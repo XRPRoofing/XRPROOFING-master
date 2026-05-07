@@ -380,7 +380,7 @@ export default function LeadForm({ compact = false, defaultService, cityName }: 
           className="mt-0.5 w-4 h-4 accent-orange-500 flex-shrink-0"
         />
         <label htmlFor="insuranceClaim" className="text-sm text-gray-700 leading-snug cursor-pointer">
-          <span className="font-semibold">This may be an insurance claim</span> — I&apos;d like help with storm damage documentation and working with my insurance adjuster.
+          <span className="font-semibold">I consent to receive non-marketing text messages from XRP Roofing regarding project updates, appointment scheduling, and service communications. Message frequency may vary. Message and data rates may apply. Reply HELP for assistance or STOP to opt out.</span>
         </label>
       </div>
 
