@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -7,11 +6,7 @@ import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
 import { SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
+const interClass = "font-sans";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -56,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased bg-white text-gray-900 pb-16 lg:pb-0">
+    <html lang="en">
+      <body className={`${interClass} antialiased bg-white text-gray-900 pb-16 lg:pb-0`}>
         <Header />
         <main>{children}</main>
         <Footer />
