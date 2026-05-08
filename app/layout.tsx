@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -57,22 +56,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <MobileCtaBar />
-        <Script id="call-tracking" strategy="lazyOnload">{`
-          (function() {
-            var o = '6233008097';
-            var t = '+14806372262';
-            var d = '(623) 300-8097';
-            document.querySelectorAll('a[href*="tel:"]').forEach(function(a) {
-              a.href = a.href.replace(o, t.replace(/[^0-9]/g, ''));
-            });
-            var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-            while (tw.nextNode()) {
-              if (tw.currentNode.textContent.indexOf(d) !== -1) {
-                tw.currentNode.textContent = tw.currentNode.textContent.replace(d, t);
-              }
-            }
-          })();
-        `}</Script>
       </body>
     </html>
   );
