@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const CANONICAL_HOST = "xrproofing.com";
 const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "0.0.0.0"]);
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const host = request.headers.get("host")?.split(":")[0].toLowerCase();
 
   if (!host || host === CANONICAL_HOST || LOCAL_HOSTS.has(host)) {
