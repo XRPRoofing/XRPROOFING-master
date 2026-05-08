@@ -1,5 +1,5 @@
 export const SITE_NAME = "XRP Roofing";
-export const SITE_URL = "https://xrproofing.com";
+export const SITE_URL = "https://www.xrproofing.com";
 export const PHONE = "(623) 300-8097"; // Replace with real number if different
 export const PHONE_HREF = "tel:+16233008097";
 export const EMAIL = "info@xrproofing.com";
