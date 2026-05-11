@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { Send, CheckCircle, AlertCircle, Shield } from "lucide-react";
-import { services } from "@/lib/services";
 import { SMS_OPT_IN_DISCLOSURE } from "@/lib/sms-compliance";
 
 const RECAPTCHA_SITE_KEY = "6Le_12ksAAAAABNp1PpYbfXZP_tsb6qRIXA6WRU2";
@@ -16,7 +15,6 @@ const errorClass = "text-red-500 text-xs mt-1";
 
 interface LeadFormProps {
   compact?: boolean;
-  defaultService?: string;
   cityName?: string;
 }
 
@@ -29,7 +27,7 @@ declare global {
   }
 }
 
-export default function LeadForm({ compact = false, defaultService, cityName }: LeadFormProps) {
+export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const formRef = useRef<HTMLFormElement>(null);
@@ -50,10 +48,6 @@ export default function LeadForm({ compact = false, defaultService, cityName }: 
     if (!fields.phone || fields.phone.length < 7) e.phone = "Valid phone number required";
     if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = "Valid email required";
     if (!fields.city || fields.city.length < 2) e.city = "City is required";
-    if (!fields.serviceNeeded) e.serviceNeeded = "Please select a service";
-    if (!fields.propertyType) e.propertyType = "Please select property type";
-    if (!fields.projectType) e.projectType = "Please select project type";
-    if (!fields.timeline) e.timeline = "Please select a timeline";
     if (!fields.smsConsent || fields.smsConsent !== "yes") {
       e.smsConsent = "Please confirm SMS consent (required to reach you by text).";
     }
@@ -165,47 +159,6 @@ export default function LeadForm({ compact = false, defaultService, cityName }: 
         />
         {errors.city && <p className={errorClass}>{errors.city}</p>}
 
-        <label htmlFor="serviceNeeded" className="sr-only">Service Needed</label>
-        <select {...field("serviceNeeded")} className={inputClass} defaultValue={defaultService || ""}>
-          <option value="" disabled>Service Needed *</option>
-          {services.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
-        </select>
-        {errors.serviceNeeded && <p className={errorClass}>{errors.serviceNeeded}</p>}
-
-        <label htmlFor="projectType" className="sr-only">Project Type</label>
-        <select {...field("projectType")} className={inputClass} defaultValue="">
-          <option value="" disabled>Project Type *</option>
-          <option value="Emergency Repair">Emergency Repair</option>
-          <option value="Repair / Patch">Repair / Patch</option>
-          <option value="Full Roof Replacement">Full Roof Replacement</option>
-          <option value="New Installation">New Installation</option>
-          <option value="Free Inspection">Free Inspection</option>
-          <option value="Insurance Claim Help">Insurance Claim Help</option>
-          <option value="Roof Coating">Roof Coating</option>
-        </select>
-        {errors.projectType && <p className={errorClass}>{errors.projectType}</p>}
-
-        <label htmlFor="propertyType" className="sr-only">Property Type</label>
-        <select {...field("propertyType")} className={inputClass} defaultValue="">
-          <option value="" disabled>Property Type *</option>
-          <option value="Single Family Home">Single Family Home</option>
-          <option value="Townhouse / Condo">Townhouse / Condo</option>
-          <option value="Multi-Family / Duplex">Multi-Family / Duplex</option>
-          <option value="Commercial Building">Commercial Building</option>
-        </select>
-        {errors.propertyType && <p className={errorClass}>{errors.propertyType}</p>}
-
-        <label htmlFor="timeline" className="sr-only">Timeline</label>
-        <select {...field("timeline")} className={inputClass} defaultValue="">
-          <option value="" disabled>Timeline *</option>
-          <option value="ASAP / Emergency">ASAP / Emergency</option>
-          <option value="Within 1 Week">Within 1 Week</option>
-          <option value="Within 1 Month">Within 1 Month</option>
-          <option value="1-3 Months">1–3 Months</option>
-          <option value="Just Getting Quotes">Just Getting Quotes</option>
-        </select>
-        {errors.timeline && <p className={errorClass}>{errors.timeline}</p>}
-
         <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-gray-50 px-3 py-3">
           <input
             id="smsConsent-compact"
@@ -283,62 +236,6 @@ export default function LeadForm({ compact = false, defaultService, cityName }: 
           <label htmlFor="city" className={labelClass}>Your City *</label>
           <input id="city" name="city" placeholder="Phoenix, AZ" className={inputClass} defaultValue={cityName || ""} />
           {errors.city && <p className={errorClass}>{errors.city}</p>}
-        </div>
-      </div>
-
-      {/* Row 3 — Service + Property type */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="serviceNeeded" className={labelClass}>Service Needed *</label>
-          <select id="serviceNeeded" name="serviceNeeded" className={inputClass} defaultValue={defaultService || ""}>
-            <option value="">Select a service...</option>
-            {services.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
-          </select>
-          {errors.serviceNeeded && <p className={errorClass}>{errors.serviceNeeded}</p>}
-        </div>
-        <div>
-          <label htmlFor="propertyType" className={labelClass}>Property Type *</label>
-          <select id="propertyType" name="propertyType" className={inputClass} defaultValue="">
-            <option value="">Select property type...</option>
-            <option value="Single Family Home">Single Family Home</option>
-            <option value="Townhouse / Condo">Townhouse / Condo</option>
-            <option value="Multi-Family / Duplex">Multi-Family / Duplex</option>
-            <option value="Commercial Building">Commercial Building</option>
-            <option value="HOA / Community">HOA / Community</option>
-            <option value="Other">Other</option>
-          </select>
-          {errors.propertyType && <p className={errorClass}>{errors.propertyType}</p>}
-        </div>
-      </div>
-
-      {/* Row 4 — Project type + Timeline */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="projectType" className={labelClass}>Project Type *</label>
-          <select id="projectType" name="projectType" className={inputClass} defaultValue="">
-            <option value="">What do you need?</option>
-            <option value="Emergency Repair">🚨 Emergency Repair</option>
-            <option value="Repair / Patch">🔧 Repair / Patch</option>
-            <option value="Full Roof Replacement">🏠 Full Roof Replacement</option>
-            <option value="New Roof Installation">🏗️ New Roof Installation</option>
-            <option value="Free Inspection Only">🔍 Free Inspection Only</option>
-            <option value="Insurance Claim Help">📋 Insurance Claim Help</option>
-            <option value="Roof Coating">🎨 Roof Coating</option>
-            <option value="Storm Damage Assessment">⛈️ Storm Damage Assessment</option>
-          </select>
-          {errors.projectType && <p className={errorClass}>{errors.projectType}</p>}
-        </div>
-        <div>
-          <label htmlFor="timeline" className={labelClass}>Project Timeline *</label>
-          <select id="timeline" name="timeline" className={inputClass} defaultValue="">
-            <option value="">When do you need this done?</option>
-            <option value="ASAP / Emergency">ASAP / Emergency</option>
-            <option value="Within 1 Week">Within 1 Week</option>
-            <option value="Within 1 Month">Within 1 Month</option>
-            <option value="1-3 Months">1–3 Months</option>
-            <option value="Just Getting Quotes">Just Getting Quotes</option>
-          </select>
-          {errors.timeline && <p className={errorClass}>{errors.timeline}</p>}
         </div>
       </div>
 

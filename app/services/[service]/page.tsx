@@ -387,7 +387,7 @@ export default async function ServicePage({
             <div className="space-y-6">
               <div className="bg-gray-900 rounded-2xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4">Request Free Inspection</h3>
-                <LeadForm compact defaultService={serviceSlug} />
+                <LeadForm compact />
               </div>
 
               {relatedServices.length > 0 && (

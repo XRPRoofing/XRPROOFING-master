@@ -268,7 +268,7 @@ export default async function CityServicePage({
                   In {city.name}. We respond within 1 hour.
                 </p>
                 <div className="bg-white rounded-xl p-4">
-                  <LeadForm compact defaultService={serviceSlug} cityName={city.name} />
+                  <LeadForm compact cityName={city.name} />
                 </div>
               </div>
 
