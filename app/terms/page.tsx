@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
-import { SMS_OPT_IN_DISCLOSURE } from "@/lib/sms-compliance";
+import { MARKETING_SMS_CONSENT, NON_MARKETING_SMS_CONSENT } from "@/lib/sms-compliance";
 
 export const metadata: Metadata = {
   title: `Terms & Conditions | ${SITE_NAME}`,
@@ -57,19 +57,23 @@ export default function TermsPage() {
               <p>
                 {SITE_NAME} sends transactional SMS messages to customers who request roofing services through our website.
                 Messages include appointment confirmations, appointment reminders, technician-on-the-way updates, job status updates,
-                and missed-call follow-ups. We do not send promotional or marketing texts through this program.
+                and missed-call follow-ups. If you separately opt in to marketing messages, we may also send promotions, discounts,
+                seasonal offers, and special deals.
               </p>
 
               <h3 className="text-lg font-bold text-gray-900 mt-4 mb-2">How to Opt In</h3>
               <p>
                 You can opt in by submitting your phone number through a contact form on <a href={SITE_URL} className="text-orange-600 hover:underline">{SITE_URL}</a>
-                {" "}and checking the consent checkbox that states:
+                {" "}and checking one or both optional consent checkboxes that state:
               </p>
               <p className="italic border-l-4 border-orange-400 pl-4 my-3 text-gray-800">
-                &ldquo;{SMS_OPT_IN_DISCLOSURE}&rdquo;
+                &ldquo;{NON_MARKETING_SMS_CONSENT}&rdquo;
+              </p>
+              <p className="italic border-l-4 border-orange-400 pl-4 my-3 text-gray-800">
+                &ldquo;{MARKETING_SMS_CONSENT}&rdquo;
               </p>
               <p>
-                The checkbox is not pre-checked and is required before submission. We do not send messages without explicit consent
+                The checkboxes are not pre-checked and are optional. We do not send messages without explicit consent
                 collected through this form.
               </p>
 

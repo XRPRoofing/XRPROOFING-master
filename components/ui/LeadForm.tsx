@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { Send, CheckCircle, AlertCircle, Shield } from "lucide-react";
-import { SMS_OPT_IN_DISCLOSURE } from "@/lib/sms-compliance";
 
 const RECAPTCHA_SITE_KEY = "6Le_12ksAAAAABNp1PpYbfXZP_tsb6qRIXA6WRU2";
 const FORMSAI_URL = "https://formsai-backend-bz0j.onrender.com/v1/forms/8DSmU7B1Qq/submit";
@@ -12,6 +11,10 @@ const inputClass =
   "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none text-sm transition-colors bg-white text-gray-900 placeholder:text-gray-400";
 const labelClass = "block text-sm font-medium text-gray-700 mb-1";
 const errorClass = "text-red-500 text-xs mt-1";
+const NON_MARKETING_SMS_CONSENT =
+  "I consent to receive non-marketing text messages from XRP Roofing regarding appointment scheduling, project updates, service notifications, technician arrival updates, and job-related communications. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase or service.";
+const MARKETING_SMS_CONSENT =
+  "I consent to receive marketing text messages from XRP Roofing, including promotions, discounts, seasonal offers, and special deals. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase or service.";
 
 interface LeadFormProps {
   compact?: boolean;
@@ -48,9 +51,6 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
     if (!fields.phone || fields.phone.length < 7) e.phone = "Valid phone number required";
     if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = "Valid email required";
     if (!fields.city || fields.city.length < 2) e.city = "City is required";
-    if (!fields.smsConsent || fields.smsConsent !== "yes") {
-      e.smsConsent = "Please confirm SMS consent (required to reach you by text).";
-    }
     return e;
   };
 
@@ -159,18 +159,32 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
         />
         {errors.city && <p className={errorClass}>{errors.city}</p>}
 
-        <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-gray-50 px-3 py-3">
-          <input
-            id="smsConsent-compact"
-            name="smsConsent"
-            type="checkbox"
-            value="yes"
-            className="mt-1 h-4 w-4 flex-shrink-0 accent-orange-500"
-          />
-          <div className="min-w-0">
-            <label htmlFor="smsConsent-compact" className="cursor-pointer text-xs leading-snug text-gray-700">
-              {SMS_OPT_IN_DISCLOSURE}
+        <div className="space-y-3 rounded-xl border border-gray-200 bg-gray-50 px-3 py-3">
+          <div className="flex items-start gap-3">
+            <input
+              id="nonMarketingSmsConsent-compact"
+              name="nonMarketingSmsConsent"
+              type="checkbox"
+              value="yes"
+              className="mt-1 h-4 w-4 flex-shrink-0 accent-orange-500"
+            />
+            <label htmlFor="nonMarketingSmsConsent-compact" className="cursor-pointer text-xs leading-snug text-gray-700">
+              {NON_MARKETING_SMS_CONSENT}
             </label>
+          </div>
+          <div className="flex items-start gap-3">
+            <input
+              id="marketingSmsConsent-compact"
+              name="marketingSmsConsent"
+              type="checkbox"
+              value="yes"
+              className="mt-1 h-4 w-4 flex-shrink-0 accent-orange-500"
+            />
+            <label htmlFor="marketingSmsConsent-compact" className="cursor-pointer text-xs leading-snug text-gray-700">
+              {MARKETING_SMS_CONSENT}
+            </label>
+          </div>
+          <div className="min-w-0">
             <p className="mt-2 text-[11px] text-gray-500">
               <Link href="/terms" className="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-700">
                 Terms
@@ -180,7 +194,6 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
                 Privacy Policy
               </Link>
             </p>
-            {errors.smsConsent && <p className={`${errorClass} mt-1`}>{errors.smsConsent}</p>}
           </div>
         </div>
 
@@ -267,33 +280,33 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
         </div>
       </div>
 
-      {/* Row 6 — Insurance claim checkbox */}
-      <div className="flex items-start gap-3 bg-orange-50 border border-orange-100 rounded-xl px-4 py-3">
-        <input
-          id="insuranceClaim"
-          name="insuranceClaim"
-          type="checkbox"
-          value="Yes"
-          className="mt-0.5 w-4 h-4 accent-orange-500 flex-shrink-0"
-        />
-        <label htmlFor="insuranceClaim" className="text-sm text-gray-700 leading-snug cursor-pointer">
-          <span className="font-semibold">I consent to receive non-marketing text messages from XRP Roofing regarding project updates, appointment scheduling, and service communications. Message frequency may vary. Message and data rates may apply. Reply HELP for assistance or STOP to opt out.</span>
-        </label>
-      </div>
-
       {/* SMS consent — must match /terms and Twilio campaign */}
-      <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
-        <input
-          id="smsConsent"
-          name="smsConsent"
-          type="checkbox"
-          value="yes"
-          className="mt-1 h-4 w-4 flex-shrink-0 accent-orange-500"
-        />
-        <div className="min-w-0">
-          <label htmlFor="smsConsent" className="cursor-pointer text-xs leading-relaxed text-gray-700 sm:text-sm">
-            {SMS_OPT_IN_DISCLOSURE}
+      <div className="space-y-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
+        <div className="flex items-start gap-3">
+          <input
+            id="nonMarketingSmsConsent"
+            name="nonMarketingSmsConsent"
+            type="checkbox"
+            value="yes"
+            className="mt-1 h-4 w-4 flex-shrink-0 accent-orange-500"
+          />
+          <label htmlFor="nonMarketingSmsConsent" className="cursor-pointer text-xs leading-relaxed text-gray-700 sm:text-sm">
+            {NON_MARKETING_SMS_CONSENT}
           </label>
+        </div>
+        <div className="flex items-start gap-3">
+          <input
+            id="marketingSmsConsent"
+            name="marketingSmsConsent"
+            type="checkbox"
+            value="yes"
+            className="mt-1 h-4 w-4 flex-shrink-0 accent-orange-500"
+          />
+          <label htmlFor="marketingSmsConsent" className="cursor-pointer text-xs leading-relaxed text-gray-700 sm:text-sm">
+            {MARKETING_SMS_CONSENT}
+          </label>
+        </div>
+        <div className="min-w-0">
           <p className="mt-2 text-xs text-gray-500">
             <Link href="/terms" className="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-700">
               Terms &amp; Conditions
@@ -303,7 +316,6 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
               Privacy Policy
             </Link>
           </p>
-          {errors.smsConsent && <p className={errorClass}>{errors.smsConsent}</p>}
         </div>
       </div>
 
