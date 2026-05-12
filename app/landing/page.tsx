@@ -89,7 +89,7 @@ export default function LandingPage() {
   return (
     <main className="scroll-smooth bg-slate-950 text-slate-950">
       <section className="relative isolate overflow-hidden bg-slate-950 text-white">
-        <Image src="/images/xrp-roofing/2025-01-26.jpg" alt="XRP Roofing crew working on a residential roof" fill priority fetchPriority="high" sizes="100vw" className="-z-20 object-cover opacity-55" />
+        <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="luxury Arizona home roof completed by XRP Roofing" fill priority fetchPriority="high" sizes="100vw" className="-z-20 object-cover opacity-55" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(37,99,235,0.55),transparent_34%),linear-gradient(105deg,rgba(2,6,23,0.96)_0%,rgba(15,23,42,0.9)_45%,rgba(30,64,175,0.5)_100%)]" />
         <div className="container mx-auto grid min-h-[860px] items-center gap-12 px-4 py-12 lg:grid-cols-[1.03fr_0.97fr] lg:py-20">
           <div className="animate-[fadeIn_0.7s_ease-out]">
@@ -132,7 +132,7 @@ export default function LandingPage() {
             </div>
             <div className="relative overflow-hidden rounded-[2.25rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="relative h-[560px] overflow-hidden rounded-[1.75rem] bg-slate-200">
-                <Image src="/images/xrp-roofing/2025-01-26-2.jpg" alt="premium roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                <Image src="/images/xrp-roofing/landing%20luxury22.jpeg" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-7">
                   <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-200">Free inspection includes</p>
                   <p className="mt-2 text-2xl font-black">Photos, recommendations, and clear next steps.</p>
@@ -182,7 +182,7 @@ export default function LandingPage() {
         <div className="container relative mx-auto grid items-center gap-14 px-4 lg:grid-cols-2">
           <div className="relative">
             <div className="relative h-[520px] overflow-hidden rounded-[2.5rem] shadow-2xl shadow-slate-900/15">
-              <Image src="/images/xrp-roofing/2025-01-26-4.jpg" alt="XRP Roofing completed roof project" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <Image src="/images/xrp-roofing/landing%20luxury22.jpeg" alt="XRP Roofing completed luxury roof project" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
             <div className="absolute -bottom-6 left-6 rounded-3xl bg-slate-950 p-6 text-white shadow-2xl">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-300">Stress-free roofing</p>
@@ -325,7 +325,7 @@ export default function LandingPage() {
       </section>
 
       <section id="contact" className="relative overflow-hidden bg-slate-950 py-24 text-white">
-        <Image src="/images/xrp-roofing/2025-01-26-5.jpg" alt="roofing inspection background" fill sizes="100vw" className="object-cover opacity-20" />
+        <Image src="/images/xrp-roofing/landing%20luxury22.jpeg" alt="luxury roof inspection background" fill sizes="100vw" className="object-cover opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/95 to-blue-950/80" />
         <div className="container relative z-10 mx-auto grid gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="rounded-[2.5rem] border border-white/10 bg-white/10 p-8 shadow-2xl shadow-black/20 backdrop-blur lg:p-10">
@@ -358,7 +358,7 @@ export default function LandingPage() {
       </section>
 
       <section className="relative overflow-hidden bg-blue-700 py-24 text-white">
-        <Image src="/images/xrp-roofing/2025-01-26-3.jpg" alt="roofing background for final call to action" fill sizes="100vw" className="object-cover opacity-25" />
+        <Image src="/images/xrp-roofing/landing%20luxury22.jpeg" alt="luxury roofing background for final call to action" fill sizes="100vw" className="object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-950/90 via-blue-700/90 to-slate-950/80" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <p className="text-sm font-black uppercase tracking-[0.26em] text-blue-100">Ready to protect your roof?</p>
