@@ -132,7 +132,7 @@ export default function LandingPage() {
             </div>
             <div className="relative overflow-hidden rounded-[2.25rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="relative h-[560px] overflow-hidden rounded-[1.75rem] bg-slate-200">
-                <Image src="/images/xrp-roofing/landing%20luxury22.jpeg" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-7">
                   <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-200">Free inspection includes</p>
                   <p className="mt-2 text-2xl font-black">Photos, recommendations, and clear next steps.</p>
