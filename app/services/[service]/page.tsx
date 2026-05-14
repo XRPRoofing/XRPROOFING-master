@@ -26,9 +26,10 @@ export async function generateMetadata({
   const service = getService(serviceSlug);
   if (!service) return {};
 
-  const title = `${service.name} in Phoenix, AZ | Licensed Contractor | ${SITE_NAME}`;
-  const description = `Expert ${service.name.toLowerCase()} in Phoenix, AZ and the entire 100-mile metro radius. Licensed & insured. Free inspections and estimates. ${service.metaDescription}`;
+  const title = `${service.name} in Phoenix, AZ | Licensed Roofing Contractor | ${SITE_NAME}`;
+  const description = `${service.metaDescription} Serving Phoenix, Scottsdale, Mesa, Chandler, Gilbert, and the 100-mile metro radius. Free roof inspections.`;
   const canonical = `${SITE_URL}/services/${serviceSlug}`;
+  const image = getServiceImage(serviceSlug).src;
 
   return {
     title,
@@ -39,7 +40,13 @@ export async function generateMetadata({
       title,
       description,
       url: canonical,
-      images: [{ url: service.heroImage }],
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -269,7 +276,9 @@ export default async function ServicePage({
   const content = serviceDetailContent[serviceSlug] || genericContent;
 
   // Top 8 cities linking to this service
-  const topCityLinks = cities.slice(0, 8);
+  const topCityLinks = cities
+    .filter((city) => city.featuredServices.includes(serviceSlug))
+    .slice(0, 8);
 
   // Generic FAQ for this service
   const faqs = [
@@ -366,7 +375,7 @@ export default async function ServicePage({
               {/* City Links */}
               <div className="mt-10">
                 <h2 className="text-xl font-black text-gray-900 mb-4">
-                  {service.name} by City — Phoenix Metro
+                  Local {service.name} Service Areas Near Phoenix
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {topCityLinks.map((city) => (
@@ -376,7 +385,7 @@ export default async function ServicePage({
                       className="group flex items-center gap-1.5 text-sm text-gray-600 hover:text-orange-500 transition-colors bg-gray-50 hover:bg-orange-50 border border-gray-200 hover:border-orange-200 rounded-xl px-3 py-2"
                     >
                       <MapPin className="w-3 h-3 text-orange-400 flex-shrink-0" />
-                      {city.name}
+                      {service.name} in {city.name}
                     </Link>
                   ))}
                 </div>
@@ -392,7 +401,7 @@ export default async function ServicePage({
 
               {relatedServices.length > 0 && (
                 <div className="bg-gray-50 rounded-2xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-4">Related Services</h3>
+                  <h3 className="font-bold text-gray-900 mb-4">Related Roofing Services</h3>
                   <ul className="space-y-2">
                     {relatedServices.map((s) => (
                       <li key={s.slug}>

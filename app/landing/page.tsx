@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   description:
     "Get a free roof inspection from XRP Roofing. Fast roofing repairs, replacements, storm restoration, commercial roofing, and insurance claim assistance across Arizona.",
   alternates: { canonical: `${SITE_URL}/landing` },
+  robots: { index: false, follow: true },
   openGraph: {
     title: `${SITE_NAME} | Free Roof Inspection`,
     description: "A high-converting roofing landing page for inspections, repairs, replacements, storm restoration, and emergency roofing support.",

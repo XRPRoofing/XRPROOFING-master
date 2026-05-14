@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle, ArrowRight, Phone } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
 import CTASection from "@/components/ui/CTASection";
 import TrustBadges from "@/components/ui/TrustBadges";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   description:
     "Learn about XRP Roofing — Phoenix's trusted, locally owned roofing contractor. Licensed, insured, and built for Arizona's extreme climate. Serving the Phoenix metro and 100-mile radius.",
   alternates: { canonical: `${SITE_URL}/about` },
+  openGraph: {
+    title: `About XRP Roofing | Phoenix Roofing Contractor`,
+    description: "Learn about XRP Roofing — Phoenix's trusted, locally owned roofing contractor. Licensed, insured, and built for Arizona's extreme climate. Serving the Phoenix metro and 100-mile radius.",
+    url: `${SITE_URL}/about`,
+    images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `About XRP Roofing | Phoenix Roofing Contractor`,
+    description: "Learn about XRP Roofing — Phoenix's trusted, locally owned roofing contractor. Licensed, insured, and built for Arizona's extreme climate. Serving the Phoenix metro and 100-mile radius.",
+    images: [OG_IMAGE],
+  },
 };
 
 const values = [

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
 import LeadForm from "@/components/ui/LeadForm";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 
@@ -9,6 +9,18 @@ export const metadata: Metadata = {
   description:
     "Contact XRP Roofing for a free roof inspection and estimate in Phoenix, AZ. Call us or fill out the form. We respond within 1 business hour. Serving the entire Phoenix metro.",
   alternates: { canonical: `${SITE_URL}/contact` },
+  openGraph: {
+    title: `Contact XRP Roofing | Free Roof Inspection`,
+    description: "Contact XRP Roofing for a free roof inspection and estimate in Phoenix, AZ. Call us or fill out the form. We respond within 1 business hour. Serving the entire Phoenix metro.",
+    url: `${SITE_URL}/contact`,
+    images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact XRP Roofing | Free Roof Inspection`,
+    description: "Contact XRP Roofing for a free roof inspection and estimate in Phoenix, AZ. Call us or fill out the form. We respond within 1 business hour. Serving the entire Phoenix metro.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function ContactPage() {

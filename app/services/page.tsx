@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { services } from "@/lib/services";
 import CTASection from "@/components/ui/CTASection";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   description:
     "Complete roofing services in Phoenix AZ: roof repair, replacement, tile, shingle, metal, TPO, flat, commercial, coatings, and emergency service. Licensed & insured. Free inspections.",
   alternates: { canonical: `${SITE_URL}/services` },
+  openGraph: {
+    title: `Roofing Services in Phoenix, AZ | XRP Roofing`,
+    description: "Complete roofing services in Phoenix AZ: roof repair, replacement, tile, shingle, metal, TPO, flat, commercial, coatings, and emergency service. Licensed & insured. Free inspections.",
+    url: `${SITE_URL}/services`,
+    images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Roofing Services in Phoenix, AZ | XRP Roofing`,
+    description: "Complete roofing services in Phoenix AZ: roof repair, replacement, tile, shingle, metal, TPO, flat, commercial, coatings, and emergency service. Licensed & insured. Free inspections.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function ServicesPage() {

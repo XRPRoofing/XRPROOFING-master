@@ -28,9 +28,15 @@ export async function generateMetadata({
   const city = getCity(citySlug);
   if (!city) return {};
 
-  const title = `Roofing Company in ${city.name}, AZ | Roof Repair & Replacement | ${SITE_NAME}`;
-  const description = `Top-rated roofing contractor in ${city.name}, AZ. Roof repair, replacement, tile, shingle, metal & commercial roofing. Licensed & insured. Free inspections. Serving ${city.name} and surrounding areas.`;
+  const primaryServices = city.featuredServices
+    .map((slug) => getService(slug)?.shortName)
+    .filter(Boolean)
+    .slice(0, 3)
+    .join(", ");
+  const title = `Roofing Company in ${city.name}, AZ | ${primaryServices} | ${SITE_NAME}`;
+  const description = `Licensed roofing contractor in ${city.name}, AZ for ${primaryServices.toLowerCase()}. Local roof inspections, repair, replacement, storm damage, and HOA-ready roofing solutions.`;
   const canonical = `${SITE_URL}/locations/${citySlug}`;
+  const image = getCityImage(citySlug).src;
 
   return {
     title,
@@ -48,7 +54,13 @@ export async function generateMetadata({
       title,
       description,
       url: canonical,
-      images: [{ url: getCityImage(citySlug).src }],
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -153,9 +165,8 @@ export default async function CityPage({
                 </ul>
               </div>
 
-              {/* Process */}
               <div>
-                <h2 className="text-xl font-black text-gray-900 mb-3">Our Process</h2>
+                <h2 className="text-xl font-black text-gray-900 mb-3">Roof Inspection & Project Process in {city.name}</h2>
                 <p className="text-gray-700 leading-relaxed">{content.process}</p>
               </div>
 
@@ -227,8 +238,8 @@ export default async function CityPage({
               >
                 <div>
                   <div className="text-2xl mb-2">🏠</div>
-                  <h3 className="font-bold text-white mb-1">All Services in {city.name}</h3>
-                  <p className="text-xs text-orange-100">View all 12 roofing services available in {city.name}.</p>
+                  <h3 className="font-bold text-white mb-1">Complete Roofing Services in {city.name}</h3>
+                  <p className="text-xs text-orange-100">Compare repair, replacement, tile, shingle, flat, and commercial roofing options in {city.name}.</p>
                 </div>
                 <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white">
                   View All <ArrowRight className="w-3 h-3" />
@@ -245,7 +256,7 @@ export default async function CityPage({
                   href={`/locations/${citySlug}/${service.slug}`}
                   className="text-sm text-gray-600 hover:text-orange-500 bg-white border border-gray-200 hover:border-orange-200 px-3 py-1.5 rounded-full transition-colors"
                 >
-                  {service.name}
+                  {service.name} in {city.name}
                 </Link>
               ))}
             </div>

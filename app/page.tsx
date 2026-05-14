@@ -11,7 +11,7 @@ import CTASection from "@/components/ui/CTASection";
 import ServiceGrid from "@/components/ui/ServiceGrid";
 import LocationGrid from "@/components/ui/LocationGrid";
 import LeadForm from "@/components/ui/LeadForm";
-import { LocalBusinessSchema, FAQSchema } from "@/components/ui/SeoSchema";
+import { LocalBusinessSchema, FAQSchema, WebSiteSchema } from "@/components/ui/SeoSchema";
 import ProjectGallery from "@/components/ui/ProjectGallery";
 
 export const metadata: Metadata = {
@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ`,
     description: "Phoenix's trusted roofing contractor. Free inspections. Licensed & insured. Serving 30+ cities.",
     images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ`,
+    description: "Phoenix roofing contractor for repair, replacement, storm damage, tile, shingle, flat, and commercial roofing.",
+    images: [OG_IMAGE],
   },
 };
 
@@ -42,6 +48,7 @@ export default function HomePage() {
   return (
     <>
       <LocalBusinessSchema />
+      <WebSiteSchema />
       <FAQSchema faqs={homepageFaqs} />
 
       {/* Hero */}

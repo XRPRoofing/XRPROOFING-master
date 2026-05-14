@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 import CTASection from "@/components/ui/CTASection";
 
 export const metadata: Metadata = {
@@ -9,6 +9,18 @@ export const metadata: Metadata = {
   description:
     "Expert roofing tips, guides, and advice for Arizona homeowners. Learn about roof maintenance, monsoon prep, material selection, and more from XRP Roofing.",
   alternates: { canonical: `${SITE_URL}/blog` },
+  openGraph: {
+    title: `Arizona Roofing Tips & Guides | XRP Roofing`,
+    description: "Expert roofing tips, guides, and advice for Arizona homeowners. Learn about roof maintenance, monsoon prep, material selection, and more from XRP Roofing.",
+    url: `${SITE_URL}/blog`,
+    images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Arizona Roofing Tips & Guides | XRP Roofing`,
+    description: "Expert roofing tips, guides, and advice for Arizona homeowners. Learn about roof maintenance, monsoon prep, material selection, and more from XRP Roofing.",
+    images: [OG_IMAGE],
+  },
 };
 
 const posts = [

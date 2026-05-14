@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { cities } from "@/lib/cities";
 import CTASection from "@/components/ui/CTASection";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
@@ -11,6 +11,18 @@ export const metadata: Metadata = {
   description:
     "XRP Roofing serves 30+ cities throughout the Phoenix metro and a 100-mile radius. Find your city and get a free roofing inspection from Arizona's trusted contractor.",
   alternates: { canonical: `${SITE_URL}/locations` },
+  openGraph: {
+    title: `Phoenix Metro Roofing Service Areas | XRP Roofing`,
+    description: "XRP Roofing serves 30+ cities throughout the Phoenix metro and a 100-mile radius. Find your city and get a free roofing inspection from Arizona's trusted contractor.",
+    url: `${SITE_URL}/locations`,
+    images: [{ url: OG_IMAGE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Phoenix Metro Roofing Service Areas | XRP Roofing`,
+    description: "XRP Roofing serves 30+ cities throughout the Phoenix metro and a 100-mile radius. Find your city and get a free roofing inspection from Arizona's trusted contractor.",
+    images: [OG_IMAGE],
+  },
 };
 
 const counties = [

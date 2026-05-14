@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 import CTASection from "@/components/ui/CTASection";
-import { FAQSchema } from "@/components/ui/SeoSchema";
+import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
   "how-to-prepare-your-roof-for-monsoon-season-arizona": {
@@ -318,11 +318,13 @@ export async function generateMetadata({
       url: canonical,
       type: "article",
       publishedTime: post.date,
+      images: [{ url: OG_IMAGE }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: post.metaDescription,
+      images: [OG_IMAGE],
     },
   };
 }
@@ -338,6 +340,12 @@ export default async function BlogPostPage({
 
   return (
     <>
+      <ArticleSchema
+        title={post.title}
+        description={post.metaDescription}
+        slug={post.slug}
+        datePublished={post.date}
+      />
       <FAQSchema faqs={post.faqs} />
 
       <section className="py-16 bg-gray-900">
@@ -415,12 +423,12 @@ export default async function BlogPostPage({
                 </Link>
               </div>
               <div className="bg-gray-50 rounded-2xl p-5">
-                <h3 className="font-bold text-gray-900 mb-3 text-sm">Related Services</h3>
+                <h3 className="font-bold text-gray-900 mb-3 text-sm">Related Roofing Services</h3>
                 <ul className="space-y-2">
                   {post.relatedServices.map((item) => (
                     <li key={item.href}>
                       <Link href={item.href} className="text-sm text-gray-600 hover:text-orange-500 transition-colors flex items-center gap-1">
-                        <ArrowRight className="w-3 h-3 text-orange-400" /> {item.label}
+                        <ArrowRight className="w-3 h-3 text-orange-400" /> {item.label} in Phoenix
                       </Link>
                     </li>
                   ))}

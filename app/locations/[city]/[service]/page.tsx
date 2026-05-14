@@ -35,19 +35,28 @@ export async function generateMetadata({
   if (!city || !service) return {};
 
   const title = `${service.name} in ${city.name}, AZ | Licensed Roofing Contractor | ${SITE_NAME}`;
-  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, AZ. XRP Roofing is your local licensed & insured roofing contractor. Free inspections. Serving ${city.name} and the Phoenix metro 100-mile radius.`;
+  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, AZ with local inspections, written estimates, Arizona-rated materials, and licensed roofing crews. Free inspection from XRP Roofing.`;
   const canonical = `${SITE_URL}/locations/${citySlug}/${serviceSlug}`;
+  const shouldIndex = city.featuredServices.includes(serviceSlug);
+  const image = getServiceImage(serviceSlug).src;
 
   return {
     title,
     description,
     keywords: [...service.keywords, `${service.name} ${city.name}`, `roofing contractor ${city.name} AZ`],
     alternates: { canonical },
+    robots: { index: shouldIndex, follow: true },
     openGraph: {
       title,
       description,
       url: canonical,
-      images: [{ url: getServiceImage(serviceSlug).src }],
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -191,7 +200,7 @@ export default async function CityServicePage({
               {/* Materials */}
               <div>
                 <h2 className="text-xl font-black text-gray-900 mb-3">
-                  Materials &amp; Products We Use
+                  Arizona-Rated Materials &amp; Products We Use
                 </h2>
                 <ul className="space-y-2">
                   {content.materials.map((mat, i) => (
