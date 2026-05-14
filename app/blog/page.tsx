@@ -25,6 +25,54 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "emergency-roof-repair-arizona",
+    title: "Emergency Roof Repair in Arizona: What to Do First",
+    excerpt: "Active roof leaks and storm damage can escalate quickly in Arizona. Learn what to do first, when to call, what emergency repairs include, and how to document damage.",
+    date: "2025-06-12",
+    readTime: "7 min read",
+    category: "Emergency Repair",
+  },
+  {
+    slug: "roof-leak-repair-cost-arizona",
+    title: "Roof Leak Repair Cost in Arizona: What Affects the Price?",
+    excerpt: "Roof leak repair costs vary based on material, leak source, access, urgency, and hidden moisture. Here is how Arizona homeowners should think about pricing.",
+    date: "2025-06-05",
+    readTime: "8 min read",
+    category: "Repair & Replacement",
+  },
+  {
+    slug: "storm-damage-roof-inspection-arizona",
+    title: "Storm Damage Roof Inspection in Arizona: What Contractors Look For",
+    excerpt: "After monsoon wind or hail, roof damage is not always visible from the ground. Learn what a professional Arizona storm damage inspection should include.",
+    date: "2025-05-29",
+    readTime: "7 min read",
+    category: "Storm Damage",
+  },
+  {
+    slug: "commercial-roofing-pricing-phoenix",
+    title: "Commercial Roofing Pricing in Phoenix: Cost Factors for Building Owners",
+    excerpt: "Commercial roofing pricing depends on membrane type, insulation, access, roof size, moisture, warranties, and business disruption planning.",
+    date: "2025-05-22",
+    readTime: "8 min read",
+    category: "Commercial Roofing",
+  },
+  {
+    slug: "hoa-roofing-requirements-arizona",
+    title: "HOA Roofing Requirements in Arizona: What Homeowners Need to Know",
+    excerpt: "Arizona HOA communities often regulate roof material, color, profile, and approval documents. Learn how to avoid delays before repair or replacement.",
+    date: "2025-05-15",
+    readTime: "7 min read",
+    category: "HOA Roofing",
+  },
+  {
+    slug: "insurance-roof-claim-guide-arizona",
+    title: "Insurance Roof Claim Guide for Arizona Homeowners",
+    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjusters, deductibles, supplements, and when not to file.",
+    date: "2025-05-08",
+    readTime: "9 min read",
+    category: "Insurance",
+  },
+  {
     slug: "how-to-prepare-your-roof-for-monsoon-season-arizona",
     title: "How to Prepare Your Phoenix Roof for Monsoon Season",
     excerpt: "Arizona's monsoon season runs June through September and brings some of the most intense storm conditions in the country. Here's how to make sure your roof is ready before the storms hit.",
@@ -74,7 +122,7 @@ const posts = [
   },
 ];
 
-const categories = ["All", "Maintenance", "Materials", "Repair & Replacement", "Arizona Climate", "Insurance"];
+const categories = ["All", "Emergency Repair", "Storm Damage", "Commercial Roofing", "HOA Roofing", "Maintenance", "Materials", "Repair & Replacement", "Arizona Climate", "Insurance"];
 
 export default function BlogPage() {
   return (

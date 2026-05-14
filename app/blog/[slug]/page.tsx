@@ -7,6 +7,270 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "emergency-roof-repair-arizona": {
+    slug: "emergency-roof-repair-arizona",
+    title: "Emergency Roof Repair in Arizona: What to Do First",
+    excerpt: "Active roof leaks and storm damage can escalate quickly in Arizona. Learn what to do first, when to call, what emergency repairs include, and how to document damage.",
+    date: "2025-06-12",
+    readTime: "7 min read",
+    category: "Emergency Repair",
+    metaDescription: "Emergency roof repair in Arizona: what to do during an active leak, when to call a roofer, insurance documentation tips, and what emergency repairs include.",
+    sections: [
+      {
+        heading: "When Emergency Roof Repair Is Actually Urgent",
+        body: "Emergency roof repair is appropriate when water is actively entering the home, storm damage has exposed underlayment or decking, flashing has separated during high winds, or debris has punctured the roof surface. In Arizona, waiting even one more storm cycle can turn a small roof opening into ceiling, insulation, drywall, flooring, and mold damage. The immediate goal is not cosmetic repair — it is fast weatherproofing and documentation.",
+      },
+      {
+        heading: "What to Do Before the Roofer Arrives",
+        listItems: [
+          "Move furniture, electronics, and valuables away from the leak area",
+          "Place buckets or towels to limit interior water spread",
+          "Take photos and short videos of active leaking and visible damage",
+          "Do not climb onto the roof during rain, wind, lightning, or darkness",
+          "Call a licensed roofer for emergency weatherproofing and written documentation",
+        ],
+      },
+      {
+        heading: "What Emergency Roof Repair Usually Includes",
+        body: "Emergency service usually starts with tarp installation, emergency sealant, temporary membrane patches, loose material removal, or securing wind-lifted areas. Permanent repair is scheduled after the roof is stable and materials are confirmed. XRP Roofing documents the emergency condition with photos and written notes so homeowners have a record for insurance review.",
+      },
+      {
+        heading: "Insurance Documentation Matters",
+        body: "If the emergency was caused by wind, hail, falling debris, or sudden storm damage, documentation can directly affect claim outcomes. A contractor report created before permanent repair helps establish the condition, cause, and mitigation steps taken to prevent further damage.",
+      },
+    ],
+    faqs: [
+      { q: "What counts as an emergency roof repair in Arizona?", a: "Active leaks, exposed roof decking, wind-torn materials, storm punctures, and damage that could allow water into the building during the next rain event generally qualify as emergency roof repair situations." },
+      { q: "Should I call insurance before emergency roof repair?", a: "You can notify your carrier, but first prevent additional damage and document everything. A licensed roofer can provide photos and a written emergency repair description that supports your claim." },
+      { q: "Is a tarp a permanent roof repair?", a: "No. A tarp is temporary weatherproofing designed to limit further damage until permanent repairs can be completed safely and correctly." },
+    ],
+    relatedServices: [
+      { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+    ],
+  },
+  "roof-leak-repair-cost-arizona": {
+    slug: "roof-leak-repair-cost-arizona",
+    title: "Roof Leak Repair Cost in Arizona: What Affects the Price?",
+    excerpt: "Roof leak repair costs vary based on material, leak source, access, urgency, and hidden moisture. Here is how Arizona homeowners should think about pricing.",
+    date: "2025-06-05",
+    readTime: "8 min read",
+    category: "Repair & Replacement",
+    metaDescription: "Roof leak repair cost in Arizona: learn what affects pricing, common leak sources, emergency costs, and when replacement may be more cost-effective.",
+    sections: [
+      {
+        heading: "Why Roof Leak Repair Costs Vary So Much",
+        body: "There is no single flat price for roof leak repair because a stain on the ceiling rarely tells the full story. In Arizona, leaks often start at pipe boots, flashing, tile underlayment, valleys, skylights, scuppers, or flat-roof seams. The visible drip may be several feet from the actual entry point. Accurate pricing requires a roof-level inspection and, when needed, attic or moisture assessment.",
+      },
+      {
+        heading: "Common Cost Drivers",
+        listItems: [
+          "Roof type: tile, shingle, flat membrane, metal, and foam all require different repair methods",
+          "Leak source: pipe boots and sealant failures are simpler than underlayment or decking failures",
+          "Access and pitch: steep, multi-story, or obstructed roofs take more labor",
+          "Urgency: after-hours emergency weatherproofing can carry a premium",
+          "Hidden damage: wet insulation, soft decking, or mold changes the repair scope",
+          "Material matching: older tile or discontinued profiles can increase sourcing time",
+        ],
+      },
+      {
+        heading: "Repair vs. Replacement Cost Decision",
+        body: "A small isolated leak on a roof with years of remaining life is usually a repair candidate. Multiple leaks, widespread underlayment failure, brittle shingles, or storm damage across large sections may make replacement the better financial decision. XRP Roofing provides written estimates that separate immediate repair options from long-term replacement recommendations when both are relevant.",
+      },
+      {
+        heading: "How to Avoid Paying Twice",
+        body: "The cheapest patch is not always the lowest-cost solution. If the contractor only seals the visible symptom without identifying the actual entry point, the leak often returns during the next monsoon. A proper leak repair includes diagnosis, photos, repair scope, and explanation of any nearby developing failures.",
+      },
+    ],
+    faqs: [
+      { q: "How much does roof leak repair cost in Arizona?", a: "Simple leak repairs can be relatively modest, while underlayment, decking, flat-roof seam, or storm-related repairs cost more. The accurate number depends on roof type, leak source, access, urgency, and hidden moisture. XRP Roofing provides free written estimates." },
+      { q: "Why does my ceiling leak appear far from the roof damage?", a: "Water travels along rafters, underlayment, insulation, and drywall before it appears inside. The visible stain is often not directly under the roof entry point." },
+      { q: "Can roof leak repair be covered by insurance?", a: "If the leak was caused by sudden storm damage, wind, hail, or falling debris, insurance may apply. Age-related wear, poor maintenance, or old sealant failure is usually not covered." },
+    ],
+    relatedServices: [
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+    ],
+  },
+  "storm-damage-roof-inspection-arizona": {
+    slug: "storm-damage-roof-inspection-arizona",
+    title: "Storm Damage Roof Inspection in Arizona: What Contractors Look For",
+    excerpt: "After monsoon wind or hail, roof damage is not always visible from the ground. Learn what a professional Arizona storm damage inspection should include.",
+    date: "2025-05-29",
+    readTime: "7 min read",
+    category: "Storm Damage",
+    metaDescription: "Storm damage roof inspection in Arizona: what roofers check after monsoon wind, hail, debris impact, and how documentation supports insurance claims.",
+    sections: [
+      {
+        heading: "Why Ground-Level Checks Miss Storm Damage",
+        body: "Storm damage often hides in places homeowners cannot see from the driveway: lifted shingle tabs, cracked tile corners, displaced ridge caps, separated flashing, impact marks, bruised shingles, and exposed underlayment. Arizona monsoon winds can create roof vulnerabilities that do not leak until the next major rain event.",
+      },
+      {
+        heading: "What a Complete Storm Damage Inspection Includes",
+        listItems: [
+          "Roof surface inspection for lifted, cracked, punctured, or displaced materials",
+          "Flashing, valley, ridge, pipe boot, skylight, and penetration review",
+          "Hail impact assessment on shingles, tile, metal, vents, and soft metals",
+          "Photo documentation tied to specific slopes and roof areas",
+          "Interior and attic review when stains or active leaks are present",
+          "Written repair or replacement recommendation for claim support",
+        ],
+      },
+      {
+        heading: "Why Inspection Timing Matters",
+        body: "The best time to inspect is shortly after the storm, before temporary drying hides evidence and before another rain event expands the damage. Fast documentation creates a clearer timeline for insurance review and helps prevent small vulnerabilities from becoming interior damage.",
+      },
+      {
+        heading: "When to File an Insurance Claim",
+        body: "A contractor inspection should happen before filing whenever possible. If the damage is minor and below deductible, a claim may not make financial sense. If the inspection shows widespread storm damage, a clear report gives the carrier stronger evidence from the start.",
+      },
+    ],
+    faqs: [
+      { q: "Do I need a storm damage roof inspection after every monsoon?", a: "Not after every storm, but you should schedule one after high winds, hail, visible debris impact, new leaks, missing materials, or if neighbors are reporting roof damage." },
+      { q: "Can hail damage be invisible from the ground?", a: "Yes. Shingle bruising, granule displacement, cracked tile edges, and soft metal dents usually require roof-level inspection to confirm." },
+      { q: "Will a roofer meet my insurance adjuster?", a: "XRP Roofing can meet adjusters on-site and walk through documented roof damage so all relevant conditions are reviewed." },
+    ],
+    relatedServices: [
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+      { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+    ],
+  },
+  "commercial-roofing-pricing-phoenix": {
+    slug: "commercial-roofing-pricing-phoenix",
+    title: "Commercial Roofing Pricing in Phoenix: Cost Factors for Building Owners",
+    excerpt: "Commercial roofing pricing depends on membrane type, insulation, access, roof size, moisture, warranties, and business disruption planning. Here is what Phoenix owners should know.",
+    date: "2025-05-22",
+    readTime: "8 min read",
+    category: "Commercial Roofing",
+    metaDescription: "Commercial roofing pricing in Phoenix: cost factors for TPO, flat roofing, coatings, insulation, access, warranties, and business disruption planning.",
+    sections: [
+      {
+        heading: "Why Commercial Roofing Pricing Requires a Site-Specific Estimate",
+        body: "Commercial roofing pricing in Phoenix is driven by roof size, system type, insulation requirements, drainage, rooftop equipment, access, warranty level, and whether the existing roof is dry enough for restoration or overlay. A square-foot number without site inspection often misses the variables that determine the real project cost.",
+      },
+      {
+        heading: "Major Commercial Roofing Cost Factors",
+        listItems: [
+          "Roof system: TPO, EPDM, modified bitumen, metal, foam, or coating restoration",
+          "Existing moisture: wet insulation or trapped water can require tear-off",
+          "Insulation and energy code: polyiso thickness affects both cost and performance",
+          "Access logistics: cranes, staging, occupied buildings, and limited parking increase complexity",
+          "Rooftop equipment: HVAC curbs, penetrations, ducting, and walk pads add detail labor",
+          "Warranty level: manufacturer-backed NDL warranties require certified installation details",
+        ],
+      },
+      {
+        heading: "Replacement vs. Restoration",
+        body: "If the roof deck is sound and insulation is dry, a coating restoration may extend roof life at a lower cost than full replacement. If moisture is trapped under the membrane, coating over it only hides the problem. XRP Roofing evaluates moisture, seams, flashing, drainage, and energy requirements before recommending restoration, overlay, or replacement.",
+      },
+      {
+        heading: "Business Disruption Is a Cost Factor Too",
+        body: "The cheapest bid can become expensive if it disrupts tenants, customers, inventory, or operations. Commercial roofing should include phasing, safety planning, access coordination, cleanup, and communication so the business can keep operating whenever possible.",
+      },
+    ],
+    faqs: [
+      { q: "How is commercial roofing priced in Phoenix?", a: "Commercial roofing is usually priced by system type, square footage, insulation, access, moisture condition, rooftop equipment, drainage, warranty requirements, and project phasing." },
+      { q: "Is TPO roofing a good commercial option in Arizona?", a: "Yes. White 60-mil TPO is a strong commercial flat-roof option in Phoenix because it reflects heat and uses heat-welded seams that perform well in thermal cycling." },
+      { q: "Can a commercial roof be coated instead of replaced?", a: "Sometimes. Coating works when the roof is structurally sound and insulation is dry. A moisture assessment is essential before recommending coating." },
+    ],
+    relatedServices: [
+      { label: "Commercial Roofing", href: "/services/commercial-roofing" },
+      { label: "TPO Roofing", href: "/services/tpo-roofing" },
+      { label: "Roof Coatings", href: "/services/roof-coatings" },
+    ],
+  },
+  "hoa-roofing-requirements-arizona": {
+    slug: "hoa-roofing-requirements-arizona",
+    title: "HOA Roofing Requirements in Arizona: What Homeowners Need to Know",
+    excerpt: "Arizona HOA communities often regulate roof material, color, profile, and approval documents. Learn how to avoid delays before repair or replacement.",
+    date: "2025-05-15",
+    readTime: "7 min read",
+    category: "HOA Roofing",
+    metaDescription: "HOA roofing requirements in Arizona: material approvals, color restrictions, tile profiles, architectural review, and documents homeowners need before roof work.",
+    sections: [
+      {
+        heading: "Why HOA Approval Matters Before Roofing Work",
+        body: "Many Arizona HOA communities regulate roofing material, color, tile profile, reflectivity, and visible roof accessories. Starting a roof replacement without approval can create delays, fines, or forced material changes. The safest path is to confirm requirements before ordering materials or scheduling installation.",
+      },
+      {
+        heading: "Common HOA Roofing Requirements",
+        listItems: [
+          "Approved material type such as concrete tile, clay tile, architectural shingle, or metal",
+          "Color palette restrictions tied to community architectural standards",
+          "Specific tile profile or manufacturer requirements for visual consistency",
+          "Sample boards, product data sheets, and color documents submitted before work",
+          "Rules for visible metal roofing, solar-ready components, vents, and skylights",
+          "Project timing, debris, dumpster placement, and work-hour restrictions",
+        ],
+      },
+      {
+        heading: "Tile Roofs and Underlayment Replacement",
+        body: "HOA communities often focus on visible tile appearance, but many tile roof projects are actually underlayment replacements where existing tile is removed and reinstalled. This can preserve community appearance while solving leaks beneath the tile. XRP Roofing helps document whether the visible tile is being reused or replaced so approval is clearer.",
+      },
+      {
+        heading: "How XRP Roofing Helps With HOA Documentation",
+        body: "We provide material specifications, color information, roof scope descriptions, and supporting documents homeowners can submit to architectural review committees. For communities in Scottsdale, Chandler, Gilbert, Mesa, Peoria, and Phoenix, this preparation can reduce approval friction and prevent ordering the wrong material.",
+      },
+    ],
+    faqs: [
+      { q: "Do I need HOA approval for roof repair in Arizona?", a: "Small like-for-like repairs may not require full approval, but replacements, material changes, color changes, and visible roof modifications usually do. Check your community rules before work begins." },
+      { q: "Can an HOA require tile roofing in Arizona?", a: "Yes. Many HOA communities require tile or specific profiles and colors to preserve neighborhood appearance. Always verify before selecting material." },
+      { q: "Can I replace underlayment and reuse the existing tile?", a: "Often, yes. If the tile is in good condition, underlayment replacement with tile removal and reinstallation can solve leaks while preserving HOA-approved appearance." },
+    ],
+    relatedServices: [
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "New Roof Installation", href: "/services/new-roof-installation" },
+    ],
+  },
+  "insurance-roof-claim-guide-arizona": {
+    slug: "insurance-roof-claim-guide-arizona",
+    title: "Insurance Roof Claim Guide for Arizona Homeowners",
+    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjusters, deductibles, supplements, and when not to file.",
+    date: "2025-05-08",
+    readTime: "9 min read",
+    category: "Insurance",
+    metaDescription: "Insurance roof claim guide for Arizona homeowners: storm damage inspections, documentation, adjuster meetings, deductibles, supplements, and claim mistakes to avoid.",
+    sections: [
+      {
+        heading: "Start With Inspection and Documentation",
+        body: "The strongest Arizona roof claims begin with a documented contractor inspection. Photos, slope notes, damage descriptions, and repair recommendations give the insurance carrier a clearer basis for review than a phone description alone. This is especially important after monsoon wind, hail, or debris impact.",
+      },
+      {
+        heading: "The Roof Claim Process",
+        listItems: [
+          "Schedule a contractor inspection and collect photo documentation",
+          "Review whether damage appears storm-related or age-related",
+          "Compare likely repair cost against your deductible before filing",
+          "File the claim with date of loss, photos, and contractor report",
+          "Meet the adjuster on-site when possible",
+          "Review the carrier estimate for missing code, flashing, underlayment, or material items",
+          "Submit supplements when legitimate scope items were missed",
+        ],
+      },
+      {
+        heading: "Deductibles and Free Roof Promises",
+        body: "Arizona homeowners should be cautious of anyone promising a free roof or deductible waiver. Your deductible is part of the policy contract. A legitimate contractor focuses on accurate documentation, proper scope, and compliant installation — not illegal shortcuts that can create problems for the homeowner.",
+      },
+      {
+        heading: "When Not to File a Claim",
+        body: "If the repair is clearly below deductible or caused by age-related wear, filing may not make sense. XRP Roofing helps homeowners understand whether a claim appears justified based on observed damage before they start the process.",
+      },
+    ],
+    faqs: [
+      { q: "Should I get a roof inspection before filing an insurance claim?", a: "Yes. A documented contractor inspection helps determine whether the damage appears claim-worthy and provides evidence for the carrier if you file." },
+      { q: "What is a supplemental roof claim?", a: "A supplement is an additional request to the carrier when legitimate scope items were missed in the initial estimate, such as flashing, code items, underlayment, or hidden damage discovered during work." },
+      { q: "Can a roofer waive my deductible in Arizona?", a: "No. Deductible waiver can be considered insurance fraud. Be cautious of contractors promising free roofs or rebate schemes." },
+    ],
+    relatedServices: [
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
+    ],
+  },
   "how-to-prepare-your-roof-for-monsoon-season-arizona": {
     slug: "how-to-prepare-your-roof-for-monsoon-season-arizona",
     title: "How to Prepare Your Phoenix Roof for Monsoon Season",

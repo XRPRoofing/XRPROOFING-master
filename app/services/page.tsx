@@ -84,6 +84,36 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-gray-900 mb-3">Highest-Demand Roofing Services in Phoenix</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+              Start with the pages homeowners and property managers use most when comparing repair urgency, replacement cost, storm damage, and commercial roofing options.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
+              { label: "Roof Leak Repair", href: "/services/roof-repair" },
+              { label: "Storm Damage Inspection", href: "/services/storm-damage-roofing" },
+              { label: "Commercial Roofing Pricing", href: "/services/commercial-roofing" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="bg-white border border-gray-200 hover:border-orange-300 rounded-2xl p-5 transition-colors group"
+              >
+                <h3 className="font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-2">{item.label}</h3>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
+                  Compare Options <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 text-center">

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { services, getService, getRelatedServices } from "@/lib/services";
 import { cities } from "@/lib/cities";
 import { getServiceImage } from "@/lib/images";
@@ -12,6 +12,34 @@ import FAQSection from "@/components/ui/FAQSection";
 import LeadForm from "@/components/ui/LeadForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
+
+
+const ctrMetadata: Record<string, { title: string; description: string }> = {
+  "roof-repair": {
+    title: `Roof Repair Phoenix, AZ | Leak Repair + Free Inspection | ${SITE_NAME}`,
+    description: "Roof leak repair in Phoenix with free inspections, written estimates, storm documentation, and licensed crews. Fast help for tile, shingle, flat, and flashing leaks.",
+  },
+  "emergency-roof-repair": {
+    title: `Emergency Roof Repair Phoenix | Active Leak Help | ${SITE_NAME}`,
+    description: "Emergency roof repair in Phoenix for active leaks, monsoon damage, tarping, temporary weatherproofing, and insurance-ready documentation. Call now.",
+  },
+  "storm-damage-roofing": {
+    title: `Storm Damage Roof Inspection Phoenix, AZ | ${SITE_NAME}`,
+    description: "Storm damage roof inspections in Phoenix after monsoon wind, hail, and debris impact. Get roof-level photos, written findings, and claim support.",
+  },
+  "roof-replacement": {
+    title: `Roof Replacement Phoenix, AZ | Repair vs Replace Guidance | ${SITE_NAME}`,
+    description: "Roof replacement in Phoenix with Arizona-rated materials, ventilation review, written warranties, and honest repair vs replacement guidance. Free inspection.",
+  },
+  "commercial-roofing": {
+    title: `Commercial Roofing Phoenix | TPO, Flat Roofs + Pricing | ${SITE_NAME}`,
+    description: "Commercial roofing in Phoenix for TPO, flat roofs, coatings, repairs, replacement, moisture scans, warranties, and site-specific pricing. Free estimate.",
+  },
+  "tile-roofing": {
+    title: `Tile Roofing Phoenix, AZ | Repair, Underlayment + HOA Help | ${SITE_NAME}`,
+    description: "Tile roofing in Phoenix for repairs, underlayment replacement, leak diagnosis, HOA documentation, and clay or concrete tile systems. Free inspection.",
+  },
+};
 
 export async function generateStaticParams() {
   return services.map((s) => ({ service: s.slug }));
@@ -26,8 +54,9 @@ export async function generateMetadata({
   const service = getService(serviceSlug);
   if (!service) return {};
 
-  const title = `${service.name} in Phoenix, AZ | Licensed Roofing Contractor | ${SITE_NAME}`;
-  const description = `${service.metaDescription} Serving Phoenix, Scottsdale, Mesa, Chandler, Gilbert, and the 100-mile metro radius. Free roof inspections.`;
+  const ctr = ctrMetadata[serviceSlug];
+  const title = ctr?.title ?? `${service.name} in Phoenix, AZ | Licensed Roofing Contractor | ${SITE_NAME}`;
+  const description = ctr?.description ?? `${service.metaDescription} Serving Phoenix, Scottsdale, Mesa, Chandler, Gilbert, and the 100-mile metro radius. Free roof inspections.`;
   const canonical = `${SITE_URL}/services/${serviceSlug}`;
   const image = getServiceImage(serviceSlug).src;
 
@@ -246,6 +275,101 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
   },
 };
 
+
+
+const authoritySections: Record<string, { comparison: string; pricing: string; whenToCall: string; trust: string[] }> = {
+  "roof-repair": {
+    comparison: "Repair is usually the right choice when the leak is isolated, the surrounding roof system is still serviceable, and the source can be corrected without chasing multiple failures. Replacement becomes the better investment when leaks are recurring, shingles are brittle, tile underlayment is failing across multiple slopes, or repair cost begins approaching the value of a new roof system.",
+    pricing: "Roof leak repair pricing depends on roof type, access, leak source, material matching, urgency, and hidden moisture. Pipe boots and simple flashing repairs are usually less complex than tile underlayment failures, flat-roof seam separation, or decking repair. XRP Roofing provides written estimates so you can compare repair scope, replacement risk, and warranty coverage clearly.",
+    whenToCall: "Call when you see ceiling stains, active dripping, missing tiles or shingles, lifted flashing, cracked pipe boots, ponding on flat sections, or new leaks after monsoon rain. The sooner the leak source is documented, the easier it is to prevent insulation, drywall, and mold damage.",
+    trust: ["Root-cause leak diagnosis", "Photo documentation", "Written repair estimate", "Workmanship warranty", "Insurance documentation when storm-related"],
+  },
+  "emergency-roof-repair": {
+    comparison: "Emergency repair is the first step when the roof must be weatherproofed immediately. It may include tarping, temporary sealing, or securing displaced material. Permanent repair follows after conditions are safe, material needs are confirmed, and hidden damage is documented.",
+    pricing: "Emergency pricing depends on response timing, roof access, tarp size, temporary material needs, weather conditions, and permanent repair scope. After-hours or storm-response work may carry a premium, but fast mitigation can prevent much larger interior damage costs.",
+    whenToCall: "Call immediately for active leaks, ceiling collapse risk, storm punctures, exposed decking, missing roof sections, or water entering near electrical fixtures. Do not climb on the roof during rain, wind, lightning, or darkness.",
+    trust: ["Emergency weatherproofing", "Active leak response", "Storm documentation", "Temporary-to-permanent repair plan", "Adjuster-ready photos"],
+  },
+  "storm-damage-roofing": {
+    comparison: "Storm damage may require targeted repair, emergency weatherproofing, or full replacement depending on impact severity and roof age. A documented inspection helps determine whether damage is isolated, widespread, claim-worthy, or below deductible.",
+    pricing: "Storm repair cost depends on whether the damage is localized or roof-wide, whether materials are discontinued, whether decking or underlayment is compromised, and whether insurance scope includes code upgrades or replacement. Documentation is critical before permanent repairs begin.",
+    whenToCall: "Call after hail, high winds, fallen branches, missing shingles, displaced tile, new leaks, or visible impact marks. Ground-level checks often miss lifted materials, bruised shingles, cracked tile edges, and flashing separation.",
+    trust: ["Roof-level storm inspections", "Carrier-ready photo reports", "Adjuster meet support", "Supplement documentation", "Class 4 upgrade guidance"],
+  },
+  "roof-replacement": {
+    comparison: "Replacement is usually the smarter option when damage is widespread, the roof is near the end of its Arizona service life, underlayment is failing, leaks are recurring, or repair costs are no longer protecting long-term value. Repair is still appropriate for isolated issues on an otherwise healthy system.",
+    pricing: "Replacement pricing depends on roof size, pitch, tear-off needs, material selection, decking repairs, ventilation upgrades, permit requirements, and warranty level. Arizona-rated materials and proper attic ventilation matter because heat shortens roof life when systems are installed to generic specifications.",
+    whenToCall: "Call when your roof has repeated leaks, brittle shingles, granule loss, failed tile underlayment, storm damage across multiple slopes, soft decking, or repair estimates that keep increasing.",
+    trust: ["Written replacement scope", "Ventilation review", "Arizona-rated materials", "Permit coordination", "Manufacturer and workmanship warranties"],
+  },
+  "commercial-roofing": {
+    comparison: "Commercial roofs should be evaluated for repair, coating restoration, overlay, or replacement. Restoration can be cost-effective when insulation is dry and the deck is sound. Replacement is necessary when moisture is trapped, seams are failing system-wide, or warranty requirements demand a full assembly.",
+    pricing: "Commercial roofing pricing depends on square footage, membrane type, insulation R-value, moisture condition, rooftop equipment, access logistics, edge metal, drainage, phasing, and warranty level. A site-specific inspection is essential for accurate pricing.",
+    whenToCall: "Call when you see recurring tenant leaks, ponding water, open seams, punctures, saturated insulation, failing coatings, rising cooling costs, or roof issues affecting business operations.",
+    trust: ["TPO and flat-roof expertise", "Moisture scan guidance", "Business-disruption planning", "NDL warranty options", "Phased commercial scheduling"],
+  },
+  "tile-roofing": {
+    comparison: "Tile repair is appropriate for isolated broken tiles, ridge issues, or localized flashing problems. Underlayment replacement is usually needed when leaks occur beneath intact tile on older systems. Full tile replacement is only necessary when tile condition, profile availability, or HOA requirements make reuse impractical.",
+    pricing: "Tile roofing pricing depends on whether the project is isolated repair, tile lift-and-reset, underlayment replacement, or full tile replacement. Costs are also affected by tile profile matching, broken tile percentage, roof pitch, access, and HOA documentation requirements.",
+    whenToCall: "Call when you see cracked tile, slipped tile, ridge mortar failure, ceiling stains after rain, underlayment age over 20 years, or HOA notices requiring roof material compliance.",
+    trust: ["Tile lift-and-reset expertise", "Underlayment replacement", "HOA documentation", "Profile and color matching", "Written warranty"],
+  },
+};
+
+const revenueFaqs: Record<string, Array<{ q: string; a: string }>> = {
+  "roof-repair": [
+    { q: "How much does roof leak repair cost in Phoenix?", a: "Roof leak repair cost depends on roof type, leak source, access, urgency, and hidden moisture. Pipe boot and flashing repairs are usually simpler than tile underlayment, flat-roof seam, or decking repairs. XRP Roofing provides free written estimates after inspection." },
+    { q: "Can you find the actual source of a roof leak?", a: "Yes. We inspect the roof surface, flashing, penetrations, valleys, attic indicators, and moisture patterns so the repair addresses the entry point instead of only sealing the visible symptom." },
+  ],
+  "emergency-roof-repair": [
+    { q: "What should I do during an active roof leak in Arizona?", a: "Move valuables, catch water safely, take photos, and avoid climbing on the roof during rain or wind. Call XRP Roofing for emergency weatherproofing and documentation before interior damage spreads." },
+    { q: "Do emergency roof repairs include permanent repair?", a: "Emergency service focuses first on stopping active water intrusion with tarps, sealants, or temporary patches. Permanent repair is then scheduled after conditions are safe and materials are confirmed." },
+  ],
+  "storm-damage-roofing": [
+    { q: "Should I get a roof inspection before filing a storm damage claim?", a: "Yes. A roof-level inspection with photos and written documentation helps determine whether the damage is claim-worthy and gives the insurance carrier clearer evidence." },
+    { q: "What storm damage is commonly missed from the ground?", a: "Lifted shingles, cracked tile edges, hail bruising, displaced ridge caps, separated flashing, and exposed underlayment are commonly missed without roof-level inspection." },
+  ],
+  "commercial-roofing": [
+    { q: "What affects commercial roofing pricing in Phoenix?", a: "Pricing depends on roof size, membrane type, insulation, access, moisture condition, rooftop equipment, drainage, warranty level, and whether the project is restoration, overlay, or replacement." },
+    { q: "Can a commercial roof be restored instead of replaced?", a: "Sometimes. If insulation is dry and the deck is sound, coating restoration can extend roof life. If moisture is trapped below the membrane, replacement or partial tear-off may be required." },
+  ],
+  "roof-replacement": [
+    { q: "When is roof replacement better than repair in Arizona?", a: "Replacement is usually better when damage is widespread, shingles are brittle, tile underlayment is failing, leaks are recurring, decking is soft, or the repair cost approaches the value of a new roof system." },
+    { q: "Can insurance pay for roof replacement?", a: "Storm-caused wind, hail, or debris damage may be covered less your deductible. Age-related wear is usually not covered. XRP Roofing documents storm damage for claim review when applicable." },
+  ],
+  "tile-roofing": [
+    { q: "Can tile roof leaks be fixed without replacing all tile?", a: "Often, yes. Many Arizona tile roof leaks come from failed underlayment beneath intact tile. The tile can frequently be removed, underlayment replaced, and tile reinstalled." },
+    { q: "Do HOA communities usually approve tile roof repairs?", a: "Like-for-like repairs are usually simpler than material changes, but requirements vary. XRP Roofing can provide material and scope documentation for HOA review when needed." },
+  ],
+};
+
+const revenueCtas: Record<string, { title: string; subtitle: string }> = {
+  "roof-repair": {
+    title: "Need Roof Leak Repair in Phoenix?",
+    subtitle: "Request a free leak inspection and written repair estimate from a licensed Arizona roofing contractor. We document the issue and explain repair vs. replacement options clearly.",
+  },
+  "emergency-roof-repair": {
+    title: "Active Roof Leak or Storm Damage?",
+    subtitle: "Call now for emergency roof repair support, temporary weatherproofing, and damage documentation for Arizona homes and businesses.",
+  },
+  "storm-damage-roofing": {
+    title: "Schedule a Storm Damage Roof Inspection",
+    subtitle: "Get roof-level photos, written findings, and insurance-ready documentation after monsoon wind, hail, or debris damage.",
+  },
+  "commercial-roofing": {
+    title: "Request a Commercial Roofing Estimate",
+    subtitle: "Get a site-specific Phoenix commercial roofing assessment for TPO, flat roofing, coatings, repairs, replacement, and warranty options.",
+  },
+  "roof-replacement": {
+    title: "Compare Roof Repair vs. Replacement",
+    subtitle: "Get an honest inspection, written estimate, and Arizona-rated material recommendations before investing in a new roof.",
+  },
+  "tile-roofing": {
+    title: "Need Tile Roof Repair or Underlayment Replacement?",
+    subtitle: "Get a free tile roof inspection with clear options for repair, underlayment replacement, HOA documentation, and long-term leak prevention.",
+  },
+};
+
 const genericContent = {
   body: [
     "Arizona's climate presents roofing challenges found nowhere else in the country. Surface temperatures exceeding 180°F in summer, monsoon season wind and rain, and constant UV exposure that degrades materials twice as fast as northern climates — these are the conditions your Phoenix roof faces every day. XRP Roofing has spent years developing the expertise, material selection, and installation techniques specifically suited to this environment.",
@@ -281,7 +405,7 @@ export default async function ServicePage({
     .slice(0, 8);
 
   // Generic FAQ for this service
-  const faqs = [
+  const baseFaqs = [
     { q: `How do I know if I need ${service.name} in Phoenix?`, a: `Signs you need ${service.name.toLowerCase()} include visible damage, leaks following rain events, material aging past its rated lifespan, or storm damage. A free professional inspection from XRP Roofing gives you an honest assessment of your roof's condition.` },
     { q: `How long does ${service.name} take in Phoenix, AZ?`, a: `Timeline depends on project scope, material availability, and weather. Most residential projects complete within one to three days. We provide an accurate schedule during the estimate process and communicate any changes promptly.` },
     { q: `Is ${service.name} covered by homeowner's insurance?`, a: `Storm-related damage requiring ${service.name.toLowerCase()} is typically covered. Gradual wear and deferred maintenance generally are not. We provide documentation suitable for insurance claim submission and work with all major carriers.` },
@@ -289,6 +413,9 @@ export default async function ServicePage({
     { q: `Do you offer financing for ${service.name} projects?`, a: `Yes — we work with financing partners to offer payment plans for qualifying projects. Ask about current options when you call for your free estimate.` },
     { q: `What areas do you serve for ${service.name}?`, a: `We provide ${service.name.toLowerCase()} throughout Phoenix and a 100-mile radius including Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, and 20+ additional cities.` },
   ];
+  const faqs = [...(revenueFaqs[serviceSlug] || []), ...baseFaqs];
+  const cta = revenueCtas[serviceSlug];
+  const authority = authoritySections[serviceSlug];
 
   const breadcrumbItems = [
     { label: "Services", href: "/services" },
@@ -338,6 +465,12 @@ export default async function ServicePage({
               >
                 Get Free Inspection <ArrowRight className="w-4 h-4" />
               </Link>
+              <a
+                href={PHONE_HREF}
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-7 py-3.5 rounded-xl font-bold transition-colors border border-white/30"
+              >
+                Call XRP Roofing {PHONE}
+              </a>
             </div>
           </div>
         </div>
@@ -371,6 +504,34 @@ export default async function ServicePage({
                   ))}
                 </ul>
               </div>
+
+              {authority && (
+                <div className="mt-8 space-y-6">
+                  <div>
+                    <h2 className="text-xl font-black text-gray-900 mb-3">Repair vs. Replacement Guidance</h2>
+                    <p className="text-gray-700 leading-relaxed">{authority.comparison}</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-2xl p-6">
+                    <h2 className="text-xl font-black text-gray-900 mb-3">Pricing Factors & Estimate Guidance</h2>
+                    <p className="text-gray-700 leading-relaxed text-sm">{authority.pricing}</p>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-black text-gray-900 mb-3">When to Call XRP Roofing</h2>
+                    <p className="text-gray-700 leading-relaxed">{authority.whenToCall}</p>
+                  </div>
+                  <div className="bg-orange-50 rounded-2xl p-6">
+                    <h3 className="font-black text-gray-900 text-lg mb-4">Trust Signals That Matter</h3>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {authority.trust.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
+                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
 
               {/* City Links */}
               <div className="mt-10">
@@ -425,7 +586,10 @@ export default async function ServicePage({
       {/* FAQ */}
       <FAQSection faqs={faqs} title={`${service.name} FAQ — Phoenix, AZ`} />
 
-      <CTASection />
+      <CTASection
+        title={cta?.title}
+        subtitle={cta?.subtitle}
+      />
     </>
   );
 }

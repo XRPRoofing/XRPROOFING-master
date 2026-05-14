@@ -41,6 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "insurance-roof-claim-guide-arizona",
+    "hoa-roofing-requirements-arizona",
+    "commercial-roofing-pricing-phoenix",
+    "storm-damage-roof-inspection-arizona",
+    "roof-leak-repair-cost-arizona",
+    "emergency-roof-repair-arizona",
     "how-to-prepare-your-roof-for-monsoon-season-arizona",
     "tile-vs-shingle-roofing-arizona",
     "signs-your-arizona-roof-needs-replacement",
