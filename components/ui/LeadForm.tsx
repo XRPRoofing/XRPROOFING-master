@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Send, CheckCircle, AlertCircle, Shield } from "lucide-react";
 
 const RECAPTCHA_SITE_KEY = "6Le_12ksAAAAABNp1PpYbfXZP_tsb6qRIXA6WRU2";
-const FORMSAI_URL = "https://formsai-backend-bz0j.onrender.com/v1/forms/8DSmU7B1Qq/submit";
 
 const inputClass =
   "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none text-sm transition-colors bg-white text-gray-900 placeholder:text-gray-400";
@@ -73,21 +72,10 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
     setStatus("submitting");
 
     try {
-      const token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(RECAPTCHA_SITE_KEY, { action: "submit_form" })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
-
-      const payload = { ...raw, recaptchaToken: token };
-
-      const res = await fetch(FORMSAI_URL, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(raw),
       });
 
       if (res.ok) {

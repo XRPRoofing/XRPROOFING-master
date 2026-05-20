@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const schema = z.object({
@@ -6,10 +6,57 @@ const schema = z.object({
   phone: z.string().min(7),
   email: z.string().email(),
   city: z.string().min(2),
-  serviceNeeded: z.string().min(1),
+  budget: z.string().optional(),
+  roofSize: z.string().optional(),
+  nonMarketingSmsConsent: z.string().optional(),
+  marketingSmsConsent: z.string().optional(),
   message: z.string().optional(),
-  honeypot: z.string().max(0).optional(),
+  website: z.string().max(0).optional(),
+  recaptchaToken: z.string().optional(),
 });
+
+async function sendLeadEmail(
+  apiKey: string,
+  toEmail: string,
+  data: z.infer<typeof schema>
+) {
+  const emailBody = `
+New Roofing Lead from XRP Roofing Website
+
+Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email}
+City: ${data.city}
+Estimated Budget: ${data.budget || "Not provided"}
+Approx. Roof Size: ${data.roofSize || "Not provided"}
+Non-Marketing SMS Consent: ${data.nonMarketingSmsConsent === "yes" ? "Yes" : "No"}
+Marketing SMS Consent: ${data.marketingSmsConsent === "yes" ? "Yes" : "No"}
+Message: ${data.message || "None provided"}
+
+---
+Submitted via xrproofing.com
+    `.trim();
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      from: "XRP Roofing Website <noreply@xrproofing.com>",
+      to: [toEmail],
+      subject: `New Roofing Lead from ${data.city}`,
+      text: emailBody,
+      reply_to: data.email,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Resend error: ${err}`);
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,7 +64,7 @@ export async function POST(req: NextRequest) {
     const data = schema.parse(body);
 
     // Bot detection
-    if (data.honeypot) {
+    if (data.website) {
       return NextResponse.json({ ok: true });
     }
 
@@ -29,40 +76,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
-    const emailBody = `
-New Roofing Lead from XRP Roofing Website
-
-Name: ${data.name}
-Phone: ${data.phone}
-Email: ${data.email}
-City: ${data.city}
-Service Needed: ${data.serviceNeeded}
-Message: ${data.message || "None provided"}
-
----
-Submitted via xrproofing.com
-    `.trim();
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: "XRP Roofing Website <noreply@xrproofing.com>",
-        to: [toEmail],
-        subject: `New Roofing Lead: ${data.serviceNeeded} in ${data.city}`,
-        text: emailBody,
-        reply_to: data.email,
-      }),
+    after(async () => {
+      try {
+        await sendLeadEmail(apiKey, toEmail, data);
+      } catch (err) {
+        console.error("Email delivery failed:", err);
+      }
     });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Resend error:", err);
-      return NextResponse.json({ error: "Email delivery failed" }, { status: 500 });
-    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
