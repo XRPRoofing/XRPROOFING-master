@@ -58,6 +58,20 @@ Submitted via xrproofing.com
   }
 }
 
+function getSafeErrorMessage(err: unknown) {
+  const message = err instanceof Error ? err.message : "";
+
+  if (message.includes("RESEND_API_KEY")) {
+    return "Email service is not configured";
+  }
+
+  if (message.includes("Resend error")) {
+    return "Email service rejected the message. Please check Resend domain verification and API key.";
+  }
+
+  return "Internal server error";
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -72,8 +86,7 @@ export async function POST(req: NextRequest) {
     const toEmail = process.env.CONTACT_EMAIL || "info@xrproofing.com";
 
     if (!apiKey) {
-      console.error("RESEND_API_KEY not set");
-      return NextResponse.json({ error: "Email service is not configured" }, { status: 500 });
+      throw new Error("RESEND_API_KEY not set");
     }
 
     await sendLeadEmail(apiKey, toEmail, data);
@@ -84,6 +97,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid form data", details: err.issues }, { status: 400 });
     }
     console.error("Contact route error:", err);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: getSafeErrorMessage(err) }, { status: 500 });
   }
 }
