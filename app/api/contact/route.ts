@@ -1,4 +1,4 @@
-import { after, NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const schema = z.object({
@@ -73,16 +73,10 @@ export async function POST(req: NextRequest) {
 
     if (!apiKey) {
       console.error("RESEND_API_KEY not set");
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+      return NextResponse.json({ error: "Email service is not configured" }, { status: 500 });
     }
 
-    after(async () => {
-      try {
-        await sendLeadEmail(apiKey, toEmail, data);
-      } catch (err) {
-        console.error("Email delivery failed:", err);
-      }
-    });
+    await sendLeadEmail(apiKey, toEmail, data);
 
     return NextResponse.json({ ok: true });
   } catch (err) {

@@ -32,6 +32,7 @@ declare global {
 export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   const loadRecaptcha = () => {
@@ -69,6 +70,7 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
       return;
     }
     setErrors({});
+    setSubmitError("");
     setStatus("submitting");
 
     try {
@@ -82,9 +84,12 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
         setStatus("success");
         form.reset();
       } else {
+        const result = await res.json().catch(() => null);
+        setSubmitError(result?.error || "Something went wrong. Please call us directly or try again.");
         setStatus("error");
       }
     } catch {
+      setSubmitError("Something went wrong. Please call us directly or try again.");
       setStatus("error");
     }
   };
@@ -188,7 +193,7 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
         {status === "error" && (
           <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl p-3">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
-            Something went wrong. Please call us directly or try again.
+            {submitError || "Something went wrong. Please call us directly or try again."}
           </div>
         )}
 
@@ -322,7 +327,7 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
       {status === "error" && (
         <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl p-3">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          Something went wrong. Please call us directly or try again.
+          {submitError || "Something went wrong. Please call us directly or try again."}
         </div>
       )}
 
