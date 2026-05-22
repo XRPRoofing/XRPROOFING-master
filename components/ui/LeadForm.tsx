@@ -14,6 +14,7 @@ const NON_MARKETING_SMS_CONSENT =
   "I consent to receive non-marketing text messages from XRP Roofing regarding appointment scheduling, project updates, service notifications, technician arrival updates, and job-related communications. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase or service.";
 const MARKETING_SMS_CONSENT =
   "I consent to receive marketing text messages from XRP Roofing, including promotions, discounts, seasonal offers, and special deals. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase or service.";
+const FORMS_VISIBLE = false;
 
 interface LeadFormProps {
   compact?: boolean;
@@ -34,6 +35,8 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+
+  if (!FORMS_VISIBLE) return null;
 
   const loadRecaptcha = () => {
     const id = "recaptcha-script";
