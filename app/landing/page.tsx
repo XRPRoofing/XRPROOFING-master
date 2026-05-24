@@ -19,7 +19,6 @@ import {
   MapPin,
   Phone,
   ShieldCheck,
-  Sparkles,
   Star,
   Trophy,
   Wrench,
@@ -27,6 +26,7 @@ import {
 } from "lucide-react";
 import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE, GOOGLE_REVIEW_URL } from "@/lib/constants";
 import LandingContactForm from "@/components/ui/LandingContactForm";
+import { LocalBusinessSchema, ReviewSchema, ServiceSchema } from "@/components/ui/SeoSchema";
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} Landing | Free Roof Inspection`,
@@ -49,11 +49,20 @@ const stats = [
 ];
 
 const services = [
-  { title: "Roof Repair", description: "Stop leaks fast and prevent minor roof issues from becoming expensive property damage.", icon: Wrench },
-  { title: "Roof Replacement", description: "Upgrade your roof with durable materials, clean installation, and reliable project timelines.", icon: Home },
-  { title: "Storm Damage Restoration", description: "Get rapid help after wind, hail, monsoon rain, and severe Arizona storm events.", icon: Zap },
-  { title: "Insurance Claim Assistance", description: "Receive clear damage documentation and support through the claim process.", icon: ClipboardCheck },
-  { title: "Commercial Roofing", description: "Protect offices, retail properties, multifamily buildings, and managed assets.", icon: Building2 },
+  { title: "Roof Repair", description: "Stop leaks fast and prevent minor roof issues from becoming expensive property damage.", icon: Wrench, href: "/services/roof-repair" },
+  { title: "Roof Replacement", description: "Upgrade your roof with durable materials, clean installation, and reliable project timelines.", icon: Home, href: "/services/roof-replacement" },
+  { title: "Storm Damage Restoration", description: "Get rapid help after wind, hail, monsoon rain, and severe Arizona storm events.", icon: Zap, href: "/services/storm-damage-roofing" },
+  { title: "Insurance Claim Assistance", description: "Receive clear damage documentation and support through the claim process.", icon: ClipboardCheck, href: "/services/storm-damage-roofing" },
+  { title: "Commercial Roofing", description: "Protect offices, retail properties, multifamily buildings, and managed assets.", icon: Building2, href: "/services/commercial-roofing" },
+];
+
+const serviceLinks = [
+  { label: "Tile Roofing", href: "/services/tile-roofing" },
+  { label: "Shingle Roofing", href: "/services/shingle-roofing" },
+  { label: "Metal Roofing", href: "/services/metal-roofing" },
+  { label: "Flat Roofing", href: "/services/flat-roofing" },
+  { label: "TPO Roofing", href: "/services/tpo-roofing" },
+  { label: "Roof Coatings", href: "/services/roof-coatings" },
 ];
 
 const reasons = [
@@ -94,7 +103,16 @@ const trustBadges = [
 
 export default function LandingPage() {
   return (
-    <main className="scroll-smooth bg-slate-950 text-slate-950">
+    <>
+      <LocalBusinessSchema />
+      <ServiceSchema
+        serviceName="Free Roof Inspection"
+        serviceSlug="free-roof-inspection"
+        description="Free roof inspections for Arizona homeowners and property managers, including roof repair, replacement, storm damage, commercial roofing, and insurance claim support."
+        pagePath="/landing"
+      />
+      <ReviewSchema authorName={testimonials[0].name} reviewBody={testimonials[0].review} />
+      <main className="scroll-smooth bg-slate-950 text-slate-950">
       <section className="relative isolate overflow-hidden bg-slate-950 text-white">
         <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="luxury Arizona home roof completed by XRP Roofing" fill priority fetchPriority="high" sizes="100vw" className="-z-20 object-cover opacity-55" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(37,99,235,0.55),transparent_34%),linear-gradient(105deg,rgba(2,6,23,0.96)_0%,rgba(15,23,42,0.9)_45%,rgba(30,64,175,0.5)_100%)]" />
@@ -142,7 +160,7 @@ export default function LandingPage() {
             </div>
             <div className="relative overflow-hidden rounded-[2.25rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="relative h-[560px] overflow-hidden rounded-[1.75rem] bg-slate-200">
-                <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" loading="lazy" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-7">
                   <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-200">Completed roofing project</p>
                   <p className="mt-2 text-2xl font-black">Clean roof repairs, coatings, and tile work handled by local pros.</p>
@@ -244,15 +262,26 @@ export default function LandingPage() {
             {services.map((service) => {
               const Icon = service.icon;
               return (
-                <div key={service.title} className="group rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 shadow-2xl shadow-black/10 transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:text-slate-950">
+                <Link href={service.href} key={service.title} className="group rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 shadow-2xl shadow-black/10 transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:text-slate-950">
                   <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-600 text-white shadow-lg shadow-blue-600/20 transition-transform group-hover:scale-110">
                     <Icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-3xl font-black tracking-[-0.04em]">{service.title}</h3>
                   <p className="mt-4 text-lg leading-8 text-slate-300 group-hover:text-slate-600">{service.description}</p>
-                </div>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-black text-blue-300 group-hover:text-blue-700">Learn more <ArrowRight className="h-4 w-4" /></span>
+                </Link>
               );
             })}
+          </div>
+          <div className="mt-10 rounded-[2rem] border border-white/10 bg-white/[0.06] p-6">
+            <p className="mb-4 text-sm font-black uppercase tracking-[0.2em] text-blue-300">More Phoenix roofing services</p>
+            <div className="flex flex-wrap gap-3">
+              {serviceLinks.map((service) => (
+                <Link key={service.href} href={service.href} className="rounded-full bg-white px-4 py-2 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-100">
+                  {service.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -399,6 +428,7 @@ export default function LandingPage() {
           <div className="mt-10 border-t border-slate-100 pt-6 text-sm font-semibold text-slate-500">© {new Date().getFullYear()} XRP Roofing. All rights reserved.</div>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }

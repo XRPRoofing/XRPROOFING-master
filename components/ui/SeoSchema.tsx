@@ -11,6 +11,7 @@ interface ServiceSchemaProps {
   description: string;
   cityName?: string;
   citySlug?: string;
+  pagePath?: string;
 }
 
 interface FAQSchemaProps {
@@ -26,6 +27,12 @@ interface ArticleSchemaProps {
   description: string;
   slug: string;
   datePublished: string;
+}
+
+interface ReviewSchemaProps {
+  authorName: string;
+  reviewBody: string;
+  ratingValue?: number;
 }
 
 export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaProps) {
@@ -99,8 +106,10 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
   );
 }
 
-export function ServiceSchema({ serviceName, serviceSlug, description, cityName, citySlug }: ServiceSchemaProps) {
-  const pageUrl = citySlug
+export function ServiceSchema({ serviceName, serviceSlug, description, cityName, citySlug, pagePath }: ServiceSchemaProps) {
+  const pageUrl = pagePath
+    ? `${SITE_URL}${pagePath}`
+    : citySlug
     ? `${SITE_URL}/locations/${citySlug}/${serviceSlug}`
     : `${SITE_URL}/services/${serviceSlug}`;
 
@@ -199,6 +208,37 @@ export function ArticleSchema({ title, description, slug, datePublished }: Artic
         url: `${SITE_URL}${OG_IMAGE}`,
       },
     },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function ReviewSchema({ authorName, reviewBody, ratingValue = 5 }: ReviewSchemaProps) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    itemReviewed: {
+      "@type": "RoofingContractor",
+      "@id": `${SITE_URL}/#localbusiness`,
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    author: {
+      "@type": "Person",
+      name: authorName,
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody,
   };
 
   return (
