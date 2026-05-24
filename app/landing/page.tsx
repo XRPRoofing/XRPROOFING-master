@@ -25,7 +25,7 @@ import {
   Wrench,
   Zap,
 } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
+import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE, GOOGLE_REVIEW_URL } from "@/lib/constants";
 import LandingContactForm from "@/components/ui/LandingContactForm";
 
 export const metadata: Metadata = {
@@ -108,6 +108,12 @@ export default function LandingPage() {
                 Get Free Inspection <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
+            <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" aria-label="See XRP Roofing reviews on Google" className="mt-6 inline-flex items-center gap-3 rounded-2xl border border-white/20 bg-white/15 px-5 py-3 text-sm font-black text-white shadow-xl shadow-blue-950/20 backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20">
+              <span className="flex items-center gap-1 text-amber-300">
+                {[1, 2, 3, 4, 5].map((rating) => <Star key={rating} className="h-4 w-4 fill-current" />)}
+              </span>
+              5.0 ★ on Google
+            </a>
             <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
               {["Arizona roofing experts", "No-pressure inspections", "Fast storm response"].map((item) => (
                 <div key={item} className="flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-3 text-sm font-bold backdrop-blur">
