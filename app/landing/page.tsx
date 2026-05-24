@@ -107,9 +107,6 @@ export default function LandingPage() {
               <Link href="#contact" className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-9 py-5 text-lg font-black text-blue-800 shadow-2xl shadow-blue-950/30 transition-all hover:-translate-y-1 hover:scale-[1.02] hover:bg-blue-50">
                 Get Free Inspection <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link href="#contact" className="inline-flex items-center justify-center gap-3 rounded-2xl bg-blue-600 px-9 py-5 text-lg font-black text-white shadow-2xl shadow-blue-600/30 ring-1 ring-white/20 transition-all hover:-translate-y-1 hover:bg-blue-500">
-                Get Instant Estimate
-              </Link>
             </div>
             <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
               {["Arizona roofing experts", "No-pressure inspections", "Fast storm response"].map((item) => (
