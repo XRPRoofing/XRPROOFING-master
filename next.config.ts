@@ -276,6 +276,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/phoenix-roofing/",
+        destination: "/phoenix-roofing",
+        permanent: true,
+      },
+      {
         source: "/about/",
         destination: "/about",
         permanent: true,
