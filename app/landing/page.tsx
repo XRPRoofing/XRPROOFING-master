@@ -85,6 +85,13 @@ const testimonials = [
   { name: "Maria Johnson", role: "Realtor", review: "XRP Roofing is the team I call when a roof concern could slow down a closing. Honest, fast, and dependable." },
 ];
 
+const trustBadges = [
+  { label: "ROC Licensed", sub: "ROC #350898", icon: ShieldCheck },
+  { label: "Licensed & Insured", sub: "Protected, professional service", icon: BadgeCheck },
+  { label: "BBB", sub: "Business trust badge", icon: Star },
+  { label: "GAF", sub: "Roofing materials trusted nationwide", icon: Hammer },
+];
+
 export default function LandingPage() {
   return (
     <main className="scroll-smooth bg-slate-950 text-slate-950">
@@ -147,6 +154,25 @@ export default function LandingPage() {
               <span className="flex items-center gap-2 text-xl font-black"><Phone className="h-5 w-5" />{PHONE}</span>
             </a>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-6">
+        <div className="container mx-auto grid gap-3 px-4 sm:grid-cols-2 lg:grid-cols-4">
+          {trustBadges.map((badge) => {
+            const Icon = badge.icon;
+            return (
+              <div key={badge.label} className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-[#f5f8ff] p-4 shadow-lg shadow-blue-950/5">
+                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-blue-700 text-white">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-slate-950">{badge.label}</p>
+                  <p className="mt-1 text-sm font-bold text-slate-600">{badge.sub}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
