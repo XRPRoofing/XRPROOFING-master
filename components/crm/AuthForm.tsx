@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Loader2, Mail, Lock, UserRound } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
+import { createClient, hasSupabaseConfig } from "@/lib/supabase/client";
 
 type AuthMode = "login" | "signup" | "forgot" | "reset";
 
@@ -30,6 +30,12 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
     setError("");
     setMessage("");
 
+    if (!hasSupabaseConfig()) {
+      setError("CRM login is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY, then restart the app.");
+      setLoading(false);
+      return;
+    }
+
     const supabase = createClient();
 
     if (mode === "login") {
@@ -37,7 +43,8 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
       if (signInError) setError(signInError.message);
       else {
         const redirectedFrom = new URLSearchParams(window.location.search).get("redirectedFrom");
-        router.push(redirectedFrom || "/crm");
+        router.replace(redirectedFrom || "/crm");
+        router.refresh();
       }
     }
 

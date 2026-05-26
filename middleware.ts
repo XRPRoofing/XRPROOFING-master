@@ -7,15 +7,15 @@ export async function middleware(request: NextRequest) {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   const isProtected = request.nextUrl.pathname.startsWith("/crm");
 
-  if (!supabaseUrl || !supabaseAnonKey) {
-    if (isProtected) {
-      const redirectUrl = request.nextUrl.clone();
-      redirectUrl.pathname = "/login";
-      redirectUrl.searchParams.set("redirectedFrom", request.nextUrl.pathname);
-      return NextResponse.redirect(redirectUrl);
-    }
-
+  if (!isProtected) {
     return response;
+  }
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = "/login";
+    redirectUrl.searchParams.set("redirectedFrom", request.nextUrl.pathname);
+    return NextResponse.redirect(redirectUrl);
   }
 
   const supabase = createServerClient(
@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (isProtected && !user) {
+  if (!user) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/login";
     redirectUrl.searchParams.set("redirectedFrom", request.nextUrl.pathname);
