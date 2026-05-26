@@ -15,6 +15,15 @@ const copy = {
   reset: { title: "Choose a new password", subtitle: "Set a secure password for your CRM account.", cta: "Update password" },
 };
 
+function withTimeout<T>(promise: Promise<T>, milliseconds = 15000) {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => {
+      window.setTimeout(() => reject(new Error("Login request timed out. Check your internet connection and Supabase credentials.")), milliseconds);
+    }),
+  ]);
+}
+
 export default function AuthForm({ mode }: { mode: AuthMode }) {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -36,46 +45,51 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
       return;
     }
 
-    const supabase = createClient();
+    try {
+      const supabase = createClient();
 
-    if (mode === "login") {
-      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-      if (signInError) setError(signInError.message);
-      else {
-        const redirectedFrom = new URLSearchParams(window.location.search).get("redirectedFrom");
-        router.replace(redirectedFrom || "/crm");
-        router.refresh();
+      if (mode === "login") {
+        const { error: signInError } = await withTimeout(supabase.auth.signInWithPassword({ email, password }));
+        if (signInError) setError(signInError.message);
+        else {
+          const redirectedFrom = new URLSearchParams(window.location.search).get("redirectedFrom");
+          window.location.href = redirectedFrom || "/crm";
+          return;
+        }
       }
-    }
 
-    if (mode === "signup") {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: { full_name: name, role: "sales_rep" }, emailRedirectTo: `${window.location.origin}/crm` },
-      });
-      if (signUpError) setError(signUpError.message);
-      else setMessage("Check your email to confirm the account before logging in.");
-    }
-
-    if (mode === "forgot") {
-      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      });
-      if (resetError) setError(resetError.message);
-      else setMessage("Password reset email sent.");
-    }
-
-    if (mode === "reset") {
-      const { error: updateError } = await supabase.auth.updateUser({ password });
-      if (updateError) setError(updateError.message);
-      else {
-        setMessage("Password updated. Redirecting to CRM...");
-        router.push("/crm");
+      if (mode === "signup") {
+        const { error: signUpError } = await withTimeout(supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: name, role: "sales_rep" }, emailRedirectTo: `${window.location.origin}/crm` },
+        }));
+        if (signUpError) setError(signUpError.message);
+        else setMessage("Check your email to confirm the account before logging in.");
       }
-    }
 
-    setLoading(false);
+      if (mode === "forgot") {
+        const { error: resetError } = await withTimeout(supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        }));
+        if (resetError) setError(resetError.message);
+        else setMessage("Password reset email sent.");
+      }
+
+      if (mode === "reset") {
+        const { error: updateError } = await withTimeout(supabase.auth.updateUser({ password }));
+        if (updateError) setError(updateError.message);
+        else {
+          setMessage("Password updated. Redirecting to CRM...");
+          router.push("/crm");
+          return;
+        }
+      }
+    } catch (authError) {
+      setError(authError instanceof Error ? authError.message : "CRM authentication failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
