@@ -230,6 +230,30 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link
+              href="/phoenix-foam-roofing"
+              className="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200"
+            >
+              <div className="relative h-48">
+                <Image
+                  src="/images/xrp-roofing/2025-01-26-4.jpg"
+                  alt="Foam Roofing and elastomeric coatings in Phoenix AZ by XRP Roofing"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-white font-bold text-lg">Foam Roofing</h3>
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">SPF roofing and elastomeric coatings for energy-efficient Phoenix flat roofs.</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
+                  Learn More <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </Link>
             {topServices.map((service) => (
               <Link
                 key={service.slug}

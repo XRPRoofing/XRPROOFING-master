@@ -94,6 +94,9 @@ export default function ServicesPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
+              { label: "Foam Roofing", href: "/phoenix-foam-roofing" },
+              { label: "SPF Roofing", href: "/phoenix-foam-roofing" },
+              { label: "Elastomeric Coatings", href: "/phoenix-foam-roofing" },
               { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
               { label: "Roof Leak Repair", href: "/services/roof-repair" },
               { label: "Storm Damage Inspection", href: "/services/storm-damage-roofing" },

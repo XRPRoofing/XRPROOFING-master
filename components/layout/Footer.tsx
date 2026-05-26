@@ -97,6 +97,30 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Our Services</h3>
             <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/phoenix-foam-roofing"
+                  className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
+                >
+                  Foam Roofing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/phoenix-foam-roofing"
+                  className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
+                >
+                  SPF Roofing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/phoenix-foam-roofing"
+                  className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
+                >
+                  Elastomeric Coatings
+                </Link>
+              </li>
               {topServices.map((s) => (
                 <li key={s.slug}>
                   <Link
