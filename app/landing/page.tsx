@@ -123,10 +123,10 @@ export default function LandingPage() {
               Free roof inspection campaign
             </div>
             <h1 className="max-w-5xl text-6xl font-black leading-[0.88] tracking-[-0.07em] text-white sm:text-7xl lg:text-8xl">
-              Phoenix Roofing Contractor You Can Trust
+              Protect Your Home With Roofing You Can Trust
             </h1>
             <p className="mt-8 max-w-2xl text-xl font-medium leading-9 text-blue-50 sm:text-2xl">
-              Professional roofing solutions for Phoenix homes and businesses. From inspections and repairs to full roof replacements, XRP Roofing delivers dependable service across the Valley.
+              Professional roofing solutions for residential and commercial properties. From inspections and repairs to full roof replacements, XRP Roofing delivers dependable service and lasting results.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link href="#contact" className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-9 py-5 text-lg font-black text-blue-800 shadow-2xl shadow-blue-950/30 transition-all hover:-translate-y-1 hover:scale-[1.02] hover:bg-blue-50">

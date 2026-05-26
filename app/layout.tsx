@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   },
   description:
     "XRP Roofing is Phoenix's trusted roofing contractor. Roof repair, replacement, tile, shingle, metal, flat & commercial roofing. Licensed & insured. Free inspections.",
+  keywords: ["roofing contractor Phoenix AZ", "roof repair Phoenix", "roof replacement Arizona", "tile roofing Phoenix", "XRP Roofing"],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   robots: { index: true, follow: true },
