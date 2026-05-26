@@ -82,6 +82,12 @@ export default function Header() {
                   onMouseEnter={() => setServicesOpen(true)}
                   onMouseLeave={() => setServicesOpen(false)}
                 >
+                  <Link
+                    href="/phoenix-foam-roofing"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#eef2fb] hover:text-[#1a3a8f] transition-colors"
+                  >
+                    Foam Roofing
+                  </Link>
                   {services.map((s) => (
                     <Link
                       key={s.slug}
@@ -150,6 +156,13 @@ export default function Header() {
               </button>
               {servicesOpen && (
                 <div className="pl-4 flex flex-col gap-1">
+                  <Link
+                    href="/phoenix-foam-roofing"
+                    className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-500"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Foam Roofing
+                  </Link>
                   {services.map((s) => (
                     <Link
                       key={s.slug}
