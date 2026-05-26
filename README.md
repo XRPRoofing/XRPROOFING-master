@@ -208,3 +208,104 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+
+## XRP Roofing CRM SaaS
+
+This repository now includes a protected roofing CRM workspace for XRP Roofing staff.
+
+### CRM Routes
+
+- `/login` — Supabase email/password login
+- `/signup` — staff signup
+- `/forgot-password` — reset email request
+- `/reset-password` — password update page
+- `/crm` — protected dashboard
+- `/crm/leads` — Kanban-style leads pipeline
+- `/crm/customers` — customer profiles
+- `/crm/estimates` — estimate builder placeholder
+- `/crm/tasks` — task management
+- `/crm/calendar` — scheduling calendar
+- `/crm/files` — file/photo upload placeholder
+- `/crm/settings` — company, users, roles, notifications, and branding settings
+
+### CRM Environment Variables
+
+Copy `.env.example` to `.env.local` and set:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+CONTACT_EMAIL=info@xrproofing.com
+```
+
+### Supabase Setup
+
+1. Create a Supabase project.
+2. Open SQL Editor.
+3. Run `supabase/schema.sql`.
+4. Go to Authentication → Providers and enable Email.
+5. Set Site URL to your local or production URL.
+6. Add redirect URLs:
+   - `http://localhost:3000/crm`
+   - `http://localhost:3000/reset-password`
+   - `https://your-vercel-domain.vercel.app/crm`
+   - `https://your-vercel-domain.vercel.app/reset-password`
+7. Create a Storage bucket named `crm-files` for roofing photos and documents.
+
+### Local Run Setup
+
+```bash
+npm install
+npm run dev
+```
+
+Open:
+
+- Public website: `http://localhost:3000`
+- CRM login: `http://localhost:3000/login`
+- CRM dashboard: `http://localhost:3000/crm`
+
+If npm has local certificate issues, run:
+
+```bash
+npm config set strict-ssl false
+npm install
+```
+
+### GitHub Setup
+
+```bash
+git status
+git add .
+git commit -m "Add XRP Roofing CRM SaaS"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git push -u origin main
+```
+
+If the remote already exists:
+
+```bash
+git remote set-url origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git push -u origin main
+```
+
+### Vercel Deployment
+
+1. Push the repository to GitHub.
+2. Import the GitHub repo in Vercel.
+3. Add environment variables from `.env.example`.
+4. Deploy with the default Next.js build settings.
+5. Add the Vercel domain to Supabase Auth redirect URLs.
+
+### CRM Architecture
+
+- `app/crm` contains the protected CRM application routes.
+- `components/crm` contains CRM-specific auth and dashboard shell components.
+- `lib/supabase` contains Supabase browser/server clients.
+- `lib/crm-data.ts` contains realistic seed UI data for the current CRM screens.
+- `types/crm.ts` contains CRM TypeScript domain types.
+- `supabase/schema.sql` contains database tables, relationships, seed data, and RLS placeholders.

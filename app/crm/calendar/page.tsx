@@ -1,0 +1,3 @@
+export default function CalendarPage() {
+  return <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm"><p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Scheduling</p><h1 className="mt-2 text-3xl font-black text-[#07183f]">Calendar & Appointments</h1><p className="mt-3 text-slate-600">Inspection appointments, team schedules, upcoming jobs, calendar views, and Google Calendar integration placeholder.</p><div className="mt-8 grid grid-cols-7 gap-2 text-center text-sm">{Array.from({ length: 35 }).map((_, index) => <div key={index} className="min-h-24 rounded-2xl bg-slate-50 p-3 text-slate-500">{index + 1}</div>)}</div></div>;
+}
