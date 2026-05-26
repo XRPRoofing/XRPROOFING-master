@@ -28,7 +28,7 @@ import FAQSection from "@/components/ui/FAQSection";
 import { BreadcrumbSchema, FAQSchema, LocalBusinessSchema, ServiceSchema } from "@/components/ui/SeoSchema";
 
 const pagePath = "/phoenix-foam-roofing";
-const heroImage = "/images/xrp-roofing/2025-01-26-4.jpg";
+const heroImage = "/images/xrp-roofing/foam-roofing-coated-flat-roof.jpeg";
 
 export const metadata: Metadata = {
   title: "Phoenix Foam Roofing & Elastomeric Coatings | XRP Roofing",
@@ -95,10 +95,10 @@ const benefits = [
 ];
 
 const galleryImages = [
-  { src: "/images/xrp-roofing/2025-01-26-4.jpg", alt: "Reflective flat roof coating completed by XRP Roofing in Phoenix AZ" },
-  { src: "/images/xrp-roofing/2024-09-18-1.jpg", alt: "Commercial flat roof prepared for foam roofing and coating in Arizona" },
-  { src: "/images/xrp-roofing/2024-07-05-1.jpg", alt: "Phoenix low slope roof repaired before elastomeric coating application" },
-  { src: "/images/xrp-roofing/project-gallery-8.jpg", alt: "XRP Roofing project showing flat roof transformation in Phoenix" },
+  { src: "/images/xrp-roofing/foam-roofing-coated-flat-roof.jpeg", alt: "White reflective foam roof coating completed by XRP Roofing in Phoenix AZ" },
+  { src: "/images/xrp-roofing/foam-roofing-After-2.jpeg", alt: "Aerial view of completed foam roofing and flat roof coating on an Arizona home" },
+  { src: "/images/xrp-roofing/foam-roofing-before-1.jpeg", alt: "Aerial before view of Phoenix flat roof areas before foam roofing and coating work" },
+  { src: "/images/xrp-roofing/foam-roofing-deck-before.jpeg", alt: "Flat roof deck before SPF foam roofing and elastomeric coating installation" },
 ];
 
 const processSteps = [
@@ -286,7 +286,7 @@ export default function PhoenixFoamRoofingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-80 lg:h-[520px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/xrp-roofing/2024-09-18-1.jpg"
+                src="/images/xrp-roofing/foam-roofing-After-2.jpeg"
                 alt="Commercial flat roof in Phoenix prepared for SPF foam roofing and roof coating"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
