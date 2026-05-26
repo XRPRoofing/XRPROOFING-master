@@ -2,8 +2,11 @@
 
 import { createBrowserClient } from "@supabase/ssr";
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://lcchocuoeettbryfwlwq.supabase.co";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_W8F6R4IraBZIt79dC5y3qg_BqypPa9C";
+
 export function hasSupabaseConfig() {
-  return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+  return Boolean(supabaseUrl && supabaseAnonKey);
 }
 
 export function createClient() {
@@ -12,7 +15,7 @@ export function createClient() {
   }
 
   return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    supabaseUrl,
+    supabaseAnonKey
   );
 }
