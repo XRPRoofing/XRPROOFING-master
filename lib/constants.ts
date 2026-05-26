@@ -15,6 +15,7 @@ export const SOCIAL_LINKS = {
 };
 
 export const OG_IMAGE = "/images/xrp-roofing/2025-01-26.jpg";
+export const LOGO_IMAGE = "/images/logo.jpeg";
 
 export const GOOGLE_REVIEW_URL = "https://g.page/r/CbclAJO7mcvFEBE/review";
 export const GOOGLE_MAPS_URL =

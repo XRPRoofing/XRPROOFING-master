@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileCtaBar from "@/components/layout/MobileCtaBar";
-import { SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
+import { SITE_NAME, SITE_URL, OG_IMAGE, LOGO_IMAGE } from "@/lib/constants";
 
 const interClass = "font-sans";
 
@@ -27,6 +27,11 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   robots: { index: true, follow: true },
+  icons: {
+    icon: [{ url: LOGO_IMAGE, type: "image/jpeg" }],
+    shortcut: LOGO_IMAGE,
+    apple: LOGO_IMAGE,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
