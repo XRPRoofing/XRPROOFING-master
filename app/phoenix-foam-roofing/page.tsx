@@ -99,7 +99,6 @@ const galleryImages = [
   { src: "/images/xrp-roofing/foam-roofing-After-2.jpeg", alt: "Aerial view of completed foam roofing and flat roof coating on an Arizona home" },
   { src: "/images/xrp-roofing/foam-roofing-before-1.jpeg", alt: "Aerial before view of Phoenix flat roof areas before foam roofing and coating work" },
   { src: "/images/xrp-roofing/foam-roofing-deck-before.jpeg", alt: "Flat roof deck before SPF foam roofing and elastomeric coating installation" },
-  { src: "/images/xrp-roofing/WhatsApp Image 2026-05-27 at 1.21.42 AM.jpeg", alt: "Phoenix foam roofing project photo from XRP Roofing" },
 ];
 
 const processSteps = [
