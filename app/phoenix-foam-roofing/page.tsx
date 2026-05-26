@@ -343,6 +343,22 @@ export default function PhoenixFoamRoofingPage() {
               </div>
             ))}
           </div>
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <video
+              src="/images/xrp-roofing/Foam video 1.mp4"
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full rounded-2xl border border-gray-100 shadow-sm"
+            />
+            <video
+              src="/images/xrp-roofing/Foam video 2.mp4"
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full rounded-2xl border border-gray-100 shadow-sm"
+            />
+          </div>
         </div>
       </section>
 
@@ -420,3 +436,4 @@ export default function PhoenixFoamRoofingPage() {
     </>
   );
 }
+
