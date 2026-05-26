@@ -248,20 +248,7 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
         </div>
       </div>
 
-      {/* Row 5 — Budget + Roof size */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="budget" className={labelClass}>Estimated Budget</label>
-          <select id="budget" name="budget" className={inputClass} defaultValue="">
-            <option value="">Select budget range (optional)</option>
-            <option value="Under $2,000">Under $2,000</option>
-            <option value="$2,000 – $5,000">$2,000 – $5,000</option>
-            <option value="$5,000 – $10,000">$5,000 – $10,000</option>
-            <option value="$10,000 – $20,000">$10,000 – $20,000</option>
-            <option value="$20,000+">$20,000+</option>
-            <option value="Not Sure">Not Sure</option>
-          </select>
-        </div>
+      <div>
         <div>
           <label htmlFor="roofSize" className={labelClass}>Approx. Roof Size</label>
           <select id="roofSize" name="roofSize" className={inputClass} defaultValue="">
