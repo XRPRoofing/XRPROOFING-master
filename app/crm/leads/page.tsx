@@ -37,6 +37,7 @@ const arizonaBounds = {
   east: -109.0452,
   west: -114.8184,
 };
+const jobsStorageKey = "xrp-crm-jobs-board";
 
 function getCityFromAddress(address: string) {
   const parts = address.split(",").map((part) => part.trim()).filter(Boolean);
@@ -44,7 +45,18 @@ function getCityFromAddress(address: string) {
 }
 
 export default function LeadsPage() {
-  const [jobs, setJobs] = useState<Lead[]>(leads);
+  const [jobs, setJobs] = useState<Lead[]>(() => {
+    if (typeof window === "undefined") return leads;
+
+    const savedJobs = window.localStorage.getItem(jobsStorageKey);
+    if (!savedJobs) return leads;
+
+    try {
+      return JSON.parse(savedJobs) as Lead[];
+    } catch {
+      return leads;
+    }
+  });
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
@@ -71,6 +83,10 @@ export default function LeadsPage() {
         .some((value) => value.toLowerCase().includes(query))
     );
   }, [jobs, search]);
+
+  useEffect(() => {
+    window.localStorage.setItem(jobsStorageKey, JSON.stringify(jobs));
+  }, [jobs]);
 
   useEffect(() => {
     if (!showForm || !addressInputRef.current) return;
