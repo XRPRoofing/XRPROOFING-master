@@ -241,7 +241,7 @@ export default function CalendarPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+      <div className="sticky top-20 z-30 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Scheduling</p>
