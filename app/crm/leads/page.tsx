@@ -1,22 +1,42 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Filter, GripVertical, MoreHorizontal, Plus, Search, X } from "lucide-react";
 import { leadStages, leads } from "@/lib/crm-data";
 import type { Lead, LeadStage } from "@/types/crm";
 
 const jobAges = ["Now", "+ 1 day", "+ 5 days", "+ 12 days", "+ 47 days", "+ 94 days"];
 const updateAges = ["Created 6 hours ago", "Updated 7 hours ago", "Updated a day ago", "Updated 4 days ago", "Updated 20 days ago", "Updated 2 months ago"];
-const addressSuggestions = [
-  "123 West San Antonio Street, Fredericksburg, TX, USA",
-  "123 San Antonio Way, Sacramento, CA, USA",
-  "123 San Antonio Street, Yountville, CA, USA",
-  "123 Little San Antonio, Rockport, TX, USA",
-  "2148 E Camelback Rd, Phoenix, AZ",
-  "8800 N Scottsdale Rd, Scottsdale, AZ",
-  "944 W Ocotillo Rd, Glendale, AZ",
-  "3012 S Dobson Rd, Mesa, AZ",
-];
+declare global {
+  interface Window {
+    google?: {
+      maps?: {
+        places?: {
+          Autocomplete: new (
+            input: HTMLInputElement,
+            options: {
+              bounds?: { north: number; south: number; east: number; west: number };
+              componentRestrictions?: { country: string };
+              fields?: string[];
+              strictBounds?: boolean;
+              types?: string[];
+            }
+          ) => {
+            addListener: (eventName: string, callback: () => void) => void;
+            getPlace: () => { formatted_address?: string; address_components?: { long_name: string; types: string[] }[] };
+          };
+        };
+      };
+    };
+  }
+}
+
+const arizonaBounds = {
+  north: 37.0043,
+  south: 31.3322,
+  east: -109.0452,
+  west: -114.8184,
+};
 
 function getCityFromAddress(address: string) {
   const parts = address.split(",").map((part) => part.trim()).filter(Boolean);
@@ -28,6 +48,7 @@ export default function LeadsPage() {
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
+  const addressInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -50,6 +71,53 @@ export default function LeadsPage() {
         .some((value) => value.toLowerCase().includes(query))
     );
   }, [jobs, search]);
+
+  useEffect(() => {
+    if (!showForm || !addressInputRef.current) return;
+
+    const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    if (!googleMapsApiKey) return;
+
+    function initializeAutocomplete() {
+      if (!addressInputRef.current || !window.google?.maps?.places?.Autocomplete) return;
+
+      const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+        bounds: arizonaBounds,
+        componentRestrictions: { country: "us" },
+        fields: ["formatted_address", "address_components"],
+        strictBounds: true,
+        types: ["address"],
+      });
+
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (place.formatted_address) {
+          setForm((currentForm) => ({ ...currentForm, address: place.formatted_address || currentForm.address }));
+        }
+      });
+    }
+
+    if (window.google?.maps?.places?.Autocomplete) {
+      initializeAutocomplete();
+      return;
+    }
+
+    const existingScript = document.querySelector<HTMLScriptElement>("script[data-google-maps-places]");
+
+    if (existingScript) {
+      existingScript.addEventListener("load", initializeAutocomplete, { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    script.dataset.googleMapsPlaces = "true";
+    script.addEventListener("load", initializeAutocomplete, { once: true });
+    document.head.appendChild(script);
+  }, [showForm]);
 
   function updateJobStage(jobId: string, stage: LeadStage) {
     setJobs((currentJobs) => currentJobs.map((job) => job.id === jobId ? { ...job, stage, lastActivity: `Moved to ${leadStages.find((item) => item.id === stage)?.label || "workflow"}` } : job));
@@ -110,12 +178,7 @@ export default function LeadsPage() {
           </div>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Customer / job name" />
-            <input required list="job-address-suggestions" value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Job address" />
-            <datalist id="job-address-suggestions">
-              {addressSuggestions.map((address) => (
-                <option key={address} value={address} />
-              ))}
-            </datalist>
+            <input ref={addressInputRef} required value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Job address" />
             <input value={form.roofType} onChange={(event) => setForm({ ...form, roofType: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Roof type" />
             <input type="number" value={form.value} onChange={(event) => setForm({ ...form, value: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Job value" />
             <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Email" />
