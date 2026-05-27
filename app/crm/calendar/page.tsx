@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CalendarDays, ExternalLink, Loader2, RefreshCw } from "lucide-react";
+import { CalendarDays, ExternalLink, Loader2, Plus, RefreshCw } from "lucide-react";
 
 type GoogleCalendarEvent = {
   id: string;
@@ -43,8 +43,17 @@ export default function CalendarPage() {
   const [events, setEvents] = useState<GoogleCalendarEvent[]>([]);
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
+  const [form, setForm] = useState({
+    title: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+    location: "",
+    description: "",
+  });
 
   const days = useMemo(() => Array.from({ length: 35 }, (_, index) => index + 1), []);
 
@@ -72,6 +81,35 @@ export default function CalendarPage() {
     void loadEvents();
   }, []);
 
+  async function handleCreateEvent(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSaving(true);
+    setError("");
+    setStatusMessage("");
+
+    try {
+      const response = await fetch("/api/google-calendar/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json() as { error?: string };
+
+      if (!response.ok) {
+        setError(data.error || "Unable to create appointment.");
+        return;
+      }
+
+      setStatusMessage("Appointment created in Google Calendar.");
+      setForm({ title: "", date: "", startTime: "", endTime: "", location: "", description: "" });
+      await loadEvents();
+    } catch {
+      setError("Unable to create appointment.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
@@ -82,6 +120,9 @@ export default function CalendarPage() {
             <p className="mt-3 text-slate-600">Connect Google Calendar to view upcoming inspections, estimates, and team appointments.</p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <a href="#new-appointment" className="rounded-2xl bg-[#07183f] px-4 py-3 font-bold text-white">
+              <Plus className="mr-2 inline h-4 w-4" />New appointment
+            </a>
             <button onClick={loadEvents} className="rounded-2xl border border-slate-200 bg-white px-4 py-3 font-bold text-slate-700">
               <RefreshCw className="mr-2 inline h-4 w-4" />Refresh
             </button>
@@ -111,6 +152,30 @@ export default function CalendarPage() {
           ))}
         </div>
       </div>
+
+      <form id="new-appointment" onSubmit={handleCreateEvent} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-end">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">New schedule</p>
+            <h2 className="mt-2 text-2xl font-black text-[#07183f]">Create appointment</h2>
+            <p className="mt-2 text-slate-600">Add inspections, estimates, customer meetings, crew schedules, or follow-ups directly to Google Calendar.</p>
+          </div>
+          {!connected && <p className="rounded-2xl bg-orange-50 px-4 py-3 font-bold text-orange-700">Connect Google first</p>}
+        </div>
+
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <input required value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Appointment title" />
+          <input required type="date" value={form.date} onChange={(event) => setForm({ ...form, date: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
+          <input required type="time" value={form.startTime} onChange={(event) => setForm({ ...form, startTime: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
+          <input required type="time" value={form.endTime} onChange={(event) => setForm({ ...form, endTime: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
+          <input value={form.location} onChange={(event) => setForm({ ...form, location: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Location / job address" />
+          <input value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Notes" />
+        </div>
+
+        <button disabled={!connected || saving} className="mt-4 rounded-2xl bg-orange-500 px-5 py-3 font-bold text-white shadow-lg shadow-orange-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none">
+          {saving ? "Saving..." : "Save to Google Calendar"}
+        </button>
+      </form>
 
       <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-2xl font-black text-[#07183f]">Upcoming Google Calendar events</h2>
