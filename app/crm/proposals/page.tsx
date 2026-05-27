@@ -44,7 +44,10 @@ type Proposal = {
   total: number;
   status: "Draft" | "Sent" | "Approved";
   template: "executive" | "insurance" | "premium";
+  title: string;
+  summary: string;
   notes: string;
+  terms: string;
 };
 
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
@@ -56,7 +59,10 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   total: job.value,
   status: index === 0 ? "Draft" : index === 1 ? "Sent" : "Approved",
   template: index === 0 ? "executive" : index === 1 ? "insurance" : "premium",
+  title: index === 1 ? "INSURANCE ROOFING PROPOSAL" : index === 2 ? "PREMIUM ROOFING PROPOSAL" : "BEST ROOFING PROPOSAL",
+  summary: "A professional roofing proposal prepared for review and approval.",
   notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
+  terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
 }));
 
 const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
@@ -76,15 +82,21 @@ export default function ProposalsPage() {
   const [scope, setScope] = useState("");
   const [total, setTotal] = useState("");
   const [proposalSearch, setProposalSearch] = useState("");
+  const [proposalFilter, setProposalFilter] = useState<"all" | "drafts">("all");
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [activeProposal, setActiveProposal] = useState<Proposal | null>(null);
+  const [deletedProposal, setDeletedProposal] = useState<Proposal | null>(null);
+  const [isPreviewing, setIsPreviewing] = useState(false);
   const [editorForm, setEditorForm] = useState({
     customerName: "",
     address: "",
+    title: "",
+    summary: "",
     scope: "",
     total: "",
     template: "executive" as Proposal["template"],
     notes: "",
+    terms: "",
   });
   const addressInputRef = useRef<HTMLInputElement>(null);
 
@@ -102,13 +114,15 @@ export default function ProposalsPage() {
   const filteredProposals = useMemo(() => {
     const query = proposalSearch.toLowerCase().trim();
 
-    if (!query) return proposals;
+    const visibleProposals = proposalFilter === "drafts" ? proposals.filter((proposal) => proposal.status === "Draft") : proposals;
 
-    return proposals.filter((proposal) =>
+    if (!query) return visibleProposals;
+
+    return visibleProposals.filter((proposal) =>
       [proposal.customerName, proposal.address, proposal.scope, proposal.status]
         .some((value) => value.toLowerCase().includes(query))
     );
-  }, [proposalSearch, proposals]);
+  }, [proposalFilter, proposalSearch, proposals]);
 
   useEffect(() => {
     if (proposalMode !== "new" || !addressInputRef.current) return;
@@ -171,7 +185,10 @@ export default function ProposalsPage() {
       total: proposalMode === "job" && selectedJob ? selectedJob.value : Number(total) || 0,
       status: "Draft",
       template: "executive",
+      title: "BEST ROOFING PROPOSAL",
+      summary: "A professional roofing proposal prepared for review and approval.",
       notes: "Includes professional roof assessment, materials, labor, cleanup, and customer-ready project documentation.",
+      terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
     };
 
     setProposals((currentProposals) => [newProposal, ...currentProposals]);
@@ -187,11 +204,15 @@ export default function ProposalsPage() {
     setEditorForm({
       customerName: proposal.customerName,
       address: proposal.address,
+      title: proposal.title,
+      summary: proposal.summary,
       scope: proposal.scope,
       total: String(proposal.total),
       template: proposal.template,
       notes: proposal.notes,
+      terms: proposal.terms,
     });
+    setIsPreviewing(false);
     setActiveProposal(proposal);
   }
 
@@ -202,16 +223,34 @@ export default function ProposalsPage() {
       ...activeProposal,
       customerName: editorForm.customerName,
       address: editorForm.address,
+      title: editorForm.title,
+      summary: editorForm.summary,
       scope: editorForm.scope,
       total: Number(editorForm.total) || 0,
       template: editorForm.template,
       notes: editorForm.notes,
+      terms: editorForm.terms,
     };
 
     setActiveProposal(updatedProposal);
     setProposals((currentProposals) =>
       currentProposals.map((proposal) => proposal.id === updatedProposal.id ? updatedProposal : proposal)
     );
+  }
+
+  function handleDeleteProposal(proposal: Proposal) {
+    setDeletedProposal(proposal);
+    setProposals((currentProposals) => currentProposals.filter((currentProposal) => currentProposal.id !== proposal.id));
+    if (activeProposal?.id === proposal.id) {
+      setActiveProposal(null);
+    }
+  }
+
+  function handleUndoDelete() {
+    if (!deletedProposal) return;
+
+    setProposals((currentProposals) => [deletedProposal, ...currentProposals]);
+    setDeletedProposal(null);
   }
 
   if (activeProposal) {
@@ -223,12 +262,14 @@ export default function ProposalsPage() {
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-black text-orange-700">{activeProposal.status}</span>
             <button type="button" onClick={handleSaveProposal} className="rounded-full bg-emerald-50 px-4 py-2 text-xs font-black text-emerald-700">Save</button>
-            <button className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-blue-700">Preview</button>
+            <button type="button" onClick={() => handleDeleteProposal(activeProposal)} className="rounded-full bg-red-50 px-4 py-2 text-xs font-black text-red-700">Delete</button>
+            <button type="button" onClick={() => setIsPreviewing((current) => !current)} className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-blue-700">{isPreviewing ? "Edit" : "Preview"}</button>
             <button className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">Send</button>
           </div>
         </div>
 
-        <div className="grid min-h-[calc(100vh-8.5rem)] grid-cols-1 lg:grid-cols-[280px_1fr]">
+        <div className={`grid min-h-[calc(100vh-8.5rem)] grid-cols-1 ${isPreviewing ? "" : "lg:grid-cols-[280px_1fr]"}`}>
+          {!isPreviewing && (
           <aside className="border-r border-slate-200 bg-white p-4">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <div className="flex items-start justify-between gap-3">
@@ -254,6 +295,14 @@ export default function ProposalsPage() {
             </div>
             <div className="mt-5 space-y-3">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Proposal title
+                <input value={editorForm.title} onChange={(event) => setEditorForm({ ...editorForm, title: event.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Proposal summary
+                <textarea value={editorForm.summary} onChange={(event) => setEditorForm({ ...editorForm, summary: event.target.value })} className="mt-2 min-h-20 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
                 Scope
                 <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
               </label>
@@ -264,6 +313,10 @@ export default function ProposalsPage() {
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
                 Customer notes
                 <textarea value={editorForm.notes} onChange={(event) => setEditorForm({ ...editorForm, notes: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Terms and conditions
+                <textarea value={editorForm.terms} onChange={(event) => setEditorForm({ ...editorForm, terms: event.target.value })} className="mt-2 min-h-32 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
               </label>
             </div>
             <div className="mt-5">
@@ -278,6 +331,7 @@ export default function ProposalsPage() {
               <button className="mt-3 w-full rounded-xl border border-blue-300 bg-blue-50 px-4 py-3 text-center text-xl font-light text-blue-700">+</button>
             </div>
           </aside>
+          )}
 
           <main className="overflow-auto p-6">
             <div className="mx-auto max-w-[760px]">
@@ -285,7 +339,11 @@ export default function ProposalsPage() {
               <div className={`min-h-[900px] border bg-white p-10 shadow-sm ${editorForm.template === "premium" ? "border-orange-300" : editorForm.template === "insurance" ? "border-blue-300" : "border-slate-300"}`}>
                 <div className={`flex items-start justify-between border-b-4 pb-4 ${editorForm.template === "premium" ? "border-orange-500" : "border-[#07183f]"}`}>
                   <div>
-                    <p className={`text-2xl font-black ${editorForm.template === "premium" ? "text-orange-600" : "text-[#07183f]"}`}>{editorForm.template === "insurance" ? "INSURANCE ROOFING PROPOSAL" : editorForm.template === "premium" ? "PREMIUM ROOFING PROPOSAL" : "BEST ROOFING PROPOSAL"}</p>
+                    {isPreviewing ? (
+                      <p className={`text-2xl font-black ${editorForm.template === "premium" ? "text-orange-600" : "text-[#07183f]"}`}>{editorForm.title}</p>
+                    ) : (
+                      <input value={editorForm.title} onChange={(event) => setEditorForm({ ...editorForm, title: event.target.value })} className={`w-full border-none bg-transparent p-0 text-2xl font-black outline-none ${editorForm.template === "premium" ? "text-orange-600" : "text-[#07183f]"}`} />
+                    )}
                     <p className="mt-2 text-sm font-semibold text-slate-500">{activeProposal.id}</p>
                   </div>
                   <div className="text-right text-sm">
@@ -302,15 +360,28 @@ export default function ProposalsPage() {
                   </div>
                   <div className="rounded-2xl bg-slate-50 p-5">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">Proposal summary</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{editorForm.template === "insurance" ? "Prepared for insurance documentation, carrier review, and roofing claim support." : editorForm.template === "premium" ? "A premium customer-ready roofing package with clear scope, value, and next steps." : "A professional roofing proposal prepared for review and approval."}</p>
+                    {isPreviewing ? (
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{editorForm.summary}</p>
+                    ) : (
+                      <textarea value={editorForm.summary} onChange={(event) => setEditorForm({ ...editorForm, summary: event.target.value })} className="mt-2 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-6 text-slate-600 outline-none" />
+                    )}
                   </div>
                 </div>
 
                 <div className="mt-8">
                   <p className="text-xs font-black uppercase tracking-wider text-slate-500">Description of Work</p>
                   <div className="mt-4 border-y border-slate-300 py-5">
-                    <p className="text-sm leading-7 text-slate-700">{editorForm.scope}</p>
-                    <p className="mt-4 text-sm leading-7 text-slate-700">{editorForm.notes}</p>
+                    {isPreviewing ? (
+                      <>
+                        <p className="text-sm leading-7 text-slate-700">{editorForm.scope}</p>
+                        <p className="mt-4 text-sm leading-7 text-slate-700">{editorForm.notes}</p>
+                      </>
+                    ) : (
+                      <>
+                        <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                        <textarea value={editorForm.notes} onChange={(event) => setEditorForm({ ...editorForm, notes: event.target.value })} className="mt-4 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                      </>
+                    )}
                   </div>
                   {editorForm.template === "insurance" && (
                     <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 p-5">
@@ -339,6 +410,15 @@ export default function ProposalsPage() {
                   </div>
                 </div>
 
+                <div className="mt-8 rounded-2xl border border-slate-200 p-5">
+                  <p className="font-black text-[#07183f]">Terms and Conditions</p>
+                  {isPreviewing ? (
+                    <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{editorForm.terms}</p>
+                  ) : (
+                    <textarea value={editorForm.terms} onChange={(event) => setEditorForm({ ...editorForm, terms: event.target.value })} className="mt-3 min-h-32 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-600 outline-none" />
+                  )}
+                </div>
+
                 <div className="mt-12 flex items-end justify-between border-t border-slate-300 pt-4">
                   <div className="text-xs text-slate-500">
                     <p className="font-black text-slate-700">XRP Roofing</p>
@@ -364,7 +444,8 @@ export default function ProposalsPage() {
 
       <div className="border-b border-slate-200">
         <div className="flex gap-8 text-sm font-black">
-          <button className="border-b-2 border-blue-600 px-1 pb-4 text-blue-600">Proposals</button>
+          <button type="button" onClick={() => setProposalFilter("all")} className={`px-1 pb-4 ${proposalFilter === "all" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Proposals</button>
+          <button type="button" onClick={() => setProposalFilter("drafts")} className={`px-1 pb-4 ${proposalFilter === "drafts" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Drafts</button>
           <button className="px-1 pb-4 text-slate-600">Templates</button>
           <button className="px-1 pb-4 text-slate-600">Settings</button>
         </div>
@@ -385,6 +466,13 @@ export default function ProposalsPage() {
           </div>
         </div>
       </div>
+
+      {deletedProposal && (
+        <div className="flex items-center justify-between rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">
+          <span>Deleted proposal for {deletedProposal.customerName}.</span>
+          <button type="button" onClick={handleUndoDelete} className="rounded-full bg-white px-4 py-2 text-blue-700 shadow-sm">Undo</button>
+        </div>
+      )}
 
       {showCreateForm && (
       <form onSubmit={handleCreateProposal} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
@@ -444,7 +532,8 @@ export default function ProposalsPage() {
 
       <div className="max-h-[calc(100vh-18rem)] space-y-3 overflow-y-auto pr-2">
         {filteredProposals.map((proposal) => (
-          <button key={proposal.id} type="button" onClick={() => openProposal(proposal)} className="grid w-full grid-cols-1 items-center gap-4 rounded bg-slate-50 p-4 text-left transition hover:bg-blue-50 md:grid-cols-[1fr_auto]">
+          <div key={proposal.id} className="grid w-full grid-cols-1 items-center gap-4 rounded bg-slate-50 p-4 text-left transition hover:bg-blue-50 md:grid-cols-[1fr_auto]">
+            <button type="button" onClick={() => openProposal(proposal)} className="flex items-center gap-4 text-left">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-white text-sm font-black leading-4 text-[#07183f] shadow-sm">XRP<br />ROOF</div>
               <div>
@@ -453,15 +542,17 @@ export default function ProposalsPage() {
                 <p className="mt-1 text-xs text-slate-500">{proposal.status === "Draft" ? "Created" : proposal.status === "Sent" ? "Sent" : "Viewed"} by Jonathan Gonzalez <span className="mx-1">•</span> Today at 3:27 AM⌄</p>
               </div>
             </div>
+            </button>
             <div className="flex items-center justify-end gap-3">
               <div className="text-right">
                 <p className="font-black text-slate-600">${proposal.total.toLocaleString()}</p>
                 <p className="mt-1 text-xs font-bold uppercase text-slate-500">BEST</p>
               </div>
               <span className={`rounded-full px-4 py-1 text-sm font-black ${proposal.status === "Draft" ? "bg-slate-500 text-white" : proposal.status === "Sent" ? "bg-sky-500 text-white" : "bg-yellow-400 text-slate-900"}`}>{proposal.status === "Approved" ? "Viewed" : proposal.status}</span>
+              <button type="button" onClick={() => handleDeleteProposal(proposal)} className="rounded-full bg-red-50 px-3 py-1 text-xs font-black text-red-700">Delete</button>
               <span className="text-xl font-black text-slate-500">⋯</span>
             </div>
-          </button>
+          </div>
         ))}
         {filteredProposals.length === 0 && (
           <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center font-semibold text-slate-500">No proposals match your search.</div>
