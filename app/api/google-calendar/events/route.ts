@@ -36,7 +36,14 @@ async function getAccessToken() {
   return accessToken;
 }
 
-function buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes, guestEmail }: {
+function getGuestEmails(guestEmails: string | undefined) {
+  return (guestEmails || "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+}
+
+function buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes, guestEmails }: {
   title: string;
   date: string;
   startTime: string;
@@ -45,8 +52,9 @@ function buildCalendarEvent({ title, date, startTime, endTime, name, address, jo
   address: string;
   jobKind: string;
   notes?: string;
-  guestEmail?: string;
+  guestEmails?: string;
 }) {
+  const attendees = getGuestEmails(guestEmails).map((email) => ({ email }));
   const description = [
     `Name: ${name}`,
     `Address: ${address}`,
@@ -58,7 +66,7 @@ function buildCalendarEvent({ title, date, startTime, endTime, name, address, jo
     summary: title,
     location: address,
     description,
-    attendees: guestEmail ? [{ email: guestEmail }] : undefined,
+    attendees: attendees.length ? attendees : undefined,
     extendedProperties: {
       private: {
         crmName: name,
@@ -111,7 +119,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Google Calendar is not connected." }, { status: 401 });
   }
 
-  const { title, date, startTime, endTime, name, address, jobKind, notes, guestEmail } = await request.json() as {
+  const { title, date, startTime, endTime, name, address, jobKind, notes, guestEmails } = await request.json() as {
     title?: string;
     date?: string;
     startTime?: string;
@@ -120,7 +128,7 @@ export async function POST(request: Request) {
     address?: string;
     jobKind?: string;
     notes?: string;
-    guestEmail?: string;
+    guestEmails?: string;
   };
 
   if (!title || !date || !startTime || !endTime || !name || !address || !jobKind) {
@@ -136,7 +144,7 @@ export async function POST(request: Request) {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes, guestEmail })),
+    body: JSON.stringify(buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes, guestEmails })),
   });
 
   if (!eventResponse.ok) {
@@ -155,7 +163,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "Google Calendar is not connected." }, { status: 401 });
   }
 
-  const { id, title, date, startTime, endTime, name, address, jobKind, notes, guestEmail } = await request.json() as {
+  const { id, title, date, startTime, endTime, name, address, jobKind, notes, guestEmails } = await request.json() as {
     id?: string;
     title?: string;
     date?: string;
@@ -165,7 +173,7 @@ export async function PUT(request: Request) {
     address?: string;
     jobKind?: string;
     notes?: string;
-    guestEmail?: string;
+    guestEmails?: string;
   };
 
   if (!id || !title || !date || !startTime || !endTime || !name || !address || !jobKind) {
@@ -181,7 +189,7 @@ export async function PUT(request: Request) {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes, guestEmail })),
+    body: JSON.stringify(buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes, guestEmails })),
   });
 
   if (!eventResponse.ok) {
