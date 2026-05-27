@@ -36,6 +36,46 @@ async function getAccessToken() {
   return accessToken;
 }
 
+function buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes }: {
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  name: string;
+  address: string;
+  jobKind: string;
+  notes?: string;
+}) {
+  const description = [
+    `Name: ${name}`,
+    `Address: ${address}`,
+    `Kind of Job: ${jobKind}`,
+    `Notes: ${notes || "None"}`,
+  ].join("\n");
+
+  return {
+    summary: title,
+    location: address,
+    description,
+    extendedProperties: {
+      private: {
+        crmName: name,
+        crmAddress: address,
+        crmJobKind: jobKind,
+        crmNotes: notes || "",
+      },
+    },
+    start: {
+      dateTime: `${date}T${startTime}:00`,
+      timeZone: "America/Phoenix",
+    },
+    end: {
+      dateTime: `${date}T${endTime}:00`,
+      timeZone: "America/Phoenix",
+    },
+  };
+}
+
 export async function GET() {
   const accessToken = await getAccessToken();
 
@@ -84,44 +124,58 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Title, name, address, job type, date, start time, and end time are required." }, { status: 400 });
   }
 
-  const description = [
-    `Name: ${name}`,
-    `Address: ${address}`,
-    `Kind of Job: ${jobKind}`,
-    `Notes: ${notes || "None"}`,
-  ].join("\n");
-
   const eventResponse = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      summary: title,
-      location: address,
-      description,
-      extendedProperties: {
-        private: {
-          crmName: name,
-          crmAddress: address,
-          crmJobKind: jobKind,
-          crmNotes: notes || "",
-        },
-      },
-      start: {
-        dateTime: `${date}T${startTime}:00`,
-        timeZone: "America/Phoenix",
-      },
-      end: {
-        dateTime: `${date}T${endTime}:00`,
-        timeZone: "America/Phoenix",
-      },
-    }),
+    body: JSON.stringify(buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes })),
   });
 
   if (!eventResponse.ok) {
     return NextResponse.json({ error: "Unable to create Google Calendar event." }, { status: 400 });
+  }
+
+  const event = await eventResponse.json();
+
+  return NextResponse.json({ event });
+}
+
+export async function PUT(request: Request) {
+  const accessToken = await getAccessToken();
+
+  if (!accessToken) {
+    return NextResponse.json({ error: "Google Calendar is not connected." }, { status: 401 });
+  }
+
+  const { id, title, date, startTime, endTime, name, address, jobKind, notes } = await request.json() as {
+    id?: string;
+    title?: string;
+    date?: string;
+    startTime?: string;
+    endTime?: string;
+    name?: string;
+    address?: string;
+    jobKind?: string;
+    notes?: string;
+  };
+
+  if (!id || !title || !date || !startTime || !endTime || !name || !address || !jobKind) {
+    return NextResponse.json({ error: "Event ID, title, name, address, job type, date, start time, and end time are required." }, { status: 400 });
+  }
+
+  const eventResponse = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(buildCalendarEvent({ title, date, startTime, endTime, name, address, jobKind, notes })),
+  });
+
+  if (!eventResponse.ok) {
+    return NextResponse.json({ error: "Unable to update Google Calendar event." }, { status: 400 });
   }
 
   const event = await eventResponse.json();

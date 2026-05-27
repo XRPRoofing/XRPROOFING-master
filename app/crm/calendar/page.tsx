@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CalendarDays, ExternalLink, Loader2, Plus, RefreshCw } from "lucide-react";
+import { AlignLeft, Bell, Briefcase, CalendarDays, Clock, ExternalLink, Loader2, MapPin, Plus, RefreshCw, User, X } from "lucide-react";
 
 type GoogleCalendarEvent = {
   id: string;
@@ -55,6 +55,16 @@ function formatEventTime(event: GoogleCalendarEvent) {
   }).format(new Date(dateValue));
 }
 
+function getDateInputValue(value: string | undefined) {
+  if (!value) return "";
+  return value.slice(0, 10);
+}
+
+function getTimeInputValue(value: string | undefined) {
+  if (!value) return "";
+  return value.slice(11, 16);
+}
+
 function getDescriptionValue(description: string | undefined, label: string) {
   if (!description) return "";
   const line = description.split("\n").find((item) => item.toLowerCase().startsWith(`${label.toLowerCase()}:`));
@@ -86,10 +96,21 @@ export default function CalendarPage() {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [updating, setUpdating] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<GoogleCalendarEvent | null>(null);
   const [error, setError] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [form, setForm] = useState({
+    title: "",
+    name: "",
+    address: "",
+    jobKind: "Repair",
+    date: "",
+    startTime: "",
+    endTime: "",
+    notes: "",
+  });
+  const [eventForm, setEventForm] = useState({
     title: "",
     name: "",
     address: "",
@@ -135,6 +156,23 @@ export default function CalendarPage() {
     void loadEvents();
   }, []);
 
+  useEffect(() => {
+    if (!selectedEvent) return;
+
+    const details = getEventDetails(selectedEvent);
+
+    setEventForm({
+      title: selectedEvent.summary || "",
+      name: details.name === "Not provided" ? "" : details.name,
+      address: details.address === "Not provided" ? "" : details.address,
+      jobKind: details.jobKind === "Not specified" ? "Repair" : details.jobKind,
+      date: getDateInputValue(selectedEvent.start?.dateTime || selectedEvent.start?.date),
+      startTime: getTimeInputValue(selectedEvent.start?.dateTime),
+      endTime: getTimeInputValue(selectedEvent.end?.dateTime),
+      notes: details.notes === "No notes" ? "" : details.notes,
+    });
+  }, [selectedEvent]);
+
   async function handleCreateEvent(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSaving(true);
@@ -161,6 +199,37 @@ export default function CalendarPage() {
       setError("Unable to create appointment.");
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleUpdateEvent(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!selectedEvent) return;
+
+    setUpdating(true);
+    setError("");
+    setStatusMessage("");
+
+    try {
+      const response = await fetch("/api/google-calendar/events", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: selectedEvent.id, ...eventForm }),
+      });
+      const data = await response.json() as { error?: string };
+
+      if (!response.ok) {
+        setError(data.error || "Unable to update appointment.");
+        return;
+      }
+
+      setStatusMessage("Appointment updated in Google Calendar.");
+      setSelectedEvent(null);
+      await loadEvents();
+    } catch {
+      setError("Unable to update appointment.");
+    } finally {
+      setUpdating(false);
     }
   }
 
@@ -275,30 +344,96 @@ export default function CalendarPage() {
         </div>
       </div>
       {selectedEvent && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4">
-          <div className="w-full max-w-xl rounded-[2rem] bg-white p-6 shadow-2xl">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Appointment details</p>
-                <h2 className="mt-2 text-2xl font-black text-[#07183f]">{selectedEvent.summary || "Untitled event"}</h2>
-                <p className="mt-1 font-bold text-orange-600">{formatEventDate(selectedEvent)}</p>
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/40 p-4">
+          <form onSubmit={handleUpdateEvent} className="mx-auto my-6 grid max-w-6xl gap-6 lg:grid-cols-[1fr_260px]">
+            <div className="rounded-[2rem] bg-white p-6 shadow-2xl">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                <input required value={eventForm.title} onChange={(event) => setEventForm({ ...eventForm, title: event.target.value })} className="w-full border-0 text-3xl font-normal text-[#07183f] outline-none" placeholder="Add title" />
+                <button type="button" onClick={() => setSelectedEvent(null)} className="rounded-full p-2 text-slate-500 hover:bg-slate-100">
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-              <button onClick={() => setSelectedEvent(null)} className="rounded-xl bg-slate-100 px-3 py-2 font-black text-slate-600">Close</button>
-            </div>
-            <div className="mt-5 grid gap-3">
-              {Object.entries(getEventDetails(selectedEvent)).map(([label, value]) => (
-                <div key={label} className="rounded-2xl bg-slate-50 p-4">
-                  <p className="text-xs font-black uppercase tracking-[0.15em] text-slate-400">{label === "jobKind" ? "Kind of Job" : label}</p>
-                  <p className="mt-1 font-bold text-[#07183f]">{value}</p>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <input required type="date" value={eventForm.date} onChange={(event) => setEventForm({ ...eventForm, date: event.target.value })} className="rounded-lg bg-slate-100 px-4 py-3 outline-none" />
+                <input required type="time" value={eventForm.startTime} onChange={(event) => setEventForm({ ...eventForm, startTime: event.target.value })} className="rounded-lg bg-slate-100 px-4 py-3 outline-none" />
+                <span className="font-semibold text-slate-600">to</span>
+                <input required type="time" value={eventForm.endTime} onChange={(event) => setEventForm({ ...eventForm, endTime: event.target.value })} className="rounded-lg bg-slate-100 px-4 py-3 outline-none" />
+                <span className="font-semibold text-slate-700">(GMT-07:00) Mountain Standard Time - Phoenix</span>
+              </div>
+
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <label className="flex items-center gap-2 font-semibold text-slate-700">
+                  <input type="checkbox" className="h-4 w-4" /> All day
+                </label>
+                <button type="button" className="rounded-lg bg-slate-100 px-4 py-3 font-semibold text-slate-700">Does not repeat</button>
+              </div>
+
+              <div className="mt-8 rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
+                <div className="flex gap-8 border-b border-slate-200">
+                  <button type="button" className="border-b-2 border-blue-600 px-2 pb-3 font-bold text-blue-600">Event details</button>
+                  <button type="button" className="px-2 pb-3 font-bold text-slate-500">Find a time</button>
                 </div>
-              ))}
+
+                <div className="mt-6 grid gap-4">
+                  <label className="grid grid-cols-[28px_1fr] items-center gap-4">
+                    <User className="h-5 w-5 text-slate-500" />
+                    <input required value={eventForm.name} onChange={(event) => setEventForm({ ...eventForm, name: event.target.value })} className="rounded-lg bg-slate-100 px-4 py-3 outline-none" placeholder="Customer name" />
+                  </label>
+                  <label className="grid grid-cols-[28px_1fr] items-center gap-4">
+                    <MapPin className="h-5 w-5 text-slate-500" />
+                    <input required value={eventForm.address} onChange={(event) => setEventForm({ ...eventForm, address: event.target.value })} className="rounded-lg bg-slate-100 px-4 py-3 outline-none" placeholder="Job address" />
+                  </label>
+                  <label className="grid grid-cols-[28px_1fr] items-center gap-4">
+                    <Briefcase className="h-5 w-5 text-slate-500" />
+                    <select required value={eventForm.jobKind} onChange={(event) => setEventForm({ ...eventForm, jobKind: event.target.value })} className="rounded-lg bg-slate-100 px-4 py-3 outline-none">
+                      <option>Repair</option>
+                      <option>Replacement</option>
+                      <option>Installation</option>
+                      <option>Maintenance</option>
+                    </select>
+                  </label>
+                  <div className="grid grid-cols-[28px_1fr] items-center gap-4">
+                    <Bell className="h-5 w-5 text-slate-500" />
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-lg bg-slate-100 px-4 py-3 font-semibold text-slate-700">Notification</span>
+                      <span className="rounded-lg bg-slate-100 px-4 py-3 font-semibold text-slate-700">10</span>
+                      <span className="rounded-lg bg-slate-100 px-4 py-3 font-semibold text-slate-700">minutes</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-[28px_1fr] items-start gap-4">
+                    <AlignLeft className="mt-3 h-5 w-5 text-slate-500" />
+                    <textarea value={eventForm.notes} onChange={(event) => setEventForm({ ...eventForm, notes: event.target.value })} className="min-h-48 rounded-lg bg-slate-100 px-4 py-3 outline-none" placeholder="Add description / notes" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                {selectedEvent.htmlLink && (
+                  <a href={selectedEvent.htmlLink} target="_blank" rel="noreferrer" className="inline-flex rounded-2xl border border-slate-200 px-4 py-3 font-bold text-slate-700">
+                    <ExternalLink className="mr-2 h-4 w-4" />Open in Google Calendar
+                  </a>
+                )}
+                <button disabled={updating} className="rounded-2xl bg-blue-600 px-6 py-3 font-bold text-white disabled:bg-slate-300">
+                  {updating ? "Saving..." : "Save changes"}
+                </button>
+              </div>
             </div>
-            {selectedEvent.htmlLink && (
-              <a href={selectedEvent.htmlLink} target="_blank" rel="noreferrer" className="mt-5 inline-flex rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white">
-                <ExternalLink className="mr-2 h-4 w-4" />Open in Google Calendar
-              </a>
-            )}
-          </div>
+
+            <aside className="rounded-[2rem] bg-white p-5 shadow-2xl">
+              <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+                <Clock className="h-5 w-5 text-slate-500" />
+                <h3 className="font-black text-[#07183f]">Guests</h3>
+              </div>
+              <input className="mt-5 w-full rounded-lg bg-slate-100 px-4 py-3 outline-none" placeholder="Add guests" />
+              <div className="mt-8 space-y-4">
+                <p className="font-bold text-slate-700">Guest permissions</p>
+                <label className="flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" className="h-4 w-4" />Modify event</label>
+                <label className="flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" defaultChecked className="h-4 w-4" />Invite others</label>
+                <label className="flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" defaultChecked className="h-4 w-4" />See guest list</label>
+              </div>
+            </aside>
+          </form>
         </div>
       )}
     </div>
