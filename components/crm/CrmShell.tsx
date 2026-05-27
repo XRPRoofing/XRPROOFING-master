@@ -12,7 +12,6 @@ const navigation = [
   { href: "/crm/customers", label: "Customers", icon: UsersRound },
   { href: "/crm/proposals", label: "Proposal", icon: FileText },
   { href: "/crm/invoices", label: "Invoice", icon: ClipboardList },
-  { href: "/crm/estimates", label: "Estimates", icon: FileText },
   { href: "/crm/tasks", label: "Tasks", icon: ClipboardList },
   { href: "/crm/calendar", label: "Calendar", icon: CalendarDays },
   { href: "/crm/files", label: "Files", icon: UploadCloud },
