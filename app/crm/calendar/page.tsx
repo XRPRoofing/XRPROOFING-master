@@ -25,6 +25,9 @@ type GoogleCalendarEvent = {
     date?: string;
     dateTime?: string;
   };
+  attendees?: {
+    email?: string;
+  }[];
 };
 
 function formatEventDate(event: GoogleCalendarEvent) {
@@ -109,6 +112,7 @@ export default function CalendarPage() {
     startTime: "",
     endTime: "",
     notes: "",
+    guestEmail: "",
   });
   const [eventForm, setEventForm] = useState({
     title: "",
@@ -119,6 +123,7 @@ export default function CalendarPage() {
     startTime: "",
     endTime: "",
     notes: "",
+    guestEmail: "",
   });
 
   const days = useMemo(() => Array.from({ length: 35 }, (_, index) => index + 1), []);
@@ -170,6 +175,7 @@ export default function CalendarPage() {
       startTime: getTimeInputValue(selectedEvent.start?.dateTime),
       endTime: getTimeInputValue(selectedEvent.end?.dateTime),
       notes: details.notes === "No notes" ? "" : details.notes,
+      guestEmail: selectedEvent.attendees?.[0]?.email || "",
     });
   }, [selectedEvent]);
 
@@ -193,7 +199,7 @@ export default function CalendarPage() {
       }
 
       setStatusMessage("Appointment created in Google Calendar.");
-      setForm({ title: "", name: "", address: "", jobKind: "Repair", date: "", startTime: "", endTime: "", notes: "" });
+      setForm({ title: "", name: "", address: "", jobKind: "Repair", date: "", startTime: "", endTime: "", notes: "", guestEmail: "" });
       await loadEvents();
     } catch {
       setError("Unable to create appointment.");
@@ -311,6 +317,7 @@ export default function CalendarPage() {
           <input required type="date" value={form.date} onChange={(event) => setForm({ ...form, date: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
           <input required type="time" value={form.startTime} onChange={(event) => setForm({ ...form, startTime: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
           <input required type="time" value={form.endTime} onChange={(event) => setForm({ ...form, endTime: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
+          <input type="email" value={form.guestEmail} onChange={(event) => setForm({ ...form, guestEmail: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Guest email" />
           <input value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Notes" />
         </div>
 
@@ -425,7 +432,8 @@ export default function CalendarPage() {
                 <Clock className="h-5 w-5 text-slate-500" />
                 <h3 className="font-black text-[#07183f]">Guests</h3>
               </div>
-              <input className="mt-5 w-full rounded-lg bg-slate-100 px-4 py-3 outline-none" placeholder="Add guests" />
+              <input type="email" value={eventForm.guestEmail} onChange={(event) => setEventForm({ ...eventForm, guestEmail: event.target.value })} className="mt-5 w-full rounded-lg bg-slate-100 px-4 py-3 outline-none" placeholder="Add guest email" />
+              <p className="mt-2 text-xs font-semibold text-slate-500">Saving changes will send the Google Calendar invite/update to this guest.</p>
               <div className="mt-8 space-y-4">
                 <p className="font-bold text-slate-700">Guest permissions</p>
                 <label className="flex items-center gap-3 text-sm font-semibold text-slate-700"><input type="checkbox" className="h-4 w-4" />Modify event</label>
