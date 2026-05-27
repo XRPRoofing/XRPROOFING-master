@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Bell, BriefcaseBusiness, CalendarDays, ClipboardList, FileText, LayoutDashboard, LogOut, Menu, Search, Settings, UploadCloud, UsersRound, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 const navigation = [
   { href: "/crm", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/crm/leads", label: "Leads", icon: BriefcaseBusiness },
+  { href: "/crm/leads", label: "Jobs", icon: BriefcaseBusiness },
   { href: "/crm/customers", label: "Customers", icon: UsersRound },
   { href: "/crm/estimates", label: "Estimates", icon: FileText },
   { href: "/crm/tasks", label: "Tasks", icon: ClipboardList },
@@ -21,10 +21,34 @@ export default function CrmShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    createClient().auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+
+      if (!data.session) {
+        router.replace(`/login?redirectedFrom=${encodeURIComponent(pathname)}`);
+        return;
+      }
+
+      setCheckingAuth(false);
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [pathname, router]);
 
   async function logout() {
     await createClient().auth.signOut();
     router.push("/login");
+  }
+
+  if (checkingAuth) {
+    return <div className="flex min-h-screen items-center justify-center bg-slate-100 text-sm font-semibold text-slate-600">Opening CRM...</div>;
   }
 
   return (
