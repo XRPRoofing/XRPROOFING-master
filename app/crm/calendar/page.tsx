@@ -30,6 +30,22 @@ function formatEventDate(event: GoogleCalendarEvent) {
   }).format(new Date(dateValue));
 }
 
+function getEventDay(event: GoogleCalendarEvent) {
+  const dateValue = event.start?.dateTime || event.start?.date;
+  if (!dateValue) return null;
+  return new Date(dateValue).getDate();
+}
+
+function formatEventTime(event: GoogleCalendarEvent) {
+  const dateValue = event.start?.dateTime;
+  if (!dateValue) return "All day";
+
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(dateValue));
+}
+
 function getGoogleCalendarStatusMessage(status: string | null) {
   if (status === "connected") return "Google Calendar connected successfully.";
   if (status === "missing_env") return "Google Calendar server settings are missing. Check GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT_URI in Vercel, then redeploy.";
@@ -56,6 +72,15 @@ export default function CalendarPage() {
   });
 
   const days = useMemo(() => Array.from({ length: 35 }, (_, index) => index + 1), []);
+  const eventsByDay = useMemo(() => {
+    return events.reduce<Record<number, GoogleCalendarEvent[]>>((groupedEvents, event) => {
+      const day = getEventDay(event);
+      if (!day) return groupedEvents;
+
+      groupedEvents[day] = [...(groupedEvents[day] || []), event];
+      return groupedEvents;
+    }, {});
+  }, [events]);
 
   async function loadEvents() {
     setLoading(true);
@@ -146,9 +171,21 @@ export default function CalendarPage() {
           {statusMessage && <p className="mt-2 font-semibold text-orange-700">{statusMessage}</p>}
         </div>
 
-        <div className="mt-8 grid grid-cols-7 gap-2 text-center text-sm">
+        <div className="mt-8 grid grid-cols-7 gap-2 text-sm">
           {days.map((day) => (
-            <div key={day} className="min-h-24 rounded-2xl bg-slate-50 p-3 text-slate-500">{day}</div>
+            <div key={day} className="min-h-28 rounded-2xl bg-slate-50 p-3 text-slate-500">
+              <div className="text-center">{day}</div>
+              <div className="mt-2 space-y-1 text-left">
+                {(eventsByDay[day] || []).slice(0, 3).map((event) => (
+                  <a key={event.id} href={event.htmlLink || "#"} target={event.htmlLink ? "_blank" : undefined} rel={event.htmlLink ? "noreferrer" : undefined} className="block rounded-lg bg-orange-50 px-2 py-1 text-[11px] font-bold text-orange-700 ring-1 ring-orange-100">
+                    <span className="block truncate">{formatEventTime(event)} · {event.summary || "Untitled event"}</span>
+                  </a>
+                ))}
+                {(eventsByDay[day] || []).length > 3 && (
+                  <p className="text-[11px] font-bold text-slate-500">+{(eventsByDay[day] || []).length - 3} more</p>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </div>
