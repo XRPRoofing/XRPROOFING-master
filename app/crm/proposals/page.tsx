@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { leads } from "@/lib/crm-data";
 import type { Lead } from "@/types/crm";
 
@@ -42,7 +43,7 @@ type Proposal = {
   address: string;
   scope: string;
   total: number;
-  status: "Draft" | "Sent" | "Approved";
+  status: "Draft" | "Sent" | "Viewed" | "Signed" | "Approved";
   template: string;
   title: string;
   summary: string;
@@ -51,6 +52,10 @@ type Proposal = {
   sendSubject?: string;
   sendMessage?: string;
   ccRecipients?: string;
+  sentToEmail?: string;
+  signedAt?: string;
+  signedBy?: string;
+  selectedOption?: "good" | "better" | "best";
   packages?: {
     good: string;
     better: string;
@@ -143,6 +148,7 @@ export default function ProposalsPage() {
     subject: "",
     message: "",
   });
+  const [sendNotice, setSendNotice] = useState("");
   const [templateForm, setTemplateForm] = useState({
     label: "",
     description: "",
@@ -210,6 +216,22 @@ export default function ProposalsPage() {
     if (!dataLoaded) return;
     window.localStorage.setItem("xrp-crm-proposals", JSON.stringify(proposals));
   }, [dataLoaded, proposals]);
+
+  useEffect(() => {
+    function refreshProposalUpdates() {
+      const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
+      if (savedProposals) {
+        setProposals(JSON.parse(savedProposals) as Proposal[]);
+      }
+    }
+
+    window.addEventListener("focus", refreshProposalUpdates);
+    window.addEventListener("storage", refreshProposalUpdates);
+    return () => {
+      window.removeEventListener("focus", refreshProposalUpdates);
+      window.removeEventListener("storage", refreshProposalUpdates);
+    };
+  }, []);
 
   useEffect(() => {
     if (!dataLoaded) return;
@@ -381,6 +403,7 @@ export default function ProposalsPage() {
 
     const savedProposal = saveActiveProposal() || activeProposal;
     setActiveProposal(savedProposal);
+    setSendNotice("");
     setSendForm({
       toName: savedProposal.customerName,
       toEmail: savedProposal.job?.email || "info@xrproofing.com",
@@ -392,21 +415,48 @@ export default function ProposalsPage() {
     setShowSendModal(true);
   }
 
-  function handleSendProposal() {
+  async function handleSendProposal() {
     if (!activeProposal) return;
 
+    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(activeProposal.id)}`;
     const sentProposal = saveActiveProposal({
       status: "Sent",
       ccRecipients: sendForm.ccRecipients,
       sendSubject: sendForm.subject,
       sendMessage: sendForm.message,
+      sentToEmail: sendForm.toEmail,
     });
 
     if (sentProposal) {
       setActiveProposal(sentProposal);
     }
 
-    setShowSendModal(false);
+    setSendNotice("Sending proposal email...");
+
+    try {
+      const response = await fetch("/api/proposals/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          toName: sendForm.toName,
+          toEmail: sendForm.toEmail,
+          ccRecipients: sendForm.ccRecipients,
+          subject: sendForm.subject,
+          message: sendForm.message,
+          proposalLink,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Unable to send proposal email");
+      }
+
+      setSendNotice(`Proposal sent to ${sendForm.toEmail}.`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Email could not be sent.";
+      setSendNotice(`${message} Proposal link: ${proposalLink}`);
+    }
   }
 
   function handleDeleteProposal(proposal: Proposal) {
@@ -685,6 +735,18 @@ export default function ProposalsPage() {
                     </div>
                     <textarea required value={sendForm.message} onChange={(event) => setSendForm({ ...sendForm, message: event.target.value })} className="min-h-56 w-full border-x border-b border-slate-200 px-5 py-4 text-sm font-normal leading-7 outline-none" />
                   </label>
+                  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                    <div className="rounded-t-xl bg-slate-200 py-5 text-center">
+                      <Image src="/images/logo.jpeg" alt="XRP Roofing" width={112} height={60} className="mx-auto h-auto bg-white" />
+                    </div>
+                    <div className="rounded-b-xl bg-white p-5 text-sm leading-7 text-slate-700">
+                      <p className="whitespace-pre-line">{sendForm.message}</p>
+                      <div className="mt-5 text-center">
+                        <span className="inline-block rounded-full bg-blue-600 px-5 py-2 text-sm font-black text-white">View Proposal</span>
+                      </div>
+                    </div>
+                  </div>
+                  {sendNotice && <p className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-bold text-blue-700">{sendNotice}</p>}
                 </div>
               </div>
               <div className="flex items-center justify-between border-t border-slate-200 px-7 py-5">
@@ -851,16 +913,16 @@ export default function ProposalsPage() {
               <div>
                 <p className="font-black text-[#07183f]">{proposal.address}</p>
                 <p className="mt-1 text-sm text-slate-500">{proposal.customerName} <span className="mx-2">•</span> Assigned to Jonathan Gonzalez</p>
-                <p className="mt-1 text-xs text-slate-500">{proposal.status === "Draft" ? "Created" : proposal.status === "Sent" ? "Sent" : "Viewed"} by Jonathan Gonzalez <span className="mx-1">•</span> Today at 3:27 AM⌄</p>
+                <p className="mt-1 text-xs text-slate-500">{proposal.status === "Draft" ? "Created" : proposal.status === "Sent" ? "Sent" : proposal.status === "Signed" ? `Signed by ${proposal.signedBy || proposal.customerName}` : "Viewed"} {proposal.status === "Signed" ? "" : "by Jonathan Gonzalez"} <span className="mx-1">•</span> {proposal.signedAt ? new Date(proposal.signedAt).toLocaleString() : "Today"}⌄</p>
               </div>
             </div>
             </button>
             <div className="flex items-center justify-end gap-3">
               <div className="text-right">
                 <p className="font-black text-slate-600">${proposal.total.toLocaleString()}</p>
-                <p className="mt-1 text-xs font-bold uppercase text-slate-500">BEST</p>
+                <p className="mt-1 text-xs font-bold uppercase text-slate-500">{proposal.selectedOption || "BEST"}</p>
               </div>
-              <span className={`rounded-full px-4 py-1 text-sm font-black ${proposal.status === "Draft" ? "bg-slate-500 text-white" : proposal.status === "Sent" ? "bg-sky-500 text-white" : "bg-yellow-400 text-slate-900"}`}>{proposal.status === "Approved" ? "Viewed" : proposal.status}</span>
+              <span className={`rounded-full px-4 py-1 text-sm font-black ${proposal.status === "Draft" ? "bg-slate-500 text-white" : proposal.status === "Sent" ? "bg-sky-500 text-white" : proposal.status === "Signed" ? "bg-emerald-500 text-white" : "bg-yellow-400 text-slate-900"}`}>{proposal.status === "Approved" ? "Viewed" : proposal.status}</span>
               <button type="button" onClick={() => handleDeleteProposal(proposal)} className="rounded-full bg-red-50 px-3 py-1 text-xs font-black text-red-700">Delete</button>
               <span className="text-xl font-black text-slate-500">⋯</span>
             </div>
