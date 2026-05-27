@@ -48,6 +48,9 @@ type Proposal = {
   summary: string;
   notes: string;
   terms: string;
+  sendSubject?: string;
+  sendMessage?: string;
+  ccRecipients?: string;
 };
 
 type ProposalTemplate = {
@@ -120,6 +123,15 @@ export default function ProposalsPage() {
   const [activeProposal, setActiveProposal] = useState<Proposal | null>(null);
   const [deletedProposal, setDeletedProposal] = useState<Proposal | null>(null);
   const [isPreviewing, setIsPreviewing] = useState(false);
+  const [showSendModal, setShowSendModal] = useState(false);
+  const [sendForm, setSendForm] = useState({
+    toName: "",
+    toEmail: "info@xrproofing.com",
+    ccRecipients: "",
+    templateName: "Personalized Proposal Email",
+    subject: "",
+    message: "",
+  });
   const [templateForm, setTemplateForm] = useState({
     label: "",
     description: "",
@@ -314,6 +326,13 @@ export default function ProposalsPage() {
   function handleSaveProposal() {
     if (!activeProposal) return;
 
+    const updatedProposal = saveActiveProposal();
+    setActiveProposal(updatedProposal);
+  }
+
+  function saveActiveProposal(extraFields?: Partial<Proposal>) {
+    if (!activeProposal) return null;
+
     const updatedProposal: Proposal = {
       ...activeProposal,
       customerName: editorForm.customerName,
@@ -325,12 +344,53 @@ export default function ProposalsPage() {
       template: editorForm.template,
       notes: editorForm.notes,
       terms: editorForm.terms,
+      ...extraFields,
     };
 
-    setActiveProposal(updatedProposal);
     setProposals((currentProposals) =>
       currentProposals.map((proposal) => proposal.id === updatedProposal.id ? updatedProposal : proposal)
     );
+
+    return updatedProposal;
+  }
+
+  function handleUpdateTemplate(updatedTemplate: ProposalTemplate) {
+    setTemplates((currentTemplates) =>
+      currentTemplates.map((template) => template.id === updatedTemplate.id ? updatedTemplate : template)
+    );
+  }
+
+  function handleOpenSendModal() {
+    if (!activeProposal) return;
+
+    const savedProposal = saveActiveProposal() || activeProposal;
+    setActiveProposal(savedProposal);
+    setSendForm({
+      toName: savedProposal.customerName,
+      toEmail: savedProposal.job?.email || "info@xrproofing.com",
+      ccRecipients: savedProposal.ccRecipients || "",
+      templateName: "Personalized Proposal Email",
+      subject: savedProposal.sendSubject || `Proposal for ${savedProposal.customerName}`,
+      message: savedProposal.sendMessage || `Dear ${savedProposal.customerName},\n\nPlease follow the link to review and accept your customized proposal.\nThank you for your time and consideration.\n\nJonathan Gonzalez`,
+    });
+    setShowSendModal(true);
+  }
+
+  function handleSendProposal() {
+    if (!activeProposal) return;
+
+    const sentProposal = saveActiveProposal({
+      status: "Sent",
+      ccRecipients: sendForm.ccRecipients,
+      sendSubject: sendForm.subject,
+      sendMessage: sendForm.message,
+    });
+
+    if (sentProposal) {
+      setActiveProposal(sentProposal);
+    }
+
+    setShowSendModal(false);
   }
 
   function handleDeleteProposal(proposal: Proposal) {
@@ -359,7 +419,7 @@ export default function ProposalsPage() {
             <button type="button" onClick={handleSaveProposal} className="rounded-full bg-emerald-50 px-4 py-2 text-xs font-black text-emerald-700">Save</button>
             <button type="button" onClick={() => handleDeleteProposal(activeProposal)} className="rounded-full bg-red-50 px-4 py-2 text-xs font-black text-red-700">Delete</button>
             <button type="button" onClick={() => setIsPreviewing((current) => !current)} className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-blue-700">{isPreviewing ? "Edit" : "Preview"}</button>
-            <button className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">Send</button>
+            <button type="button" onClick={handleOpenSendModal} className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">Send</button>
           </div>
         </div>
 
@@ -526,6 +586,69 @@ export default function ProposalsPage() {
             </div>
           </main>
         </div>
+        {showSendModal && (
+          <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/50">
+            <div className="flex h-full w-full max-w-[530px] flex-col bg-white shadow-2xl">
+              <div className="flex items-center justify-between border-b border-slate-200 px-7 py-5">
+                <div className="flex items-center gap-3 text-xl font-black text-slate-900">
+                  <span className="text-blue-600">✉</span>
+                  <span>Send proposal</span>
+                </div>
+                <button type="button" onClick={() => setShowSendModal(false)} className="text-2xl text-slate-500">×</button>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                <div className="bg-slate-50 px-7 py-6">
+                  <div className="grid grid-cols-[44px_1fr] gap-4">
+                    <p className="pt-3 text-sm font-black text-slate-900">To:</p>
+                    <div className="rounded-lg border border-slate-200 bg-white p-4">
+                      <input value={sendForm.toName} onChange={(event) => setSendForm({ ...sendForm, toName: event.target.value })} className="w-full border-none text-sm font-black text-slate-900 outline-none" />
+                      <div className="mt-3 flex items-center justify-between gap-3 text-sm text-slate-600">
+                        <span>Customer</span>
+                        <input value={sendForm.toEmail} onChange={(event) => setSendForm({ ...sendForm, toEmail: event.target.value })} className="max-w-[230px] border-none text-right text-sm text-slate-600 outline-none" />
+                      </div>
+                    </div>
+                  </div>
+                  <label className="ml-[60px] mt-3 block text-sm font-bold text-blue-600">
+                    Add Cc recipients...
+                    <input value={sendForm.ccRecipients} onChange={(event) => setSendForm({ ...sendForm, ccRecipients: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-normal text-slate-700 outline-none" placeholder="email@example.com, another@example.com" />
+                  </label>
+                </div>
+                <div className="space-y-5 px-7 py-6">
+                  <div>
+                    <div className="mb-2 flex items-center justify-between">
+                      <p className="text-sm font-black text-slate-900">Template</p>
+                      <button type="button" onClick={() => setActiveTab("templates")} className="text-xs font-black text-blue-600">⊞ Select template</button>
+                    </div>
+                    <input value={sendForm.templateName} onChange={(event) => setSendForm({ ...sendForm, templateName: event.target.value })} className="w-full rounded border border-slate-200 px-4 py-3 text-sm font-bold outline-none" />
+                  </div>
+                  <label className="block text-sm font-black text-slate-900">
+                    Subject*
+                    <input required value={sendForm.subject} onChange={(event) => setSendForm({ ...sendForm, subject: event.target.value })} className="mt-3 w-full rounded border border-slate-200 px-4 py-3 text-sm font-normal outline-none" />
+                  </label>
+                  <label className="block text-sm font-black text-slate-900">
+                    Message*
+                    <div className="mt-3 flex items-center gap-6 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-800">
+                      <span>B</span>
+                      <span className="italic">I</span>
+                      <span className="underline">U</span>
+                      <span>🔗</span>
+                      <span>Dynamic fields⌄</span>
+                      <span>Attach</span>
+                    </div>
+                    <textarea required value={sendForm.message} onChange={(event) => setSendForm({ ...sendForm, message: event.target.value })} className="min-h-56 w-full border-x border-b border-slate-200 px-5 py-4 text-sm font-normal leading-7 outline-none" />
+                  </label>
+                </div>
+              </div>
+              <div className="flex items-center justify-between border-t border-slate-200 px-7 py-5">
+                <button type="button" onClick={() => setShowSendModal(false)} className="text-sm font-black text-blue-600">Cancel</button>
+                <div className="flex gap-3">
+                  <button type="button" onClick={() => setIsPreviewing(true)} className="rounded-full border border-blue-600 px-6 py-3 text-sm font-black text-blue-600">↗ Preview</button>
+                  <button type="button" onClick={handleSendProposal} className="rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white">✈ Send proposal</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -586,15 +709,24 @@ export default function ProposalsPage() {
             {templates.map((template) => (
               <div key={template.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                 <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-lg font-black text-[#07183f]">{template.label}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{template.description}</p>
+                  <div className="flex-1">
+                    <input value={template.label} onChange={(event) => handleUpdateTemplate({ ...template, label: event.target.value })} className="w-full border-none bg-transparent text-lg font-black text-[#07183f] outline-none" />
+                    <input value={template.description} onChange={(event) => handleUpdateTemplate({ ...template, description: event.target.value })} className="mt-1 w-full border-none bg-transparent text-sm text-slate-500 outline-none" />
                   </div>
-                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700">Template</span>
+                  <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">Saved</span>
                 </div>
-                <p className="mt-4 font-black text-slate-800">{template.title}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{template.summary}</p>
-                <p className="mt-3 text-xs leading-5 text-slate-500">{template.terms}</p>
+                <label className="mt-4 block text-xs font-black uppercase tracking-wider text-slate-500">
+                  Proposal title
+                  <input value={template.title} onChange={(event) => handleUpdateTemplate({ ...template, title: event.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm normal-case tracking-normal text-slate-800 outline-none" />
+                </label>
+                <label className="mt-3 block text-xs font-black uppercase tracking-wider text-slate-500">
+                  Proposal summary
+                  <textarea value={template.summary} onChange={(event) => handleUpdateTemplate({ ...template, summary: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm normal-case leading-6 tracking-normal text-slate-600 outline-none" />
+                </label>
+                <label className="mt-3 block text-xs font-black uppercase tracking-wider text-slate-500">
+                  Terms and Conditions
+                  <textarea value={template.terms} onChange={(event) => handleUpdateTemplate({ ...template, terms: event.target.value })} className="mt-2 min-h-32 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm normal-case leading-6 tracking-normal text-slate-600 outline-none" />
+                </label>
               </div>
             ))}
           </div>
