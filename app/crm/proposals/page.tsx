@@ -43,6 +43,8 @@ type Proposal = {
   scope: string;
   total: number;
   status: "Draft" | "Sent" | "Approved";
+  template: "executive" | "insurance" | "premium";
+  notes: string;
 };
 
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
@@ -53,9 +55,16 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   scope: `${job.roofType} roofing proposal`,
   total: job.value,
   status: index === 0 ? "Draft" : index === 1 ? "Sent" : "Approved",
+  template: index === 0 ? "executive" : index === 1 ? "insurance" : "premium",
+  notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
 }));
 
 const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
+const proposalTemplates = [
+  { id: "executive", label: "Executive Roofing", description: "Clean premium proposal for homeowner approvals." },
+  { id: "insurance", label: "Insurance Claim", description: "Detailed format for carrier and adjuster review." },
+  { id: "premium", label: "Premium Package", description: "Polished customer-facing proposal with value highlights." },
+] as const;
 
 export default function ProposalsPage() {
   const [proposalMode, setProposalMode] = useState<"job" | "new">("job");
@@ -69,6 +78,14 @@ export default function ProposalsPage() {
   const [proposalSearch, setProposalSearch] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [activeProposal, setActiveProposal] = useState<Proposal | null>(null);
+  const [editorForm, setEditorForm] = useState({
+    customerName: "",
+    address: "",
+    scope: "",
+    total: "",
+    template: "executive" as Proposal["template"],
+    notes: "",
+  });
   const addressInputRef = useRef<HTMLInputElement>(null);
 
   const selectedJob = useMemo(() => leads.find((job) => job.id === selectedJobId), [selectedJobId]);
@@ -146,17 +163,19 @@ export default function ProposalsPage() {
     if (proposalMode === "new" && (!customerName || !address)) return;
 
     const newProposal: Proposal = {
-      id: `P-${Date.now()}`,
+      id: `P-${1001 + proposals.length}`,
       job: proposalMode === "job" ? selectedJob : undefined,
       customerName: proposalMode === "job" && selectedJob ? selectedJob.name : customerName,
       address: proposalMode === "job" && selectedJob ? `${selectedJob.address}, ${selectedJob.city}` : address,
       scope: scope || (proposalMode === "job" && selectedJob ? `${selectedJob.roofType} roofing proposal` : "Roofing proposal"),
       total: proposalMode === "job" && selectedJob ? selectedJob.value : Number(total) || 0,
       status: "Draft",
+      template: "executive",
+      notes: "Includes professional roof assessment, materials, labor, cleanup, and customer-ready project documentation.",
     };
 
     setProposals((currentProposals) => [newProposal, ...currentProposals]);
-    setActiveProposal(newProposal);
+    openProposal(newProposal);
     setShowCreateForm(false);
     setCustomerName("");
     setAddress("");
@@ -164,14 +183,46 @@ export default function ProposalsPage() {
     setTotal("");
   }
 
+  function openProposal(proposal: Proposal) {
+    setEditorForm({
+      customerName: proposal.customerName,
+      address: proposal.address,
+      scope: proposal.scope,
+      total: String(proposal.total),
+      template: proposal.template,
+      notes: proposal.notes,
+    });
+    setActiveProposal(proposal);
+  }
+
+  function handleSaveProposal() {
+    if (!activeProposal) return;
+
+    const updatedProposal: Proposal = {
+      ...activeProposal,
+      customerName: editorForm.customerName,
+      address: editorForm.address,
+      scope: editorForm.scope,
+      total: Number(editorForm.total) || 0,
+      template: editorForm.template,
+      notes: editorForm.notes,
+    };
+
+    setActiveProposal(updatedProposal);
+    setProposals((currentProposals) =>
+      currentProposals.map((proposal) => proposal.id === updatedProposal.id ? updatedProposal : proposal)
+    );
+  }
+
   if (activeProposal) {
     return (
       <div className="-mx-4 -my-6 min-h-[calc(100vh-5rem)] bg-slate-100 sm:-mx-6 lg:-mx-8">
         <div className="sticky top-20 z-30 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 shadow-sm">
           <button type="button" onClick={() => setActiveProposal(null)} className="text-sm font-bold text-blue-700">← Back to proposals</button>
-          <div className="hidden text-sm font-semibold text-slate-700 md:block">{activeProposal.address}</div>
+          <div className="hidden text-sm font-semibold text-slate-700 md:block">{editorForm.address}</div>
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-black text-orange-700">{activeProposal.status}</span>
+            <button type="button" onClick={handleSaveProposal} className="rounded-full bg-emerald-50 px-4 py-2 text-xs font-black text-emerald-700">Save</button>
             <button className="rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-blue-700">Preview</button>
             <button className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">Send</button>
           </div>
@@ -183,13 +234,38 @@ export default function ProposalsPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Customer</p>
-                  <h2 className="mt-2 font-black text-[#07183f]">{activeProposal.customerName}</h2>
-                  <p className="mt-1 text-xs text-slate-500">{activeProposal.address}</p>
+                  <input value={editorForm.customerName} onChange={(event) => setEditorForm({ ...editorForm, customerName: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-black text-[#07183f] outline-none" />
+                  <input value={editorForm.address} onChange={(event) => setEditorForm({ ...editorForm, address: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600 outline-none" />
                 </div>
                 <button className="text-slate-400">•••</button>
               </div>
             </div>
             <button className="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-bold text-blue-700">View job details</button>
+            <div className="mt-5">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Proposal template</p>
+              <div className="space-y-2">
+                {proposalTemplates.map((template) => (
+                  <button key={template.id} type="button" onClick={() => setEditorForm({ ...editorForm, template: template.id })} className={`w-full rounded-xl p-3 text-left ${editorForm.template === template.id ? "bg-blue-50 ring-1 ring-blue-300" : "bg-slate-50"}`}>
+                    <span className="block text-sm font-black text-[#07183f]">{template.label}</span>
+                    <span className="mt-1 block text-xs font-semibold text-slate-500">{template.description}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 space-y-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Scope
+                <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Total
+                <input type="number" value={editorForm.total} onChange={(event) => setEditorForm({ ...editorForm, total: event.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Customer notes
+                <textarea value={editorForm.notes} onChange={(event) => setEditorForm({ ...editorForm, notes: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+            </div>
             <div className="mt-5">
               <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Proposal sections</p>
               <div className="space-y-2">
@@ -205,30 +281,65 @@ export default function ProposalsPage() {
 
           <main className="overflow-auto p-6">
             <div className="mx-auto max-w-[760px]">
-              <p className="mb-5 text-center text-sm font-black text-slate-700">Estimate</p>
-              <div className="min-h-[900px] border border-slate-300 bg-white p-10 shadow-sm">
-                <div className="flex items-start justify-between border-b-4 border-[#07183f] pb-4">
+              <p className="mb-5 text-center text-sm font-black text-slate-700">{proposalTemplates.find((template) => template.id === editorForm.template)?.label}</p>
+              <div className={`min-h-[900px] border bg-white p-10 shadow-sm ${editorForm.template === "premium" ? "border-orange-300" : editorForm.template === "insurance" ? "border-blue-300" : "border-slate-300"}`}>
+                <div className={`flex items-start justify-between border-b-4 pb-4 ${editorForm.template === "premium" ? "border-orange-500" : "border-[#07183f]"}`}>
                   <div>
-                    <p className="text-2xl font-black text-[#07183f]">BEST</p>
+                    <p className={`text-2xl font-black ${editorForm.template === "premium" ? "text-orange-600" : "text-[#07183f]"}`}>{editorForm.template === "insurance" ? "INSURANCE ROOFING PROPOSAL" : editorForm.template === "premium" ? "PREMIUM ROOFING PROPOSAL" : "BEST ROOFING PROPOSAL"}</p>
                     <p className="mt-2 text-sm font-semibold text-slate-500">{activeProposal.id}</p>
                   </div>
-                  <button className="rounded-full border border-blue-300 px-4 py-2 text-xs font-black text-blue-700">Edit option</button>
+                  <div className="text-right text-sm">
+                    <p className="font-black text-[#07183f]">XRP Roofing</p>
+                    <p className="text-slate-500">ROC #350898</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 grid gap-6 md:grid-cols-2">
+                  <div className="rounded-2xl bg-slate-50 p-5">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Prepared for</p>
+                    <p className="mt-2 text-lg font-black text-[#07183f]">{editorForm.customerName}</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{editorForm.address}</p>
+                  </div>
+                  <div className="rounded-2xl bg-slate-50 p-5">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Proposal summary</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">{editorForm.template === "insurance" ? "Prepared for insurance documentation, carrier review, and roofing claim support." : editorForm.template === "premium" ? "A premium customer-ready roofing package with clear scope, value, and next steps." : "A professional roofing proposal prepared for review and approval."}</p>
+                  </div>
                 </div>
 
                 <div className="mt-8">
-                  <p className="text-xs font-black uppercase tracking-wider text-slate-500">Item</p>
-                  <div className="mt-4 border-y border-slate-300 py-4">
-                    <p className="font-black text-slate-900">Description of Work:</p>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">{activeProposal.scope}</p>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">Property: {activeProposal.address}</p>
+                  <p className="text-xs font-black uppercase tracking-wider text-slate-500">Description of Work</p>
+                  <div className="mt-4 border-y border-slate-300 py-5">
+                    <p className="text-sm leading-7 text-slate-700">{editorForm.scope}</p>
+                    <p className="mt-4 text-sm leading-7 text-slate-700">{editorForm.notes}</p>
                   </div>
+                  {editorForm.template === "insurance" && (
+                    <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                      <p className="font-black text-[#07183f]">Insurance documentation included</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">Scope notes, property details, estimated roofing work, and supporting documentation sections are organized for adjuster review.</p>
+                    </div>
+                  )}
+                  {editorForm.template === "premium" && (
+                    <div className="mt-5 grid gap-3 md:grid-cols-3">
+                      {["Premium materials", "Clean job site", "Professional warranty"].map((item) => (
+                        <div key={item} className="rounded-2xl bg-orange-50 p-4 text-sm font-black text-orange-700">{item}</div>
+                      ))}
+                    </div>
+                  )}
                   <div className="mt-4 flex justify-between text-sm">
-                    <span className="font-bold text-slate-700">Estimate subtotal</span>
-                    <span className="font-black text-[#07183f]">${activeProposal.total.toLocaleString()}</span>
+                    <span className="font-bold text-slate-700">Proposal total</span>
+                    <span className="font-black text-[#07183f]">${(Number(editorForm.total) || 0).toLocaleString()}</span>
                   </div>
                 </div>
 
-                <div className="mt-[460px] flex items-end justify-between border-t border-slate-300 pt-4">
+                <div className="mt-32 rounded-2xl border border-slate-200 p-5">
+                  <p className="font-black text-[#07183f]">Customer approval</p>
+                  <div className="mt-8 grid gap-6 md:grid-cols-2">
+                    <div className="border-t border-slate-300 pt-2 text-xs text-slate-500">Customer signature</div>
+                    <div className="border-t border-slate-300 pt-2 text-xs text-slate-500">Date</div>
+                  </div>
+                </div>
+
+                <div className="mt-12 flex items-end justify-between border-t border-slate-300 pt-4">
                   <div className="text-xs text-slate-500">
                     <p className="font-black text-slate-700">XRP Roofing</p>
                     <p>ROC #350898</p>
@@ -333,7 +444,7 @@ export default function ProposalsPage() {
 
       <div className="max-h-[calc(100vh-18rem)] space-y-3 overflow-y-auto pr-2">
         {filteredProposals.map((proposal) => (
-          <button key={proposal.id} type="button" onClick={() => setActiveProposal(proposal)} className="grid w-full grid-cols-1 items-center gap-4 rounded bg-slate-50 p-4 text-left transition hover:bg-blue-50 md:grid-cols-[1fr_auto]">
+          <button key={proposal.id} type="button" onClick={() => openProposal(proposal)} className="grid w-full grid-cols-1 items-center gap-4 rounded bg-slate-50 p-4 text-left transition hover:bg-blue-50 md:grid-cols-[1fr_auto]">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-white text-sm font-black leading-4 text-[#07183f] shadow-sm">XRP<br />ROOF</div>
               <div>
