@@ -51,6 +51,11 @@ type Proposal = {
   sendSubject?: string;
   sendMessage?: string;
   ccRecipients?: string;
+  packages?: {
+    good: string;
+    better: string;
+    best: string;
+  };
 };
 
 type ProposalTemplate = {
@@ -78,6 +83,11 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
 }));
 
 const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
+const defaultPackages = {
+  good: "GOOD option: Essential roofing repair package with necessary labor, standard materials, cleanup, and workmanship basics.",
+  better: "BETTER option: Enhanced roofing package with upgraded materials, improved ventilation details, cleanup, and stronger warranty support.",
+  best: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
+};
 const initialProposalTemplates: ProposalTemplate[] = [
   {
     id: "executive",
@@ -123,6 +133,7 @@ export default function ProposalsPage() {
   const [activeProposal, setActiveProposal] = useState<Proposal | null>(null);
   const [deletedProposal, setDeletedProposal] = useState<Proposal | null>(null);
   const [isPreviewing, setIsPreviewing] = useState(false);
+  const [activeSection, setActiveSection] = useState("Estimate");
   const [showSendModal, setShowSendModal] = useState(false);
   const [sendForm, setSendForm] = useState({
     toName: "",
@@ -149,6 +160,7 @@ export default function ProposalsPage() {
     template: "executive",
     notes: "",
     terms: "",
+    packages: defaultPackages,
   });
   const addressInputRef = useRef<HTMLInputElement>(null);
 
@@ -269,6 +281,7 @@ export default function ProposalsPage() {
       summary: "A professional roofing proposal prepared for review and approval.",
       notes: "Includes professional roof assessment, materials, labor, cleanup, and customer-ready project documentation.",
       terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+      packages: defaultPackages,
     };
 
     setProposals((currentProposals) => [newProposal, ...currentProposals]);
@@ -318,8 +331,10 @@ export default function ProposalsPage() {
       template: proposal.template,
       notes: proposal.notes,
       terms: proposal.terms,
+      packages: proposal.packages || defaultPackages,
     });
     setIsPreviewing(false);
+    setActiveSection("Estimate");
     setActiveProposal(proposal);
   }
 
@@ -344,6 +359,7 @@ export default function ProposalsPage() {
       template: editorForm.template,
       notes: editorForm.notes,
       terms: editorForm.terms,
+      packages: editorForm.packages,
       ...extraFields,
     };
 
@@ -478,7 +494,7 @@ export default function ProposalsPage() {
               <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Proposal sections</p>
               <div className="space-y-2">
                 {proposalSections.map((section) => (
-                  <button key={section} className={`w-full rounded-xl px-4 py-3 text-left text-sm font-bold ${section === "Estimate" ? "bg-blue-50 text-blue-700 ring-1 ring-blue-200" : "bg-slate-50 text-slate-600"}`}>
+                  <button key={section} type="button" onClick={() => setActiveSection(section)} className={`w-full rounded-xl px-4 py-3 text-left text-sm font-bold ${section === activeSection ? "bg-blue-50 text-blue-700 ring-1 ring-blue-200" : "bg-slate-50 text-slate-600"}`}>
                     {section}
                   </button>
                 ))}
@@ -507,72 +523,104 @@ export default function ProposalsPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 grid gap-6 md:grid-cols-2">
-                  <div className="rounded-2xl bg-slate-50 p-5">
-                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Prepared for</p>
-                    <p className="mt-2 text-lg font-black text-[#07183f]">{editorForm.customerName}</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">{editorForm.address}</p>
+                {activeSection === "Cover" && (
+                  <div className="mt-8 rounded-3xl bg-slate-50 p-8 text-center">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Cover page</p>
+                    <p className="mt-5 text-3xl font-black text-[#07183f]">{editorForm.title}</p>
+                    <p className="mt-4 text-lg font-bold text-slate-700">{editorForm.customerName}</p>
+                    <p className="mt-2 text-sm text-slate-500">{editorForm.address}</p>
                   </div>
-                  <div className="rounded-2xl bg-slate-50 p-5">
-                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Proposal summary</p>
-                    {isPreviewing ? (
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{editorForm.summary}</p>
-                    ) : (
-                      <textarea value={editorForm.summary} onChange={(event) => setEditorForm({ ...editorForm, summary: event.target.value })} className="mt-2 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-6 text-slate-600 outline-none" />
-                    )}
-                  </div>
-                </div>
+                )}
 
-                <div className="mt-8">
-                  <p className="text-xs font-black uppercase tracking-wider text-slate-500">Description of Work</p>
-                  <div className="mt-4 border-y border-slate-300 py-5">
-                    {isPreviewing ? (
-                      <>
-                        <p className="text-sm leading-7 text-slate-700">{editorForm.scope}</p>
-                        <p className="mt-4 text-sm leading-7 text-slate-700">{editorForm.notes}</p>
-                      </>
-                    ) : (
-                      <>
-                        <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
-                        <textarea value={editorForm.notes} onChange={(event) => setEditorForm({ ...editorForm, notes: event.target.value })} className="mt-4 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
-                      </>
-                    )}
-                  </div>
-                  {editorForm.template === "insurance" && (
-                    <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 p-5">
-                      <p className="font-black text-[#07183f]">Insurance documentation included</p>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">Scope notes, property details, estimated roofing work, and supporting documentation sections are organized for adjuster review.</p>
-                    </div>
-                  )}
-                  {editorForm.template === "premium" && (
-                    <div className="mt-5 grid gap-3 md:grid-cols-3">
-                      {["Premium materials", "Clean job site", "Professional warranty"].map((item) => (
-                        <div key={item} className="rounded-2xl bg-orange-50 p-4 text-sm font-black text-orange-700">{item}</div>
+                {activeSection === "Inspection Photos" && (
+                  <div className="mt-8">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Inspection Photos</p>
+                    <div className="mt-4 grid gap-4 md:grid-cols-2">
+                      {["Front elevation", "Roof condition", "Detail area", "Project notes"].map((label) => (
+                        <div key={label} className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-sm font-bold text-slate-500">{label}</div>
                       ))}
                     </div>
-                  )}
-                  <div className="mt-4 flex justify-between text-sm">
-                    <span className="font-bold text-slate-700">Proposal total</span>
-                    <span className="font-black text-[#07183f]">${(Number(editorForm.total) || 0).toLocaleString()}</span>
                   </div>
-                </div>
+                )}
 
-                <div className="mt-32 rounded-2xl border border-slate-200 p-5">
-                  <p className="font-black text-[#07183f]">Customer approval</p>
+                {(activeSection === "Estimate" || activeSection === "Summary") && (
                   <div className="mt-8 grid gap-6 md:grid-cols-2">
-                    <div className="border-t border-slate-300 pt-2 text-xs text-slate-500">Customer signature</div>
-                    <div className="border-t border-slate-300 pt-2 text-xs text-slate-500">Date</div>
+                    <div className="rounded-2xl bg-slate-50 p-5">
+                      <p className="text-xs font-black uppercase tracking-wider text-slate-500">Prepared for</p>
+                      <p className="mt-2 text-lg font-black text-[#07183f]">{editorForm.customerName}</p>
+                      <p className="mt-1 text-sm leading-6 text-slate-600">{editorForm.address}</p>
+                    </div>
+                    <div className="rounded-2xl bg-slate-50 p-5">
+                      <p className="text-xs font-black uppercase tracking-wider text-slate-500">Proposal summary</p>
+                      {isPreviewing ? (
+                        <p className="mt-2 text-sm leading-6 text-slate-600">{editorForm.summary}</p>
+                      ) : (
+                        <textarea value={editorForm.summary} onChange={(event) => setEditorForm({ ...editorForm, summary: event.target.value })} className="mt-2 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-6 text-slate-600 outline-none" />
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <div className="mt-8 rounded-2xl border border-slate-200 p-5">
-                  <p className="font-black text-[#07183f]">Terms and Conditions</p>
-                  {isPreviewing ? (
-                    <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{editorForm.terms}</p>
-                  ) : (
-                    <textarea value={editorForm.terms} onChange={(event) => setEditorForm({ ...editorForm, terms: event.target.value })} className="mt-3 min-h-32 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-600 outline-none" />
-                  )}
-                </div>
+                {activeSection === "Estimate" && (
+                  <div className="mt-8">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Description of Work</p>
+                    <div className="mt-4 border-y border-slate-300 py-5">
+                      {isPreviewing ? (
+                        <>
+                          <p className="text-sm leading-7 text-slate-700">{editorForm.scope}</p>
+                          <p className="mt-4 text-sm leading-7 text-slate-700">{editorForm.notes}</p>
+                        </>
+                      ) : (
+                        <>
+                          <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                          <textarea value={editorForm.notes} onChange={(event) => setEditorForm({ ...editorForm, notes: event.target.value })} className="mt-4 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                        </>
+                      )}
+                    </div>
+                    <div className="mt-4 flex justify-between text-sm">
+                      <span className="font-bold text-slate-700">Proposal total</span>
+                      <span className="font-black text-[#07183f]">${(Number(editorForm.total) || 0).toLocaleString()}</span>
+                    </div>
+                  </div>
+                )}
+
+                {(["GOOD", "BETTER", "BEST"].includes(activeSection)) && (
+                  <div className="mt-8">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">{activeSection} proposal option</p>
+                    <div className="mt-4 rounded-2xl border border-slate-200 p-5">
+                      <div className="flex items-center justify-between">
+                        <p className="text-2xl font-black text-[#07183f]">{activeSection} Roofing Package</p>
+                        <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700">${(Number(editorForm.total) || 0).toLocaleString()}</span>
+                      </div>
+                      {isPreviewing ? (
+                        <p className="mt-5 whitespace-pre-line text-sm leading-7 text-slate-700">{editorForm.packages[activeSection.toLowerCase() as "good" | "better" | "best"]}</p>
+                      ) : (
+                        <textarea value={editorForm.packages[activeSection.toLowerCase() as "good" | "better" | "best"]} onChange={(event) => setEditorForm({ ...editorForm, packages: { ...editorForm.packages, [activeSection.toLowerCase()]: event.target.value } })} className="mt-5 min-h-64 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {(activeSection === "Estimate" || activeSection === "Summary") && (
+                  <div className="mt-32 rounded-2xl border border-slate-200 p-5">
+                    <p className="font-black text-[#07183f]">Customer approval</p>
+                    <div className="mt-8 grid gap-6 md:grid-cols-2">
+                      <div className="border-t border-slate-300 pt-2 text-xs text-slate-500">Customer signature</div>
+                      <div className="border-t border-slate-300 pt-2 text-xs text-slate-500">Date</div>
+                    </div>
+                  </div>
+                )}
+
+                {activeSection === "Terms and Conditions" && (
+                  <div className="mt-8 rounded-2xl border border-slate-200 p-5">
+                    <p className="font-black text-[#07183f]">Terms and Conditions</p>
+                    {isPreviewing ? (
+                      <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{editorForm.terms}</p>
+                    ) : (
+                      <textarea value={editorForm.terms} onChange={(event) => setEditorForm({ ...editorForm, terms: event.target.value })} className="mt-3 min-h-32 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-600 outline-none" />
+                    )}
+                  </div>
+                )}
 
                 <div className="mt-12 flex items-end justify-between border-t border-slate-300 pt-4">
                   <div className="text-xs text-slate-500">
