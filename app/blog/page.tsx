@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 import CTASection from "@/components/ui/CTASection";
 

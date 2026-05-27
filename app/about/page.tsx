@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle, ArrowRight, Phone } from "lucide-react";
-import { OG_IMAGE, PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, PHONE, PHONE_HREF, SITE_URL } from "@/lib/constants";
 import CTASection from "@/components/ui/CTASection";
 import TrustBadges from "@/components/ui/TrustBadges";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";

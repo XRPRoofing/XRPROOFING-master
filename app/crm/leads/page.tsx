@@ -7,6 +7,21 @@ import type { Lead, LeadStage } from "@/types/crm";
 
 const jobAges = ["Now", "+ 1 day", "+ 5 days", "+ 12 days", "+ 47 days", "+ 94 days"];
 const updateAges = ["Created 6 hours ago", "Updated 7 hours ago", "Updated a day ago", "Updated 4 days ago", "Updated 20 days ago", "Updated 2 months ago"];
+const addressSuggestions = [
+  "123 West San Antonio Street, Fredericksburg, TX, USA",
+  "123 San Antonio Way, Sacramento, CA, USA",
+  "123 San Antonio Street, Yountville, CA, USA",
+  "123 Little San Antonio, Rockport, TX, USA",
+  "2148 E Camelback Rd, Phoenix, AZ",
+  "8800 N Scottsdale Rd, Scottsdale, AZ",
+  "944 W Ocotillo Rd, Glendale, AZ",
+  "3012 S Dobson Rd, Mesa, AZ",
+];
+
+function getCityFromAddress(address: string) {
+  const parts = address.split(",").map((part) => part.trim()).filter(Boolean);
+  return parts.length >= 2 ? parts[parts.length - 2] : "Phoenix";
+}
 
 export default function LeadsPage() {
   const [jobs, setJobs] = useState<Lead[]>(leads);
@@ -18,7 +33,6 @@ export default function LeadsPage() {
     email: "",
     phone: "",
     address: "",
-    city: "",
     roofType: "",
     source: "Website",
     assignedTo: "Office Coordinator",
@@ -32,7 +46,7 @@ export default function LeadsPage() {
     if (!query) return jobs;
 
     return jobs.filter((job) =>
-      [job.name, job.city, job.roofType, job.source, job.assignedTo, job.lastActivity]
+      [job.name, job.address, job.city, job.roofType, job.source, job.assignedTo, job.lastActivity]
         .some((value) => value.toLowerCase().includes(query))
     );
   }, [jobs, search]);
@@ -50,7 +64,7 @@ export default function LeadsPage() {
       email: form.email || "crm@xrproofing.com",
       phone: form.phone || "(602) 555-0000",
       address: form.address || "Address pending",
-      city: form.city || "Phoenix",
+      city: getCityFromAddress(form.address),
       stage: "new_lead",
       value: Number(form.value) || 0,
       assignedTo: form.assignedTo,
@@ -65,7 +79,6 @@ export default function LeadsPage() {
       email: "",
       phone: "",
       address: "",
-      city: "",
       roofType: "",
       source: "Website",
       assignedTo: "Office Coordinator",
@@ -97,14 +110,18 @@ export default function LeadsPage() {
           </div>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Customer / job name" />
-            <input value={form.city} onChange={(event) => setForm({ ...form, city: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="City" />
+            <input required list="job-address-suggestions" value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Job address" />
+            <datalist id="job-address-suggestions">
+              {addressSuggestions.map((address) => (
+                <option key={address} value={address} />
+              ))}
+            </datalist>
             <input value={form.roofType} onChange={(event) => setForm({ ...form, roofType: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Roof type" />
             <input type="number" value={form.value} onChange={(event) => setForm({ ...form, value: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Job value" />
             <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Email" />
             <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Phone" />
             <input value={form.source} onChange={(event) => setForm({ ...form, source: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Source" />
             <input value={form.assignedTo} onChange={(event) => setForm({ ...form, assignedTo: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Assigned to" />
-            <input value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Job address" />
             <input value={form.lastActivity} onChange={(event) => setForm({ ...form, lastActivity: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Current note" />
           </div>
           <button className="mt-4 rounded-2xl bg-[#07183f] px-5 py-3 font-bold text-white">Save job</button>
@@ -113,7 +130,7 @@ export default function LeadsPage() {
 
       <div className="relative max-w-xl">
         <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-        <input value={search} onChange={(event) => setSearch(event.target.value)} className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-12 pr-4 outline-none" placeholder="Search by customer, city, roof type, source..." />
+        <input value={search} onChange={(event) => setSearch(event.target.value)} className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-12 pr-4 outline-none" placeholder="Search by address, customer, city, roof type, source..." />
       </div>
 
       <div className="flex gap-4 overflow-x-auto pb-4">

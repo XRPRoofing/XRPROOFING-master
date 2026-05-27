@@ -21,7 +21,7 @@ import {
   ThermometerSun,
   Wrench,
 } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { PHONE_HREF, SITE_URL } from "@/lib/constants";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CTASection from "@/components/ui/CTASection";
 import FAQSection from "@/components/ui/FAQSection";

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Phone, ArrowRight, CheckCircle, Star } from "lucide-react";
 import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
 import { services } from "@/lib/services";
-import { cities } from "@/lib/cities";
 import TrustBadges from "@/components/ui/TrustBadges";
 import ReviewSection from "@/components/ui/ReviewSection";
 import CTASection from "@/components/ui/CTASection";
@@ -43,7 +42,6 @@ const homepageFaqs = [
 
 export default function HomePage() {
   const topServices = services.slice(0, 6);
-  const topCities = cities.slice(0, 15);
 
   return (
     <>
