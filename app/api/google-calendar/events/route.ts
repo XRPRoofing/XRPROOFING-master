@@ -69,18 +69,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Google Calendar is not connected." }, { status: 401 });
   }
 
-  const { title, date, startTime, endTime, location, description } = await request.json() as {
+  const { title, date, startTime, endTime, name, address, jobKind, notes } = await request.json() as {
     title?: string;
     date?: string;
     startTime?: string;
     endTime?: string;
-    location?: string;
-    description?: string;
+    name?: string;
+    address?: string;
+    jobKind?: string;
+    notes?: string;
   };
 
-  if (!title || !date || !startTime || !endTime) {
-    return NextResponse.json({ error: "Title, date, start time, and end time are required." }, { status: 400 });
+  if (!title || !date || !startTime || !endTime || !name || !address || !jobKind) {
+    return NextResponse.json({ error: "Title, name, address, job type, date, start time, and end time are required." }, { status: 400 });
   }
+
+  const description = [
+    `Name: ${name}`,
+    `Address: ${address}`,
+    `Kind of Job: ${jobKind}`,
+    `Notes: ${notes || "None"}`,
+  ].join("\n");
 
   const eventResponse = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
     method: "POST",
@@ -90,8 +99,16 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify({
       summary: title,
-      location,
+      location: address,
       description,
+      extendedProperties: {
+        private: {
+          crmName: name,
+          crmAddress: address,
+          crmJobKind: jobKind,
+          crmNotes: notes || "",
+        },
+      },
       start: {
         dateTime: `${date}T${startTime}:00`,
         timeZone: "America/Phoenix",

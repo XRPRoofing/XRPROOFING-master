@@ -8,6 +8,15 @@ type GoogleCalendarEvent = {
   summary?: string;
   description?: string;
   htmlLink?: string;
+  location?: string;
+  extendedProperties?: {
+    private?: {
+      crmName?: string;
+      crmAddress?: string;
+      crmJobKind?: string;
+      crmNotes?: string;
+    };
+  };
   start?: {
     date?: string;
     dateTime?: string;
@@ -46,6 +55,23 @@ function formatEventTime(event: GoogleCalendarEvent) {
   }).format(new Date(dateValue));
 }
 
+function getDescriptionValue(description: string | undefined, label: string) {
+  if (!description) return "";
+  const line = description.split("\n").find((item) => item.toLowerCase().startsWith(`${label.toLowerCase()}:`));
+  return line?.split(":").slice(1).join(":").trim() || "";
+}
+
+function getEventDetails(event: GoogleCalendarEvent) {
+  const privateDetails = event.extendedProperties?.private;
+
+  return {
+    name: privateDetails?.crmName || getDescriptionValue(event.description, "Name") || event.summary || "Not provided",
+    address: privateDetails?.crmAddress || getDescriptionValue(event.description, "Address") || event.location || "Not provided",
+    jobKind: privateDetails?.crmJobKind || getDescriptionValue(event.description, "Kind of Job") || "Not specified",
+    notes: privateDetails?.crmNotes || getDescriptionValue(event.description, "Notes") || event.description || "No notes",
+  };
+}
+
 function getGoogleCalendarStatusMessage(status: string | null) {
   if (status === "connected") return "Google Calendar connected successfully.";
   if (status === "missing_env") return "Google Calendar server settings are missing. Check GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT_URI in Vercel, then redeploy.";
@@ -60,15 +86,18 @@ export default function CalendarPage() {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<GoogleCalendarEvent | null>(null);
   const [error, setError] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [form, setForm] = useState({
     title: "",
+    name: "",
+    address: "",
+    jobKind: "Repair",
     date: "",
     startTime: "",
     endTime: "",
-    location: "",
-    description: "",
+    notes: "",
   });
 
   const days = useMemo(() => Array.from({ length: 35 }, (_, index) => index + 1), []);
@@ -126,7 +155,7 @@ export default function CalendarPage() {
       }
 
       setStatusMessage("Appointment created in Google Calendar.");
-      setForm({ title: "", date: "", startTime: "", endTime: "", location: "", description: "" });
+      setForm({ title: "", name: "", address: "", jobKind: "Repair", date: "", startTime: "", endTime: "", notes: "" });
       await loadEvents();
     } catch {
       setError("Unable to create appointment.");
@@ -177,9 +206,9 @@ export default function CalendarPage() {
               <div className="text-center">{day}</div>
               <div className="mt-2 space-y-1 text-left">
                 {(eventsByDay[day] || []).slice(0, 3).map((event) => (
-                  <a key={event.id} href={event.htmlLink || "#"} target={event.htmlLink ? "_blank" : undefined} rel={event.htmlLink ? "noreferrer" : undefined} className="block rounded-lg bg-orange-50 px-2 py-1 text-[11px] font-bold text-orange-700 ring-1 ring-orange-100">
+                  <button key={event.id} type="button" onClick={() => setSelectedEvent(event)} className="block w-full rounded-lg bg-orange-50 px-2 py-1 text-left text-[11px] font-bold text-orange-700 ring-1 ring-orange-100">
                     <span className="block truncate">{formatEventTime(event)} · {event.summary || "Untitled event"}</span>
-                  </a>
+                  </button>
                 ))}
                 {(eventsByDay[day] || []).length > 3 && (
                   <p className="text-[11px] font-bold text-slate-500">+{(eventsByDay[day] || []).length - 3} more</p>
@@ -202,11 +231,18 @@ export default function CalendarPage() {
 
         <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           <input required value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Appointment title" />
+          <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Customer name" />
+          <input required value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Job address" />
+          <select required value={form.jobKind} onChange={(event) => setForm({ ...form, jobKind: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none">
+            <option>Repair</option>
+            <option>Replacement</option>
+            <option>Installation</option>
+            <option>Maintenance</option>
+          </select>
           <input required type="date" value={form.date} onChange={(event) => setForm({ ...form, date: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
           <input required type="time" value={form.startTime} onChange={(event) => setForm({ ...form, startTime: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
           <input required type="time" value={form.endTime} onChange={(event) => setForm({ ...form, endTime: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
-          <input value={form.location} onChange={(event) => setForm({ ...form, location: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Location / job address" />
-          <input value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Notes" />
+          <input value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Notes" />
         </div>
 
         <button disabled={!connected || saving} className="mt-4 rounded-2xl bg-orange-500 px-5 py-3 font-bold text-white shadow-lg shadow-orange-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none">
@@ -218,7 +254,7 @@ export default function CalendarPage() {
         <h2 className="text-2xl font-black text-[#07183f]">Upcoming Google Calendar events</h2>
         <div className="mt-4 grid gap-3 lg:grid-cols-2">
           {events.map((event) => (
-            <article key={event.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <article key={event.id} onClick={() => setSelectedEvent(event)} className="cursor-pointer rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="font-black text-[#07183f]">{event.summary || "Untitled event"}</p>
@@ -238,6 +274,33 @@ export default function CalendarPage() {
           )}
         </div>
       </div>
+      {selectedEvent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4">
+          <div className="w-full max-w-xl rounded-[2rem] bg-white p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Appointment details</p>
+                <h2 className="mt-2 text-2xl font-black text-[#07183f]">{selectedEvent.summary || "Untitled event"}</h2>
+                <p className="mt-1 font-bold text-orange-600">{formatEventDate(selectedEvent)}</p>
+              </div>
+              <button onClick={() => setSelectedEvent(null)} className="rounded-xl bg-slate-100 px-3 py-2 font-black text-slate-600">Close</button>
+            </div>
+            <div className="mt-5 grid gap-3">
+              {Object.entries(getEventDetails(selectedEvent)).map(([label, value]) => (
+                <div key={label} className="rounded-2xl bg-slate-50 p-4">
+                  <p className="text-xs font-black uppercase tracking-[0.15em] text-slate-400">{label === "jobKind" ? "Kind of Job" : label}</p>
+                  <p className="mt-1 font-bold text-[#07183f]">{value}</p>
+                </div>
+              ))}
+            </div>
+            {selectedEvent.htmlLink && (
+              <a href={selectedEvent.htmlLink} target="_blank" rel="noreferrer" className="mt-5 inline-flex rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white">
+                <ExternalLink className="mr-2 h-4 w-4" />Open in Google Calendar
+              </a>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
