@@ -274,7 +274,9 @@ export default function CalendarPage() {
           {error && <p className="mt-2 font-semibold text-red-600">{error}</p>}
           {statusMessage && <p className="mt-2 font-semibold text-orange-700">{statusMessage}</p>}
         </div>
+      </div>
 
+      <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
         <div className="mt-8 grid grid-cols-7 gap-2 text-sm">
           {days.map((day) => (
             <div key={day} className="min-h-28 rounded-2xl bg-slate-50 p-3 text-slate-500">
