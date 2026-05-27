@@ -10,6 +10,8 @@ const navigation = [
   { href: "/crm", label: "Dashboard", icon: LayoutDashboard },
   { href: "/crm/leads", label: "Jobs", icon: BriefcaseBusiness },
   { href: "/crm/customers", label: "Customers", icon: UsersRound },
+  { href: "/crm/proposals", label: "Proposal", icon: FileText },
+  { href: "/crm/invoices", label: "Invoice", icon: ClipboardList },
   { href: "/crm/estimates", label: "Estimates", icon: FileText },
   { href: "/crm/tasks", label: "Tasks", icon: ClipboardList },
   { href: "/crm/calendar", label: "Calendar", icon: CalendarDays },
