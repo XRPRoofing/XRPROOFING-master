@@ -18,43 +18,43 @@ export default function CustomersPage() {
         <input className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-12 pr-4 outline-none" placeholder="Search customers, addresses, carriers..." />
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-3">
+      <div className="grid gap-4 xl:grid-cols-3">
         {customers.map((customer) => (
-          <article key={customer.id} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-xl">
-            <div className="bg-gradient-to-br from-[#07183f] to-[#173c8f] p-5 text-white">
-              <div className="flex items-start justify-between gap-4">
+          <article key={customer.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-xl">
+            <div className="bg-gradient-to-br from-[#07183f] to-[#173c8f] p-4 text-white">
+              <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm font-bold text-orange-300">{customer.id}</p>
-                  <h2 className="mt-2 text-2xl font-black">{customer.name}</h2>
+                  <p className="text-xs font-bold text-orange-300">{customer.id}</p>
+                  <h2 className="mt-1 text-xl font-black">{customer.name}</h2>
                 </div>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold ring-1 ring-white/15">{customer.status}</span>
+                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-bold ring-1 ring-white/15">{customer.status}</span>
               </div>
             </div>
-            <div className="space-y-4 p-5">
-              <div className="space-y-2 text-sm text-slate-600">
-                <p className="flex items-center gap-2"><Mail className="h-4 w-4 text-orange-500" />{customer.email}</p>
-                <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-orange-500" />{customer.phone}</p>
-                <p className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-orange-500" />{customer.propertyAddress}</p>
+            <div className="space-y-3 p-4">
+              <div className="space-y-1.5 text-xs text-slate-600">
+                <p className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-orange-500" />{customer.email}</p>
+                <p className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-orange-500" />{customer.phone}</p>
+                <p className="flex items-start gap-2"><MapPin className="mt-0.5 h-3.5 w-3.5 text-orange-500" />{customer.propertyAddress}</p>
               </div>
-              <div className="rounded-2xl bg-slate-50 p-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Roof details</p>
-                <p className="mt-2 font-semibold text-slate-900">{customer.roofDetails}</p>
+              <div className="rounded-xl bg-slate-50 p-3">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Roof details</p>
+                <p className="mt-1.5 text-sm font-semibold text-slate-900">{customer.roofDetails}</p>
               </div>
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-2xl bg-orange-50 p-4">
-                  <ShieldCheck className="h-5 w-5 text-orange-600" />
-                  <p className="mt-2 text-slate-500">Insurance</p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="rounded-xl bg-orange-50 p-3">
+                  <ShieldCheck className="h-4 w-4 text-orange-600" />
+                  <p className="mt-1.5 text-slate-500">Insurance</p>
                   <p className="font-black text-[#07183f]">{customer.insuranceCarrier}</p>
                 </div>
-                <div className="rounded-2xl bg-blue-50 p-4">
-                  <UploadCloud className="h-5 w-5 text-blue-700" />
-                  <p className="mt-2 text-slate-500">Files</p>
+                <div className="rounded-xl bg-blue-50 p-3">
+                  <UploadCloud className="h-4 w-4 text-blue-700" />
+                  <p className="mt-1.5 text-slate-500">Files</p>
                   <p className="font-black text-[#07183f]">Photos + docs</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between border-t border-slate-100 pt-4">
-                <span className="text-sm text-slate-500">Lifetime value</span>
-                <span className="text-xl font-black text-[#07183f]">${customer.lifetimeValue.toLocaleString()}</span>
+              <div className="flex items-center justify-between border-t border-slate-100 pt-3">
+                <span className="text-xs text-slate-500">Lifetime value</span>
+                <span className="text-lg font-black text-[#07183f]">${customer.lifetimeValue.toLocaleString()}</span>
               </div>
             </div>
           </article>
