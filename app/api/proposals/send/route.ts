@@ -8,6 +8,10 @@ const schema = z.object({
   subject: z.string().min(1),
   message: z.string().min(1),
   proposalLink: z.string().url(),
+  coverPhoto: z.string().optional(),
+  coverTitle: z.string().optional(),
+  coverText: z.string().optional(),
+  terms: z.string().optional(),
 });
 
 function escapeHtml(value: string) {
@@ -34,6 +38,11 @@ export async function POST(req: NextRequest) {
     }
 
     const safeMessage = escapeHtml(data.message).replaceAll("\n", "<br />");
+    const coverPhoto = data.coverPhoto || "/images/logo.jpeg";
+    const coverPhotoUrl = coverPhoto.startsWith("http") ? coverPhoto : new URL(coverPhoto, data.proposalLink).toString();
+    const safeCoverTitle = data.coverTitle ? escapeHtml(data.coverTitle) : "Your XRP Roofing Proposal";
+    const safeCoverText = data.coverText ? escapeHtml(data.coverText).replaceAll("\n", "<br />") : "";
+    const safeTerms = data.terms ? escapeHtml(data.terms).replaceAll("\n", "<br />") : "";
     const html = `
       <div style="margin:0;background:#f1f5f9;padding:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="background:#e9eef3;padding:28px 0;text-align:center;">
@@ -41,6 +50,12 @@ export async function POST(req: NextRequest) {
         </div>
         <div style="max-width:560px;margin:0 auto;background:#fff;padding:38px 32px 46px;line-height:1.7;font-size:16px;">
           <div>${safeMessage}</div>
+          <div style="border:1px solid #e2e8f0;border-radius:16px;padding:18px;text-align:center;margin-top:28px;">
+            <img src="${coverPhotoUrl}" alt="Proposal cover" style="max-width:180px;max-height:110px;width:auto;height:auto;display:inline-block;" />
+            <div style="font-weight:800;color:#07183f;margin-top:12px;">${safeCoverTitle}</div>
+            ${safeCoverText ? `<div style="font-size:13px;color:#475569;margin-top:8px;">${safeCoverText}</div>` : ""}
+          </div>
+          ${safeTerms ? `<div style="background:#f8fafc;border-radius:16px;padding:16px;margin-top:20px;"><div style="font-weight:800;color:#1e293b;">Terms and Conditions</div><div style="font-size:12px;color:#475569;margin-top:8px;line-height:1.6;">${safeTerms}</div></div>` : ""}
           <div style="text-align:center;margin-top:30px;">
             <a href="${data.proposalLink}" style="display:inline-block;border-radius:999px;background:#1768c9;color:#fff;text-decoration:none;padding:12px 25px;font-weight:700;">View Proposal</a>
           </div>

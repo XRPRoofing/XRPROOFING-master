@@ -47,6 +47,8 @@ type Proposal = {
   template: string;
   title: string;
   summary: string;
+  coverPhoto: string;
+  coverText: string;
   notes: string;
   terms: string;
   sendSubject?: string;
@@ -83,6 +85,8 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   template: index === 0 ? "executive" : index === 1 ? "insurance" : "premium",
   title: index === 1 ? "INSURANCE ROOFING PROPOSAL" : index === 2 ? "PREMIUM ROOFING PROPOSAL" : "BEST ROOFING PROPOSAL",
   summary: "A professional roofing proposal prepared for review and approval.",
+  coverPhoto: "/images/logo.jpeg",
+  coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
   notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
   terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
 }));
@@ -161,6 +165,8 @@ export default function ProposalsPage() {
     address: "",
     title: "",
     summary: "",
+    coverPhoto: "/images/logo.jpeg",
+    coverText: "",
     scope: "",
     total: "",
     template: "executive",
@@ -301,6 +307,8 @@ export default function ProposalsPage() {
       template: "executive",
       title: "BEST ROOFING PROPOSAL",
       summary: "A professional roofing proposal prepared for review and approval.",
+      coverPhoto: "/images/logo.jpeg",
+      coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
       notes: "Includes professional roof assessment, materials, labor, cleanup, and customer-ready project documentation.",
       terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
       packages: defaultPackages,
@@ -348,6 +356,8 @@ export default function ProposalsPage() {
       address: proposal.address,
       title: proposal.title,
       summary: proposal.summary,
+      coverPhoto: proposal.coverPhoto || "/images/logo.jpeg",
+      coverText: proposal.coverText || "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
       scope: proposal.scope,
       total: String(proposal.total),
       template: proposal.template,
@@ -376,6 +386,8 @@ export default function ProposalsPage() {
       address: editorForm.address,
       title: editorForm.title,
       summary: editorForm.summary,
+      coverPhoto: editorForm.coverPhoto,
+      coverText: editorForm.coverText,
       scope: editorForm.scope,
       total: Number(editorForm.total) || 0,
       template: editorForm.template,
@@ -444,6 +456,10 @@ export default function ProposalsPage() {
           subject: sendForm.subject,
           message: sendForm.message,
           proposalLink,
+          coverPhoto: sentProposal?.coverPhoto || editorForm.coverPhoto,
+          coverTitle: sentProposal?.title || editorForm.title,
+          coverText: sentProposal?.coverText || editorForm.coverText,
+          terms: sentProposal?.terms || editorForm.terms,
         }),
       });
 
@@ -524,6 +540,14 @@ export default function ProposalsPage() {
                 <textarea value={editorForm.summary} onChange={(event) => setEditorForm({ ...editorForm, summary: event.target.value })} className="mt-2 min-h-20 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
               </label>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Cover photo URL
+                <input value={editorForm.coverPhoto} onChange={(event) => setEditorForm({ ...editorForm, coverPhoto: event.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" placeholder="/images/logo.jpeg" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                Cover text
+                <textarea value={editorForm.coverText} onChange={(event) => setEditorForm({ ...editorForm, coverText: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+              </label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
                 Scope
                 <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
               </label>
@@ -576,9 +600,15 @@ export default function ProposalsPage() {
                 {activeSection === "Cover" && (
                   <div className="mt-8 rounded-3xl bg-slate-50 p-8 text-center">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">Cover page</p>
+                    <Image src={editorForm.coverPhoto || "/images/logo.jpeg"} alt="Proposal cover" width={220} height={130} className="mx-auto mt-5 max-h-36 w-auto rounded-2xl bg-white object-contain shadow-sm" />
                     <p className="mt-5 text-3xl font-black text-[#07183f]">{editorForm.title}</p>
                     <p className="mt-4 text-lg font-bold text-slate-700">{editorForm.customerName}</p>
                     <p className="mt-2 text-sm text-slate-500">{editorForm.address}</p>
+                    {isPreviewing ? (
+                      <p className="mx-auto mt-6 max-w-xl whitespace-pre-line text-sm leading-7 text-slate-600">{editorForm.coverText}</p>
+                    ) : (
+                      <textarea value={editorForm.coverText} onChange={(event) => setEditorForm({ ...editorForm, coverText: event.target.value })} className="mx-auto mt-6 min-h-28 w-full max-w-xl resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm leading-7 text-slate-600 outline-none" />
+                    )}
                   </div>
                 )}
 
@@ -741,6 +771,15 @@ export default function ProposalsPage() {
                     </div>
                     <div className="rounded-b-xl bg-white p-5 text-sm leading-7 text-slate-700">
                       <p className="whitespace-pre-line">{sendForm.message}</p>
+                      <div className="mt-5 rounded-xl border border-slate-200 p-4 text-center">
+                        <Image src={editorForm.coverPhoto || "/images/logo.jpeg"} alt="Proposal cover" width={180} height={100} className="mx-auto max-h-28 w-auto object-contain" />
+                        <p className="mt-3 font-black text-[#07183f]">{editorForm.title}</p>
+                        <p className="mt-2 whitespace-pre-line text-xs leading-5 text-slate-600">{editorForm.coverText}</p>
+                      </div>
+                      <div className="mt-5 rounded-xl bg-slate-50 p-4">
+                        <p className="font-black text-slate-800">Terms and Conditions</p>
+                        <p className="mt-2 whitespace-pre-line text-xs leading-5 text-slate-600">{editorForm.terms}</p>
+                      </div>
                       <div className="mt-5 text-center">
                         <span className="inline-block rounded-full bg-blue-600 px-5 py-2 text-sm font-black text-white">View Proposal</span>
                       </div>

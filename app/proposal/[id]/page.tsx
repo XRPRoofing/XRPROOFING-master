@@ -13,6 +13,8 @@ type Proposal = {
   status: "Draft" | "Sent" | "Viewed" | "Signed" | "Approved";
   title: string;
   summary: string;
+  coverPhoto?: string;
+  coverText?: string;
   notes: string;
   terms: string;
   signedAt?: string;
@@ -94,6 +96,13 @@ export default function CustomerProposalPage() {
       </div>
       <div className="mx-auto max-w-5xl px-5 py-8">
         <section className="rounded-3xl bg-white p-8 shadow-sm">
+          <div className="mb-8 rounded-3xl bg-slate-50 p-8 text-center">
+            <Image src={proposal.coverPhoto || "/images/logo.jpeg"} alt="Proposal cover" width={220} height={130} className="mx-auto max-h-36 w-auto rounded-2xl bg-white object-contain shadow-sm" />
+            <p className="mt-5 text-3xl font-black text-[#07183f]">{proposal.title}</p>
+            <p className="mt-4 text-lg font-bold text-slate-700">{proposal.customerName}</p>
+            <p className="mt-2 text-sm text-slate-500">{proposal.address}</p>
+            {proposal.coverText && <p className="mx-auto mt-6 max-w-xl whitespace-pre-line text-sm leading-7 text-slate-600">{proposal.coverText}</p>}
+          </div>
           <div className="border-b border-slate-200 pb-6">
             <p className="text-xs font-black uppercase tracking-wider text-blue-700">Proposal {proposal.id}</p>
             <h1 className="mt-3 text-3xl font-black text-[#07183f]">{proposal.title}</h1>
