@@ -44,6 +44,10 @@ function getCityFromAddress(address: string) {
   return parts.length >= 2 ? parts[parts.length - 2] : "Phoenix";
 }
 
+function saveJobs(nextJobs: Lead[]) {
+  window.localStorage.setItem(jobsStorageKey, JSON.stringify(nextJobs));
+}
+
 export default function LeadsPage() {
   const [jobs, setJobs] = useState<Lead[]>(() => {
     if (typeof window === "undefined") return leads;
@@ -136,7 +140,11 @@ export default function LeadsPage() {
   }, [showForm]);
 
   function updateJobStage(jobId: string, stage: LeadStage) {
-    setJobs((currentJobs) => currentJobs.map((job) => job.id === jobId ? { ...job, stage, lastActivity: `Moved to ${leadStages.find((item) => item.id === stage)?.label || "workflow"}` } : job));
+    setJobs((currentJobs) => {
+      const nextJobs = currentJobs.map((job) => job.id === jobId ? { ...job, stage, lastActivity: `Moved to ${leadStages.find((item) => item.id === stage)?.label || "workflow"}` } : job);
+      saveJobs(nextJobs);
+      return nextJobs;
+    });
   }
 
   function handleAddJob(event: React.FormEvent<HTMLFormElement>) {
@@ -157,7 +165,11 @@ export default function LeadsPage() {
       lastActivity: form.lastActivity || "New job created",
     };
 
-    setJobs((currentJobs) => [newJob, ...currentJobs]);
+    setJobs((currentJobs) => {
+      const nextJobs = [newJob, ...currentJobs];
+      saveJobs(nextJobs);
+      return nextJobs;
+    });
     setForm({
       name: "",
       email: "",
@@ -220,7 +232,7 @@ export default function LeadsPage() {
           const stageValue = stageJobs.reduce((total, job) => total + job.value, 0);
           return (
             <section key={stage.id} onDragOver={(event) => event.preventDefault()} onDrop={() => draggedJobId && updateJobStage(draggedJobId, stage.id)} className="min-h-[34rem] w-80 shrink-0 rounded-3xl bg-slate-100 p-4">
-              <div className="mb-4 border-b border-slate-300 pb-4">
+              <div className="sticky top-[19rem] z-20 mb-4 border-b border-slate-300 bg-slate-100 pb-4 pt-1">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-base font-black text-slate-700">{stage.label} ({stageJobs.length})</h2>
