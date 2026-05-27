@@ -1,7 +1,86 @@
-import { Mail, MapPin, Phone, Plus, Search, ShieldCheck, UploadCloud } from "lucide-react";
+"use client";
+
+import { useMemo, useState } from "react";
+import { Mail, MapPin, Phone, Plus, Search, ShieldCheck, UploadCloud, X } from "lucide-react";
 import { customers } from "@/lib/crm-data";
+import type { Customer } from "@/types/crm";
+
+const customersStorageKey = "xrp-crm-customers";
+
+function saveCustomers(nextCustomers: Customer[]) {
+  window.localStorage.setItem(customersStorageKey, JSON.stringify(nextCustomers));
+}
 
 export default function CustomersPage() {
+  const [customerList, setCustomerList] = useState<Customer[]>(() => {
+    if (typeof window === "undefined") return customers;
+
+    const savedCustomers = window.localStorage.getItem(customersStorageKey);
+    if (!savedCustomers) return customers;
+
+    try {
+      return JSON.parse(savedCustomers) as Customer[];
+    } catch {
+      return customers;
+    }
+  });
+  const [search, setSearch] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    propertyAddress: "",
+    roofDetails: "",
+    insuranceCarrier: "",
+    status: "New customer",
+    lifetimeValue: "",
+  });
+
+  const filteredCustomers = useMemo(() => {
+    const query = search.toLowerCase().trim();
+
+    if (!query) return customerList;
+
+    return customerList.filter((customer) =>
+      [customer.name, customer.email, customer.phone, customer.propertyAddress, customer.roofDetails, customer.insuranceCarrier, customer.status]
+        .some((value) => value.toLowerCase().includes(query))
+    );
+  }, [customerList, search]);
+
+  function handleAddCustomer(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const newCustomer: Customer = {
+      id: `C-${Date.now()}`,
+      name: form.name,
+      email: form.email || "customer@xrproofing.com",
+      phone: form.phone || "(602) 555-0000",
+      propertyAddress: form.propertyAddress || "Address pending",
+      roofDetails: form.roofDetails || "Roof details pending",
+      insuranceCarrier: form.insuranceCarrier || "Not provided",
+      status: form.status || "New customer",
+      lifetimeValue: Number(form.lifetimeValue) || 0,
+    };
+
+    setCustomerList((currentCustomers) => {
+      const nextCustomers = [newCustomer, ...currentCustomers];
+      saveCustomers(nextCustomers);
+      return nextCustomers;
+    });
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      propertyAddress: "",
+      roofDetails: "",
+      insuranceCarrier: "",
+      status: "New customer",
+      lifetimeValue: "",
+    });
+    setShowForm(false);
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
@@ -10,16 +89,36 @@ export default function CustomersPage() {
           <h1 className="mt-2 text-3xl font-black text-[#07183f]">Customers</h1>
           <p className="mt-2 text-slate-600">Central profiles for contact details, property data, roof details, insurance, notes, files, and timelines.</p>
         </div>
-        <button className="w-fit rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white shadow-lg shadow-orange-200"><Plus className="mr-2 inline h-4 w-4" />Add customer</button>
+        <button onClick={() => setShowForm(true)} className="w-fit rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white shadow-lg shadow-orange-200"><Plus className="mr-2 inline h-4 w-4" />Add customer</button>
       </div>
+
+      {showForm && (
+        <form onSubmit={handleAddCustomer} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-black text-[#07183f]">Add new customer</h2>
+            <button type="button" onClick={() => setShowForm(false)} className="rounded-xl p-2 text-slate-400 hover:bg-slate-100"><X className="h-5 w-5" /></button>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Customer name" />
+            <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Email" />
+            <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Phone" />
+            <input value={form.status} onChange={(event) => setForm({ ...form, status: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Status" />
+            <input required value={form.propertyAddress} onChange={(event) => setForm({ ...form, propertyAddress: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Property address" />
+            <input value={form.insuranceCarrier} onChange={(event) => setForm({ ...form, insuranceCarrier: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Insurance carrier" />
+            <input type="number" value={form.lifetimeValue} onChange={(event) => setForm({ ...form, lifetimeValue: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Lifetime value" />
+            <input value={form.roofDetails} onChange={(event) => setForm({ ...form, roofDetails: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Roof details" />
+          </div>
+          <button className="mt-4 rounded-2xl bg-[#07183f] px-5 py-3 font-bold text-white">Save customer</button>
+        </form>
+      )}
 
       <div className="relative max-w-xl">
         <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-        <input className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-12 pr-4 outline-none" placeholder="Search customers, addresses, carriers..." />
+        <input value={search} onChange={(event) => setSearch(event.target.value)} className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-12 pr-4 outline-none" placeholder="Search customers, addresses, carriers..." />
       </div>
 
       <div className="grid gap-3 lg:grid-cols-3 2xl:grid-cols-4">
-        {customers.map((customer) => (
+        {filteredCustomers.map((customer) => (
           <article key={customer.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-xl">
             <div className="bg-gradient-to-br from-[#07183f] to-[#173c8f] p-3 text-white">
               <div className="flex items-start justify-between gap-3">
