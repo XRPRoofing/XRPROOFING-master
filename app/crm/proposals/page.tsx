@@ -43,10 +43,19 @@ type Proposal = {
   scope: string;
   total: number;
   status: "Draft" | "Sent" | "Approved";
-  template: "executive" | "insurance" | "premium";
+  template: string;
   title: string;
   summary: string;
   notes: string;
+  terms: string;
+};
+
+type ProposalTemplate = {
+  id: string;
+  label: string;
+  description: string;
+  title: string;
+  summary: string;
   terms: string;
 };
 
@@ -66,16 +75,40 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
 }));
 
 const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
-const proposalTemplates = [
-  { id: "executive", label: "Executive Roofing", description: "Clean premium proposal for homeowner approvals." },
-  { id: "insurance", label: "Insurance Claim", description: "Detailed format for carrier and adjuster review." },
-  { id: "premium", label: "Premium Package", description: "Polished customer-facing proposal with value highlights." },
-] as const;
+const initialProposalTemplates: ProposalTemplate[] = [
+  {
+    id: "executive",
+    label: "Executive Roofing",
+    description: "Clean premium proposal for homeowner approvals.",
+    title: "BEST ROOFING PROPOSAL",
+    summary: "A professional roofing proposal prepared for review and approval.",
+    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+  },
+  {
+    id: "insurance",
+    label: "Insurance Claim",
+    description: "Detailed format for carrier and adjuster review.",
+    title: "INSURANCE ROOFING PROPOSAL",
+    summary: "Prepared for insurance documentation, carrier review, and roofing claim support.",
+    terms: "Insurance scope is subject to carrier approval, code requirements, supplement review, and written authorization before work begins.",
+  },
+  {
+    id: "premium",
+    label: "Premium Package",
+    description: "Polished customer-facing proposal with value highlights.",
+    title: "PREMIUM ROOFING PROPOSAL",
+    summary: "A premium customer-ready roofing package with clear scope, value, and next steps.",
+    terms: "Premium package pricing includes listed materials and workmanship only. Additional hidden damage, upgrades, or requested changes require written approval.",
+  },
+];
 
 export default function ProposalsPage() {
   const [proposalMode, setProposalMode] = useState<"job" | "new">("job");
   const [selectedJobId, setSelectedJobId] = useState(leads[0]?.id || "");
   const [proposals, setProposals] = useState<Proposal[]>(initialProposals);
+  const [templates, setTemplates] = useState<ProposalTemplate[]>(initialProposalTemplates);
+  const [activeTab, setActiveTab] = useState<"proposals" | "drafts" | "templates" | "settings">("proposals");
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [jobSearch, setJobSearch] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [address, setAddress] = useState("");
@@ -87,6 +120,13 @@ export default function ProposalsPage() {
   const [activeProposal, setActiveProposal] = useState<Proposal | null>(null);
   const [deletedProposal, setDeletedProposal] = useState<Proposal | null>(null);
   const [isPreviewing, setIsPreviewing] = useState(false);
+  const [templateForm, setTemplateForm] = useState({
+    label: "",
+    description: "",
+    title: "",
+    summary: "",
+    terms: "",
+  });
   const [editorForm, setEditorForm] = useState({
     customerName: "",
     address: "",
@@ -94,13 +134,14 @@ export default function ProposalsPage() {
     summary: "",
     scope: "",
     total: "",
-    template: "executive" as Proposal["template"],
+    template: "executive",
     notes: "",
     terms: "",
   });
   const addressInputRef = useRef<HTMLInputElement>(null);
 
   const selectedJob = useMemo(() => leads.find((job) => job.id === selectedJobId), [selectedJobId]);
+  const selectedTemplate = useMemo(() => templates.find((template) => template.id === editorForm.template), [editorForm.template, templates]);
   const filteredJobs = useMemo(() => {
     const query = jobSearch.toLowerCase().trim();
 
@@ -123,6 +164,33 @@ export default function ProposalsPage() {
         .some((value) => value.toLowerCase().includes(query))
     );
   }, [proposalFilter, proposalSearch, proposals]);
+
+  useEffect(() => {
+    const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
+    const savedTemplates = window.localStorage.getItem("xrp-crm-proposal-templates");
+
+    queueMicrotask(() => {
+      if (savedProposals) {
+        setProposals(JSON.parse(savedProposals) as Proposal[]);
+      }
+
+      if (savedTemplates) {
+        setTemplates(JSON.parse(savedTemplates) as ProposalTemplate[]);
+      }
+
+      setDataLoaded(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!dataLoaded) return;
+    window.localStorage.setItem("xrp-crm-proposals", JSON.stringify(proposals));
+  }, [dataLoaded, proposals]);
+
+  useEffect(() => {
+    if (!dataLoaded) return;
+    window.localStorage.setItem("xrp-crm-proposal-templates", JSON.stringify(templates));
+  }, [dataLoaded, templates]);
 
   useEffect(() => {
     if (proposalMode !== "new" || !addressInputRef.current) return;
@@ -200,6 +268,33 @@ export default function ProposalsPage() {
     setTotal("");
   }
 
+  function applyTemplateToEditor(template: ProposalTemplate) {
+    setEditorForm({
+      ...editorForm,
+      template: template.id,
+      title: template.title,
+      summary: template.summary,
+      terms: template.terms,
+    });
+  }
+
+  function handleCreateTemplate(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!templateForm.label || !templateForm.title) return;
+
+    const newTemplate: ProposalTemplate = {
+      id: `template-${templates.length + 1}`,
+      label: templateForm.label,
+      description: templateForm.description || "Custom professional proposal template.",
+      title: templateForm.title,
+      summary: templateForm.summary || "A professional roofing proposal prepared for customer review.",
+      terms: templateForm.terms || "Terms and conditions are subject to written approval by customer and XRP Roofing.",
+    };
+
+    setTemplates((currentTemplates) => [newTemplate, ...currentTemplates]);
+    setTemplateForm({ label: "", description: "", title: "", summary: "", terms: "" });
+  }
+
   function openProposal(proposal: Proposal) {
     setEditorForm({
       customerName: proposal.customerName,
@@ -255,7 +350,7 @@ export default function ProposalsPage() {
 
   if (activeProposal) {
     return (
-      <div className="-mx-4 -my-6 min-h-[calc(100vh-5rem)] bg-slate-100 sm:-mx-6 lg:-mx-8">
+      <div className="-mx-4 -my-6 min-h-[calc(100vh-5rem)] bg-slate-100 font-serif sm:-mx-6 lg:-mx-8">
         <div className="sticky top-20 z-30 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 shadow-sm">
           <button type="button" onClick={() => setActiveProposal(null)} className="text-sm font-bold text-blue-700">← Back to proposals</button>
           <div className="hidden text-sm font-semibold text-slate-700 md:block">{editorForm.address}</div>
@@ -285,8 +380,8 @@ export default function ProposalsPage() {
             <div className="mt-5">
               <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Proposal template</p>
               <div className="space-y-2">
-                {proposalTemplates.map((template) => (
-                  <button key={template.id} type="button" onClick={() => setEditorForm({ ...editorForm, template: template.id })} className={`w-full rounded-xl p-3 text-left ${editorForm.template === template.id ? "bg-blue-50 ring-1 ring-blue-300" : "bg-slate-50"}`}>
+                {templates.map((template) => (
+                  <button key={template.id} type="button" onClick={() => applyTemplateToEditor(template)} className={`w-full rounded-xl p-3 text-left ${editorForm.template === template.id ? "bg-blue-50 ring-1 ring-blue-300" : "bg-slate-50"}`}>
                     <span className="block text-sm font-black text-[#07183f]">{template.label}</span>
                     <span className="mt-1 block text-xs font-semibold text-slate-500">{template.description}</span>
                   </button>
@@ -335,7 +430,7 @@ export default function ProposalsPage() {
 
           <main className="overflow-auto p-6">
             <div className="mx-auto max-w-[760px]">
-              <p className="mb-5 text-center text-sm font-black text-slate-700">{proposalTemplates.find((template) => template.id === editorForm.template)?.label}</p>
+              <p className="mb-5 text-center text-sm font-black text-slate-700">{selectedTemplate?.label || "Custom Proposal"}</p>
               <div className={`min-h-[900px] border bg-white p-10 shadow-sm ${editorForm.template === "premium" ? "border-orange-300" : editorForm.template === "insurance" ? "border-blue-300" : "border-slate-300"}`}>
                 <div className={`flex items-start justify-between border-b-4 pb-4 ${editorForm.template === "premium" ? "border-orange-500" : "border-[#07183f]"}`}>
                   <div>
@@ -436,7 +531,7 @@ export default function ProposalsPage() {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 font-serif">
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-3xl font-black text-[#07183f]">Proposals</h1>
         <button type="button" onClick={() => setShowCreateForm((current) => !current)} className="rounded-full bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-200">⊕ Proposal</button>
@@ -444,10 +539,10 @@ export default function ProposalsPage() {
 
       <div className="border-b border-slate-200">
         <div className="flex gap-8 text-sm font-black">
-          <button type="button" onClick={() => setProposalFilter("all")} className={`px-1 pb-4 ${proposalFilter === "all" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Proposals</button>
-          <button type="button" onClick={() => setProposalFilter("drafts")} className={`px-1 pb-4 ${proposalFilter === "drafts" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Drafts</button>
-          <button className="px-1 pb-4 text-slate-600">Templates</button>
-          <button className="px-1 pb-4 text-slate-600">Settings</button>
+          <button type="button" onClick={() => { setActiveTab("proposals"); setProposalFilter("all"); }} className={`px-1 pb-4 ${activeTab === "proposals" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Proposals</button>
+          <button type="button" onClick={() => { setActiveTab("drafts"); setProposalFilter("drafts"); }} className={`px-1 pb-4 ${activeTab === "drafts" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Drafts</button>
+          <button type="button" onClick={() => setActiveTab("templates")} className={`px-1 pb-4 ${activeTab === "templates" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Templates</button>
+          <button type="button" onClick={() => setActiveTab("settings")} className={`px-1 pb-4 ${activeTab === "settings" ? "border-b-2 border-blue-600 text-blue-600" : "text-slate-600"}`}>Settings</button>
         </div>
       </div>
 
@@ -474,7 +569,43 @@ export default function ProposalsPage() {
         </div>
       )}
 
-      {showCreateForm && (
+      {activeTab === "templates" && (
+        <div className="grid gap-5 lg:grid-cols-[420px_1fr]">
+          <form onSubmit={handleCreateTemplate} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-xl font-black text-[#07183f]">Create proposal template</h2>
+            <div className="mt-4 space-y-3">
+              <input required value={templateForm.label} onChange={(event) => setTemplateForm({ ...templateForm, label: event.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none" placeholder="Template name" />
+              <input value={templateForm.description} onChange={(event) => setTemplateForm({ ...templateForm, description: event.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none" placeholder="Short description" />
+              <input required value={templateForm.title} onChange={(event) => setTemplateForm({ ...templateForm, title: event.target.value })} className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none" placeholder="Proposal title" />
+              <textarea value={templateForm.summary} onChange={(event) => setTemplateForm({ ...templateForm, summary: event.target.value })} className="min-h-28 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none" placeholder="Proposal summary" />
+              <textarea value={templateForm.terms} onChange={(event) => setTemplateForm({ ...templateForm, terms: event.target.value })} className="min-h-36 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none" placeholder="Default terms and conditions" />
+              <button className="w-full rounded-xl bg-blue-600 px-5 py-3 text-sm font-black text-white">Save template</button>
+            </div>
+          </form>
+          <div className="grid gap-3">
+            {templates.map((template) => (
+              <div key={template.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-black text-[#07183f]">{template.label}</h3>
+                    <p className="mt-1 text-sm text-slate-500">{template.description}</p>
+                  </div>
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700">Template</span>
+                </div>
+                <p className="mt-4 font-black text-slate-800">{template.title}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{template.summary}</p>
+                <p className="mt-3 text-xs leading-5 text-slate-500">{template.terms}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "settings" && (
+        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-slate-600 shadow-sm">Proposal settings will appear here.</div>
+      )}
+
+      {activeTab !== "templates" && activeTab !== "settings" && showCreateForm && (
       <form onSubmit={handleCreateProposal} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
         <div className="mb-4 flex flex-wrap gap-2">
           <button type="button" onClick={() => setProposalMode("job")} className={`rounded-2xl px-4 py-2 text-sm font-black ${proposalMode === "job" ? "bg-[#07183f] text-white" : "bg-slate-100 text-slate-700"}`}>From selected job</button>
@@ -530,6 +661,7 @@ export default function ProposalsPage() {
       </form>
       )}
 
+      {activeTab !== "templates" && activeTab !== "settings" && (
       <div className="max-h-[calc(100vh-18rem)] space-y-3 overflow-y-auto pr-2">
         {filteredProposals.map((proposal) => (
           <div key={proposal.id} className="grid w-full grid-cols-1 items-center gap-4 rounded bg-slate-50 p-4 text-left transition hover:bg-blue-50 md:grid-cols-[1fr_auto]">
@@ -558,6 +690,7 @@ export default function ProposalsPage() {
           <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center font-semibold text-slate-500">No proposals match your search.</div>
         )}
       </div>
+      )}
     </div>
   );
 }
