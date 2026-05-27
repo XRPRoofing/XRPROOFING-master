@@ -231,8 +231,8 @@ export default function LeadsPage() {
           const stageJobs = filteredJobs.filter((job) => job.stage === stage.id);
           const stageValue = stageJobs.reduce((total, job) => total + job.value, 0);
           return (
-            <section key={stage.id} onDragOver={(event) => event.preventDefault()} onDrop={() => draggedJobId && updateJobStage(draggedJobId, stage.id)} className="min-h-[34rem] w-80 shrink-0 rounded-3xl bg-slate-100 p-4">
-              <div className="sticky top-[19rem] z-20 mb-4 border-b border-slate-300 bg-slate-100 pb-4 pt-1">
+            <section key={stage.id} onDragOver={(event) => event.preventDefault()} onDrop={() => draggedJobId && updateJobStage(draggedJobId, stage.id)} className="flex max-h-[calc(100vh-18rem)] min-h-[34rem] w-80 shrink-0 flex-col rounded-3xl bg-slate-100 p-4">
+              <div className="mb-4 shrink-0 border-b border-slate-300 bg-slate-100 pb-4 pt-1">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-base font-black text-slate-700">{stage.label} ({stageJobs.length})</h2>
@@ -248,7 +248,7 @@ export default function LeadsPage() {
                 </div>
               </div>
 
-              <div className="space-y-3">
+              <div className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
                 {stageJobs.map((job, index) => (
                   <article key={job.id} draggable onDragStart={() => setDraggedJobId(job.id)} onDragEnd={() => setDraggedJobId(null)} className="cursor-grab rounded-3xl border border-slate-200 bg-white p-4 text-sm shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
                     <div className="flex items-start justify-between gap-3">
