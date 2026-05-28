@@ -41,6 +41,14 @@ function decodeProposalFromLink(value: string) {
   }
 }
 
+function getSharedProposalData() {
+  const dataFromSearch = new URLSearchParams(window.location.search).get("data");
+  const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : window.location.hash;
+  const dataFromHash = new URLSearchParams(hash).get("data");
+
+  return dataFromSearch || dataFromHash;
+}
+
 export default function CustomerProposalPage() {
   const params = useParams<{ id: string }>();
   const proposalId = decodeURIComponent(params.id);
@@ -56,7 +64,7 @@ export default function CustomerProposalPage() {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
       const proposals = savedProposals ? JSON.parse(savedProposals) as Proposal[] : [];
       const foundProposal = proposals.find((item) => item.id === proposalId);
-      const proposalFromLink = new URLSearchParams(window.location.search).get("data");
+      const proposalFromLink = getSharedProposalData();
       const sharedProposal = proposalFromLink ? decodeProposalFromLink(proposalFromLink) : null;
 
       if (!foundProposal && !sharedProposal) return;

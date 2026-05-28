@@ -501,7 +501,7 @@ export default function ProposalsPage() {
       sentToEmail: sendForm.toEmail,
     });
     const proposalForLink = sentProposal || activeProposal;
-    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}?data=${encodeURIComponent(encodeProposalForCustomer(proposalForLink))}`;
+    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}#data=${encodeURIComponent(encodeProposalForCustomer(proposalForLink))}`;
 
     if (sentProposal) {
       setActiveProposal(sentProposal);
