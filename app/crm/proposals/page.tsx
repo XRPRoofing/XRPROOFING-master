@@ -59,10 +59,15 @@ type Proposal = {
   signedBy?: string;
   selectedOption?: "good" | "better" | "best";
   packages?: {
-    good: string;
-    better: string;
-    best: string;
+    good: string | PackageOption;
+    better: string | PackageOption;
+    best: string | PackageOption;
   };
+};
+
+type PackageOption = {
+  scope: string;
+  price: number;
 };
 
 type ProposalTemplate = {
@@ -73,6 +78,183 @@ type ProposalTemplate = {
   summary: string;
   terms: string;
 };
+
+const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
+const defaultTerms = `AZPRO Contractor LLC DBA XRP Roofing
+2843 W McDowell Rd, Phoenix, AZ 85009
+Phone: (623) 300-8097 | Email: info@xrproofing.com
+ROC # 350898
+
+Arizona Registrar of Contractors Licensed & Insured Contractor
+
+These Terms and Conditions form part of the Agreement between XRP Roofing, (“XRP Roofing,” “we,” “us,” or “our”) and the property owner or authorized representative (“Customer,” “you,” or “your”) for roofing services. By signing the proposal or contract, you acknowledge that you have read, understood, and agree to be bound by these terms.
+
+1. Communication
+It is important to maintain open communication with XRP Roofing regarding any issues or disputes about payments to address them promptly and avoid escalation to a lien filing.
+
+Notice of Cancellation Policy
+Cancellation Right: The Customer has the right to cancel this transaction at any time prior to midnight of the third business day after the date of the signed contract. This right to cancel is in accordance with federal and state regulations that provide a "cooling-off" period for consumers to reconsider their agreement without penalty.
+
+How to Cancel: To cancel this contract within the specified period, the Customer must provide written notice of cancellation to XRP Roofing. This can be done via email or written letter. The notice must be received by XRP Roofing before the deadline to be effective. The email or letter must contain the customer’s first and last name, property address, and contract dollar amount.
+
+Post-Cancellation Penalty: If the Customer cancels the contract after the third business day, a penalty equal to 25% of the contract price may apply. This penalty covers administrative and operational costs incurred by XRP Roofing during the initial stages of the project preparation.
+
+Acknowledgment
+By signing this contract, you, the Customer, acknowledge that you have read and understood all the terms and conditions outlined in this agreement. This includes the cancellation policy, payment terms, liability limitations, and all other provisions specified herein. You are aware of your rights and obligations under this contract and agree to abide by them.
+
+Delivery and Payment
+Initial Deposit: A 50% initial deposit is due upon acceptance of the Agreement for cash buyers (or as specified in your proposal).
+
+Final Payment: All remaining balances are due upon XRP Roofing’s final inspection of the work (“substantial completion” – 90% or greater completion).
+
+Material Taxes: Material taxes are included in the price.
+
+Outstanding Balances: The final payment is due within ten (7) days after XRP Roofing issues the final invoice. Any unpaid balance not received within this period shall accrue a late charge of one and one-half percent (1.5%) per month (18% annual rate), or the maximum rate permitted by law, until paid in full.
+
+Collection Costs: Customer agrees to pay collection costs, including attorney’s fees, lien recording fees, and non-taxable court costs if complete payment is not received by the due date.
+
+Authorized Payment Methods: Debit, Credit, Cash, Check, ACH, Financing, Bank Wire.
+
+Damage
+Post-Installation Damage: XRP Roofing is not liable for any damage to the Product once installed if such damage is not caused by XRP Roofing.
+
+Prior Damage: XRP Roofing is not liable for any prior damage to the property.
+
+Structural Damage: XRP Roofing is not liable for any structural damage or structural repairs. Standard roofing activities are not expected to cause damage to the structure.
+
+Acceptance of Order
+Cashing a down payment check does not constitute acceptance of an order.
+
+Job Site Conditions
+Clear Worksite: Customers shall provide a clear worksite.
+
+Driveway Access: Customers shall provide clear access to the driveway for equipment to operate and be stowed during the duration of the project as needed.
+
+Expenses for Delays: All expenses related to delays caused by un-cleared obstructions will be paid/charged to the Customer.
+
+Utilities: Customers shall furnish electricity and water to the worksite at no expense to XRP Roofing.
+
+Hidden Site Conditions: XRP Roofing is not responsible for hidden site conditions not identified by the Customer.
+
+Precautions: The owner should take precautions to keep children, pets, valuables, and cars away from the "hazard zone" of 10 to 20 foot perimeter around the house, and to remove or protect hanging or loose items inside the building.
+
+Unsafe Working Environment / Customer Non-Performance
+XRP Roofing reserves the right to cancel or delay work if the jobsite presents unsafe working conditions (including structural hazards, illegal activity, or hazardous materials). Cancellation may also occur if the customer:
+
+Fails to provide access to the property as needed,
+Does not respond to critical communications,
+Fails to obtain required permits or approvals,
+Makes unauthorized changes to the project scope,
+Breaches any part of the contract.
+
+Non-Payment: If payment terms are not met, including deposits or progress payments, XRP Roofing reserves the right to stop work and/or cancel the agreement.
+
+Discretionary Termination: XRP Roofing reserves the right to cancel this contract at any time, with or without cause, at its sole discretion.
+
+Refunds and Final Accounting: In the event of cancellation, the customer will be notified promptly and, if applicable, will receive a refund of any unused portion of their deposit, less the cost of any materials ordered or work already performed.
+
+Weather Conditions
+Postponements: XRP Roofing reserves the right to postpone or delay the project due to adverse weather conditions, including but not limited to rain, high winds, extreme heat, monsoons, or any other weather-related factors that could impact the safety and quality of the work.
+
+Acknowledgment of Delays: The Customer acknowledges and agrees that such delays are beyond the control of XRP Roofing and that XRP Roofing shall not be held liable for any damages, costs, or inconveniences arising from weather-related postponements.
+
+Scheduling Issues
+Unforeseen Circumstances: While XRP Roofing strives to adhere to the agreed-upon schedule, unforeseen circumstances such as material shortages, labor issues, or other project-related complications may result in delays. The Customer acknowledges that such delays are sometimes inevitable and are not the fault of XRP Roofing. XRP Roofing shall not be held liable for any damages, costs, or inconveniences arising from these scheduling issues.
+
+Change Orders
+Hidden Conditions: During the roof tear-off process, previously hidden conditions may be discovered that require additional work or materials (e.g., rotted decking, insufficient structural support, damaged insulation, or unforeseen complications with underlying roofing components).
+
+Authorization of Additional Work: If additional issues are discovered, XRP Roofing will provide the Customer with a detailed description of the necessary additional work and an estimate of the associated costs. No additional work will be performed without the Customer’s written approval. If financed, change order documents must be approved before work continues.
+
+Project Halt: If the pending status of a change order prohibits XRP Roofing’s team from continuing work and installing according to code, work may be halted. Delayed work may incur a penalty of $250.
+
+Payment for Change Orders: 100% of the payment for approved change orders is due upon acceptance of the change order.
+
+Right to Cancel by Contractor
+XRP Roofing may cancel work if site conditions are discovered that were not reasonably visible or known at the time of the original inspection or contract signing, and which materially affect the cost, safety, or feasibility of the project. XRP Roofing can also cancel if a change order is required to bring the roof up to code and the customer cannot cover the remaining balance (customer will be required to pay for all materials and services rendered up to 100% of the contract price).
+
+Limitations of Liability
+Incidental Damages: XRP Roofing shall not be held liable for any incidental, special, or consequential damages, including but not limited to loss of revenue, loss of use of facilities, or other economic loss.
+
+Acts of God: XRP Roofing shall not be liable for any damages resulting from Acts of God, including but not limited to lightning, wind, hurricanes, tornadoes, hail, ice, wind-driven rain, water leaks, or mold growth.
+
+HVAC / Plumbing / Framing / Code Disclaimer: XRP Roofing will not be responsible for assessing the existing condition of air conditioning units, swamp coolers, ductwork, structural framing, poor drainage, chimney caps, or other surfaces that may be affected during normal construction operations. We will not be responsible for any water, electrical, sewer, or other existing items that are currently out of code.
+
+Crane / Thermostat Wires / Other Disclaimers: Specific disclaimers apply for crane use, thermostat wire impacts, bird deterrent devices, gutter removal, painting, satellite/solar panel removal, misting systems, and roof conduit (see Additional Terms below for details).
+
+Limited Warranty / Exclusive Remedy
+Workmanship Warranty: XRP Roofing warrants its workmanship for various lengths depending on packages and type of installs. Refer to your specific proposal for warranty information. Written workmanship warranties back every project.
+
+Repair Warranty: Repairs have a 90-day warranty on the specific repair only.
+
+Void Warranties: Warranties are void if amounts owed under this agreement are not paid.
+
+Material Warranty: Material warranty claims must be made by the Customer directly to the manufacturer. XRP Roofing will assist the property owner with this process upon request.
+
+Maintenance Requirement: The workmanship warranty is valid as long as the roof is properly maintained and XRP Roofing is notified within seven days of discovering a leak or roofing problem.
+
+Professional Workmanship & ROC
+Good Faith: All work will be performed professionally, with a sincere effort to repair problems to the best of our ability. All labor required to complete the scope of work is included in the agreed-upon price. Surplus materials remain the property of XRP Roofing and will be removed by us.
+
+ROC Complaint: The property owner has the right to file a written complaint with the Arizona Registrar of Contractors for any alleged violation. For more information, call the AZ Registrar of Contractors or visit www.azroc.gov.
+
+Final Payment
+Payment Upon Substantial Completion: XRP Roofing can collect the final remaining payment once 90% of the project has been installed.
+
+Payment Timeline: Final payment is due within seven (7) days after the final invoice.
+
+Withholding Payments: Payment may only be withheld for a specific part of the Work that is defective or incomplete, and then only in an amount reasonably necessary to cover the cost of correcting that issue, not to exceed 150% of the estimated cost of correction. Any funds withheld must be released once the issue is corrected. The Owner may not withhold funds for matters of appearance or aesthetics that do not affect functionality or integrity. All undisputed amounts must be paid in full and on time.
+
+Lien Rights
+XRP Roofing retains the right to file a mechanic’s lien against the property if payments are not made in accordance with the terms of the contract. The filing of a lien will include the unpaid balance plus any applicable interest and collection costs.
+
+Preliminary Twenty-Day Lien Notice: This notice informs you of potential lien rights under Arizona law. It is crucial to ensure all payments are made in full and on time to prevent a lien, which could affect your ability to sell, refinance, or transfer the property.
+
+Dispute Resolution
+Jurisdiction: Any claims arising out of this contract will be decided by a court of general jurisdiction in Maricopa County, Arizona.
+
+Governing Law: The laws of the state of Arizona govern this contract.
+
+Jury Waiver: The Customer waives their right to a jury trial for any claims arising out of or in connection with this contract.
+
+Entire Agreement
+This Agreement constitutes the entire understanding between the parties. No other provisions, alterations, or additions are binding unless in writing and signed by both parties.
+
+Independent Contractor
+XRP Roofing may engage independent contractors to perform certain work. These independent contractors are not authorized to make commitments or decisions on behalf of XRP Roofing. They are required to carry appropriate insurance.
+
+Additional Terms and Conditions
+Bird Deterrent/Pest Control Devices, Gutter Removal, Painting, Permanent Christmas Lights, Satellite Removal, Solar Panels, Misting Systems, Roof Conduit, Thermostat Wires, Crane Disclaimer, Tile Color/Manufacturer Disclaimer: Please refer to the detailed disclaimers in the original documents for specific responsibilities and limitations. In general, the homeowner is responsible for reinstallation/reconnection of many ancillary items (gutters, satellites, solar, misting, etc.) unless otherwise stated in the proposal. XRP Roofing will do its best to maintain integrity but disclaims liability for damage beyond our direct control.
+
+Insurance Claims: We assist with documentation and on-site meetings with adjusters, but final approval and payouts are between you and your insurance provider. You remain responsible for any deductible and non-covered amounts.
+
+Arizona Climate: All materials and methods are selected for superior performance in Arizona’s extreme heat, UV exposure, and monsoon conditions.
+
+Standard Methods / Additional Work / Service Calls
+All work shall be constructed using XRP Roofing’s standard methods unless otherwise noted. Customer agrees to pay fees for labor and materials for work not covered by the warranty. Service calls not covered by the warranty will incur applicable service call and diagnosis fees.`;
+
+const defaultPackages: Record<"good" | "better" | "best", PackageOption> = {
+  good: {
+    scope: "GOOD option: Essential roofing repair package with necessary labor, standard materials, cleanup, and workmanship basics.",
+    price: 0,
+  },
+  better: {
+    scope: "BETTER option: Enhanced roofing package with upgraded materials, improved ventilation details, cleanup, and stronger warranty support.",
+    price: 0,
+  },
+  best: {
+    scope: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
+    price: 0,
+  },
+};
+
+function normalizePackages(packages?: Proposal["packages"]): Record<"good" | "better" | "best", PackageOption> {
+  return {
+    good: typeof packages?.good === "string" ? { scope: packages.good, price: 0 } : packages?.good || defaultPackages.good,
+    better: typeof packages?.better === "string" ? { scope: packages.better, price: 0 } : packages?.better || defaultPackages.better,
+    best: typeof packages?.best === "string" ? { scope: packages.best, price: 0 } : packages?.best || defaultPackages.best,
+  };
+}
 
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   id: `P-${1001 + index}`,
@@ -88,15 +270,9 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   coverPhoto: "/images/logo.jpeg",
   coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
   notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
-  terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+  terms: defaultTerms,
+  packages: defaultPackages,
 }));
-
-const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
-const defaultPackages = {
-  good: "GOOD option: Essential roofing repair package with necessary labor, standard materials, cleanup, and workmanship basics.",
-  better: "BETTER option: Enhanced roofing package with upgraded materials, improved ventilation details, cleanup, and stronger warranty support.",
-  best: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
-};
 
 function formatPastedProposalText(value: string) {
   return value
@@ -120,7 +296,7 @@ const initialProposalTemplates: ProposalTemplate[] = [
     description: "Clean premium proposal for homeowner approvals.",
     title: "BEST ROOFING PROPOSAL",
     summary: "A professional roofing proposal prepared for review and approval.",
-    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    terms: defaultTerms,
   },
   {
     id: "insurance",
@@ -128,7 +304,7 @@ const initialProposalTemplates: ProposalTemplate[] = [
     description: "Detailed format for carrier and adjuster review.",
     title: "INSURANCE ROOFING PROPOSAL",
     summary: "Prepared for insurance documentation, carrier review, and roofing claim support.",
-    terms: "Insurance scope is subject to carrier approval, code requirements, supplement review, and written authorization before work begins.",
+    terms: defaultTerms,
   },
   {
     id: "premium",
@@ -136,7 +312,7 @@ const initialProposalTemplates: ProposalTemplate[] = [
     description: "Polished customer-facing proposal with value highlights.",
     title: "PREMIUM ROOFING PROPOSAL",
     summary: "A premium customer-ready roofing package with clear scope, value, and next steps.",
-    terms: "Premium package pricing includes listed materials and workmanship only. Additional hidden damage, upgrades, or requested changes require written approval.",
+    terms: defaultTerms,
   },
 ];
 
@@ -277,7 +453,7 @@ export default function ProposalsPage() {
         template: editorForm.template,
         notes: editorForm.notes,
         terms: editorForm.terms,
-        packages: editorForm.packages,
+        packages: normalizePackages(editorForm.packages),
       };
 
       setProposals((currentProposals) =>
@@ -354,7 +530,7 @@ export default function ProposalsPage() {
       coverPhoto: "/images/logo.jpeg",
       coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
       notes: "Includes professional roof assessment, materials, labor, cleanup, and customer-ready project documentation.",
-      terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+      terms: defaultTerms,
       packages: defaultPackages,
     };
 
@@ -387,7 +563,7 @@ export default function ProposalsPage() {
       description: templateForm.description || "Custom professional proposal template.",
       title: templateForm.title,
       summary: templateForm.summary || "A professional roofing proposal prepared for customer review.",
-      terms: templateForm.terms || "Terms and conditions are subject to written approval by customer and XRP Roofing.",
+      terms: templateForm.terms || defaultTerms,
     };
 
     setTemplates((currentTemplates) => [newTemplate, ...currentTemplates]);
@@ -406,8 +582,8 @@ export default function ProposalsPage() {
       total: String(proposal.total),
       template: proposal.template,
       notes: proposal.notes,
-      terms: proposal.terms,
-      packages: proposal.packages || defaultPackages,
+      terms: proposal.terms || defaultTerms,
+      packages: normalizePackages(proposal.packages),
     });
     setIsPreviewing(false);
     setActiveSection("Estimate");
@@ -437,7 +613,7 @@ export default function ProposalsPage() {
       template: editorForm.template,
       notes: editorForm.notes,
       terms: editorForm.terms,
-      packages: editorForm.packages,
+      packages: normalizePackages(editorForm.packages),
       ...extraFields,
     };
 
@@ -714,12 +890,16 @@ export default function ProposalsPage() {
                     <div className="mt-4 rounded-2xl border border-slate-200 p-5">
                       <div className="flex items-center justify-between">
                         <p className="text-2xl font-black text-[#07183f]">{activeSection} Roofing Package</p>
-                        <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700">${(Number(editorForm.total) || 0).toLocaleString()}</span>
+                        {isPreviewing ? (
+                          <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700">${normalizePackages(editorForm.packages)[activeSection.toLowerCase() as "good" | "better" | "best"].price.toLocaleString()}</span>
+                        ) : (
+                          <input type="number" value={normalizePackages(editorForm.packages)[activeSection.toLowerCase() as "good" | "better" | "best"].price} onChange={(event) => { const option = activeSection.toLowerCase() as "good" | "better" | "best"; setEditorForm({ ...editorForm, packages: { ...normalizePackages(editorForm.packages), [option]: { ...normalizePackages(editorForm.packages)[option], price: Number(event.target.value) || 0 } } }); }} className="w-32 rounded-full bg-blue-50 px-4 py-2 text-right text-sm font-black text-blue-700 outline-none" />
+                        )}
                       </div>
                       {isPreviewing ? (
-                        <p className="mt-5 whitespace-pre-line text-sm leading-7 text-slate-700">{editorForm.packages[activeSection.toLowerCase() as "good" | "better" | "best"]}</p>
+                        <p className="mt-5 whitespace-pre-line text-sm leading-7 text-slate-700">{normalizePackages(editorForm.packages)[activeSection.toLowerCase() as "good" | "better" | "best"].scope}</p>
                       ) : (
-                        <textarea value={editorForm.packages[activeSection.toLowerCase() as "good" | "better" | "best"]} onChange={(event) => setEditorForm({ ...editorForm, packages: { ...editorForm.packages, [activeSection.toLowerCase()]: event.target.value } })} className="mt-5 min-h-64 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                        <textarea value={normalizePackages(editorForm.packages)[activeSection.toLowerCase() as "good" | "better" | "best"].scope} onChange={(event) => { const option = activeSection.toLowerCase() as "good" | "better" | "best"; setEditorForm({ ...editorForm, packages: { ...normalizePackages(editorForm.packages), [option]: { ...normalizePackages(editorForm.packages)[option], scope: event.target.value } } }); }} className="mt-5 min-h-64 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
                       )}
                     </div>
                   </div>

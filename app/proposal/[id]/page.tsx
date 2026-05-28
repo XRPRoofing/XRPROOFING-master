@@ -21,17 +21,39 @@ type Proposal = {
   signedBy?: string;
   selectedOption?: "good" | "better" | "best";
   packages?: {
-    good: string;
-    better: string;
-    best: string;
+    good: string | PackageOption;
+    better: string | PackageOption;
+    best: string | PackageOption;
   };
 };
 
-const defaultPackages = {
-  good: "GOOD option: Essential roofing repair package with necessary labor, standard materials, cleanup, and workmanship basics.",
-  better: "BETTER option: Enhanced roofing package with upgraded materials, improved ventilation details, cleanup, and stronger warranty support.",
-  best: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
+type PackageOption = {
+  scope: string;
+  price: number;
 };
+
+const defaultPackages: Record<"good" | "better" | "best", PackageOption> = {
+  good: {
+    scope: "GOOD option: Essential roofing repair package with necessary labor, standard materials, cleanup, and workmanship basics.",
+    price: 0,
+  },
+  better: {
+    scope: "BETTER option: Enhanced roofing package with upgraded materials, improved ventilation details, cleanup, and stronger warranty support.",
+    price: 0,
+  },
+  best: {
+    scope: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
+    price: 0,
+  },
+};
+
+function normalizePackages(packages?: Proposal["packages"]): Record<"good" | "better" | "best", PackageOption> {
+  return {
+    good: typeof packages?.good === "string" ? { scope: packages.good, price: 0 } : packages?.good || defaultPackages.good,
+    better: typeof packages?.better === "string" ? { scope: packages.better, price: 0 } : packages?.better || defaultPackages.better,
+    best: typeof packages?.best === "string" ? { scope: packages.best, price: 0 } : packages?.best || defaultPackages.best,
+  };
+}
 
 const publicProposalFallbacks: Proposal[] = [
   {
@@ -89,7 +111,7 @@ export default function CustomerProposalPage() {
   const [signatureName, setSignatureName] = useState("");
   const [notice, setNotice] = useState("");
 
-  const packageOptions = useMemo(() => proposal?.packages || defaultPackages, [proposal]);
+  const packageOptions = useMemo(() => normalizePackages(proposal?.packages), [proposal]);
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -186,7 +208,8 @@ export default function CustomerProposalPage() {
             {(["good", "better", "best"] as const).map((option) => (
               <button key={option} type="button" onClick={() => setSelectedOption(option)} className={`rounded-2xl border p-5 text-left transition ${selectedOption === option ? "border-blue-500 bg-blue-50 ring-2 ring-blue-100" : "border-slate-200 bg-white hover:border-blue-200"}`}>
                 <span className="text-lg font-black uppercase text-[#07183f]">{option}</span>
-                <span className="mt-3 block whitespace-pre-line text-sm leading-6 text-slate-600">{packageOptions[option]}</span>
+                <span className="mt-2 block text-xl font-black text-blue-700">${packageOptions[option].price.toLocaleString()}</span>
+                <span className="mt-3 block whitespace-pre-line text-sm leading-6 text-slate-600">{packageOptions[option].scope}</span>
               </button>
             ))}
           </div>
