@@ -33,6 +33,14 @@ const defaultPackages = {
   best: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
 };
 
+function decodeProposalFromLink(value: string) {
+  try {
+    return JSON.parse(decodeURIComponent(escape(atob(value)))) as Proposal;
+  } catch {
+    return null;
+  }
+}
+
 export default function CustomerProposalPage() {
   const params = useParams<{ id: string }>();
   const proposalId = decodeURIComponent(params.id);
@@ -46,15 +54,20 @@ export default function CustomerProposalPage() {
   useEffect(() => {
     queueMicrotask(() => {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
-      if (!savedProposals) return;
-
-      const proposals = JSON.parse(savedProposals) as Proposal[];
+      const proposals = savedProposals ? JSON.parse(savedProposals) as Proposal[] : [];
       const foundProposal = proposals.find((item) => item.id === proposalId);
+      const proposalFromLink = new URLSearchParams(window.location.search).get("data");
+      const sharedProposal = proposalFromLink ? decodeProposalFromLink(proposalFromLink) : null;
 
-      if (!foundProposal) return;
+      if (!foundProposal && !sharedProposal) return;
 
-      const viewedProposal: Proposal = foundProposal.status === "Sent" ? { ...foundProposal, status: "Viewed" } : foundProposal;
-      const updatedProposals = proposals.map((item) => item.id === proposalId ? viewedProposal : item);
+      const baseProposal = foundProposal || sharedProposal;
+      if (!baseProposal) return;
+
+      const viewedProposal: Proposal = baseProposal.status === "Sent" ? { ...baseProposal, status: "Viewed" } : baseProposal;
+      const updatedProposals = foundProposal
+        ? proposals.map((item) => item.id === proposalId ? viewedProposal : item)
+        : [...proposals, viewedProposal];
 
       window.localStorage.setItem("xrp-crm-proposals", JSON.stringify(updatedProposals));
       window.dispatchEvent(new StorageEvent("storage", { key: "xrp-crm-proposals", newValue: JSON.stringify(updatedProposals) }));
