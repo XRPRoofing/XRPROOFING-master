@@ -156,6 +156,20 @@ function createInvoiceNumber(count: number) {
   return `XRP-INV-${String(1001 + count).padStart(4, "0")}`;
 }
 
+function statusBadgeClass(status: InvoiceStatus) {
+  if (status === "Paid") return "bg-emerald-50 text-emerald-700 ring-emerald-100";
+  if (status === "Partially Paid") return "bg-blue-50 text-blue-700 ring-blue-100";
+  if (status === "Overdue") return "bg-red-50 text-red-700 ring-red-100";
+  if (status === "Void") return "bg-slate-100 text-slate-600 ring-slate-200";
+  return "bg-orange-50 text-orange-700 ring-orange-100";
+}
+
+function stageHeaderClass(stage: "Unpaid" | "Partially Paid" | "Paid") {
+  if (stage === "Paid") return "from-emerald-50 to-white text-emerald-700";
+  if (stage === "Partially Paid") return "from-blue-50 to-white text-blue-700";
+  return "from-orange-50 to-white text-orange-700";
+}
+
 export default function InvoicesPage() {
   const [invoices, setInvoices] = useState<Invoice[]>(initialInvoices);
   const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(null);
@@ -190,6 +204,12 @@ export default function InvoicesPage() {
   });
 
   const selectedInvoice = invoices.find((invoice) => invoice.id === selectedInvoiceId) || null;
+  const boardTotals = useMemo(() => {
+    const total = invoices.reduce((sum, invoice) => sum + calculateTotals(invoice).finalTotal, 0);
+    const paid = invoices.reduce((sum, invoice) => sum + getPaidAmount(invoice), 0);
+    const balance = Math.max(total - paid, 0);
+    return { total, paid, balance };
+  }, [invoices]);
   const boardGroups = useMemo(() => {
     const groups: Record<"Unpaid" | "Partially Paid" | "Paid", Invoice[]> = { Unpaid: [], "Partially Paid": [], Paid: [] };
     invoices.forEach((invoice) => {
@@ -294,22 +314,23 @@ export default function InvoicesPage() {
 
   function renderInvoiceFields(invoice: Invoice, editable: boolean, onChange: (invoice: Invoice) => void) {
     const totals = calculateTotals(invoice);
+    const inputClass = "mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-blue-300 focus:ring-4 focus:ring-blue-50 disabled:bg-slate-50";
     return (
       <div className="grid gap-4 lg:grid-cols-2">
-        <input disabled={!editable} value={invoice.clientName} onChange={(event) => onChange({ ...invoice, clientName: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Client name" />
-        <input disabled={!editable} value={invoice.email} onChange={(event) => onChange({ ...invoice, email: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Email" />
-        <input disabled={!editable} value={invoice.phone} onChange={(event) => onChange({ ...invoice, phone: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Phone" />
-        <input disabled={!editable} value={invoice.propertyAddress} onChange={(event) => onChange({ ...invoice, propertyAddress: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Property address" />
-        <input disabled={!editable} value={invoice.jobName} onChange={(event) => onChange({ ...invoice, jobName: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Job reference/name" />
-        <input disabled={!editable} value={invoice.jobReference} onChange={(event) => onChange({ ...invoice, jobReference: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Job reference" />
-        <input disabled={!editable} type="date" value={invoice.issueDate} onChange={(event) => onChange({ ...invoice, issueDate: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" />
-        <input disabled={!editable} type="date" value={invoice.dueDate} onChange={(event) => onChange({ ...invoice, dueDate: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" />
-        <input disabled={!editable} value={invoice.roofType} onChange={(event) => onChange({ ...invoice, roofType: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Roof type" />
-        <input disabled={!editable} value={invoice.proposalReference} onChange={(event) => onChange({ ...invoice, proposalReference: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Proposal reference" />
-        <input disabled={!editable} type="date" value={invoice.projectCompletionDate} onChange={(event) => onChange({ ...invoice, projectCompletionDate: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" />
-        <input disabled={!editable} value={invoice.warrantyDuration} onChange={(event) => onChange({ ...invoice, warrantyDuration: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Warranty duration" />
-        <textarea disabled={!editable} value={invoice.paymentTerms} onChange={(event) => onChange({ ...invoice, paymentTerms: event.target.value })} className="min-h-28 rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50 lg:col-span-2" placeholder="Payment terms" />
-        <textarea disabled={!editable} value={invoice.warrantyNotes} onChange={(event) => onChange({ ...invoice, warrantyNotes: event.target.value })} className="min-h-28 rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50 lg:col-span-2" placeholder="Warranty notes" />
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Client name<input disabled={!editable} value={invoice.clientName} onChange={(event) => onChange({ ...invoice, clientName: event.target.value })} className={inputClass} placeholder="Client name" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Email<input disabled={!editable} value={invoice.email} onChange={(event) => onChange({ ...invoice, email: event.target.value })} className={inputClass} placeholder="Email" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Phone<input disabled={!editable} value={invoice.phone} onChange={(event) => onChange({ ...invoice, phone: event.target.value })} className={inputClass} placeholder="Phone" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Property address<input disabled={!editable} value={invoice.propertyAddress} onChange={(event) => onChange({ ...invoice, propertyAddress: event.target.value })} className={inputClass} placeholder="Property address" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Job name<input disabled={!editable} value={invoice.jobName} onChange={(event) => onChange({ ...invoice, jobName: event.target.value })} className={inputClass} placeholder="Job reference/name" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Job reference<input disabled={!editable} value={invoice.jobReference} onChange={(event) => onChange({ ...invoice, jobReference: event.target.value })} className={inputClass} placeholder="Job reference" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Issue date<input disabled={!editable} type="date" value={invoice.issueDate} onChange={(event) => onChange({ ...invoice, issueDate: event.target.value })} className={inputClass} /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Due date<input disabled={!editable} type="date" value={invoice.dueDate} onChange={(event) => onChange({ ...invoice, dueDate: event.target.value })} className={inputClass} /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Roof type<input disabled={!editable} value={invoice.roofType} onChange={(event) => onChange({ ...invoice, roofType: event.target.value })} className={inputClass} placeholder="Roof type" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Proposal reference<input disabled={!editable} value={invoice.proposalReference} onChange={(event) => onChange({ ...invoice, proposalReference: event.target.value })} className={inputClass} placeholder="Proposal reference" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Project completion date<input disabled={!editable} type="date" value={invoice.projectCompletionDate} onChange={(event) => onChange({ ...invoice, projectCompletionDate: event.target.value })} className={inputClass} /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Warranty duration<input disabled={!editable} value={invoice.warrantyDuration} onChange={(event) => onChange({ ...invoice, warrantyDuration: event.target.value })} className={inputClass} placeholder="Warranty duration" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500 lg:col-span-2">Payment terms<textarea disabled={!editable} value={invoice.paymentTerms} onChange={(event) => onChange({ ...invoice, paymentTerms: event.target.value })} className={`${inputClass} min-h-28`} placeholder="Payment terms" /></label>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500 lg:col-span-2">Warranty notes<textarea disabled={!editable} value={invoice.warrantyNotes} onChange={(event) => onChange({ ...invoice, warrantyNotes: event.target.value })} className={`${inputClass} min-h-28`} placeholder="Warranty notes" /></label>
         <div className="lg:col-span-2">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="font-black text-[#07183f]">Line Items</h3>
@@ -326,12 +347,15 @@ export default function InvoicesPage() {
             ))}
           </div>
         </div>
-        <input disabled={!editable} type="number" value={invoice.discount} onChange={(event) => onChange({ ...invoice, discount: Number(event.target.value) || 0 })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none disabled:bg-slate-50" placeholder="Discount" />
-        <div className="rounded-2xl bg-slate-50 p-4 text-sm font-bold text-slate-700">
-          <p>Subtotal: {currency(totals.subtotal)}</p>
-          <p>Tax: {currency(totals.tax)}</p>
-          <p>Discount: {currency(invoice.discount)}</p>
-          <p className="mt-2 text-xl text-[#07183f]">Final Total: {currency(totals.finalTotal)}</p>
+        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Discount<input disabled={!editable} type="number" value={invoice.discount} onChange={(event) => onChange({ ...invoice, discount: Number(event.target.value) || 0 })} className={inputClass} placeholder="Discount" /></label>
+        <div className="rounded-2xl bg-gradient-to-br from-slate-50 to-white p-4 text-sm font-bold text-slate-700 ring-1 ring-slate-100">
+          <div className="flex justify-between"><span>Subtotal</span><span>{currency(totals.subtotal)}</span></div>
+          <div className="mt-2 flex justify-between"><span>Tax</span><span>{currency(totals.tax)}</span></div>
+          <div className="mt-2 flex justify-between"><span>Discount</span><span>{currency(invoice.discount)}</span></div>
+          <div className="mt-3 border-t border-slate-200 pt-3">
+            <p className="text-xs font-black uppercase tracking-wider text-slate-500">Final Total</p>
+            <p className="mt-1 text-2xl font-black text-[#07183f]">{currency(totals.finalTotal)}</p>
+          </div>
         </div>
       </div>
     );
@@ -339,13 +363,29 @@ export default function InvoicesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
+      <div className="rounded-[2rem] border border-white/70 bg-white/90 p-6 shadow-sm shadow-slate-200">
+        <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">CRM Module</p>
           <h1 className="mt-2 text-3xl font-black text-[#07183f]">Invoice Board</h1>
           <p className="mt-2 text-slate-600">Track invoice status, balances, payments, PDF invoices, and roofing job billing.</p>
         </div>
         <button onClick={() => setShowCreateModal(true)} className="w-fit rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white shadow-lg shadow-orange-200">+ New invoice</button>
+        </div>
+        <div className="mt-6 grid gap-3 md:grid-cols-3">
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-xs font-black uppercase tracking-wider text-slate-500">Invoice total</p>
+            <p className="mt-2 text-2xl font-black text-[#07183f]">{currency(boardTotals.total)}</p>
+          </div>
+          <div className="rounded-2xl bg-emerald-50 p-4">
+            <p className="text-xs font-black uppercase tracking-wider text-emerald-700">Payments received</p>
+            <p className="mt-2 text-2xl font-black text-emerald-800">{currency(boardTotals.paid)}</p>
+          </div>
+          <div className="rounded-2xl bg-orange-50 p-4">
+            <p className="text-xs font-black uppercase tracking-wider text-orange-700">Open balance</p>
+            <p className="mt-2 text-2xl font-black text-orange-800">{currency(boardTotals.balance)}</p>
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
@@ -353,31 +393,47 @@ export default function InvoicesPage() {
           const invoicesInStage = boardGroups[stage];
           const stageTotal = invoicesInStage.reduce((total, invoice) => total + calculateTotals(invoice).finalTotal, 0);
           return (
-            <section key={stage} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <section key={stage} className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/90 shadow-sm shadow-slate-200">
+              <div className={`bg-gradient-to-br ${stageHeaderClass(stage)} flex items-center justify-between border-b border-slate-100 p-5`}>
                 <div>
                   <h2 className="text-lg font-black text-[#07183f]">{stage}</h2>
                   <p className="text-sm font-semibold text-slate-500">{invoicesInStage.length} invoices</p>
                 </div>
-                <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-black text-orange-700">{currency(stageTotal)}</span>
+                <span className="rounded-full bg-white px-3 py-1 text-xs font-black shadow-sm">{currency(stageTotal)}</span>
               </div>
-              <div className="mt-4 space-y-3">
+              <div className="space-y-3 p-5">
                 {invoicesInStage.map((invoice) => {
                   const totals = calculateTotals(invoice);
+                  const paid = getPaidAmount(invoice);
                   const balance = Math.max(totals.finalTotal - getPaidAmount(invoice), 0);
+                  const status = getComputedStatus(invoice);
                   return (
-                    <button key={invoice.id} onClick={() => openInvoice(invoice)} className="w-full rounded-2xl bg-slate-50 p-4 text-left transition hover:bg-orange-50">
+                    <button key={invoice.id} onClick={() => openInvoice(invoice)} className="group w-full rounded-2xl border border-slate-100 bg-slate-50 p-4 text-left transition hover:-translate-y-0.5 hover:border-orange-100 hover:bg-white hover:shadow-lg">
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="font-black text-slate-900">{invoice.clientName}</p>
                           <p className="mt-1 text-sm text-slate-500">{invoice.invoiceNumber} · {invoice.jobName}</p>
                         </div>
-                        <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#07183f]">{getComputedStatus(invoice)}</span>
+                        <span className={`rounded-full px-3 py-1 text-xs font-black ring-1 ${statusBadgeClass(status)}`}>{status}</span>
                       </div>
-                      <p className="mt-3 text-sm font-bold text-slate-600">Balance {currency(balance)}</p>
+                      <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div className="rounded-xl bg-white p-3">
+                          <p className="text-xs font-bold uppercase text-slate-400">Total</p>
+                          <p className="font-black text-[#07183f]">{currency(totals.finalTotal)}</p>
+                        </div>
+                        <div className="rounded-xl bg-white p-3">
+                          <p className="text-xs font-bold uppercase text-slate-400">Balance</p>
+                          <p className="font-black text-orange-700">{currency(balance)}</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 h-2 overflow-hidden rounded-full bg-white">
+                        <div className="h-full rounded-full bg-gradient-to-r from-orange-400 to-emerald-500" style={{ width: `${Math.min((paid / Math.max(totals.finalTotal, 1)) * 100, 100)}%` }} />
+                      </div>
+                      <p className="mt-3 text-xs font-bold text-slate-500">Due {invoice.dueDate} · Click to open details</p>
                     </button>
                   );
                 })}
+                {invoicesInStage.length === 0 && <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center text-sm font-bold text-slate-500">No invoices in this column.</div>}
               </div>
             </section>
           );
@@ -396,7 +452,7 @@ export default function InvoicesPage() {
                 <p className="text-sm text-slate-500">{selectedInvoice.propertyAddress}</p>
               </div>
               <div className="text-left lg:text-right">
-                <span className="rounded-full bg-orange-50 px-4 py-2 text-sm font-black text-orange-700">{getComputedStatus(selectedInvoice)}</span>
+                <span className={`rounded-full px-4 py-2 text-sm font-black ring-1 ${statusBadgeClass(getComputedStatus(selectedInvoice))}`}>{getComputedStatus(selectedInvoice)}</span>
                 <p className="mt-4 text-sm font-bold text-slate-500">Total amount</p>
                 <p className="text-3xl font-black text-[#07183f]">{currency(calculateTotals(selectedInvoice).finalTotal)}</p>
                 <p className="mt-2 text-sm font-bold text-slate-600">Remaining balance {currency(Math.max(calculateTotals(selectedInvoice).finalTotal - getPaidAmount(selectedInvoice), 0))}</p>
