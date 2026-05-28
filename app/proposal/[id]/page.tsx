@@ -20,11 +20,18 @@ type Proposal = {
   signedAt?: string;
   signedBy?: string;
   selectedOption?: "good" | "better" | "best";
+  inspectionPhotos?: InspectionPhoto[];
   packages?: {
     good: string | PackageOption;
     better: string | PackageOption;
     best: string | PackageOption;
   };
+};
+
+type InspectionPhoto = {
+  label: string;
+  image: string;
+  note: string;
 };
 
 type PackageOption = {
@@ -126,6 +133,13 @@ const defaultPackages: Record<"good" | "better" | "best", PackageOption> = {
   },
 };
 
+const defaultInspectionPhotos: InspectionPhoto[] = [
+  { label: "Front elevation", image: "", note: "" },
+  { label: "Roof condition", image: "", note: "" },
+  { label: "Detail area", image: "", note: "" },
+  { label: "Project notes", image: "", note: "" },
+];
+
 function normalizePackages(packages?: Proposal["packages"]): Record<"good" | "better" | "best", PackageOption> {
   return {
     good: typeof packages?.good === "string" ? { scope: packages.good, price: 0 } : packages?.good || defaultPackages.good,
@@ -136,6 +150,13 @@ function normalizePackages(packages?: Proposal["packages"]): Record<"good" | "be
 
 function normalizeTerms(terms?: string) {
   return !terms || terms === oldDefaultTerms ? defaultTerms : terms;
+}
+
+function normalizeInspectionPhotos(photos?: InspectionPhoto[]) {
+  return defaultInspectionPhotos.map((defaultPhoto, index) => ({
+    ...defaultPhoto,
+    ...(photos?.[index] || {}),
+  }));
 }
 
 const publicProposalFallbacks: Proposal[] = [
@@ -195,6 +216,7 @@ export default function CustomerProposalPage() {
   const [notice, setNotice] = useState("");
 
   const packageOptions = useMemo(() => normalizePackages(proposal?.packages), [proposal]);
+  const inspectionPhotos = useMemo(() => normalizeInspectionPhotos(proposal?.inspectionPhotos).filter((photo) => photo.image || photo.note), [proposal]);
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -319,6 +341,21 @@ export default function CustomerProposalPage() {
           <h2 className="text-2xl font-black text-[#07183f]">Terms and Conditions</h2>
           <p className="mt-5 whitespace-pre-line text-sm leading-7 text-slate-600">{proposal.terms}</p>
         </section>
+
+        {inspectionPhotos.length > 0 && (
+          <section className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-black text-[#07183f]">Project Photos</h2>
+            <div className="mt-5 grid gap-5 md:grid-cols-2">
+              {inspectionPhotos.map((photo) => (
+                <div key={photo.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  {photo.image && <Image src={photo.image} alt={photo.label} width={520} height={360} className="max-h-80 w-full rounded-xl object-cover" />}
+                  <p className="mt-3 font-black text-[#07183f]">{photo.label}</p>
+                  {photo.note && <p className="mt-2 whitespace-pre-line text-sm leading-6 text-slate-600">{photo.note}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

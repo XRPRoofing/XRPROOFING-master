@@ -58,11 +58,18 @@ type Proposal = {
   signedAt?: string;
   signedBy?: string;
   selectedOption?: "good" | "better" | "best";
+  inspectionPhotos?: InspectionPhoto[];
   packages?: {
     good: string | PackageOption;
     better: string | PackageOption;
     best: string | PackageOption;
   };
+};
+
+type InspectionPhoto = {
+  label: string;
+  image: string;
+  note: string;
 };
 
 type PackageOption = {
@@ -80,6 +87,12 @@ type ProposalTemplate = {
 };
 
 const proposalSections = ["Cover", "Inspection Photos", "Estimate", "BEST", "BETTER", "GOOD", "Summary", "Terms and Conditions"];
+const defaultInspectionPhotos: InspectionPhoto[] = [
+  { label: "Front elevation", image: "", note: "" },
+  { label: "Roof condition", image: "", note: "" },
+  { label: "Detail area", image: "", note: "" },
+  { label: "Project notes", image: "", note: "" },
+];
 const defaultTerms = `AZPRO Contractor LLC DBA XRP Roofing
 2843 W McDowell Rd, Phoenix, AZ 85009
 Phone: (623) 300-8097 | Email: info@xrproofing.com
@@ -256,6 +269,13 @@ function normalizePackages(packages?: Proposal["packages"]): Record<"good" | "be
   };
 }
 
+function normalizeInspectionPhotos(photos?: InspectionPhoto[]) {
+  return defaultInspectionPhotos.map((defaultPhoto, index) => ({
+    ...defaultPhoto,
+    ...(photos?.[index] || {}),
+  }));
+}
+
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   id: `P-${1001 + index}`,
   job,
@@ -271,6 +291,7 @@ const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
   notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
   terms: defaultTerms,
+  inspectionPhotos: defaultInspectionPhotos,
   packages: defaultPackages,
 }));
 
@@ -364,6 +385,7 @@ export default function ProposalsPage() {
     template: "executive",
     notes: "",
     terms: "",
+    inspectionPhotos: defaultInspectionPhotos,
     packages: defaultPackages,
   });
   const addressInputRef = useRef<HTMLInputElement>(null);
@@ -453,6 +475,7 @@ export default function ProposalsPage() {
         template: editorForm.template,
         notes: editorForm.notes,
         terms: editorForm.terms,
+        inspectionPhotos: normalizeInspectionPhotos(editorForm.inspectionPhotos),
         packages: normalizePackages(editorForm.packages),
       };
 
@@ -531,6 +554,7 @@ export default function ProposalsPage() {
       coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
       notes: "Includes professional roof assessment, materials, labor, cleanup, and customer-ready project documentation.",
       terms: defaultTerms,
+      inspectionPhotos: defaultInspectionPhotos,
       packages: defaultPackages,
     };
 
@@ -583,6 +607,7 @@ export default function ProposalsPage() {
       template: proposal.template,
       notes: proposal.notes,
       terms: proposal.terms || defaultTerms,
+      inspectionPhotos: normalizeInspectionPhotos(proposal.inspectionPhotos),
       packages: normalizePackages(proposal.packages),
     });
     setIsPreviewing(false);
@@ -613,6 +638,7 @@ export default function ProposalsPage() {
       template: editorForm.template,
       notes: editorForm.notes,
       terms: editorForm.terms,
+      inspectionPhotos: normalizeInspectionPhotos(editorForm.inspectionPhotos),
       packages: normalizePackages(editorForm.packages),
       ...extraFields,
     };
@@ -708,6 +734,19 @@ export default function ProposalsPage() {
 
     setProposals((currentProposals) => [deletedProposal, ...currentProposals]);
     setDeletedProposal(null);
+  }
+
+  function handleInspectionPhotoUpload(index: number, file: File | undefined) {
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const image = typeof reader.result === "string" ? reader.result : "";
+      const inspectionPhotos = normalizeInspectionPhotos(editorForm.inspectionPhotos);
+      inspectionPhotos[index] = { ...inspectionPhotos[index], image };
+      setEditorForm({ ...editorForm, inspectionPhotos });
+    };
+    reader.readAsDataURL(file);
   }
 
   if (activeProposal) {
@@ -836,8 +875,27 @@ export default function ProposalsPage() {
                   <div className="mt-8">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">Inspection Photos</p>
                     <div className="mt-4 grid gap-4 md:grid-cols-2">
-                      {["Front elevation", "Roof condition", "Detail area", "Project notes"].map((label) => (
-                        <div key={label} className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-sm font-bold text-slate-500">{label}</div>
+                      {normalizeInspectionPhotos(editorForm.inspectionPhotos).map((photo, index) => (
+                        <div key={photo.label} className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4">
+                          <div className="flex min-h-40 items-center justify-center overflow-hidden rounded-xl bg-white text-sm font-bold text-slate-500">
+                            {photo.image ? (
+                              <Image src={photo.image} alt={photo.label} width={320} height={220} className="h-full max-h-52 w-full object-cover" />
+                            ) : (
+                              <span>{photo.label}</span>
+                            )}
+                          </div>
+                          {isPreviewing ? (
+                            photo.note && <p className="mt-3 whitespace-pre-line text-sm leading-6 text-slate-600">{photo.note}</p>
+                          ) : (
+                            <>
+                              <label className="mt-3 block rounded-xl bg-blue-50 px-4 py-3 text-center text-sm font-black text-blue-700">
+                                Upload photo
+                                <input type="file" accept="image/*" onChange={(event) => handleInspectionPhotoUpload(index, event.target.files?.[0])} className="hidden" />
+                              </label>
+                              <textarea value={photo.note} onChange={(event) => { const inspectionPhotos = normalizeInspectionPhotos(editorForm.inspectionPhotos); inspectionPhotos[index] = { ...inspectionPhotos[index], note: event.target.value }; setEditorForm({ ...editorForm, inspectionPhotos }); }} className="mt-3 min-h-24 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm leading-6 text-slate-600 outline-none" placeholder={`${photo.label} notes`} />
+                            </>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </div>
