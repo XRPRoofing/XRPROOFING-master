@@ -523,7 +523,6 @@ export default function ProposalsPage() {
           coverPhoto: sentProposal?.coverPhoto || editorForm.coverPhoto,
           coverTitle: sentProposal?.title || editorForm.title,
           coverText: sentProposal?.coverText || editorForm.coverText,
-          terms: sentProposal?.terms || editorForm.terms,
         }),
       });
 
@@ -839,10 +838,6 @@ export default function ProposalsPage() {
                         <Image src={editorForm.coverPhoto || "/images/logo.jpeg"} alt="Proposal cover" width={180} height={100} className="mx-auto max-h-28 w-auto object-contain" />
                         <p className="mt-3 font-black text-[#07183f]">{editorForm.title}</p>
                         <p className="mt-2 whitespace-pre-line text-xs leading-5 text-slate-600">{editorForm.coverText}</p>
-                      </div>
-                      <div className="mt-5 rounded-xl bg-slate-50 p-4">
-                        <p className="font-black text-slate-800">Terms and Conditions</p>
-                        <p className="mt-2 whitespace-pre-line text-xs leading-5 text-slate-600">{editorForm.terms}</p>
                       </div>
                       <div className="mt-5 text-center">
                         <span className="inline-block rounded-full bg-blue-600 px-5 py-2 text-sm font-black text-white">View Proposal</span>

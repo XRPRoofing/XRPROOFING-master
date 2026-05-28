@@ -11,7 +11,6 @@ const schema = z.object({
   coverPhoto: z.string().optional(),
   coverTitle: z.string().optional(),
   coverText: z.string().optional(),
-  terms: z.string().optional(),
 });
 
 function escapeHtml(value: string) {
@@ -42,7 +41,6 @@ export async function POST(req: NextRequest) {
     const coverPhotoUrl = coverPhoto.startsWith("http") ? coverPhoto : new URL(coverPhoto, data.proposalLink).toString();
     const safeCoverTitle = data.coverTitle ? escapeHtml(data.coverTitle) : "Your XRP Roofing Proposal";
     const safeCoverText = data.coverText ? escapeHtml(data.coverText).replaceAll("\n", "<br />") : "";
-    const safeTerms = data.terms ? escapeHtml(data.terms).replaceAll("\n", "<br />") : "";
     const html = `
       <div style="margin:0;background:#f1f5f9;padding:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="background:#e9eef3;padding:28px 0;text-align:center;">
@@ -55,7 +53,6 @@ export async function POST(req: NextRequest) {
             <div style="font-weight:800;color:#07183f;margin-top:12px;">${safeCoverTitle}</div>
             ${safeCoverText ? `<div style="font-size:13px;color:#475569;margin-top:8px;">${safeCoverText}</div>` : ""}
           </div>
-          ${safeTerms ? `<div style="background:#f8fafc;border-radius:16px;padding:16px;margin-top:20px;"><div style="font-weight:800;color:#1e293b;">Terms and Conditions</div><div style="font-size:12px;color:#475569;margin-top:8px;line-height:1.6;">${safeTerms}</div></div>` : ""}
           <div style="text-align:center;margin-top:30px;">
             <a href="${data.proposalLink}" style="display:inline-block;border-radius:999px;background:#1768c9;color:#fff;text-decoration:none;padding:12px 25px;font-weight:700;">View Proposal</a>
           </div>
