@@ -49,17 +49,24 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
       const supabase = createClient();
 
       if (mode === "login") {
-        const { data: signInData, error: signInError } = await withTimeout(supabase.auth.signInWithPassword({ email, password }));
-        if (signInError) setError(signInError.message);
-        else if (!signInData.session) setError("Login did not create a CRM session. Please confirm this user in Supabase Authentication and try again.");
-        else {
-          setMessage("Logged in. Opening CRM dashboard...");
-          const redirectedFrom = new URLSearchParams(window.location.search).get("redirectedFrom");
-          window.setTimeout(() => {
-            window.location.assign(redirectedFrom || "/crm");
-          }, 500);
+        const response = await withTimeout(fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }));
+        const result = await response.json();
+
+        if (!response.ok) {
+          setError(result.error || "CRM login failed. Please check your email and password.");
           return;
         }
+
+        setMessage("Logged in. Opening CRM dashboard...");
+        const redirectedFrom = new URLSearchParams(window.location.search).get("redirectedFrom");
+        window.setTimeout(() => {
+          window.location.assign(redirectedFrom || "/crm");
+        }, 500);
+        return;
       }
 
       if (mode === "signup") {
