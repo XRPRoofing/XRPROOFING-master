@@ -276,18 +276,6 @@ function normalizeInspectionPhotos(photos?: InspectionPhoto[]) {
   }));
 }
 
-function encodeProposalForCustomer(proposal: Proposal) {
-  return btoa(unescape(encodeURIComponent(JSON.stringify(proposal))));
-}
-
-function createCompactProposal(proposal: Proposal): Proposal {
-  return {
-    ...proposal,
-    terms: "",
-    inspectionPhotos: normalizeInspectionPhotos(proposal.inspectionPhotos).map((photo) => ({ ...photo, image: "" })),
-  };
-}
-
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   id: `P-${1001 + index}`,
   job,
@@ -696,7 +684,7 @@ export default function ProposalsPage() {
       sentToEmail: sendForm.toEmail,
     });
     const proposalForLink = sentProposal || activeProposal;
-    let proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}`;
+    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}`;
 
     if (sentProposal) {
       setActiveProposal(sentProposal);
@@ -712,7 +700,7 @@ export default function ProposalsPage() {
       });
 
       if (!shareResponse.ok) {
-        proposalLink = `${proposalLink}#data=${encodeProposalForCustomer(createCompactProposal(proposalForLink))}`;
+        throw new Error("Proposal sharing is not configured. Please set up the proposal_shares table before sending customer links.");
       }
 
       const response = await fetch("/api/proposals/send", {

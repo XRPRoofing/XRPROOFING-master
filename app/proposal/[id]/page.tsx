@@ -159,19 +159,6 @@ function normalizeInspectionPhotos(photos?: InspectionPhoto[]) {
   }));
 }
 
-function getSharedProposalData() {
-  if (typeof window === "undefined") return null;
-
-  const data = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("data");
-  if (!data) return null;
-
-  try {
-    return JSON.parse(decodeURIComponent(escape(atob(data)))) as Proposal;
-  } catch {
-    return null;
-  }
-}
-
 const publicProposalFallbacks: Proposal[] = [
   {
     id: "P-1001",
@@ -236,12 +223,11 @@ export default function CustomerProposalPage() {
     async function loadProposal() {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
       const proposals = savedProposals ? JSON.parse(savedProposals) as Proposal[] : [];
-      const sharedProposal = getSharedProposalData();
       const foundProposal = proposals.find((item) => item.id === proposalId);
       const publicProposal = publicProposalFallbacks.find((item) => item.id === proposalId);
       let serverProposal: Proposal | null = null;
 
-      if (!foundProposal && !sharedProposal) {
+      if (!foundProposal) {
         try {
           const response = await fetch(`/api/proposals/share?id=${encodeURIComponent(proposalId)}`);
           if (response.ok) {
@@ -251,9 +237,9 @@ export default function CustomerProposalPage() {
         } catch {}
       }
 
-      if (!foundProposal && !sharedProposal && !serverProposal && !publicProposal) return;
+      if (!foundProposal && !serverProposal && !publicProposal) return;
 
-      const baseProposal = foundProposal || sharedProposal || serverProposal || publicProposal;
+      const baseProposal = foundProposal || serverProposal || publicProposal;
       if (!baseProposal) return;
 
       const proposalWithDefaultTerms: Proposal = { ...baseProposal, terms: normalizeTerms(baseProposal.terms) };
@@ -295,7 +281,7 @@ export default function CustomerProposalPage() {
   }
 
   if (!proposal) {
-    return <div className="flex min-h-screen items-center justify-center bg-slate-100 px-6 text-center text-sm font-semibold text-slate-600">Proposal not found. Please open the proposal from the email link on this device.</div>;
+    return <div className="flex min-h-screen items-center justify-center bg-slate-100 px-6 text-center text-sm font-semibold text-slate-600">Proposal not found. Please ask XRP Roofing to resend the proposal link.</div>;
   }
 
   return (
