@@ -32,6 +32,85 @@ type PackageOption = {
   price: number;
 };
 
+const oldDefaultTerms = "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.";
+
+const defaultTerms = `AZPRO Contractor LLC DBA XRP Roofing
+2843 W McDowell Rd, Phoenix, AZ 85009
+Phone: (623) 300-8097 | Email: info@xrproofing.com
+ROC # 350898
+
+Arizona Registrar of Contractors Licensed & Insured Contractor
+
+These Terms and Conditions form part of the Agreement between XRP Roofing, (“XRP Roofing,” “we,” “us,” or “our”) and the property owner or authorized representative (“Customer,” “you,” or “your”) for roofing services. By signing the proposal or contract, you acknowledge that you have read, understood, and agree to be bound by these terms.
+
+1. Communication
+It is important to maintain open communication with XRP Roofing regarding any issues or disputes about payments to address them promptly and avoid escalation to a lien filing.
+
+Notice of Cancellation Policy
+Cancellation Right: The Customer has the right to cancel this transaction at any time prior to midnight of the third business day after the date of the signed contract.
+
+How to Cancel: To cancel this contract within the specified period, the Customer must provide written notice of cancellation to XRP Roofing. This can be done via email or written letter. The notice must be received by XRP Roofing before the deadline to be effective.
+
+Post-Cancellation Penalty: If the Customer cancels the contract after the third business day, a penalty equal to 25% of the contract price may apply.
+
+Acknowledgment
+By signing this contract, you acknowledge that you have read and understood all the terms and conditions outlined in this agreement.
+
+Delivery and Payment
+Initial Deposit: A 50% initial deposit is due upon acceptance of the Agreement for cash buyers, or as specified in your proposal.
+
+Final Payment: All remaining balances are due upon XRP Roofing’s final inspection of the work.
+
+Material Taxes: Material taxes are included in the price.
+
+Outstanding Balances: Final payment is due within seven (7) days after XRP Roofing issues the final invoice. Any unpaid balance may accrue a late charge of 1.5% per month, or the maximum rate permitted by law.
+
+Collection Costs: Customer agrees to pay collection costs, including attorney’s fees, lien recording fees, and non-taxable court costs if complete payment is not received by the due date.
+
+Authorized Payment Methods: Debit, Credit, Cash, Check, ACH, Financing, Bank Wire.
+
+Damage
+XRP Roofing is not liable for prior damage, structural damage, hidden site conditions, or damage not caused by XRP Roofing after installation.
+
+Job Site Conditions
+Customers shall provide a clear worksite, driveway access, electricity, and water. Expenses related to delays caused by un-cleared obstructions will be charged to the Customer.
+
+Unsafe Working Environment / Customer Non-Performance
+XRP Roofing reserves the right to cancel or delay work if the jobsite presents unsafe working conditions, if payment terms are not met, if access is not provided, or if the customer breaches any part of the contract.
+
+Weather Conditions
+XRP Roofing reserves the right to postpone or delay the project due to adverse weather conditions including rain, high winds, extreme heat, monsoons, or other weather-related factors affecting safety or quality.
+
+Scheduling Issues
+Unforeseen circumstances such as material shortages, labor issues, or project complications may result in delays. XRP Roofing shall not be held liable for damages, costs, or inconveniences arising from these scheduling issues.
+
+Change Orders
+Hidden conditions discovered during work may require additional work or materials. No additional work will be performed without written approval. Approved change orders are due upon acceptance.
+
+Limitations of Liability
+XRP Roofing shall not be liable for incidental, special, or consequential damages, acts of God, or existing out-of-code water, electrical, sewer, HVAC, plumbing, framing, drainage, or related conditions.
+
+Limited Warranty / Exclusive Remedy
+Workmanship warranty varies by package and installation type. Repairs have a 90-day warranty on the specific repair only. Warranties are void if amounts owed under this agreement are not paid.
+
+Professional Workmanship & ROC
+All work will be performed professionally using XRP Roofing’s standard methods unless otherwise noted. The property owner has the right to file a written complaint with the Arizona Registrar of Contractors.
+
+Final Payment
+XRP Roofing can collect the final remaining payment once 90% of the project has been installed. Final payment is due within seven (7) days after the final invoice.
+
+Lien Rights
+XRP Roofing retains the right to file a mechanic’s lien against the property if payments are not made according to the contract.
+
+Dispute Resolution
+Any claims arising out of this contract will be decided by a court of general jurisdiction in Maricopa County, Arizona. Arizona law governs this contract. The Customer waives the right to a jury trial.
+
+Entire Agreement
+This Agreement constitutes the entire understanding between the parties. No other provisions, alterations, or additions are binding unless in writing and signed by both parties.
+
+Additional Terms and Conditions
+Bird deterrent/pest control devices, gutter removal, painting, permanent Christmas lights, satellite removal, solar panels, misting systems, roof conduit, thermostat wires, crane use, tile color/manufacturer limitations, insurance claims, Arizona climate considerations, additional work, and service calls are subject to the detailed responsibilities, limitations, and disclaimers stated by XRP Roofing.`;
+
 const defaultPackages: Record<"good" | "better" | "best", PackageOption> = {
   good: {
     scope: "GOOD option: Essential roofing repair package with necessary labor, standard materials, cleanup, and workmanship basics.",
@@ -55,6 +134,10 @@ function normalizePackages(packages?: Proposal["packages"]): Record<"good" | "be
   };
 }
 
+function normalizeTerms(terms?: string) {
+  return !terms || terms === oldDefaultTerms ? defaultTerms : terms;
+}
+
 const publicProposalFallbacks: Proposal[] = [
   {
     id: "P-1001",
@@ -68,7 +151,7 @@ const publicProposalFallbacks: Proposal[] = [
     coverPhoto: "/images/logo.jpeg",
     coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
     notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
-    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    terms: defaultTerms,
     packages: defaultPackages,
   },
   {
@@ -83,7 +166,7 @@ const publicProposalFallbacks: Proposal[] = [
     coverPhoto: "/images/logo.jpeg",
     coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
     notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
-    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    terms: defaultTerms,
     packages: defaultPackages,
   },
   {
@@ -98,7 +181,7 @@ const publicProposalFallbacks: Proposal[] = [
     coverPhoto: "/images/logo.jpeg",
     coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
     notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
-    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    terms: defaultTerms,
     packages: defaultPackages,
   },
 ];
@@ -125,7 +208,8 @@ export default function CustomerProposalPage() {
       const baseProposal = foundProposal || publicProposal;
       if (!baseProposal) return;
 
-      const viewedProposal: Proposal = baseProposal.status === "Sent" ? { ...baseProposal, status: "Viewed" } : baseProposal;
+      const proposalWithDefaultTerms: Proposal = { ...baseProposal, terms: normalizeTerms(baseProposal.terms) };
+      const viewedProposal: Proposal = proposalWithDefaultTerms.status === "Sent" ? { ...proposalWithDefaultTerms, status: "Viewed" } : proposalWithDefaultTerms;
       const updatedProposals = foundProposal
         ? proposals.map((item) => item.id === proposalId ? viewedProposal : item)
         : [...proposals, viewedProposal];
@@ -239,3 +323,4 @@ export default function CustomerProposalPage() {
     </main>
   );
 }
+
