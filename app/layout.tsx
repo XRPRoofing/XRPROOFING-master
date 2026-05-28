@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 import AppChrome from "@/components/layout/AppChrome";
 import { SITE_NAME, SITE_URL, OG_IMAGE, LOGO_IMAGE } from "@/lib/constants";
@@ -57,13 +56,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${interClass} antialiased bg-white text-gray-900 pb-16 lg:pb-0`}>
         <AppChrome>{children}</AppChrome>
-        <Script
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="6a101e66975ecd30311851c1"
-          data-source="WEB_USER"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
