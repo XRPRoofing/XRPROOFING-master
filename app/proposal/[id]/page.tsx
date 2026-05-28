@@ -159,6 +159,19 @@ function normalizeInspectionPhotos(photos?: InspectionPhoto[]) {
   }));
 }
 
+function getSharedProposalData() {
+  if (typeof window === "undefined") return null;
+
+  const data = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("data");
+  if (!data) return null;
+
+  try {
+    return JSON.parse(decodeURIComponent(escape(atob(data)))) as Proposal;
+  } catch {
+    return null;
+  }
+}
+
 const publicProposalFallbacks: Proposal[] = [
   {
     id: "P-1001",
@@ -223,12 +236,13 @@ export default function CustomerProposalPage() {
     queueMicrotask(() => {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
       const proposals = savedProposals ? JSON.parse(savedProposals) as Proposal[] : [];
+      const sharedProposal = getSharedProposalData();
       const foundProposal = proposals.find((item) => item.id === proposalId);
       const publicProposal = publicProposalFallbacks.find((item) => item.id === proposalId);
 
-      if (!foundProposal && !publicProposal) return;
+      if (!foundProposal && !sharedProposal && !publicProposal) return;
 
-      const baseProposal = foundProposal || publicProposal;
+      const baseProposal = foundProposal || sharedProposal || publicProposal;
       if (!baseProposal) return;
 
       const proposalWithDefaultTerms: Proposal = { ...baseProposal, terms: normalizeTerms(baseProposal.terms) };

@@ -276,6 +276,10 @@ function normalizeInspectionPhotos(photos?: InspectionPhoto[]) {
   }));
 }
 
+function encodeProposalForCustomer(proposal: Proposal) {
+  return btoa(unescape(encodeURIComponent(JSON.stringify(proposal))));
+}
+
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   id: `P-${1001 + index}`,
   job,
@@ -684,7 +688,7 @@ export default function ProposalsPage() {
       sentToEmail: sendForm.toEmail,
     });
     const proposalForLink = sentProposal || activeProposal;
-    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}`;
+    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}#data=${encodeProposalForCustomer(proposalForLink)}`;
 
     if (sentProposal) {
       setActiveProposal(sentProposal);
