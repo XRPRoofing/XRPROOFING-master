@@ -125,6 +125,10 @@ export default function CustomerProposalPage() {
             <p className="text-xs font-black uppercase tracking-wider text-slate-500">Scope of work</p>
             <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-700">{proposal.scope}</p>
             <p className="mt-4 whitespace-pre-line text-sm leading-7 text-slate-700">{proposal.notes}</p>
+            <div className="mt-6 rounded-2xl bg-slate-50 p-5">
+              <p className="font-black text-[#07183f]">Terms and Conditions</p>
+              <p className="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{proposal.terms}</p>
+            </div>
           </div>
         </section>
 
@@ -141,8 +145,7 @@ export default function CustomerProposalPage() {
         </section>
 
         <section className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
-          <h2 className="text-2xl font-black text-[#07183f]">Terms and signature</h2>
-          <p className="mt-4 whitespace-pre-line text-sm leading-7 text-slate-600">{proposal.terms}</p>
+          <h2 className="text-2xl font-black text-[#07183f]">Signature</h2>
           <div className="mt-7 rounded-2xl border border-slate-200 p-5">
             <label className="block text-sm font-black text-slate-800">
               Type your full name to sign
