@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Bell, BriefcaseBusiness, CalendarDays, ClipboardList, FileText, LayoutDashboard, LogOut, Menu, Search, Settings, UploadCloud, UsersRound, X } from "lucide-react";
+import { Bell, BriefcaseBusiness, CalendarDays, ClipboardList, CreditCard, FileSignature, FileText, LayoutDashboard, LogOut, Menu, Search, Settings, UploadCloud, UsersRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -12,8 +12,10 @@ const navigation = [
   { href: "/crm/customers", label: "Customers", icon: UsersRound },
   { href: "/crm/proposals", label: "Proposal", icon: FileText },
   { href: "/crm/invoices", label: "Invoice", icon: ClipboardList },
+  { href: "/crm/payments", label: "Payments", icon: CreditCard },
   { href: "/crm/tasks", label: "Tasks", icon: ClipboardList },
   { href: "/crm/calendar", label: "Calendar", icon: CalendarDays },
+  { href: "/crm/pdf-signer-board", label: "PDF Signer Board", icon: FileSignature },
   { href: "/crm/files", label: "Files", icon: UploadCloud },
   { href: "/crm/settings", label: "Settings", icon: Settings },
 ];
