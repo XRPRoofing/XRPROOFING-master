@@ -817,7 +817,7 @@ export default function ProposalsPage() {
                   </div>
                 </div>
 
-                {activeSection === "Cover" && (
+                {(isPreviewing || activeSection === "Cover") && (
                   <div className="mt-8 rounded-3xl bg-slate-50 p-8 text-center">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">Cover page</p>
                     <Image src={editorForm.coverPhoto || "/images/logo.jpeg"} alt="Proposal cover" width={220} height={130} className="mx-auto mt-5 max-h-36 w-auto rounded-2xl bg-white object-contain shadow-sm" />
@@ -832,7 +832,7 @@ export default function ProposalsPage() {
                   </div>
                 )}
 
-                {activeSection === "Inspection Photos" && (
+                {(isPreviewing || activeSection === "Inspection Photos") && (
                   <div className="mt-8">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">Inspection Photos</p>
                     <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -843,7 +843,7 @@ export default function ProposalsPage() {
                   </div>
                 )}
 
-                {(activeSection === "Estimate" || activeSection === "Summary") && (
+                {(isPreviewing || activeSection === "Estimate" || activeSection === "Summary") && (
                   <div className="mt-8 grid gap-6 md:grid-cols-2">
                     <div className="rounded-2xl bg-slate-50 p-5">
                       <p className="text-xs font-black uppercase tracking-wider text-slate-500">Prepared for</p>
@@ -861,7 +861,7 @@ export default function ProposalsPage() {
                   </div>
                 )}
 
-                {activeSection === "Estimate" && (
+                {(isPreviewing || activeSection === "Estimate") && (
                   <div className="mt-8">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">Description of Work</p>
                     <div className="mt-4 border-y border-slate-300 py-5">
@@ -884,7 +884,24 @@ export default function ProposalsPage() {
                   </div>
                 )}
 
-                {(["GOOD", "BETTER", "BEST"].includes(activeSection)) && (
+                {isPreviewing && (
+                  <div className="mt-8">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">Proposal options</p>
+                    <div className="mt-4 grid gap-4">
+                      {(["good", "better", "best"] as const).map((option) => (
+                        <div key={option} className="rounded-2xl border border-slate-200 p-5">
+                          <div className="flex items-center justify-between">
+                            <p className="text-2xl font-black uppercase text-[#07183f]">{option} Roofing Package</p>
+                            <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700">${normalizePackages(editorForm.packages)[option].price.toLocaleString()}</span>
+                          </div>
+                          <p className="mt-5 whitespace-pre-line text-sm leading-7 text-slate-700">{normalizePackages(editorForm.packages)[option].scope}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {!isPreviewing && (["GOOD", "BETTER", "BEST"].includes(activeSection)) && (
                   <div className="mt-8">
                     <p className="text-xs font-black uppercase tracking-wider text-slate-500">{activeSection} proposal option</p>
                     <div className="mt-4 rounded-2xl border border-slate-200 p-5">
@@ -905,7 +922,7 @@ export default function ProposalsPage() {
                   </div>
                 )}
 
-                {(activeSection === "Estimate" || activeSection === "Summary") && (
+                {(isPreviewing || activeSection === "Estimate" || activeSection === "Summary") && (
                   <div className="mt-32 rounded-2xl border border-slate-200 p-5">
                     <p className="font-black text-[#07183f]">Customer approval</p>
                     <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -915,7 +932,7 @@ export default function ProposalsPage() {
                   </div>
                 )}
 
-                {activeSection === "Terms and Conditions" && (
+                {(isPreviewing || activeSection === "Terms and Conditions") && (
                   <div className="mt-8 rounded-2xl border border-slate-200 p-5">
                     <p className="font-black text-[#07183f]">Terms and Conditions</p>
                     {isPreviewing ? (
@@ -1195,3 +1212,4 @@ export default function ProposalsPage() {
     </div>
   );
 }
+
