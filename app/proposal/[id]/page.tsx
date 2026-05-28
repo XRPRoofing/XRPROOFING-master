@@ -217,6 +217,7 @@ export default function CustomerProposalPage() {
 
   const packageOptions = useMemo(() => normalizePackages(proposal?.packages), [proposal]);
   const inspectionPhotos = useMemo(() => normalizeInspectionPhotos(proposal?.inspectionPhotos).filter((photo) => photo.image || photo.note), [proposal]);
+  const selectedOptionTotal = packageOptions[selectedOption].price || proposal?.total || 0;
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -251,6 +252,7 @@ export default function CustomerProposalPage() {
       ...proposal,
       status: "Signed",
       selectedOption,
+      total: selectedOptionTotal,
       signedBy: signatureName.trim(),
       signedAt: new Date().toISOString(),
     };
@@ -297,7 +299,8 @@ export default function CustomerProposalPage() {
             </div>
             <div className="rounded-2xl bg-slate-50 p-5">
               <p className="text-xs font-black uppercase tracking-wider text-slate-500">Estimated total</p>
-              <p className="mt-2 text-3xl font-black text-[#07183f]">${proposal.total.toLocaleString()}</p>
+              <p className="mt-2 text-3xl font-black text-[#07183f]">${selectedOptionTotal.toLocaleString()}</p>
+              <p className="mt-1 text-sm font-bold uppercase text-blue-700">{selectedOption} option selected</p>
             </div>
           </div>
 
