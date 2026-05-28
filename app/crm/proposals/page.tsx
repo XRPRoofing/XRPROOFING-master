@@ -798,7 +798,7 @@ export default function ProposalsPage() {
           </aside>
           )}
 
-          <main className="overflow-auto p-6">
+          <main className="p-6">
             <div className="mx-auto max-w-[760px]">
               <p className="mb-5 text-center text-sm font-black text-slate-700">{selectedTemplate?.label || "Custom Proposal"}</p>
               <div className={`min-h-[900px] border bg-white p-10 shadow-sm ${editorForm.template === "premium" ? "border-orange-300" : editorForm.template === "insurance" ? "border-blue-300" : "border-slate-300"}`}>
