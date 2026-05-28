@@ -280,6 +280,14 @@ function encodeProposalForCustomer(proposal: Proposal) {
   return btoa(unescape(encodeURIComponent(JSON.stringify(proposal))));
 }
 
+function createCompactProposal(proposal: Proposal): Proposal {
+  return {
+    ...proposal,
+    terms: "",
+    inspectionPhotos: normalizeInspectionPhotos(proposal.inspectionPhotos).map((photo) => ({ ...photo, image: "" })),
+  };
+}
+
 const initialProposals: Proposal[] = leads.slice(0, 3).map((job, index) => ({
   id: `P-${1001 + index}`,
   job,
@@ -688,7 +696,7 @@ export default function ProposalsPage() {
       sentToEmail: sendForm.toEmail,
     });
     const proposalForLink = sentProposal || activeProposal;
-    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}#data=${encodeProposalForCustomer(proposalForLink)}`;
+    let proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}`;
 
     if (sentProposal) {
       setActiveProposal(sentProposal);
@@ -697,6 +705,16 @@ export default function ProposalsPage() {
     setSendNotice("Sending proposal email...");
 
     try {
+      const shareResponse = await fetch("/api/proposals/share", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(proposalForLink),
+      });
+
+      if (!shareResponse.ok) {
+        proposalLink = `${proposalLink}#data=${encodeProposalForCustomer(createCompactProposal(proposalForLink))}`;
+      }
+
       const response = await fetch("/api/proposals/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

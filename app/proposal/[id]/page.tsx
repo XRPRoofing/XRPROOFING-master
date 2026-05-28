@@ -233,16 +233,27 @@ export default function CustomerProposalPage() {
   const selectedOptionTotal = packageOptions[selectedOption].price || proposal?.total || 0;
 
   useEffect(() => {
-    queueMicrotask(() => {
+    async function loadProposal() {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
       const proposals = savedProposals ? JSON.parse(savedProposals) as Proposal[] : [];
       const sharedProposal = getSharedProposalData();
       const foundProposal = proposals.find((item) => item.id === proposalId);
       const publicProposal = publicProposalFallbacks.find((item) => item.id === proposalId);
+      let serverProposal: Proposal | null = null;
 
-      if (!foundProposal && !sharedProposal && !publicProposal) return;
+      if (!foundProposal && !sharedProposal) {
+        try {
+          const response = await fetch(`/api/proposals/share?id=${encodeURIComponent(proposalId)}`);
+          if (response.ok) {
+            const data = await response.json() as { proposal?: Proposal };
+            serverProposal = data.proposal || null;
+          }
+        } catch {}
+      }
 
-      const baseProposal = foundProposal || sharedProposal || publicProposal;
+      if (!foundProposal && !sharedProposal && !serverProposal && !publicProposal) return;
+
+      const baseProposal = foundProposal || sharedProposal || serverProposal || publicProposal;
       if (!baseProposal) return;
 
       const proposalWithDefaultTerms: Proposal = { ...baseProposal, terms: normalizeTerms(baseProposal.terms) };
@@ -256,7 +267,9 @@ export default function CustomerProposalPage() {
       setProposal(viewedProposal);
       setSelectedOption(viewedProposal.selectedOption || "better");
       setSignatureName(viewedProposal.signedBy || "");
-    });
+    }
+
+    void loadProposal();
   }, [proposalId]);
 
   function handleSignProposal() {
