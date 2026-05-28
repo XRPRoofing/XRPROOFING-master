@@ -97,6 +97,21 @@ const defaultPackages = {
   better: "BETTER option: Enhanced roofing package with upgraded materials, improved ventilation details, cleanup, and stronger warranty support.",
   best: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
 };
+
+function formatPastedProposalText(value: string) {
+  return value
+    .replace(/\r\n/g, "\n")
+    .replace(/\*\*(.*?)\*\*/g, "\n\n$1\n")
+    .replace(/\s+---\s+/g, "\n\n")
+    .replace(/\s+--\s+/g, "\n\n")
+    .replace(/\s+##\s+/g, "\n\n")
+    .replace(/\s+\*(?=\s*\S)/g, "\n- ")
+    .replace(/\n{3,}/g, "\n\n")
+    .split("\n")
+    .map((line) => line.trim())
+    .join("\n")
+    .trim();
+}
 const initialProposalTemplates: ProposalTemplate[] = [
   {
     id: "executive",
@@ -243,6 +258,34 @@ export default function ProposalsPage() {
     if (!dataLoaded) return;
     window.localStorage.setItem("xrp-crm-proposal-templates", JSON.stringify(templates));
   }, [dataLoaded, templates]);
+
+  useEffect(() => {
+    if (!dataLoaded || !activeProposal) return;
+
+    const timeout = window.setTimeout(() => {
+      const updatedProposal: Proposal = {
+        ...activeProposal,
+        customerName: editorForm.customerName,
+        address: editorForm.address,
+        title: editorForm.title,
+        summary: editorForm.summary,
+        coverPhoto: editorForm.coverPhoto,
+        coverText: editorForm.coverText,
+        scope: editorForm.scope,
+        total: Number(editorForm.total) || 0,
+        template: editorForm.template,
+        notes: editorForm.notes,
+        terms: editorForm.terms,
+        packages: editorForm.packages,
+      };
+
+      setProposals((currentProposals) =>
+        currentProposals.map((proposal) => proposal.id === updatedProposal.id ? updatedProposal : proposal)
+      );
+    }, 800);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeProposal, dataLoaded, editorForm]);
 
   useEffect(() => {
     if (proposalMode !== "new" || !addressInputRef.current) return;
@@ -549,7 +592,7 @@ export default function ProposalsPage() {
               </label>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
                 Scope
-                <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="mt-2 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
+                <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} onPaste={(event) => { event.preventDefault(); setEditorForm({ ...editorForm, scope: formatPastedProposalText(event.clipboardData.getData("text")) }); }} className="mt-2 min-h-40 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm normal-case tracking-normal text-slate-700 outline-none" />
               </label>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
                 Total
@@ -647,12 +690,12 @@ export default function ProposalsPage() {
                     <div className="mt-4 border-y border-slate-300 py-5">
                       {isPreviewing ? (
                         <>
-                          <p className="text-sm leading-7 text-slate-700">{editorForm.scope}</p>
-                          <p className="mt-4 text-sm leading-7 text-slate-700">{editorForm.notes}</p>
+                          <p className="whitespace-pre-line text-sm leading-7 text-slate-700">{editorForm.scope}</p>
+                          <p className="mt-4 whitespace-pre-line text-sm leading-7 text-slate-700">{editorForm.notes}</p>
                         </>
                       ) : (
                         <>
-                          <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} className="min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
+                          <textarea value={editorForm.scope} onChange={(event) => setEditorForm({ ...editorForm, scope: event.target.value })} onPaste={(event) => { event.preventDefault(); setEditorForm({ ...editorForm, scope: formatPastedProposalText(event.clipboardData.getData("text")) }); }} className="min-h-96 w-full resize-y border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
                           <textarea value={editorForm.notes} onChange={(event) => setEditorForm({ ...editorForm, notes: event.target.value })} className="mt-4 min-h-24 w-full resize-none border-none bg-transparent p-0 text-sm leading-7 text-slate-700 outline-none" />
                         </>
                       )}
