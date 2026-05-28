@@ -33,21 +33,53 @@ const defaultPackages = {
   best: "BEST option: Premium roofing package with top-tier materials, full project documentation, priority scheduling, cleanup, and best available workmanship coverage.",
 };
 
-function decodeProposalFromLink(value: string) {
-  try {
-    return JSON.parse(decodeURIComponent(escape(atob(value)))) as Proposal;
-  } catch {
-    return null;
-  }
-}
-
-function getSharedProposalData() {
-  const dataFromSearch = new URLSearchParams(window.location.search).get("data");
-  const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : window.location.hash;
-  const dataFromHash = new URLSearchParams(hash).get("data");
-
-  return dataFromSearch || dataFromHash;
-}
+const publicProposalFallbacks: Proposal[] = [
+  {
+    id: "P-1001",
+    customerName: "Maria Hernandez",
+    address: "2148 E Camelback Rd, Phoenix",
+    scope: "Tile roofing proposal",
+    total: 18500,
+    status: "Sent",
+    title: "BEST ROOFING PROPOSAL",
+    summary: "A professional roofing proposal prepared for review and approval.",
+    coverPhoto: "/images/logo.jpeg",
+    coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
+    notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
+    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    packages: defaultPackages,
+  },
+  {
+    id: "P-1002",
+    customerName: "Desert Plaza HOA",
+    address: "8800 N Scottsdale Rd, Scottsdale",
+    scope: "Flat/TPO roofing proposal",
+    total: 72000,
+    status: "Sent",
+    title: "INSURANCE ROOFING PROPOSAL",
+    summary: "A professional roofing proposal prepared for review and approval.",
+    coverPhoto: "/images/logo.jpeg",
+    coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
+    notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
+    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    packages: defaultPackages,
+  },
+  {
+    id: "P-1003",
+    customerName: "Ryan Mitchell",
+    address: "944 W Ocotillo Rd, Glendale",
+    scope: "Shingle roofing proposal",
+    total: 24600,
+    status: "Sent",
+    title: "PREMIUM ROOFING PROPOSAL",
+    summary: "A professional roofing proposal prepared for review and approval.",
+    coverPhoto: "/images/logo.jpeg",
+    coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
+    notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
+    terms: "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.",
+    packages: defaultPackages,
+  },
+];
 
 export default function CustomerProposalPage() {
   const params = useParams<{ id: string }>();
@@ -64,12 +96,11 @@ export default function CustomerProposalPage() {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
       const proposals = savedProposals ? JSON.parse(savedProposals) as Proposal[] : [];
       const foundProposal = proposals.find((item) => item.id === proposalId);
-      const proposalFromLink = getSharedProposalData();
-      const sharedProposal = proposalFromLink ? decodeProposalFromLink(proposalFromLink) : null;
+      const publicProposal = publicProposalFallbacks.find((item) => item.id === proposalId);
 
-      if (!foundProposal && !sharedProposal) return;
+      if (!foundProposal && !publicProposal) return;
 
-      const baseProposal = foundProposal || sharedProposal;
+      const baseProposal = foundProposal || publicProposal;
       if (!baseProposal) return;
 
       const viewedProposal: Proposal = baseProposal.status === "Sent" ? { ...baseProposal, status: "Viewed" } : baseProposal;

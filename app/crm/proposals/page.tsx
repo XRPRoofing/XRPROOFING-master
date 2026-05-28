@@ -113,25 +113,6 @@ function formatPastedProposalText(value: string) {
     .trim();
 }
 
-function encodeProposalForCustomer(proposal: Proposal) {
-  const payload = JSON.stringify({
-    id: proposal.id,
-    customerName: proposal.customerName,
-    address: proposal.address,
-    scope: proposal.scope,
-    total: proposal.total,
-    status: proposal.status,
-    title: proposal.title,
-    summary: proposal.summary,
-    coverPhoto: proposal.coverPhoto,
-    coverText: proposal.coverText,
-    notes: proposal.notes,
-    terms: proposal.terms,
-    packages: proposal.packages || defaultPackages,
-  });
-
-  return btoa(unescape(encodeURIComponent(payload)));
-}
 const initialProposalTemplates: ProposalTemplate[] = [
   {
     id: "executive",
@@ -501,7 +482,7 @@ export default function ProposalsPage() {
       sentToEmail: sendForm.toEmail,
     });
     const proposalForLink = sentProposal || activeProposal;
-    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}#data=${encodeURIComponent(encodeProposalForCustomer(proposalForLink))}`;
+    const proposalLink = `${window.location.origin}/proposal/${encodeURIComponent(proposalForLink.id)}`;
 
     if (sentProposal) {
       setActiveProposal(sentProposal);
