@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Bell, BriefcaseBusiness, CalendarDays, ClipboardList, CreditCard, FileSignature, FileText, LayoutDashboard, LogOut, Menu, Search, Settings, ShieldCheck, Sparkles, UploadCloud, UsersRound, X } from "lucide-react";
+import { Bell, BriefcaseBusiness, CalendarDays, ClipboardList, CreditCard, FileSignature, FileText, LayoutDashboard, LogOut, Menu, MessageSquareText, Search, Settings, ShieldCheck, Sparkles, UploadCloud, UsersRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 const navigation = [
   { href: "/crm", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/crm/conversations", label: "Conversation board", icon: MessageSquareText },
   { href: "/crm/leads", label: "Jobs", icon: BriefcaseBusiness },
   { href: "/crm/customers", label: "Customers", icon: UsersRound },
   { href: "/crm/proposals", label: "Proposal", icon: FileText },
