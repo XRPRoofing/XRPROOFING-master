@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Filter, GripVertical, MoreHorizontal, Plus, Search, X } from "lucide-react";
-import { leadStages, leads } from "@/lib/crm-data";
-import type { Lead, LeadStage } from "@/types/crm";
+import { customers, leadStages, leads } from "@/lib/crm-data";
+import type { Customer, Lead, LeadStage } from "@/types/crm";
 
 const jobAges = ["Now", "+ 1 day", "+ 5 days", "+ 12 days", "+ 47 days", "+ 94 days"];
 const updateAges = ["Created 6 hours ago", "Updated 7 hours ago", "Updated a day ago", "Updated 4 days ago", "Updated 20 days ago", "Updated 2 months ago"];
@@ -38,6 +38,7 @@ const arizonaBounds = {
   west: -114.8184,
 };
 const jobsStorageKey = "xrp-crm-jobs-board";
+const customersStorageKey = "xrp-crm-customers";
 
 function getCityFromAddress(address: string) {
   const parts = address.split(",").map((part) => part.trim()).filter(Boolean);
@@ -46,6 +47,43 @@ function getCityFromAddress(address: string) {
 
 function saveJobs(nextJobs: Lead[]) {
   window.localStorage.setItem(jobsStorageKey, JSON.stringify(nextJobs));
+}
+
+function getSavedCustomers() {
+  const savedCustomers = window.localStorage.getItem(customersStorageKey);
+  if (!savedCustomers) return customers;
+
+  try {
+    return JSON.parse(savedCustomers) as Customer[];
+  } catch {
+    return customers;
+  }
+}
+
+function syncCustomerFromJob(job: Lead) {
+  const customerFromJob: Customer = {
+    id: `C-${job.id}`,
+    name: job.name,
+    email: job.email,
+    phone: job.phone,
+    propertyAddress: `${job.address}${job.city && !job.address.includes(job.city) ? `, ${job.city}, AZ` : ""}`,
+    roofDetails: job.roofType || "Roof details pending",
+    insuranceCarrier: "Not provided",
+    status: "New job",
+    lifetimeValue: job.value,
+  };
+  const currentCustomers = getSavedCustomers();
+  const matchingCustomer = currentCustomers.find((customer) =>
+    customer.id === customerFromJob.id ||
+    (customer.email && customer.email === job.email) ||
+    (customer.phone && customer.phone === job.phone)
+  );
+  const nextCustomers = matchingCustomer
+    ? currentCustomers.map((customer) => customer.id === matchingCustomer.id ? { ...customer, ...customerFromJob, id: customer.id, insuranceCarrier: customer.insuranceCarrier || customerFromJob.insuranceCarrier } : customer)
+    : [customerFromJob, ...currentCustomers];
+
+  window.localStorage.setItem(customersStorageKey, JSON.stringify(nextCustomers));
+  window.dispatchEvent(new StorageEvent("storage", { key: customersStorageKey, newValue: JSON.stringify(nextCustomers) }));
 }
 
 export default function LeadsPage() {
@@ -170,6 +208,7 @@ export default function LeadsPage() {
       saveJobs(nextJobs);
       return nextJobs;
     });
+    syncCustomerFromJob(newJob);
     setForm({
       name: "",
       email: "",

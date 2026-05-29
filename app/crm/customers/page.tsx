@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Mail, MapPin, Phone, Plus, Search, ShieldCheck, UploadCloud, X } from "lucide-react";
+import { Edit3, Mail, MapPin, Phone, Plus, Search, ShieldCheck, UploadCloud, X } from "lucide-react";
 import { customers } from "@/lib/crm-data";
 import type { Customer } from "@/types/crm";
 
@@ -26,6 +26,8 @@ export default function CustomersPage() {
   });
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState<Customer | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -81,6 +83,24 @@ export default function CustomersPage() {
     setShowForm(false);
   }
 
+  function handleEditCustomer(customer: Customer) {
+    setEditingCustomerId(customer.id);
+    setEditForm(customer);
+  }
+
+  function handleSaveCustomer(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!editForm) return;
+
+    setCustomerList((currentCustomers) => {
+      const nextCustomers = currentCustomers.map((customer) => customer.id === editForm.id ? editForm : customer);
+      saveCustomers(nextCustomers);
+      return nextCustomers;
+    });
+    setEditingCustomerId(null);
+    setEditForm(null);
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
@@ -120,13 +140,34 @@ export default function CustomersPage() {
       <div className="grid gap-3 lg:grid-cols-3 2xl:grid-cols-4">
         {filteredCustomers.map((customer) => (
           <article key={customer.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-xl">
+            {editingCustomerId === customer.id && editForm ? (
+              <form onSubmit={handleSaveCustomer} className="space-y-3 p-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-base font-black text-[#07183f]">Edit customer</h2>
+                  <button type="button" onClick={() => { setEditingCustomerId(null); setEditForm(null); }} className="rounded-xl p-2 text-slate-400 hover:bg-slate-100"><X className="h-4 w-4" /></button>
+                </div>
+                <input required value={editForm.name} onChange={(event) => setEditForm({ ...editForm, name: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Customer name" />
+                <input type="email" value={editForm.email} onChange={(event) => setEditForm({ ...editForm, email: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Email" />
+                <input value={editForm.phone} onChange={(event) => setEditForm({ ...editForm, phone: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Phone" />
+                <input required value={editForm.propertyAddress} onChange={(event) => setEditForm({ ...editForm, propertyAddress: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Property address" />
+                <input value={editForm.roofDetails} onChange={(event) => setEditForm({ ...editForm, roofDetails: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Roof details" />
+                <input value={editForm.insuranceCarrier} onChange={(event) => setEditForm({ ...editForm, insuranceCarrier: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Insurance carrier" />
+                <input value={editForm.status} onChange={(event) => setEditForm({ ...editForm, status: event.target.value })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Status" />
+                <input type="number" value={editForm.lifetimeValue} onChange={(event) => setEditForm({ ...editForm, lifetimeValue: Number(event.target.value) || 0 })} className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none" placeholder="Lifetime value" />
+                <button className="w-full rounded-xl bg-[#07183f] px-4 py-2 text-sm font-bold text-white">Save changes</button>
+              </form>
+            ) : (
+            <>
             <div className="bg-gradient-to-br from-[#07183f] to-[#173c8f] p-3 text-white">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-[10px] font-bold text-orange-300">{customer.id}</p>
                   <h2 className="mt-0.5 text-base font-black">{customer.name}</h2>
                 </div>
-                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-bold ring-1 ring-white/15">{customer.status}</span>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-bold ring-1 ring-white/15">{customer.status}</span>
+                  <button type="button" onClick={() => handleEditCustomer(customer)} className="rounded-lg bg-white/10 p-1.5 text-white hover:bg-white/20"><Edit3 className="h-3.5 w-3.5" /></button>
+                </div>
               </div>
             </div>
             <div className="space-y-2 p-3">
@@ -156,6 +197,8 @@ export default function CustomersPage() {
                 <span className="text-base font-black text-[#07183f]">${customer.lifetimeValue.toLocaleString()}</span>
               </div>
             </div>
+            </>
+            )}
           </article>
         ))}
       </div>
