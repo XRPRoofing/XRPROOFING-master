@@ -1,28 +1,80 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Edit3, Mail, MapPin, Phone, Plus, Search, ShieldCheck, UploadCloud, X } from "lucide-react";
 import { customers } from "@/lib/crm-data";
-import type { Customer } from "@/types/crm";
+import type { Customer, Lead } from "@/types/crm";
 
 const customersStorageKey = "xrp-crm-customers";
+const jobsStorageKey = "xrp-crm-jobs-board";
 
 function saveCustomers(nextCustomers: Customer[]) {
   window.localStorage.setItem(customersStorageKey, JSON.stringify(nextCustomers));
 }
 
+function getSavedCustomers() {
+  const savedCustomers = window.localStorage.getItem(customersStorageKey);
+  if (!savedCustomers) return customers;
+
+  try {
+    return JSON.parse(savedCustomers) as Customer[];
+  } catch {
+    return customers;
+  }
+}
+
+function getSavedJobs() {
+  const savedJobs = window.localStorage.getItem(jobsStorageKey);
+  if (!savedJobs) return [];
+
+  try {
+    return JSON.parse(savedJobs) as Lead[];
+  } catch {
+    return [];
+  }
+}
+
+function customerFromJob(job: Lead): Customer {
+  return {
+    id: `C-${job.id}`,
+    name: job.name,
+    email: job.email,
+    phone: job.phone,
+    propertyAddress: `${job.address}${job.city && !job.address.includes(job.city) ? `, ${job.city}, AZ` : ""}`,
+    roofDetails: job.roofType || "Roof details pending",
+    insuranceCarrier: "Not provided",
+    status: "New job",
+    lifetimeValue: job.value,
+  };
+}
+
+function mergeCustomerList(savedCustomers: Customer[], jobCustomers: Customer[]) {
+  return [...jobCustomers, ...savedCustomers].reduce<Customer[]>((mergedCustomers, nextCustomer) => {
+    const matchingIndex = mergedCustomers.findIndex((customer) =>
+      customer.id === nextCustomer.id ||
+      (customer.email && customer.email === nextCustomer.email) ||
+      (customer.phone && customer.phone === nextCustomer.phone)
+    );
+
+    if (matchingIndex === -1) return [...mergedCustomers, nextCustomer];
+
+    const currentCustomer = mergedCustomers[matchingIndex];
+    mergedCustomers[matchingIndex] = { ...nextCustomer, ...currentCustomer };
+    return mergedCustomers;
+  }, []);
+}
+
+function loadCustomerDashboardRecords() {
+  const savedCustomers = getSavedCustomers();
+  const jobCustomers = getSavedJobs().map(customerFromJob);
+
+  return mergeCustomerList(savedCustomers, jobCustomers);
+}
+
 export default function CustomersPage() {
   const [customerList, setCustomerList] = useState<Customer[]>(() => {
     if (typeof window === "undefined") return customers;
-
-    const savedCustomers = window.localStorage.getItem(customersStorageKey);
-    if (!savedCustomers) return customers;
-
-    try {
-      return JSON.parse(savedCustomers) as Customer[];
-    } catch {
-      return customers;
-    }
+    return loadCustomerDashboardRecords();
   });
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -50,8 +102,24 @@ export default function CustomersPage() {
     );
   }, [customerList, search]);
 
+  useEffect(() => {
+    function refreshCustomers() {
+      setCustomerList(loadCustomerDashboardRecords());
+    }
+
+    window.addEventListener("storage", refreshCustomers);
+    window.addEventListener("focus", refreshCustomers);
+
+    return () => {
+      window.removeEventListener("storage", refreshCustomers);
+      window.removeEventListener("focus", refreshCustomers);
+    };
+  }, []);
+
   function handleAddCustomer(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const submitter = (event.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
+    const shouldKeepAdding = submitter?.value === "add-another";
 
     const newCustomer: Customer = {
       id: `C-${Date.now()}`,
@@ -80,7 +148,7 @@ export default function CustomersPage() {
       status: "New customer",
       lifetimeValue: "",
     });
-    setShowForm(false);
+    setShowForm(shouldKeepAdding);
   }
 
   function handleEditCustomer(customer: Customer) {
@@ -128,7 +196,10 @@ export default function CustomersPage() {
             <input type="number" value={form.lifetimeValue} onChange={(event) => setForm({ ...form, lifetimeValue: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Lifetime value" />
             <input value={form.roofDetails} onChange={(event) => setForm({ ...form, roofDetails: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none md:col-span-2" placeholder="Roof details" />
           </div>
-          <button className="mt-4 rounded-2xl bg-[#07183f] px-5 py-3 font-bold text-white">Save customer</button>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <button value="save" className="rounded-2xl bg-[#07183f] px-5 py-3 font-bold text-white">Save customer</button>
+            <button value="add-another" className="rounded-2xl bg-orange-500 px-5 py-3 font-bold text-white">Save + add another</button>
+          </div>
         </form>
       )}
 
