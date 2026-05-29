@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { appointmentTypes, conversationFilters, conversationsData, pipelineStages, quickTemplates } from "@/lib/crm-conversations";
 import type { ConversationMessage, ConversationRecord } from "@/types/conversations";
 import { CheckCheck, Clock, FileImage, Headphones, Mail, Mic, Pause, Phone, PhoneOff, Plus, Search, Send, Smile, Upload, UserRound } from "lucide-react";
@@ -66,22 +69,34 @@ function MessageRow({ message }: { message: ConversationMessage }) {
   );
 }
 
-function DialerPanel({ contact }: { contact: ConversationRecord["contact"] }) {
+function FloatingDialer({ contact, isOpen, isMinimized, isActiveCall, onClose, onMinimize, onStartCall, onEndCall }: { contact: ConversationRecord["contact"]; isOpen: boolean; isMinimized: boolean; isActiveCall: boolean; onClose: () => void; onMinimize: () => void; onStartCall: () => void; onEndCall: () => void }) {
+  if (!isOpen) return null;
+
   return (
-    <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#07183f] via-blue-800 to-blue-600 p-4 text-white shadow-2xl shadow-blue-200">
+    <div className="fixed inset-x-3 bottom-3 z-50 sm:inset-auto sm:bottom-8 sm:right-8 sm:w-[360px]">
+      <div className={`overflow-hidden rounded-t-[2rem] bg-gradient-to-br from-[#07183f] via-blue-800 to-blue-600 p-4 text-white shadow-2xl shadow-blue-950/30 ring-1 ring-white/20 backdrop-blur-2xl transition duration-300 sm:rounded-[2rem] ${isMinimized ? "translate-y-2 opacity-95" : "translate-y-0 opacity-100"}`}>
       <div className="flex items-center justify-between">
-        <div><p className="text-xs font-black uppercase tracking-wider text-blue-100">Built-in dialer</p><p className="mt-1 text-lg font-black">{contact.phone}</p></div>
-        <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1 text-xs font-black text-white ring-1 ring-white/15"><Clock className="h-3 w-3" />03:18</span>
+        <div><p className="text-xs font-black uppercase tracking-wider text-blue-100">Floating dialer</p><p className="mt-1 text-lg font-black">{contact.phone}</p></div>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1 text-xs font-black text-white ring-1 ring-white/15"><Clock className="h-3 w-3" />03:18</span>
+          <button onClick={onMinimize} className="rounded-full bg-white/10 px-2 py-1 text-xs font-black ring-1 ring-white/10 transition hover:bg-white/20">{isMinimized ? "Open" : "Min"}</button>
+          <button onClick={onClose} className="rounded-full bg-white/10 px-2 py-1 text-xs font-black ring-1 ring-white/10 transition hover:bg-white/20">×</button>
+        </div>
       </div>
-      <div className="mt-4 flex h-8 items-end justify-center gap-1.5">{[35, 60, 42, 75, 50, 68, 38, 58, 45].map((height, index) => <span key={index} className="w-1.5 rounded-full bg-orange-300/90 shadow-sm shadow-orange-200/30 transition-all" style={{ height: `${height}%` }} />)}</div>
+      {!isMinimized && (
+        <>
+      <div className="mt-4 flex h-8 items-end justify-center gap-1.5">{[35, 60, 42, 75, 50, 68, 38, 58, 45].map((height, index) => <span key={index} className={`w-1.5 rounded-full bg-orange-300/90 shadow-sm shadow-orange-200/30 transition-all ${isActiveCall ? "animate-pulse" : ""}`} style={{ height: `${height}%` }} />)}</div>
       <div className="mt-4 grid grid-cols-3 gap-2 text-center text-sm font-black">{"123456789*0#".split("").map((key) => <button key={key} className="rounded-2xl bg-white/10 py-3 text-white ring-1 ring-white/10 transition hover:-translate-y-0.5 hover:bg-white/20 active:scale-95">{key}</button>)}</div>
       <div className="mt-4 grid grid-cols-4 gap-2">
         <button className="rounded-2xl bg-white/10 p-3 text-white ring-1 ring-white/10 transition hover:bg-white/20 active:scale-95"><Mic className="mx-auto h-4 w-4" /></button>
         <button className="rounded-2xl bg-white/10 p-3 text-white ring-1 ring-white/10 transition hover:bg-white/20 active:scale-95"><Pause className="mx-auto h-4 w-4" /></button>
-        <button className="rounded-2xl bg-emerald-400 p-3 text-white shadow-lg shadow-emerald-950/20 transition hover:-translate-y-0.5 active:scale-95"><Phone className="mx-auto h-4 w-4" /></button>
-        <button className="rounded-2xl bg-red-500 p-3 text-white shadow-lg shadow-red-950/20 transition hover:-translate-y-0.5 active:scale-95"><PhoneOff className="mx-auto h-4 w-4" /></button>
+        <button onClick={onStartCall} className="rounded-2xl bg-emerald-400 p-3 text-white shadow-lg shadow-emerald-950/20 transition hover:-translate-y-0.5 active:scale-95"><Phone className="mx-auto h-4 w-4" /></button>
+        <button onClick={onEndCall} className="rounded-2xl bg-red-500 p-3 text-white shadow-lg shadow-red-950/20 transition hover:-translate-y-0.5 active:scale-95"><PhoneOff className="mx-auto h-4 w-4" /></button>
       </div>
       <textarea className="mt-4 min-h-24 w-full rounded-2xl bg-white/10 p-3 text-sm font-medium text-white outline-none ring-1 ring-white/15 transition placeholder:text-blue-100 focus:bg-white/15 focus:ring-4 focus:ring-white/10" placeholder="Type live call notes... auto-save ready" />
+        </>
+      )}
+      </div>
     </div>
   );
 }
@@ -123,7 +138,6 @@ function ContactPanel({ conversation }: { conversation: ConversationRecord }) {
         </div>
         <div className="mt-4 flex flex-wrap gap-2">{contact.tags.map((tag) => <span key={tag} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700 shadow-sm ring-1 ring-blue-100">{tag}</span>)}</div>
       </div>
-      <DialerPanel contact={contact} />
       <SchedulerPanel />
     </aside>
   );
@@ -131,11 +145,21 @@ function ContactPanel({ conversation }: { conversation: ConversationRecord }) {
 
 export default function ConversationBoard() {
   const active = conversationsData[0];
+  const [isDialerOpen, setIsDialerOpen] = useState(false);
+  const [isDialerMinimized, setIsDialerMinimized] = useState(false);
+  const [isActiveCall, setIsActiveCall] = useState(false);
+
   return (
     <div className="-mx-4 -my-6 min-h-[calc(100vh-5rem)] bg-[radial-gradient(circle_at_top_left,#dbeafe,transparent_30%),linear-gradient(180deg,#f8fafc_0%,#eef2f7_100%)] px-4 py-6 font-sans sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      {isActiveCall && (
+        <div className="sticky top-20 z-40 mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#07183f]/95 px-4 py-3 text-white shadow-2xl shadow-blue-950/20 ring-1 ring-white/10 backdrop-blur-xl">
+          <div className="flex items-center gap-3"><span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-300" /><span className="text-sm font-black">Active call with {active.contact.name}</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black"><Clock className="mr-1 inline h-3 w-3" />03:18</span></div>
+          <div className="flex gap-2"><button className="rounded-xl bg-white/10 px-3 py-2 text-xs font-black transition hover:bg-white/20"><Mic className="mr-1 inline h-3 w-3" />Mute</button><button onClick={() => { setIsDialerOpen(true); setIsDialerMinimized(false); }} className="rounded-xl bg-white/10 px-3 py-2 text-xs font-black transition hover:bg-white/20">Open dialer</button><button onClick={() => setIsActiveCall(false)} className="rounded-xl bg-red-500 px-3 py-2 text-xs font-black transition hover:bg-red-600"><PhoneOff className="mr-1 inline h-3 w-3" />End</button></div>
+        </div>
+      )}
       <div className="sticky top-20 z-30 mb-5 flex flex-col justify-between gap-4 rounded-[2rem] bg-white/80 p-5 shadow-2xl shadow-slate-200/70 ring-1 ring-white/80 backdrop-blur-xl lg:flex-row lg:items-end">
         <div><p className="text-xs font-black uppercase tracking-[0.24em] text-orange-600">Premium communication board</p><h1 className="mt-2 text-3xl font-black tracking-tight text-[#07183f]">Conversations</h1><p className="mt-2 max-w-3xl text-sm font-semibold text-slate-600">Answer calls, type live notes, collect customer info, send SMS, schedule inspections, and update roofing lead status in one fast workspace.</p></div>
-        <div className="flex flex-wrap gap-2">{pipelineStages.slice(0, 4).map((stage) => <button key={stage} className="rounded-full bg-white/80 px-3 py-2 text-xs font-black text-slate-700 shadow-sm ring-1 ring-slate-100 transition hover:-translate-y-0.5 hover:bg-blue-50 hover:text-blue-700 active:scale-95">{stage}</button>)}</div>
+        <div className="flex flex-wrap gap-2"><button onClick={() => { setIsDialerOpen(true); setIsDialerMinimized(false); }} className="inline-flex items-center rounded-full bg-gradient-to-br from-orange-400 to-orange-600 px-4 py-2 text-xs font-black text-white shadow-xl shadow-orange-200 transition hover:-translate-y-0.5 active:scale-95"><Phone className="mr-2 h-3.5 w-3.5" />Dial</button>{pipelineStages.slice(0, 4).map((stage) => <button key={stage} className="rounded-full bg-white/80 px-3 py-2 text-xs font-black text-slate-700 shadow-sm ring-1 ring-slate-100 transition hover:-translate-y-0.5 hover:bg-blue-50 hover:text-blue-700 active:scale-95">{stage}</button>)}</div>
       </div>
       <div className="grid gap-5 xl:grid-cols-[340px_minmax(520px,1fr)_360px]">
         <ConversationInbox conversations={conversationsData} active={active} />
@@ -152,6 +176,12 @@ export default function ConversationBoard() {
         </main>
         <ContactPanel conversation={active} />
       </div>
+      {!isDialerOpen && (
+        <button onClick={() => setIsDialerOpen(true)} className="fixed bottom-6 right-6 z-40 inline-flex items-center rounded-full bg-gradient-to-br from-orange-400 to-orange-600 px-5 py-4 text-sm font-black text-white shadow-2xl shadow-orange-300 transition hover:-translate-y-1 active:scale-95">
+          <Phone className="mr-2 h-5 w-5" />Dial
+        </button>
+      )}
+      <FloatingDialer contact={active.contact} isOpen={isDialerOpen} isMinimized={isDialerMinimized} isActiveCall={isActiveCall} onClose={() => setIsDialerOpen(false)} onMinimize={() => setIsDialerMinimized((value) => !value)} onStartCall={() => setIsActiveCall(true)} onEndCall={() => setIsActiveCall(false)} />
     </div>
   );
 }
