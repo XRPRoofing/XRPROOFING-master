@@ -43,7 +43,7 @@ type Proposal = {
   address: string;
   scope: string;
   total: number;
-  status: "Draft" | "Sent" | "Viewed" | "Signed" | "Approved";
+  status: "Draft" | "Sent" | "Viewed" | "Signed" | "Won" | "Approved";
   template: string;
   title: string;
   summary: string;
@@ -57,6 +57,7 @@ type Proposal = {
   sentToEmail?: string;
   signedAt?: string;
   signedBy?: string;
+  signatureData?: string;
   selectedOption?: "good" | "better" | "best";
   inspectionPhotos?: InspectionPhoto[];
   packages?: {
@@ -438,13 +439,24 @@ export default function ProposalsPage() {
   }, [dataLoaded, proposals]);
 
   useEffect(() => {
-    function refreshProposalUpdates() {
+    async function refreshProposalUpdates() {
       const savedProposals = window.localStorage.getItem("xrp-crm-proposals");
       if (savedProposals) {
-        setProposals(JSON.parse(savedProposals) as Proposal[]);
+        const localProposals = JSON.parse(savedProposals) as Proposal[];
+        const serverProposals = await Promise.all(localProposals.map(async (proposal) => {
+          const response = await fetch(`/api/proposals/share?id=${encodeURIComponent(proposal.id)}`).catch(() => null);
+          if (!response?.ok) return proposal;
+          const data = await response.json().catch(() => null) as { proposal?: Proposal } | null;
+          return data?.proposal || proposal;
+        }));
+
+        window.localStorage.setItem("xrp-crm-proposals", JSON.stringify(serverProposals));
+        setProposals(serverProposals);
+        setActiveProposal((currentProposal) => currentProposal ? serverProposals.find((proposal) => proposal.id === currentProposal.id) || currentProposal : currentProposal);
       }
     }
 
+    void refreshProposalUpdates();
     window.addEventListener("focus", refreshProposalUpdates);
     window.addEventListener("storage", refreshProposalUpdates);
     return () => {
@@ -774,6 +786,16 @@ export default function ProposalsPage() {
             <button type="button" onClick={handleOpenSendModal} className="rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">Send</button>
           </div>
         </div>
+
+        {(activeProposal.status === "Won" || activeProposal.status === "Signed") && (
+          <div className="border-b border-emerald-200 bg-emerald-50 px-4 py-4">
+            <div className="mx-auto max-w-5xl rounded-2xl bg-white p-5 shadow-sm">
+              <p className="text-xs font-black uppercase tracking-wider text-emerald-700">Signed proposal copy</p>
+              <p className="mt-2 text-sm font-bold text-slate-700">Signed by {activeProposal.signedBy || activeProposal.customerName} on {activeProposal.signedAt ? new Date(activeProposal.signedAt).toLocaleString() : "today"}.</p>
+              {activeProposal.signatureData && <Image src={activeProposal.signatureData} alt="Customer signature" width={360} height={110} className="mt-3 max-h-28 w-auto rounded-lg border border-slate-200 bg-white object-contain p-2" />}
+            </div>
+          </div>
+        )}
 
         <div className={`grid min-h-[calc(100vh-8.5rem)] grid-cols-1 ${isPreviewing ? "" : "lg:grid-cols-[280px_1fr]"}`}>
           {!isPreviewing && (
@@ -1258,7 +1280,7 @@ export default function ProposalsPage() {
               <div>
                 <p className="font-black text-[#07183f]">{proposal.address}</p>
                 <p className="mt-1 text-sm text-slate-500">{proposal.customerName} <span className="mx-2">•</span> Assigned to Jonathan Gonzalez</p>
-                <p className="mt-1 text-xs text-slate-500">{proposal.status === "Draft" ? "Created" : proposal.status === "Sent" ? "Sent" : proposal.status === "Signed" ? `Signed by ${proposal.signedBy || proposal.customerName}` : "Viewed"} {proposal.status === "Signed" ? "" : "by Jonathan Gonzalez"} <span className="mx-1">•</span> {proposal.signedAt ? new Date(proposal.signedAt).toLocaleString() : "Today"}⌄</p>
+                <p className="mt-1 text-xs text-slate-500">{proposal.status === "Draft" ? "Created" : proposal.status === "Sent" ? "Sent" : proposal.status === "Won" || proposal.status === "Signed" ? `Signed by ${proposal.signedBy || proposal.customerName}` : "Viewed"} {proposal.status === "Won" || proposal.status === "Signed" ? "" : "by Jonathan Gonzalez"} <span className="mx-1">•</span> {proposal.signedAt ? new Date(proposal.signedAt).toLocaleString() : "Today"}⌄</p>
               </div>
             </div>
             </button>
@@ -1267,7 +1289,7 @@ export default function ProposalsPage() {
                 <p className="font-black text-slate-600">${proposal.total.toLocaleString()}</p>
                 <p className="mt-1 text-xs font-bold uppercase text-slate-500">{proposal.selectedOption || "BEST"}</p>
               </div>
-              <span className={`rounded-full px-4 py-1 text-sm font-black ${proposal.status === "Draft" ? "bg-slate-500 text-white" : proposal.status === "Sent" ? "bg-sky-500 text-white" : proposal.status === "Signed" ? "bg-emerald-500 text-white" : "bg-yellow-400 text-slate-900"}`}>{proposal.status === "Approved" ? "Viewed" : proposal.status}</span>
+              <span className={`rounded-full px-4 py-1 text-sm font-black ${proposal.status === "Draft" ? "bg-slate-500 text-white" : proposal.status === "Sent" ? "bg-sky-500 text-white" : proposal.status === "Won" || proposal.status === "Signed" ? "bg-emerald-500 text-white" : "bg-yellow-400 text-slate-900"}`}>{proposal.status === "Approved" ? "Viewed" : proposal.status}</span>
               <button type="button" onClick={() => handleDeleteProposal(proposal)} className="rounded-full bg-red-50 px-3 py-1 text-xs font-black text-red-700">Delete</button>
               <span className="text-xl font-black text-slate-500">⋯</span>
             </div>

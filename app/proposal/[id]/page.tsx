@@ -10,7 +10,7 @@ type Proposal = {
   address: string;
   scope: string;
   total: number;
-  status: "Draft" | "Sent" | "Viewed" | "Signed" | "Approved";
+  status: "Draft" | "Sent" | "Viewed" | "Signed" | "Won" | "Approved";
   title: string;
   summary: string;
   coverPhoto?: string;
@@ -257,12 +257,20 @@ export default function CustomerProposalPage() {
       setProposal(viewedProposal);
       setSelectedOption(viewedProposal.selectedOption || "better");
       setSignatureName(viewedProposal.signedBy || "");
+
+      if (viewedProposal.status === "Viewed") {
+        await fetch("/api/proposals/share", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(viewedProposal),
+        }).catch(() => null);
+      }
     }
 
     void loadProposal();
   }, [proposalId]);
 
-  function handleSignProposal() {
+  async function handleSignProposal() {
     if (!proposal || !signatureName.trim()) return;
     if (!termsAccepted || termsConfirmation.trim().toUpperCase() !== "AGREED") {
       setNotice("Please accept the terms and type AGREED before signing.");
@@ -275,7 +283,7 @@ export default function CustomerProposalPage() {
 
     const signedProposal: Proposal = {
       ...proposal,
-      status: "Signed",
+      status: "Won",
       selectedOption,
       total: selectedOptionTotal,
       signedBy: signatureName.trim(),
@@ -290,7 +298,15 @@ export default function CustomerProposalPage() {
     window.localStorage.setItem("xrp-crm-proposals", JSON.stringify(updatedProposals));
     window.dispatchEvent(new StorageEvent("storage", { key: "xrp-crm-proposals", newValue: JSON.stringify(updatedProposals) }));
     setProposal(signedProposal);
-    setNotice("Thank you. Your signed proposal has been submitted to XRP Roofing.");
+    setNotice("Submitting your signed proposal to XRP Roofing...");
+
+    const response = await fetch("/api/proposals/share", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(signedProposal),
+    }).catch(() => null);
+
+    setNotice(response?.ok ? "Thank you. Your signed proposal has been submitted to XRP Roofing." : "Your signature was saved on this device, but XRP Roofing could not be notified. Please call the office.");
   }
 
   function getSignaturePoint(event: React.PointerEvent<HTMLCanvasElement>) {
@@ -413,9 +429,9 @@ export default function CustomerProposalPage() {
           <div className="mt-7 rounded-2xl border border-slate-200 p-5">
             <label className="block text-sm font-black text-slate-800">
               Type your full name to sign
-              <input value={signatureName} onChange={(event) => setSignatureName(event.target.value)} disabled={proposal.status === "Signed"} className="mt-3 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-normal outline-none disabled:bg-slate-100" placeholder="Customer full name" />
+              <input value={signatureName} onChange={(event) => setSignatureName(event.target.value)} disabled={proposal.status === "Signed" || proposal.status === "Won"} className="mt-3 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-normal outline-none disabled:bg-slate-100" placeholder="Customer full name" />
             </label>
-            {proposal.status !== "Signed" && (
+            {proposal.status !== "Signed" && proposal.status !== "Won" && (
               <div className="mt-4 rounded-2xl bg-slate-50 p-4">
                 <div>
                   <div className="mb-2 flex items-center justify-between gap-3">
@@ -434,7 +450,7 @@ export default function CustomerProposalPage() {
                 </label>
               </div>
             )}
-            {proposal.status === "Signed" ? (
+            {proposal.status === "Signed" || proposal.status === "Won" ? (
               <div className="mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">
                 <p>Signed by {proposal.signedBy} on {proposal.signedAt ? new Date(proposal.signedAt).toLocaleString() : "today"}.</p>
                 {proposal.signatureData && <Image src={proposal.signatureData} alt="Customer signature" width={360} height={110} className="mt-3 max-h-28 w-auto rounded-lg bg-white object-contain p-2" />}
