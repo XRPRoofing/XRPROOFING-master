@@ -1,21 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
+import { normalizeSupabaseUrl } from "@/lib/supabase/url";
 
 const invoiceSchema = z.record(z.string(), z.unknown()).and(z.object({ id: z.string().min(1) }));
 
-function getSupabaseUrl() {
-  const value = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
-  if (!value) return null;
-  if (value.startsWith("http://") || value.startsWith("https://")) return value;
-  return `https://${value}.supabase.co`;
-}
-
 function getAdminClient() {
-  const url = getSupabaseUrl();
+  const url = normalizeSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL);
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!url || !key) return null;
+  if (!key) return null;
 
   return createClient(url, key, { auth: { persistSession: false } });
 }
