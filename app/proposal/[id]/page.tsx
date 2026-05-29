@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Proposal = {
   id: string;
@@ -19,6 +19,7 @@ type Proposal = {
   terms: string;
   signedAt?: string;
   signedBy?: string;
+  signatureData?: string;
   selectedOption?: "good" | "better" | "best";
   inspectionPhotos?: InspectionPhoto[];
   packages?: {
@@ -213,7 +214,12 @@ export default function CustomerProposalPage() {
   const [proposal, setProposal] = useState<Proposal | null>(null);
   const [selectedOption, setSelectedOption] = useState<"good" | "better" | "best">("better");
   const [signatureName, setSignatureName] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsConfirmation, setTermsConfirmation] = useState("");
+  const [signatureData, setSignatureData] = useState("");
+  const [isDrawingSignature, setIsDrawingSignature] = useState(false);
   const [notice, setNotice] = useState("");
+  const signatureCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const packageOptions = useMemo(() => normalizePackages(proposal?.packages), [proposal]);
   const inspectionPhotos = useMemo(() => normalizeInspectionPhotos(proposal?.inspectionPhotos).filter((photo) => photo.image || photo.note), [proposal]);
@@ -258,6 +264,14 @@ export default function CustomerProposalPage() {
 
   function handleSignProposal() {
     if (!proposal || !signatureName.trim()) return;
+    if (!termsAccepted || termsConfirmation.trim().toUpperCase() !== "AGREED") {
+      setNotice("Please accept the terms and type AGREED before signing.");
+      return;
+    }
+    if (!signatureData) {
+      setNotice("Please draw your signature before signing.");
+      return;
+    }
 
     const signedProposal: Proposal = {
       ...proposal,
@@ -265,6 +279,7 @@ export default function CustomerProposalPage() {
       selectedOption,
       total: selectedOptionTotal,
       signedBy: signatureName.trim(),
+      signatureData,
       signedAt: new Date().toISOString(),
     };
 
@@ -276,6 +291,64 @@ export default function CustomerProposalPage() {
     window.dispatchEvent(new StorageEvent("storage", { key: "xrp-crm-proposals", newValue: JSON.stringify(updatedProposals) }));
     setProposal(signedProposal);
     setNotice("Thank you. Your signed proposal has been submitted to XRP Roofing.");
+  }
+
+  function getSignaturePoint(event: React.PointerEvent<HTMLCanvasElement>) {
+    const canvas = signatureCanvasRef.current;
+    if (!canvas) return null;
+
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (event.clientX - rect.left) * (canvas.width / rect.width),
+      y: (event.clientY - rect.top) * (canvas.height / rect.height),
+    };
+  }
+
+  function handleSignatureStart(event: React.PointerEvent<HTMLCanvasElement>) {
+    const canvas = signatureCanvasRef.current;
+    const point = getSignaturePoint(event);
+    if (!canvas || !point) return;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    canvas.setPointerCapture(event.pointerId);
+    context.strokeStyle = "#07183f";
+    context.lineWidth = 3;
+    context.lineCap = "round";
+    context.beginPath();
+    context.moveTo(point.x, point.y);
+    setIsDrawingSignature(true);
+  }
+
+  function handleSignatureMove(event: React.PointerEvent<HTMLCanvasElement>) {
+    if (!isDrawingSignature) return;
+
+    const canvas = signatureCanvasRef.current;
+    const point = getSignaturePoint(event);
+    if (!canvas || !point) return;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    context.lineTo(point.x, point.y);
+    context.stroke();
+    setSignatureData(canvas.toDataURL("image/png"));
+  }
+
+  function handleSignatureEnd() {
+    setIsDrawingSignature(false);
+    const canvas = signatureCanvasRef.current;
+    if (canvas) setSignatureData(canvas.toDataURL("image/png"));
+  }
+
+  function handleClearSignature() {
+    const canvas = signatureCanvasRef.current;
+    const context = canvas?.getContext("2d");
+    if (!canvas || !context) return;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    setSignatureData("");
   }
 
   if (!proposal) {
@@ -342,8 +415,30 @@ export default function CustomerProposalPage() {
               Type your full name to sign
               <input value={signatureName} onChange={(event) => setSignatureName(event.target.value)} disabled={proposal.status === "Signed"} className="mt-3 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-normal outline-none disabled:bg-slate-100" placeholder="Customer full name" />
             </label>
+            {proposal.status !== "Signed" && (
+              <div className="mt-4 rounded-2xl bg-slate-50 p-4">
+                <div>
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <p className="text-sm font-black text-slate-800">Draw your signature</p>
+                    <button type="button" onClick={handleClearSignature} className="text-xs font-black text-blue-700">Clear</button>
+                  </div>
+                  <canvas ref={signatureCanvasRef} width={900} height={260} onPointerDown={handleSignatureStart} onPointerMove={handleSignatureMove} onPointerUp={handleSignatureEnd} onPointerLeave={handleSignatureEnd} className="h-40 w-full touch-none rounded-xl border border-slate-300 bg-white" />
+                </div>
+                <label className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-700">
+                  <input type="checkbox" checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} className="mt-1 h-4 w-4 rounded border-slate-300" />
+                  <span>I have read and accept the Terms and Conditions for this proposal.</span>
+                </label>
+                <label className="mt-4 block text-sm font-black text-slate-800">
+                  Type AGREED to confirm acceptance
+                  <input value={termsConfirmation} onChange={(event) => setTermsConfirmation(event.target.value)} className="mt-3 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-normal uppercase outline-none" placeholder="AGREED" />
+                </label>
+              </div>
+            )}
             {proposal.status === "Signed" ? (
-              <p className="mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">Signed by {proposal.signedBy} on {proposal.signedAt ? new Date(proposal.signedAt).toLocaleString() : "today"}.</p>
+              <div className="mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">
+                <p>Signed by {proposal.signedBy} on {proposal.signedAt ? new Date(proposal.signedAt).toLocaleString() : "today"}.</p>
+                {proposal.signatureData && <Image src={proposal.signatureData} alt="Customer signature" width={360} height={110} className="mt-3 max-h-28 w-auto rounded-lg bg-white object-contain p-2" />}
+              </div>
             ) : (
               <button type="button" onClick={handleSignProposal} className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white">Accept and sign proposal</button>
             )}
