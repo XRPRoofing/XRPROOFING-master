@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 
-type InvoiceStatus = "Unpaid" | "Partially Paid" | "Paid" | "Overdue" | "Void";
-type PaymentMethod = "Cash" | "Check" | "Bank Transfer" | "Credit Card" | "Zelle";
+type InvoiceStatus = "Draft" | "Sent" | "Pending" | "Due Soon" | "Overdue" | "Partially Paid" | "Paid" | "Voided";
+type PaymentMethod = "Cash" | "Check" | "Bank Transfer" | "Credit Card" | "Zelle" | "Stripe ACH" | "Stripe Card";
 
 type InvoiceLineItem = {
   description: string;
@@ -66,7 +66,7 @@ const initialInvoices: Invoice[] = [
     paymentTerms: "Payment due upon receipt unless otherwise agreed in writing.",
     warrantyNotes: "Warranty begins after final payment is received.",
     discount: 500,
-    status: "Unpaid",
+    status: "Sent",
     lineItems: [{ description: "Roofing labor and materials", quantity: 1, unitPrice: 18500, tax: 7.8 }],
     payments: [],
     activity: ["Invoice created"],
@@ -127,6 +127,15 @@ const emailTemplates = {
   "Paid receipt": "Thank you. Your payment has been received and your invoice is marked paid.",
 };
 
+const filterOptions = ["All", "Paid clients", "Unpaid clients", "Overdue accounts"] as const;
+const integrations = [
+  { group: "Payment gateways", items: ["Stripe", "PayPal", "Square"] },
+  { group: "Accounting", items: ["QuickBooks", "Xero"] },
+  { group: "Communication", items: ["Gmail", "Outlook", "Twilio"] },
+  { group: "CRM / Automation", items: ["Zapier", "Webhooks"] },
+  { group: "Storage", items: ["Google Drive", "Dropbox"] },
+];
+
 function currency(value: number) {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
@@ -143,13 +152,19 @@ function getPaidAmount(invoice: Invoice) {
 }
 
 function getComputedStatus(invoice: Invoice): InvoiceStatus {
-  if (invoice.status === "Void") return "Void";
+  if (invoice.status === "Draft") return "Draft";
+  if (invoice.status === "Voided") return "Voided";
   const total = calculateTotals(invoice).finalTotal;
   const paid = getPaidAmount(invoice);
   if (paid >= total && total > 0) return "Paid";
   if (paid > 0) return "Partially Paid";
-  if (new Date(invoice.dueDate) < new Date(today)) return "Overdue";
-  return "Unpaid";
+  const dueDate = new Date(`${invoice.dueDate}T00:00:00`);
+  const currentDate = new Date(`${today}T00:00:00`);
+  const daysUntilDue = Math.ceil((dueDate.getTime() - currentDate.getTime()) / 86400000);
+  if (daysUntilDue < 0) return "Overdue";
+  if (daysUntilDue <= 3) return "Due Soon";
+  if (invoice.status === "Sent") return "Pending";
+  return invoice.status === "Pending" || invoice.status === "Due Soon" || invoice.status === "Overdue" ? invoice.status : "Pending";
 }
 
 function createInvoiceNumber(count: number) {
@@ -159,8 +174,10 @@ function createInvoiceNumber(count: number) {
 function statusBadgeClass(status: InvoiceStatus) {
   if (status === "Paid") return "bg-emerald-50 text-emerald-700 ring-emerald-100";
   if (status === "Partially Paid") return "bg-blue-50 text-blue-700 ring-blue-100";
+  if (status === "Due Soon") return "bg-amber-50 text-amber-700 ring-amber-100";
   if (status === "Overdue") return "bg-red-50 text-red-700 ring-red-100";
-  if (status === "Void") return "bg-slate-100 text-slate-600 ring-slate-200";
+  if (status === "Voided") return "bg-slate-100 text-slate-600 ring-slate-200";
+  if (status === "Draft") return "bg-slate-50 text-slate-700 ring-slate-200";
   return "bg-orange-50 text-orange-700 ring-orange-100";
 }
 
@@ -177,6 +194,9 @@ export default function InvoicesPage() {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [invoiceFilter, setInvoiceFilter] = useState<(typeof filterOptions)[number]>("All");
+  const [invoiceSearch, setInvoiceSearch] = useState("");
+  const [integrationNotice, setIntegrationNotice] = useState("");
   const [paymentForm, setPaymentForm] = useState({ amount: "", date: today, method: "Cash" as PaymentMethod, reference: "", notes: "" });
   const [sendForm, setSendForm] = useState({ template: "Invoice sent", subject: "Your XRP Roofing invoice", message: emailTemplates["Invoice sent"] });
   const [createForm, setCreateForm] = useState<Invoice>({
@@ -197,7 +217,7 @@ export default function InvoicesPage() {
     paymentTerms: "Payment due upon receipt unless otherwise agreed in writing.",
     warrantyNotes: "Warranty begins after final payment is received.",
     discount: 0,
-    status: "Unpaid",
+    status: "Draft",
     lineItems: [emptyLineItem],
     payments: [],
     activity: ["Invoice created"],
@@ -208,22 +228,50 @@ export default function InvoicesPage() {
     const total = invoices.reduce((sum, invoice) => sum + calculateTotals(invoice).finalTotal, 0);
     const paid = invoices.reduce((sum, invoice) => sum + getPaidAmount(invoice), 0);
     const balance = Math.max(total - paid, 0);
-    return { total, paid, balance };
+    const overdue = invoices.filter((invoice) => getComputedStatus(invoice) === "Overdue").length;
+    const pending = invoices.filter((invoice) => ["Pending", "Due Soon", "Overdue"].includes(getComputedStatus(invoice))).length;
+    const partial = invoices.filter((invoice) => getComputedStatus(invoice) === "Partially Paid").length;
+    const collectionRate = total > 0 ? Math.round((paid / total) * 100) : 0;
+    return { total, paid, balance, overdue, pending, partial, collectionRate };
   }, [invoices]);
+  const filteredInvoices = useMemo(() => {
+    const query = invoiceSearch.toLowerCase().trim();
+    return invoices.filter((invoice) => {
+      const status = getComputedStatus(invoice);
+      const matchesFilter =
+        invoiceFilter === "All" ||
+        (invoiceFilter === "Paid clients" && status === "Paid") ||
+        (invoiceFilter === "Unpaid clients" && status !== "Paid" && status !== "Voided") ||
+        (invoiceFilter === "Overdue accounts" && status === "Overdue");
+      const matchesSearch = !query || [invoice.clientName, invoice.invoiceNumber, invoice.propertyAddress]
+        .some((value) => value.toLowerCase().includes(query));
+      return matchesFilter && matchesSearch;
+    });
+  }, [invoiceFilter, invoiceSearch, invoices]);
+  const clientHistory = useMemo(() => {
+    if (!selectedInvoice) return null;
+    const clientInvoices = invoices.filter((invoice) => invoice.clientName === selectedInvoice.clientName);
+    const totalPaid = clientInvoices.reduce((sum, invoice) => sum + getPaidAmount(invoice), 0);
+    const outstandingBalance = clientInvoices.reduce((sum, invoice) => sum + Math.max(calculateTotals(invoice).finalTotal - getPaidAmount(invoice), 0), 0);
+    const payments = clientInvoices.flatMap((invoice) => invoice.payments.map((payment) => ({ ...payment, invoiceNumber: invoice.invoiceNumber })));
+    const lastPaymentDate = payments.map((payment) => payment.date).sort().at(-1) || "No payments yet";
+    const methods = Array.from(new Set(payments.map((payment) => payment.method)));
+    return { clientInvoices, totalPaid, outstandingBalance, payments, lastPaymentDate, methods };
+  }, [invoices, selectedInvoice]);
   const boardGroups = useMemo(() => {
     const groups: Record<"Unpaid" | "Partially Paid" | "Paid", Invoice[]> = { Unpaid: [], "Partially Paid": [], Paid: [] };
-    invoices.forEach((invoice) => {
+    filteredInvoices.forEach((invoice) => {
       const status = getComputedStatus(invoice);
       if (status === "Paid") groups.Paid.push(invoice);
       else if (status === "Partially Paid") groups["Partially Paid"].push(invoice);
       else groups.Unpaid.push(invoice);
     });
     return groups;
-  }, [invoices]);
+  }, [filteredInvoices]);
 
   function updateInvoice(nextInvoice: Invoice, activity?: string) {
     const status = getComputedStatus(nextInvoice);
-    const statusActivity = status !== nextInvoice.status ? [`Status changed to ${status}`] : [];
+    const statusActivity = status !== nextInvoice.status ? [`Status changed to ${status}`, `Notification: ${status === "Paid" ? "New payment received" : status === "Partially Paid" ? "Partial payment made" : status === "Overdue" ? "Invoice overdue" : `Invoice ${status.toLowerCase()}`}`] : [];
     const updatedInvoice = { ...nextInvoice, status, activity: [...(activity ? [activity] : []), ...statusActivity, ...nextInvoice.activity] };
     setInvoices((currentInvoices) => currentInvoices.map((invoice) => invoice.id === updatedInvoice.id ? updatedInvoice : invoice));
   }
@@ -253,15 +301,55 @@ export default function InvoicesPage() {
     const amount = Number(paymentForm.amount) || 0;
     if (amount <= 0) return;
     const payment: Payment = { ...paymentForm, amount, offline };
-    updateInvoice({ ...selectedInvoice, payments: [...selectedInvoice.payments, payment] }, `Payment recorded: ${currency(amount)}`);
+    updateInvoice({ ...selectedInvoice, payments: [...selectedInvoice.payments, payment] }, `${offline ? "Offline payment" : "Manual payment"} recorded: ${currency(amount)}`);
     setPaymentForm({ amount: "", date: today, method: "Cash", reference: "", notes: "" });
     setShowPaymentModal(false);
   }
 
-  function handleSendInvoice() {
+  async function handleSendInvoice() {
     if (!selectedInvoice) return;
-    updateInvoice(selectedInvoice, `Invoice sent using ${sendForm.template} template`);
-    setShowSendModal(false);
+    const invoiceLink = `${window.location.origin}/invoice/${encodeURIComponent(selectedInvoice.id)}`;
+    const totals = calculateTotals(selectedInvoice);
+    const balance = Math.max(totals.finalTotal - getPaidAmount(selectedInvoice), 0);
+
+    setSendForm((currentForm) => ({ ...currentForm, message: "Sending invoice email..." }));
+
+    try {
+      const shareResponse = await fetch("/api/invoices/share", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(selectedInvoice),
+      });
+
+      if (!shareResponse.ok) {
+        throw new Error("Invoice sharing is not configured. Please set up the invoice_shares table before sending customer payment links.");
+      }
+
+      const response = await fetch("/api/invoices/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          toName: selectedInvoice.clientName,
+          toEmail: selectedInvoice.email,
+          subject: sendForm.subject,
+          message: sendForm.message,
+          invoiceNumber: selectedInvoice.invoiceNumber,
+          invoiceLink,
+          balance: currency(balance),
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Unable to send invoice email");
+      }
+
+      updateInvoice({ ...selectedInvoice, status: "Sent" }, `Invoice sent with online payment link using ${sendForm.template} template`);
+      setShowSendModal(false);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Invoice email could not be sent.";
+      setSendForm((currentForm) => ({ ...currentForm, message: `${sendForm.message}\n\n${message}` }));
+    }
   }
 
   function handleDownloadPdf(invoice: Invoice) {
@@ -372,18 +460,38 @@ export default function InvoicesPage() {
         </div>
         <button onClick={() => setShowCreateModal(true)} className="w-fit rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white shadow-lg shadow-orange-200">+ New invoice</button>
         </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-3">
+        <div className="mt-6 grid gap-3 md:grid-cols-3 xl:grid-cols-6">
           <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-xs font-black uppercase tracking-wider text-slate-500">Invoice total</p>
-            <p className="mt-2 text-2xl font-black text-[#07183f]">{currency(boardTotals.total)}</p>
+            <p className="text-xs font-black uppercase tracking-wider text-slate-500">Outstanding balance</p>
+            <p className="mt-2 text-2xl font-black text-[#07183f]">{currency(boardTotals.balance)}</p>
           </div>
           <div className="rounded-2xl bg-emerald-50 p-4">
-            <p className="text-xs font-black uppercase tracking-wider text-emerald-700">Payments received</p>
+            <p className="text-xs font-black uppercase tracking-wider text-emerald-700">Paid this month</p>
             <p className="mt-2 text-2xl font-black text-emerald-800">{currency(boardTotals.paid)}</p>
           </div>
           <div className="rounded-2xl bg-orange-50 p-4">
-            <p className="text-xs font-black uppercase tracking-wider text-orange-700">Open balance</p>
-            <p className="mt-2 text-2xl font-black text-orange-800">{currency(boardTotals.balance)}</p>
+            <p className="text-xs font-black uppercase tracking-wider text-orange-700">Pending payments</p>
+            <p className="mt-2 text-2xl font-black text-orange-800">{boardTotals.pending}</p>
+          </div>
+          <div className="rounded-2xl bg-red-50 p-4">
+            <p className="text-xs font-black uppercase tracking-wider text-red-700">Overdue invoices</p>
+            <p className="mt-2 text-2xl font-black text-red-800">{boardTotals.overdue}</p>
+          </div>
+          <div className="rounded-2xl bg-blue-50 p-4">
+            <p className="text-xs font-black uppercase tracking-wider text-blue-700">Partial payments</p>
+            <p className="mt-2 text-2xl font-black text-blue-800">{boardTotals.partial}</p>
+          </div>
+          <div className="rounded-2xl bg-violet-50 p-4">
+            <p className="text-xs font-black uppercase tracking-wider text-violet-700">Collection rate</p>
+            <p className="mt-2 text-2xl font-black text-violet-800">{boardTotals.collectionRate}%</p>
+          </div>
+        </div>
+        <div className="mt-5 flex flex-col gap-3 lg:flex-row">
+          <input value={invoiceSearch} onChange={(event) => setInvoiceSearch(event.target.value)} className="min-w-0 flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold outline-none focus:border-blue-300" placeholder="Search by client name, invoice number, property address..." />
+          <div className="flex flex-wrap gap-2">
+            {filterOptions.map((option) => (
+              <button key={option} type="button" onClick={() => setInvoiceFilter(option)} className={`rounded-2xl px-4 py-3 text-sm font-black ${invoiceFilter === option ? "bg-[#07183f] text-white" : "bg-slate-50 text-slate-600"}`}>{option}</button>
+            ))}
           </div>
         </div>
       </div>
@@ -464,7 +572,7 @@ export default function InvoicesPage() {
               <button onClick={() => handleDownloadPdf(selectedInvoice)} className="rounded-2xl border border-slate-200 px-4 py-3 font-bold text-slate-700">Download PDF</button>
               <button onClick={() => setShowPaymentModal(true)} className="rounded-2xl bg-emerald-50 px-4 py-3 font-bold text-emerald-700">Record Payment</button>
               <button onClick={handleMarkPaidOffline} className="rounded-2xl bg-slate-100 px-4 py-3 font-bold text-slate-700">Mark Paid Offline</button>
-              <button onClick={() => updateInvoice({ ...selectedInvoice, status: "Void" }, "Invoice voided")} className="rounded-2xl bg-red-50 px-4 py-3 font-bold text-red-700">Void Invoice</button>
+              <button onClick={() => updateInvoice({ ...selectedInvoice, status: "Voided" }, "Invoice voided")} className="rounded-2xl bg-red-50 px-4 py-3 font-bold text-red-700">Void Invoice</button>
             </div>
             <div className="mt-6">{renderInvoiceFields(selectedInvoice, editing, updateInvoice)}</div>
             <div className="mt-6 grid gap-4 lg:grid-cols-2">
@@ -482,6 +590,44 @@ export default function InvoicesPage() {
                 </div>
               </section>
             </div>
+            {clientHistory && (
+              <section className="mt-6 rounded-3xl bg-slate-50 p-5">
+                <h3 className="font-black text-[#07183f]">Client Payment History</h3>
+                <div className="mt-4 grid gap-3 md:grid-cols-5">
+                  <div className="rounded-2xl bg-white p-4"><p className="text-xs font-black uppercase text-slate-500">Invoices sent</p><p className="mt-2 text-xl font-black text-[#07183f]">{clientHistory.clientInvoices.length}</p></div>
+                  <div className="rounded-2xl bg-white p-4"><p className="text-xs font-black uppercase text-slate-500">Total paid</p><p className="mt-2 text-xl font-black text-emerald-700">{currency(clientHistory.totalPaid)}</p></div>
+                  <div className="rounded-2xl bg-white p-4"><p className="text-xs font-black uppercase text-slate-500">Outstanding</p><p className="mt-2 text-xl font-black text-orange-700">{currency(clientHistory.outstandingBalance)}</p></div>
+                  <div className="rounded-2xl bg-white p-4"><p className="text-xs font-black uppercase text-slate-500">Last payment</p><p className="mt-2 text-sm font-black text-[#07183f]">{clientHistory.lastPaymentDate}</p></div>
+                  <div className="rounded-2xl bg-white p-4"><p className="text-xs font-black uppercase text-slate-500">Methods used</p><p className="mt-2 text-sm font-black text-[#07183f]">{clientHistory.methods.join(", ") || "None"}</p></div>
+                </div>
+                <div className="mt-4 space-y-2">
+                  {clientHistory.payments.map((payment, index) => (
+                    <p key={`${payment.invoiceNumber}-${index}`} className="rounded-2xl bg-white p-3 text-sm font-semibold text-slate-600">{payment.date} · {payment.invoiceNumber} · {currency(payment.amount)} · {payment.method} · {payment.reference || "No reference"}</p>
+                  ))}
+                  {clientHistory.payments.length === 0 && <p className="rounded-2xl bg-white p-3 text-sm font-semibold text-slate-500">No client payments recorded yet.</p>}
+                </div>
+              </section>
+            )}
+            <section className="mt-6 rounded-3xl bg-slate-50 p-5">
+              <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
+                <div>
+                  <h3 className="font-black text-[#07183f]">Integrations</h3>
+                  <p className="mt-1 text-sm font-semibold text-slate-500">Connect payment, accounting, communication, automation, and storage platforms.</p>
+                </div>
+                <button type="button" onClick={() => setIntegrationNotice("Stripe is ready to connect. Add STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET to enable live payment links, successful payment sync, failed payment alerts, and auto-paid invoice updates.")} className="rounded-2xl bg-[#07183f] px-4 py-3 text-sm font-black text-white">Connect Stripe</button>
+              </div>
+              <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+                {integrations.map((integration) => (
+                  <div key={integration.group} className="rounded-2xl bg-white p-4">
+                    <p className="text-xs font-black uppercase tracking-wider text-slate-500">{integration.group}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {integration.items.map((item) => <span key={item} className="rounded-full bg-slate-50 px-3 py-1 text-xs font-black text-slate-600">{item}</span>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {integrationNotice && <p className="mt-4 rounded-2xl bg-blue-50 p-4 text-sm font-bold leading-6 text-blue-700">{integrationNotice}</p>}
+            </section>
           </div>
         </div>
       )}
@@ -513,7 +659,7 @@ export default function InvoicesPage() {
               <input type="number" value={paymentForm.amount} onChange={(event) => setPaymentForm({ ...paymentForm, amount: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Payment amount" />
               <input type="date" value={paymentForm.date} onChange={(event) => setPaymentForm({ ...paymentForm, date: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" />
               <select value={paymentForm.method} onChange={(event) => setPaymentForm({ ...paymentForm, method: event.target.value as PaymentMethod })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none">
-                {(["Cash", "Check", "Bank Transfer", "Credit Card", "Zelle"] as PaymentMethod[]).map((method) => <option key={method}>{method}</option>)}
+                {(["Cash", "Check", "Bank Transfer", "Zelle"] as PaymentMethod[]).map((method) => <option key={method}>{method}</option>)}
               </select>
               <input value={paymentForm.reference} onChange={(event) => setPaymentForm({ ...paymentForm, reference: event.target.value })} className="rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Reference number" />
               <textarea value={paymentForm.notes} onChange={(event) => setPaymentForm({ ...paymentForm, notes: event.target.value })} className="min-h-28 rounded-2xl border border-slate-200 px-4 py-3 outline-none" placeholder="Notes" />
@@ -540,6 +686,7 @@ export default function InvoicesPage() {
             <div className="mt-6 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
               <p className="font-black text-[#07183f]">{selectedInvoice.invoiceNumber}</p>
               <p>To: {selectedInvoice.clientName} · {selectedInvoice.email}</p>
+              <p className="font-bold text-blue-700">Customer can pay online by ACH bank transfer or credit card.</p>
               <p>{sendForm.message}</p>
             </div>
             <div className="mt-6 flex justify-end gap-3">

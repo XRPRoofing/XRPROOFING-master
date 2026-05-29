@@ -8,7 +8,7 @@ import MobileCtaBar from "@/components/layout/MobileCtaBar";
 
 export default function AppChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isStandaloneRoute = pathname?.startsWith("/crm") || pathname?.startsWith("/proposal") || pathname?.startsWith("/login") || pathname?.startsWith("/signup") || pathname?.startsWith("/forgot-password") || pathname?.startsWith("/reset-password");
+  const isStandaloneRoute = pathname?.startsWith("/crm") || pathname?.startsWith("/proposal") || pathname?.startsWith("/invoice") || pathname?.startsWith("/login") || pathname?.startsWith("/signup") || pathname?.startsWith("/forgot-password") || pathname?.startsWith("/reset-password");
 
   if (isStandaloneRoute) {
     return <>{children}</>;
