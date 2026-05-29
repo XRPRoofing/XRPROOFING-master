@@ -693,7 +693,6 @@ export default function ProposalsPage() {
     setSendNotice("Sending proposal email...");
 
     try {
-      let sharingWarning = "";
       const shareResponse = await fetch("/api/proposals/share", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -701,8 +700,7 @@ export default function ProposalsPage() {
       });
 
       if (!shareResponse.ok) {
-        const data = await shareResponse.json() as { error?: string };
-        sharingWarning = data.error || "Proposal sharing storage is not configured";
+        await shareResponse.json().catch(() => null);
       }
 
       const response = await fetch("/api/proposals/send", {
@@ -726,7 +724,7 @@ export default function ProposalsPage() {
         throw new Error(data.error || "Unable to send proposal email");
       }
 
-      setSendNotice(sharingWarning ? `Proposal sent to ${sendForm.toEmail}. Storage warning: ${sharingWarning}` : `Proposal sent to ${sendForm.toEmail}.`);
+      setSendNotice(`Proposal sent to ${sendForm.toEmail}. Link: ${proposalLink}`);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Email could not be sent.";
       setSendNotice(`${message} Proposal link: ${proposalLink}`);
