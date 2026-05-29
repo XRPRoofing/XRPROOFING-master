@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Filter, GripVertical, MoreHorizontal, Plus, Search, X } from "lucide-react";
+import { CalendarDays, Filter, GripVertical, MessageSquare, MoreHorizontal, Phone, Plus, Search, StickyNote, X } from "lucide-react";
 import { customers, leadStages, leads } from "@/lib/crm-data";
 import type { Customer, Lead, LeadStage } from "@/types/crm";
 
 const jobAges = ["Now", "+ 1 day", "+ 5 days", "+ 12 days", "+ 47 days", "+ 94 days"];
-const updateAges = ["Created 6 hours ago", "Updated 7 hours ago", "Updated a day ago", "Updated 4 days ago", "Updated 20 days ago", "Updated 2 months ago"];
 declare global {
   interface Window {
     google?: {
@@ -39,6 +38,37 @@ const arizonaBounds = {
 };
 const jobsStorageKey = "xrp-crm-jobs-board";
 const customersStorageKey = "xrp-crm-customers";
+
+const badgeStyles = [
+  "bg-blue-50 text-blue-700 ring-blue-100",
+  "bg-emerald-50 text-emerald-700 ring-emerald-100",
+  "bg-orange-50 text-orange-700 ring-orange-100",
+  "bg-violet-50 text-violet-700 ring-violet-100",
+];
+
+function getFundingType(job: Lead) {
+  return job.source.toLowerCase().includes("insurance") || job.value > 30000 ? "Insurance" : "Cash";
+}
+
+function getPriority(job: Lead) {
+  if (job.value >= 70000) return "Urgent";
+  if (job.value >= 30000) return "High";
+  if (job.stage === "in_progress") return "Active";
+  return "Normal";
+}
+
+function JobBadge({ label, index }: { label: string; index: number }) {
+  return <span className={`rounded-full px-2.5 py-1 text-[11px] font-black ring-1 ${badgeStyles[index % badgeStyles.length]}`}>{label}</span>;
+}
+
+function CardAction({ icon: Icon, label }: { icon: typeof Phone; label: string }) {
+  return (
+    <button type="button" className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-2.5 py-1.5 text-[11px] font-black text-slate-600 ring-1 ring-slate-200 transition hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-100">
+      <Icon className="h-3.5 w-3.5" />
+      {label}
+    </button>
+  );
+}
 
 function getCityFromAddress(address: string) {
   const parts = address.split(",").map((part) => part.trim()).filter(Boolean);
@@ -224,17 +254,17 @@ export default function LeadsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="sticky top-20 z-30 space-y-6 bg-slate-100 pb-4 pt-1">
+    <div className="-mx-4 -my-6 min-h-[calc(100vh-5rem)] bg-slate-100 px-4 py-6 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div className="sticky top-20 z-30 space-y-5 border-b border-slate-200/80 bg-slate-100/95 pb-5 pt-1 backdrop-blur">
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Pipeline</p>
-            <h1 className="mt-2 text-3xl font-black text-[#07183f]">Jobs board</h1>
-            <p className="mt-2 text-slate-600">Drag-ready Kanban workflow for roofing jobs from first contact through completion.</p>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-orange-600">Roofing operations</p>
+            <h1 className="mt-2 text-3xl font-black tracking-tight text-[#07183f]">Jobs board</h1>
+            <p className="mt-2 max-w-2xl text-sm font-medium text-slate-600">A clean production pipeline for inspections, estimates, insurance review, active installs, and completed roofing jobs.</p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <button onClick={() => setSearch("")} className="rounded-2xl border border-slate-200 bg-white px-4 py-3 font-bold text-slate-700"><Filter className="mr-2 inline h-4 w-4" />Clear filter</button>
-            <button onClick={() => setShowForm(true)} className="rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white shadow-lg shadow-orange-200"><Plus className="mr-2 inline h-4 w-4" />Add job</button>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={() => setSearch("")} className="inline-flex items-center rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:border-blue-200 hover:text-blue-700"><Filter className="mr-2 h-4 w-4" />Clear filters</button>
+            <button onClick={() => setShowForm(true)} className="inline-flex items-center rounded-2xl bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-orange-200 transition hover:bg-orange-600"><Plus className="mr-2 h-4 w-4" />Add job</button>
           </div>
         </div>
 
@@ -259,60 +289,74 @@ export default function LeadsPage() {
           </form>
         )}
 
-        <div className="relative max-w-xl">
-          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-          <input value={search} onChange={(event) => setSearch(event.target.value)} className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-12 pr-4 outline-none" placeholder="Search by address, customer, city, roof type, source..." />
+        <div className="grid gap-3 lg:grid-cols-[minmax(260px,1fr)_180px_180px]">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-12 pr-4 text-sm font-semibold text-slate-700 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50" placeholder="Search address, customer, city, roof type, source..." />
+          </div>
+          <select className="rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm font-bold text-slate-600 shadow-sm outline-none">
+            <option>All roof types</option>
+          </select>
+          <select className="rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm font-bold text-slate-600 shadow-sm outline-none">
+            <option>All assignees</option>
+          </select>
         </div>
       </div>
 
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      <div className="mt-6 flex gap-5 overflow-x-auto pb-6">
         {leadStages.map((stage) => {
           const stageJobs = filteredJobs.filter((job) => job.stage === stage.id);
           const stageValue = stageJobs.reduce((total, job) => total + job.value, 0);
           return (
-            <section key={stage.id} onDragOver={(event) => event.preventDefault()} onDrop={() => draggedJobId && updateJobStage(draggedJobId, stage.id)} className="flex max-h-[calc(100vh-18rem)] min-h-[34rem] w-80 shrink-0 flex-col rounded-3xl bg-slate-100 p-4">
-              <div className="mb-4 shrink-0 border-b border-slate-300 bg-slate-100 pb-4 pt-1">
+            <section key={stage.id} onDragOver={(event) => event.preventDefault()} onDrop={() => draggedJobId && updateJobStage(draggedJobId, stage.id)} className="flex max-h-[calc(100vh-18rem)] min-h-[34rem] w-[22rem] shrink-0 flex-col rounded-[1.75rem] border border-slate-200 bg-slate-50/90 p-3 shadow-sm">
+              <div className="sticky top-0 z-10 mb-3 shrink-0 rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="text-base font-black text-slate-700">{stage.label} ({stageJobs.length})</h2>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-600 ring-1 ring-slate-200">🏠 Default</span>
-                      {stage.id === "new_lead" && <span className="rounded-full bg-pink-50 px-3 py-1 text-xs font-bold text-pink-700 ring-1 ring-pink-100">Property Management</span>}
-                    </div>
+                    <h2 className="text-sm font-black uppercase tracking-wide text-[#07183f]">{stage.label}</h2>
+                    <p className="mt-1 text-xs font-bold text-slate-500">{stageJobs.length} jobs · ${stageValue.toLocaleString()}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-black text-slate-500">${stageValue.toLocaleString()}</p>
-                    <button className="mt-1 rounded-xl p-2 text-slate-400 hover:bg-white"><MoreHorizontal className="h-5 w-5" /></button>
-                  </div>
+                  <button className="rounded-xl p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"><MoreHorizontal className="h-5 w-5" /></button>
                 </div>
               </div>
 
-              <div className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
+              <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-1 pb-1">
                 {stageJobs.map((job, index) => (
-                  <article key={job.id} draggable onDragStart={() => setDraggedJobId(job.id)} onDragEnd={() => setDraggedJobId(null)} className="cursor-grab rounded-3xl border border-slate-200 bg-white p-4 text-sm shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+                  <article key={job.id} draggable onDragStart={() => setDraggedJobId(job.id)} onDragEnd={() => setDraggedJobId(null)} className="group cursor-grab rounded-3xl border border-slate-200 bg-white p-4 text-sm shadow-sm transition hover:-translate-y-0.5 hover:border-blue-100 hover:shadow-xl active:cursor-grabbing">
                     <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="font-black leading-snug text-slate-900">{job.address}, {job.city}, AZ</p>
-                        <p className="mt-1 text-slate-500">{job.name}</p>
+                      <div className="min-w-0">
+                        <p className="text-base font-black leading-snug text-slate-950">{job.address}</p>
+                        <p className="mt-1 truncate text-xs font-bold text-slate-500">{job.name} · {job.city}, AZ</p>
                       </div>
-                      <span className="rounded-full bg-orange-50 p-2 text-xs">🏠</span>
+                      <GripVertical className="mt-1 h-4 w-4 shrink-0 text-slate-300" />
                     </div>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="rounded-lg bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">{job.roofType}</span>
-                      <span className="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">{job.source}</span>
-                      {job.value > 50000 && <span className="rounded-lg bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-100">Multiple</span>}
+                      <JobBadge label={job.roofType} index={0} />
+                      <JobBadge label={job.source} index={1} />
+                      <JobBadge label={getFundingType(job)} index={2} />
+                      <JobBadge label={getPriority(job)} index={3} />
                     </div>
 
-                    <div className="mt-4 border-t border-slate-100 pt-3">
-                      <p className="line-clamp-2 text-slate-600">{job.lastActivity}</p>
-                      <p className="mt-1 font-semibold text-[#0f2156]">{job.assignedTo}</p>
+                    <div className="mt-4 grid gap-2 border-t border-slate-100 pt-3 text-xs">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-bold text-slate-500">Assigned</span>
+                        <span className="truncate font-black text-[#07183f]">{job.assignedTo}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-bold text-slate-500">Updated</span>
+                        <span className={index % 3 === 0 ? "font-black text-orange-600" : "font-bold text-slate-600"}>{jobAges[index % jobAges.length]}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-bold text-slate-500">Value</span>
+                        <span className="font-black text-slate-900">${job.value.toLocaleString()}</span>
+                      </div>
                     </div>
 
-                    <div className="mt-4 flex items-center justify-between text-xs">
-                      <span className={index % 3 === 0 ? "font-bold text-red-500" : "text-slate-500"}>{jobAges[index % jobAges.length]}</span>
-                      <span className="text-slate-500">{updateAges[index % updateAges.length]}</span>
-                      <GripVertical className="h-4 w-4 text-slate-300" />
+                    <div className="mt-4 flex flex-wrap gap-2 opacity-100 transition md:opacity-0 md:group-hover:opacity-100">
+                      <CardAction icon={Phone} label="Call" />
+                      <CardAction icon={MessageSquare} label="SMS" />
+                      <CardAction icon={CalendarDays} label="Schedule" />
+                      <CardAction icon={StickyNote} label="Notes" />
                     </div>
                   </article>
                 ))}
