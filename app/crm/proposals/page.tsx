@@ -700,7 +700,8 @@ export default function ProposalsPage() {
       });
 
       if (!shareResponse.ok) {
-        await shareResponse.json().catch(() => null);
+        const data = await shareResponse.json().catch(() => null) as { error?: string } | null;
+        throw new Error(data?.error || "Proposal could not be saved for the customer link. Please configure proposal sharing before sending.");
       }
 
       const response = await fetch("/api/proposals/send", {

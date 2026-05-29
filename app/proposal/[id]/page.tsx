@@ -227,19 +227,17 @@ export default function CustomerProposalPage() {
       const publicProposal = publicProposalFallbacks.find((item) => item.id === proposalId);
       let serverProposal: Proposal | null = null;
 
-      if (!foundProposal) {
-        try {
-          const response = await fetch(`/api/proposals/share?id=${encodeURIComponent(proposalId)}`);
-          if (response.ok) {
-            const data = await response.json() as { proposal?: Proposal };
-            serverProposal = data.proposal || null;
-          }
-        } catch {}
-      }
+      try {
+        const response = await fetch(`/api/proposals/share?id=${encodeURIComponent(proposalId)}`);
+        if (response.ok) {
+          const data = await response.json() as { proposal?: Proposal };
+          serverProposal = data.proposal || null;
+        }
+      } catch {}
 
       if (!foundProposal && !serverProposal && !publicProposal) return;
 
-      const baseProposal = foundProposal || serverProposal || publicProposal;
+      const baseProposal = serverProposal || foundProposal || publicProposal;
       if (!baseProposal) return;
 
       const proposalWithDefaultTerms: Proposal = { ...baseProposal, terms: normalizeTerms(baseProposal.terms) };
