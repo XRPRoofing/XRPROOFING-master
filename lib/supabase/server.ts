@@ -1,13 +1,11 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { normalizeSupabaseUrl } from "@/lib/supabase/url";
 
-const fallbackSupabaseUrl = "https://lcchocuoeettbryfwlwq.supabase.co";
 const fallbackSupabaseAnonKey = "sb_publishable_W8F6R4IraBZIt79dC5y3qg_BqypPa9C";
 
 export function getSupabaseUrl() {
-  const value = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || fallbackSupabaseUrl;
-  if (value.startsWith("http://") || value.startsWith("https://")) return value;
-  return `https://${value}.supabase.co`;
+  return normalizeSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL);
 }
 
 export function getSupabaseAnonKey() {

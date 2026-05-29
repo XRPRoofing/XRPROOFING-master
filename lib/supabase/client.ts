@@ -1,8 +1,9 @@
 "use client";
 
 import { createBrowserClient } from "@supabase/ssr";
+import { normalizeSupabaseUrl } from "@/lib/supabase/url";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://lcchocuoeettbryfwlwq.supabase.co";
+const supabaseUrl = normalizeSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL);
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_W8F6R4IraBZIt79dC5y3qg_BqypPa9C";
 
 export function hasSupabaseConfig() {
