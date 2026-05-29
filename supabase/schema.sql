@@ -128,6 +128,18 @@ create table public.uploaded_files (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.proposal_shares (
+  id text primary key,
+  payload jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.invoice_shares (
+  id text primary key,
+  payload jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
 alter table public.users enable row level security;
 alter table public.customers enable row level security;
 alter table public.leads enable row level security;
@@ -138,6 +150,8 @@ alter table public.appointments enable row level security;
 alter table public.notes enable row level security;
 alter table public.activities enable row level security;
 alter table public.uploaded_files enable row level security;
+alter table public.proposal_shares enable row level security;
+alter table public.invoice_shares enable row level security;
 
 create policy "Authenticated users can read users" on public.users for select to authenticated using (true);
 create policy "Users can update own profile" on public.users for update to authenticated using (auth.uid() = id);
@@ -149,6 +163,8 @@ create policy "Authenticated users can read appointments" on public.appointments
 create policy "Admins can manage customers" on public.customers for all to authenticated using (exists (select 1 from public.users where id = auth.uid() and role = 'admin'));
 create policy "Admins can manage leads" on public.leads for all to authenticated using (exists (select 1 from public.users where id = auth.uid() and role = 'admin'));
 create policy "Admins can manage users" on public.users for all to authenticated using (exists (select 1 from public.users where id = auth.uid() and role = 'admin'));
+create policy "Service role can manage proposal shares" on public.proposal_shares for all using (auth.role() = 'service_role') with check (auth.role() = 'service_role');
+create policy "Service role can manage invoice shares" on public.invoice_shares for all using (auth.role() = 'service_role') with check (auth.role() = 'service_role');
 
 insert into public.customers (name, email, phone, property_address, roof_details, insurance_carrier, notes) values
 ('Priya Shah', 'priya@example.com', '(480) 555-0108', '3012 S Dobson Rd, Mesa, AZ', 'Concrete tile, 2,900 sq ft, underlayment replacement', 'State Farm', 'Approved job with deposit received.'),

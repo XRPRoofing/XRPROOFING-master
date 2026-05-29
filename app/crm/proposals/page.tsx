@@ -700,7 +700,8 @@ export default function ProposalsPage() {
       });
 
       if (!shareResponse.ok) {
-        throw new Error("Proposal sharing is not configured. Please set up the proposal_shares table before sending customer links.");
+        const data = await shareResponse.json() as { error?: string };
+        throw new Error(data.error || "Proposal sharing is not configured. Please set up the proposal_shares table before sending customer links.");
       }
 
       const response = await fetch("/api/proposals/send", {
