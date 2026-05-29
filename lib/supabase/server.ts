@@ -1,12 +1,25 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
+const fallbackSupabaseUrl = "https://lcchocuoeettbryfwlwq.supabase.co";
+const fallbackSupabaseAnonKey = "sb_publishable_W8F6R4IraBZIt79dC5y3qg_BqypPa9C";
+
+export function getSupabaseUrl() {
+  const value = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || fallbackSupabaseUrl;
+  if (value.startsWith("http://") || value.startsWith("https://")) return value;
+  return `https://${value}.supabase.co`;
+}
+
+export function getSupabaseAnonKey() {
+  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || fallbackSupabaseAnonKey;
+}
+
 export async function createClient() {
   const cookieStore = await cookies();
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    getSupabaseUrl(),
+    getSupabaseAnonKey(),
     {
       cookies: {
         getAll() {

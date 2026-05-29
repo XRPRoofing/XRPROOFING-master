@@ -3,10 +3,6 @@ import { createClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
   try {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      return NextResponse.json({ error: "CRM login is not configured. Supabase environment variables are missing." }, { status: 500 });
-    }
-
     const { email, password } = await request.json();
 
     if (!email || !password) {
