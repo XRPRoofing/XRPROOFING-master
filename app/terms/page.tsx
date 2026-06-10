@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
-import { MARKETING_SMS_CONSENT, NON_MARKETING_SMS_CONSENT } from "@/lib/sms-compliance";
+import { MARKETING_SMS_CONSENT, NON_MARKETING_SMS_CONSENT, SMS_REQUIRED_DISCLOSURE } from "@/lib/sms-compliance";
 
 export const metadata: Metadata = {
   title: `Terms & Conditions | ${SITE_NAME}`,
@@ -76,6 +76,10 @@ export default function TermsPage() {
                 The checkboxes are not pre-checked and are optional. We do not send messages without explicit consent
                 collected through this form.
               </p>
+
+              <div className="mt-3 rounded-lg bg-white border border-orange-300 px-4 py-3">
+                <p className="text-sm font-semibold text-gray-800">{SMS_REQUIRED_DISCLOSURE}</p>
+              </div>
 
               <h3 className="text-lg font-bold text-gray-900 mt-4 mb-2">Message Frequency</h3>
               <p>

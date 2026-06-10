@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Mail, MapPin, MessageSquare, Phone, User } from "lucide-react";
+import { NON_MARKETING_SMS_CONSENT, MARKETING_SMS_CONSENT, SMS_REQUIRED_DISCLOSURE, SMS_SENDER_NAME } from "@/lib/sms-compliance";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -63,6 +65,26 @@ export default function LandingContactForm() {
         <label className="block"><span className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-700"><MapPin className="h-4 w-4 text-blue-700" />Property Address</span><input name="address" type="text" autoComplete="street-address" placeholder="Property address" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100" /></label>
       </div>
       <label className="mt-5 block"><span className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-700"><MessageSquare className="h-4 w-4 text-blue-700" />Message</span><textarea name="message" rows={5} placeholder="Tell us about your roofing needs." className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100" /></label>
+      <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 space-y-3">
+        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+          <MessageSquare className="h-4 w-4 text-blue-700 flex-shrink-0" />
+          <span className="text-sm font-bold text-slate-700">SMS Notifications from {SMS_SENDER_NAME} <span className="font-normal text-slate-500">(Optional)</span></span>
+        </div>
+        <div className="flex items-start gap-3">
+          <input id="landing-nonMarketingSmsConsent" name="nonMarketingSmsConsent" type="checkbox" value="yes" defaultChecked={false} className="mt-1 h-4 w-4 flex-shrink-0 accent-blue-700" />
+          <label htmlFor="landing-nonMarketingSmsConsent" className="cursor-pointer text-xs leading-relaxed text-slate-700">{NON_MARKETING_SMS_CONSENT}</label>
+        </div>
+        <div className="flex items-start gap-3">
+          <input id="landing-marketingSmsConsent" name="marketingSmsConsent" type="checkbox" value="yes" defaultChecked={false} className="mt-1 h-4 w-4 flex-shrink-0 accent-blue-700" />
+          <label htmlFor="landing-marketingSmsConsent" className="cursor-pointer text-xs leading-relaxed text-slate-700">{MARKETING_SMS_CONSENT}</label>
+        </div>
+        <p className="text-xs text-slate-500 leading-relaxed">{SMS_REQUIRED_DISCLOSURE}</p>
+        <p className="text-xs text-slate-500">
+          <Link href="/terms" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">Terms &amp; Conditions</Link>
+          {" · "}
+          <Link href="/privacy-policy" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">Privacy Policy</Link>
+        </p>
+      </div>
       {status === "success" && <p className="mt-4 rounded-2xl bg-green-50 px-4 py-3 text-sm font-bold text-green-700">Request received. We&apos;ll contact you shortly.</p>}
       {status === "error" && <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">{error}</p>}
       <button type="submit" disabled={status === "submitting"} className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-blue-700 px-8 py-5 text-lg font-black text-white shadow-2xl shadow-blue-700/25 transition-all hover:-translate-y-1 hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-blue-400">{status === "submitting" ? "Sending..." : "Get Free Estimate"} <ArrowRight className="h-5 w-5" /></button>
