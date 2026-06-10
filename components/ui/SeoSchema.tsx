@@ -1,4 +1,4 @@
-import { ADDRESS, EMAIL, GOOGLE_MAPS_URL, LOGO_IMAGE, OG_IMAGE, PHONE, SITE_NAME, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
+import { ADDRESS, EMAIL, GOOGLE_MAPS_URL, LOGO_IMAGE, LOGO_IMAGE_WIDTH, LOGO_IMAGE_HEIGHT, OG_IMAGE, PHONE, SITE_NAME, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 interface LocalBusinessSchemaProps {
   cityName?: string;
@@ -59,7 +59,12 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
     name: SITE_NAME,
     url: pageUrl,
     image: `${SITE_URL}${OG_IMAGE}`,
-    logo: `${SITE_URL}${LOGO_IMAGE}`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}${LOGO_IMAGE}`,
+      width: LOGO_IMAGE_WIDTH,
+      height: LOGO_IMAGE_HEIGHT,
+    },
     telephone: PHONE,
     email: EMAIL,
     address: {
@@ -207,6 +212,8 @@ export function ArticleSchema({ title, description, slug, datePublished }: Artic
       logo: {
         "@type": "ImageObject",
         url: `${SITE_URL}${LOGO_IMAGE}`,
+        width: LOGO_IMAGE_WIDTH,
+        height: LOGO_IMAGE_HEIGHT,
       },
     },
   };

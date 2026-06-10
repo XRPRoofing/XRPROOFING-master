@@ -30,9 +30,11 @@ export default function Footer() {
                 <Image
                   src="/images/logo.jpeg"
                   alt="XRP Roofing Logo"
-                  width={140}
-                  height={56}
+                  width={295}
+                  height={120}
                   className="h-12 w-auto object-contain"
+                  sizes="120px"
+                  quality={90}
                 />
               </div>
             </Link>

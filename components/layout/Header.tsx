@@ -59,9 +59,11 @@ export default function Header() {
             <Image
               src="/images/logo.jpeg"
               alt="XRP Roofing Logo"
-              width={160}
-              height={64}
+              width={344}
+              height={140}
               className="h-12 lg:h-14 w-auto object-contain"
+              sizes="(max-width: 1024px) 120px, 140px"
+              quality={90}
               priority
             />
           </Link>
