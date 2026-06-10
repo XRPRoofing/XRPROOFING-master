@@ -30,12 +30,9 @@ export const metadata: Metadata = {
   creator: SITE_NAME,
   robots: { index: true, follow: true },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: LOGO_IMAGE, type: "image/jpeg", sizes: "2560x1043" },
-    ],
+    icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: [{ url: LOGO_IMAGE, sizes: "2560x1043", type: "image/jpeg" }],
+    apple: "/apple-icon.png",
   },
   openGraph: {
     type: "website",
