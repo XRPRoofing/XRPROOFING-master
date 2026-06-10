@@ -57,6 +57,8 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
     "@type": "RoofingContractor",
     "@id": `${SITE_URL}/#localbusiness`,
     name: SITE_NAME,
+    legalName: "AZ Pro Contractors LLC",
+    description: "XRP Roofing (AZ Pro Contractors LLC) is a licensed and insured roofing contractor serving Phoenix, AZ and the 100-mile metro radius. ROC #350898. Specializing in tile roofing, shingle, flat, foam, metal, commercial roofing, emergency repairs, and storm damage. Free inspections and written estimates.",
     url: pageUrl,
     image: `${SITE_URL}${OG_IMAGE}`,
     logo: {
@@ -80,8 +82,10 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
       latitude: "33.4734",
       longitude: "-112.1226",
     },
+    hasMap: GOOGLE_MAPS_URL,
     areaServed,
     priceRange: "$$",
+    openingHours: ["Mo-Fr 07:00-18:00", "Sa 08:00-16:00"],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -99,8 +103,10 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
     sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok, GOOGLE_MAPS_URL],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: 5,
-      reviewCount: 147,
+      ratingValue: "5",
+      bestRating: "5",
+      worstRating: "1",
+      reviewCount: "147",
     },
   };
 
