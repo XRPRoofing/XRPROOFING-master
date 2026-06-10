@@ -1,7 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import AppChrome from "@/components/layout/AppChrome";
 import { SITE_NAME, SITE_URL, OG_IMAGE, LOGO_IMAGE } from "@/lib/constants";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -51,8 +58,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://widgets.leadconnectorhq.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900 pb-16 lg:pb-0">

@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { Phone, ArrowRight, CheckCircle, Star } from "lucide-react";
 import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
 import { services } from "@/lib/services";
 import { LocalBusinessSchema, FAQSchema, WebSiteSchema } from "@/components/ui/SeoSchema";
 import TrustBadges from "@/components/ui/TrustBadges";
 import LeadForm from "@/components/ui/LeadForm";
-
-const ServiceGrid    = dynamic(() => import("@/components/ui/ServiceGrid"),    { ssr: true });
-const ReviewSection  = dynamic(() => import("@/components/ui/ReviewSection"),  { ssr: true });
-const CTASection     = dynamic(() => import("@/components/ui/CTASection"),     { ssr: true });
-const LocationGrid   = dynamic(() => import("@/components/ui/LocationGrid"),   { ssr: true });
-const ProjectGallery = dynamic(() => import("@/components/ui/ProjectGallery"), { ssr: true });
+import ServiceGrid from "@/components/ui/ServiceGrid";
+import ReviewSection from "@/components/ui/ReviewSection";
+import CTASection from "@/components/ui/CTASection";
+import LocationGrid from "@/components/ui/LocationGrid";
+import ProjectGallery from "@/components/ui/ProjectGallery";
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ | Repair, Replacement & More`,
@@ -62,7 +60,9 @@ export default function HomePage() {
             priority
             fetchPriority="high"
             sizes="100vw"
-            quality={50}
+            quality={75}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAFAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEA//EAB8QAAICAQUBAAAAAAAAAAAAAAECAwQREiExQf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCbD5NNFQcZK5tLm0DtNXiHUKT0oA9DwAAAAAA/9k="
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f2156]/90 via-[#0f2156]/70 to-[#0f2156]/40" />
         </div>
@@ -176,6 +176,8 @@ export default function HomePage() {
                 loading="lazy"
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAARCAAFAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgMEBf/EAB4QAAICAQUBAAAAAAAAAAAAAAECAxESITFBUf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCiS4ydNQcZM5slrg7TOYiHUKi0oA9jAAAAA/9k="
               />
             </div>
           </div>

@@ -35,6 +35,13 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-DNS-Prefetch-Control", value: "on" },
           { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
+      {
+        source: "/:path((?!_next/static|_next/image|images|favicon).*)",
+        headers: [
+          { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
         ],
       },
     ];
