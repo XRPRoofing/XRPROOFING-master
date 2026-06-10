@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Phone, ArrowRight, CheckCircle, Star } from "lucide-react";
 import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
 import { services } from "@/lib/services";
-import TrustBadges from "@/components/ui/TrustBadges";
-import ReviewSection from "@/components/ui/ReviewSection";
-import CTASection from "@/components/ui/CTASection";
-import ServiceGrid from "@/components/ui/ServiceGrid";
-import LocationGrid from "@/components/ui/LocationGrid";
-import LeadForm from "@/components/ui/LeadForm";
 import { LocalBusinessSchema, FAQSchema, WebSiteSchema } from "@/components/ui/SeoSchema";
-import ProjectGallery from "@/components/ui/ProjectGallery";
+import TrustBadges from "@/components/ui/TrustBadges";
+import LeadForm from "@/components/ui/LeadForm";
+
+const ServiceGrid    = dynamic(() => import("@/components/ui/ServiceGrid"),    { ssr: true });
+const ReviewSection  = dynamic(() => import("@/components/ui/ReviewSection"),  { ssr: true });
+const CTASection     = dynamic(() => import("@/components/ui/CTASection"),     { ssr: true });
+const LocationGrid   = dynamic(() => import("@/components/ui/LocationGrid"),   { ssr: true });
+const ProjectGallery = dynamic(() => import("@/components/ui/ProjectGallery"), { ssr: true });
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ | Repair, Replacement & More`,
@@ -171,6 +173,7 @@ export default function HomePage() {
                 src="/images/xrp-roofing/2025-01-26-2.jpg"
                 alt="XRP Roofing team working on a tile roof installation in Phoenix AZ"
                 fill
+                loading="lazy"
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -237,6 +240,7 @@ export default function HomePage() {
                   src="/images/xrp-roofing/2025-01-26-4.jpg"
                   alt="Foam Roofing and elastomeric coatings in Phoenix AZ by XRP Roofing"
                   fill
+                  loading="lazy"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
@@ -263,6 +267,7 @@ export default function HomePage() {
                     src={service.heroImage}
                     alt={`${service.name} in Phoenix AZ by XRP Roofing`}
                     fill
+                    loading="lazy"
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />

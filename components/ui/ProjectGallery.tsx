@@ -22,7 +22,7 @@ export default function ProjectGallery() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
-          {projectGalleryImages.map((img, index) => (
+          {projectGalleryImages.slice(0, 8).map((img, index) => (
             <div
               key={img.src}
               className={`relative overflow-hidden rounded-xl shadow-sm group${
@@ -34,6 +34,7 @@ export default function ProjectGallery() {
                 src={img.src}
                 alt={img.alt}
                 fill
+                loading="lazy"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes={
                   index === 0

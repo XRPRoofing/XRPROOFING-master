@@ -1,4 +1,5 @@
 import type { ConversationFilter, ConversationRecord } from "@/types/conversations";
+import type { Lead } from "@/types/crm";
 
 export const conversationFilters: ConversationFilter[] = ["Unread", "Missed Calls", "New Leads", "Assigned Rep", "SMS", "Calls"];
 
@@ -12,6 +13,40 @@ export const quickTemplates = [
 export const pipelineStages = ["New Lead", "Inspection Scheduled", "Estimate Sent", "Insurance Review", "Approved", "In Production"];
 
 export const appointmentTypes = ["Roof inspection", "Insurance adjuster meeting", "Estimate review", "Production walkthrough", "Warranty follow-up"];
+
+export function createConversationFromLead(lead: Lead): ConversationRecord {
+  const stageLabel = lead.stage.replace(/_/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+  const isCallLead = lead.lastActivity.toLowerCase().includes("call") || lead.stage === "inspection_scheduled";
+  const isNewLead = lead.stage === "new_lead";
+
+  return {
+    id: `conv-${lead.id}`,
+    contact: {
+      id: lead.id,
+      name: lead.name,
+      phone: lead.phone,
+      email: lead.email,
+      address: `${lead.address}, ${lead.city}, AZ`,
+      roofType: lead.roofType,
+      assignedRep: lead.assignedTo,
+      insuranceStatus: lead.stage === "insurance_review" ? "Insurance review" : lead.stage === "approved" ? "Approved" : "Not confirmed",
+      jobStatus: stageLabel,
+      leadSource: lead.source,
+      tags: [lead.roofType, lead.source, stageLabel],
+      notes: lead.lastActivity,
+    },
+    lastMessage: lead.lastActivity,
+    lastActivityAt: isNewLead ? "12 min ago" : isCallLead ? "Today" : "Recently",
+    unreadCount: isNewLead ? 2 : lead.stage === "estimate_sent" ? 1 : 0,
+    isMissedCall: lead.lastActivity.toLowerCase().includes("missed"),
+    isNewLead,
+    channels: isCallLead ? ["call", "sms"] : ["sms"],
+    messages: [
+      { id: `${lead.id}-m1`, channel: "note", direction: "internal", author: "CRM", body: `${stageLabel}: ${lead.lastActivity}`, timestamp: "CRM sync" },
+      { id: `${lead.id}-m2`, channel: "sms", direction: "outbound", author: lead.assignedTo, body: `Hi ${lead.name.split(" ")[0]}, this is XRP Roofing following up about ${lead.roofType.toLowerCase()} at ${lead.address}.`, timestamp: "Ready", status: "sent" },
+    ],
+  };
+}
 
 export const conversationsData: ConversationRecord[] = [
   {

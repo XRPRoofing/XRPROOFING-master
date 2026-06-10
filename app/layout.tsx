@@ -3,8 +3,6 @@ import "./globals.css";
 import AppChrome from "@/components/layout/AppChrome";
 import { SITE_NAME, SITE_URL, OG_IMAGE, LOGO_IMAGE } from "@/lib/constants";
 
-const interClass = "font-sans";
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -54,7 +52,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${interClass} antialiased bg-white text-gray-900 pb-16 lg:pb-0`}>
+      <head>
+        <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
+      </head>
+      <body className="font-sans antialiased bg-white text-gray-900 pb-16 lg:pb-0">
         <AppChrome>{children}</AppChrome>
       </body>
     </html>

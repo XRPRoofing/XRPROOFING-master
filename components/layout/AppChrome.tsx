@@ -25,7 +25,7 @@ export default function AppChrome({ children }: { children: React.ReactNode }) {
         data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
         data-widget-id="6a101e66975ecd30311851c1"
         data-source="WEB_USER"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     </>
   );
