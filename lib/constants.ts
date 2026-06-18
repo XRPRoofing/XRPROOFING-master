@@ -1,7 +1,7 @@
 export const SITE_NAME = "XRP Roofing";
 export const SITE_URL = "https://www.xrproofing.com";
-export const PHONE = "(623) 321-2652"; // Replace with real number if different
-export const PHONE_HREF = "tel:+16233212652";
+export const PHONE = "(623) 300-0611";
+export const PHONE_HREF = "tel:+16233000611";
 export const EMAIL = "info@xrproofing.com";
 export const ADDRESS = "2843 W McDowell Rd, Phoenix, AZ 85009";
 export const SERVICE_AREA = "Phoenix Metro and 100-mile radius";
