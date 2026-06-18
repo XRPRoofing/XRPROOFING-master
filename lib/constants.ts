@@ -16,8 +16,8 @@ export const SOCIAL_LINKS = {
 
 export const OG_IMAGE = "/images/og-image.png";
 export const LOGO_IMAGE = "/images/logo.png";
-export const LOGO_IMAGE_WIDTH = 774;
-export const LOGO_IMAGE_HEIGHT = 393;
+export const LOGO_IMAGE_WIDTH = 792;
+export const LOGO_IMAGE_HEIGHT = 412;
 
 export const GOOGLE_REVIEW_URL = "https://g.page/r/CbclAJO7mcvFEBE/review";
 export const GOOGLE_MAPS_URL =
