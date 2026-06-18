@@ -135,7 +135,7 @@ export default function CustomerInvoicePage() {
   return (
     <main className="min-h-screen bg-slate-100 text-slate-900">
       <div className="bg-slate-200 py-8 text-center">
-        <Image src="/images/logo.jpeg" alt="XRP Roofing" width={150} height={80} className="mx-auto bg-white" priority />
+        <Image src="/images/logo.png" alt="XRP Roofing" width={150} height={80} className="mx-auto bg-white" priority />
       </div>
       <div className="mx-auto grid max-w-6xl gap-6 px-5 py-8 lg:grid-cols-[1fr_380px]">
         <section className="rounded-3xl bg-white p-8 shadow-sm">

@@ -37,14 +37,14 @@ export async function POST(req: NextRequest) {
     }
 
     const safeMessage = escapeHtml(data.message).replaceAll("\n", "<br />");
-    const coverPhoto = data.coverPhoto || "/images/logo.jpeg";
+    const coverPhoto = data.coverPhoto || "/images/logo.png";
     const coverPhotoUrl = coverPhoto.startsWith("http") ? coverPhoto : new URL(coverPhoto, data.proposalLink).toString();
     const safeCoverTitle = data.coverTitle ? escapeHtml(data.coverTitle) : "Your XRP Roofing Proposal";
     const safeCoverText = data.coverText ? escapeHtml(data.coverText).replaceAll("\n", "<br />") : "";
     const html = `
       <div style="margin:0;background:#f1f5f9;padding:0;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="background:#e9eef3;padding:28px 0;text-align:center;">
-          <img src="${new URL("/images/logo.jpeg", data.proposalLink).toString()}" alt="XRP Roofing" style="width:150px;height:auto;display:inline-block;background:#fff;" />
+          <img src="${new URL("/images/logo.png", data.proposalLink).toString()}" alt="XRP Roofing" style="width:150px;height:auto;display:inline-block;background:#fff;" />
         </div>
         <div style="max-width:560px;margin:0 auto;background:#fff;padding:38px 32px 46px;line-height:1.7;font-size:16px;">
           <div>${safeMessage}</div>

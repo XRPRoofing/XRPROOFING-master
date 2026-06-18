@@ -14,10 +14,10 @@ export const SOCIAL_LINKS = {
   tiktok: "https://www.tiktok.com/@johnnytheroofer",
 };
 
-export const OG_IMAGE = "/images/xrp-roofing/2025-01-26.jpg";
-export const LOGO_IMAGE = "/images/logo.jpeg";
-export const LOGO_IMAGE_WIDTH = 2560;
-export const LOGO_IMAGE_HEIGHT = 1043;
+export const OG_IMAGE = "/images/og-image.png";
+export const LOGO_IMAGE = "/images/logo.png";
+export const LOGO_IMAGE_WIDTH = 774;
+export const LOGO_IMAGE_HEIGHT = 393;
 
 export const GOOGLE_REVIEW_URL = "https://g.page/r/CbclAJO7mcvFEBE/review";
 export const GOOGLE_MAPS_URL =

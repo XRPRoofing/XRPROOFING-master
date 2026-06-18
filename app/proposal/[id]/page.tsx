@@ -170,7 +170,7 @@ const publicProposalFallbacks: Proposal[] = [
     status: "Sent",
     title: "BEST ROOFING PROPOSAL",
     summary: "A professional roofing proposal prepared for review and approval.",
-    coverPhoto: "/images/logo.jpeg",
+    coverPhoto: "/images/logo.png",
     coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
     notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
     terms: defaultTerms,
@@ -185,7 +185,7 @@ const publicProposalFallbacks: Proposal[] = [
     status: "Sent",
     title: "INSURANCE ROOFING PROPOSAL",
     summary: "A professional roofing proposal prepared for review and approval.",
-    coverPhoto: "/images/logo.jpeg",
+    coverPhoto: "/images/logo.png",
     coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
     notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
     terms: defaultTerms,
@@ -200,7 +200,7 @@ const publicProposalFallbacks: Proposal[] = [
     status: "Sent",
     title: "PREMIUM ROOFING PROPOSAL",
     summary: "A professional roofing proposal prepared for review and approval.",
-    coverPhoto: "/images/logo.jpeg",
+    coverPhoto: "/images/logo.png",
     coverText: "Prepared by XRP Roofing with a professional project overview, proposal options, and customer approval details.",
     notes: "Includes materials, labor, cleanup, workmanship standards, and customer-ready project documentation.",
     terms: defaultTerms,
@@ -374,12 +374,12 @@ export default function CustomerProposalPage() {
   return (
     <main className="min-h-screen bg-slate-100 font-serif text-slate-900">
       <div className="bg-slate-200 py-8 text-center">
-        <Image src="/images/logo.jpeg" alt="XRP Roofing" width={150} height={80} className="mx-auto bg-white" priority />
+        <Image src="/images/logo.png" alt="XRP Roofing" width={150} height={80} className="mx-auto bg-white" priority />
       </div>
       <div className="mx-auto max-w-5xl px-5 py-8">
         <section className="rounded-3xl bg-white p-8 shadow-sm">
           <div className="mb-8 rounded-3xl bg-slate-50 p-8 text-center">
-            <Image src={proposal.coverPhoto || "/images/logo.jpeg"} alt="Proposal cover" width={220} height={130} className="mx-auto max-h-36 w-auto rounded-2xl bg-white object-contain shadow-sm" />
+            <Image src={proposal.coverPhoto || "/images/logo.png"} alt="Proposal cover" width={220} height={130} className="mx-auto max-h-36 w-auto rounded-2xl bg-white object-contain shadow-sm" />
             <p className="mt-5 text-3xl font-black text-[#07183f]">{proposal.title}</p>
             <p className="mt-4 text-lg font-bold text-slate-700">{proposal.customerName}</p>
             <p className="mt-2 text-sm text-slate-500">{proposal.address}</p>

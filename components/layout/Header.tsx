@@ -57,7 +57,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0" aria-label={SITE_NAME}>
             <Image
-              src="/images/logo.jpeg"
+              src="/images/logo.png"
               alt="XRP Roofing Logo"
               width={344}
               height={140}
