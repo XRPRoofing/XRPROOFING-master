@@ -28,7 +28,7 @@ export default function Footer() {
             <Link href="/" aria-label={SITE_NAME}>
               <div className="inline-block bg-white rounded-xl px-3 py-2">
                 <Image
-                  src="/images/logo.jpeg"
+                  src="/images/logo.png"
                   alt="XRP Roofing Logo"
                   width={295}
                   height={120}
