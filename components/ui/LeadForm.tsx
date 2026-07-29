@@ -203,7 +203,7 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="w-full flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-bold py-3 px-6 rounded-xl text-sm transition-colors"
+          className="w-full flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 disabled:bg-orange-300 text-white font-bold py-3 px-6 rounded-xl text-sm transition-colors"
         >
           <Send className="w-4 h-4" />
           {status === "submitting" ? "Sending..." : "Request Free Inspection"}
@@ -327,7 +327,7 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-bold py-4 px-6 rounded-xl text-base transition-colors shadow-lg shadow-orange-200"
+        className="w-full flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 disabled:bg-orange-300 text-white font-bold py-4 px-6 rounded-xl text-base transition-colors shadow-lg shadow-orange-200"
       >
         <Send className="w-5 h-5" />
         {status === "submitting" ? "Sending your request..." : "Request Free Roof Inspection"}

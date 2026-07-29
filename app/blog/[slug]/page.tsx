@@ -620,7 +620,7 @@ export default async function BlogPostPage({
           >
             <ArrowLeft className="w-4 h-4" /> Back to Blog
           </Link>
-          <div className="inline-block bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold mb-4">
+          <div className="inline-block bg-orange-700 text-white px-3 py-1 rounded-full text-xs font-semibold mb-4">
             {post.category}
           </div>
           <h1 className="text-3xl lg:text-4xl font-black text-white mb-4">
@@ -654,7 +654,7 @@ export default async function BlogPostPage({
                     <ul className="space-y-3 text-gray-700 mb-6">
                       {section.listItems.map((item, j) => (
                         <li key={j} className="flex items-start gap-2">
-                          <span className="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold text-xs flex-shrink-0 mt-0.5">{j + 1}</span>
+                          <span className="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center text-orange-700 font-bold text-xs flex-shrink-0 mt-0.5">{j + 1}</span>
                           {item}
                         </li>
                       ))}
@@ -676,12 +676,12 @@ export default async function BlogPostPage({
             </article>
 
             <aside className="space-y-6">
-              <div className="bg-orange-500 rounded-2xl p-6 text-white">
+              <div className="bg-orange-700 rounded-2xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-2">Need a Roof Inspection?</h3>
                 <p className="text-orange-100 text-sm mb-4">Free inspection by a licensed Arizona roofing professional.</p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-orange-50 transition-colors w-full justify-center"
+                  className="inline-flex items-center gap-2 bg-white text-orange-700 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-orange-50 transition-colors w-full justify-center"
                 >
                   Schedule Free Inspection <ArrowRight className="w-4 h-4" />
                 </Link>

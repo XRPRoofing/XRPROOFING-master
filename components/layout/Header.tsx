@@ -117,7 +117,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href={PHONE_HREF}
-              className="hidden sm:flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors"
+              className="hidden sm:flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors"
             >
               <Phone className="w-4 h-4" />
               {PHONE}
@@ -141,7 +141,7 @@ export default function Header() {
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-1">
             <a
               href={PHONE_HREF}
-              className="flex items-center gap-2 bg-orange-500 text-white px-4 py-3 rounded-lg font-semibold text-sm mb-2"
+              className="flex items-center gap-2 bg-orange-700 text-white px-4 py-3 rounded-lg font-semibold text-sm mb-2"
             >
               <Phone className="w-4 h-4" />
               Call Now: {PHONE}

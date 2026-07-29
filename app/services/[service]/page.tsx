@@ -449,7 +449,7 @@ export default async function ServicePage({
         </div>
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-2xl">
-            <div className="inline-block bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-block bg-orange-700 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
               {service.icon} {service.name}
             </div>
             <h1 className="text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
@@ -461,7 +461,7 @@ export default async function ServicePage({
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-7 py-3.5 rounded-xl font-bold transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-7 py-3.5 rounded-xl font-bold transition-colors"
               >
                 Get Free Inspection <ArrowRight className="w-4 h-4" />
               </Link>

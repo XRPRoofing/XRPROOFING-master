@@ -130,7 +130,7 @@ export default function BlogPage() {
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             Roofing Blog
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
@@ -151,7 +151,7 @@ export default function BlogPage() {
                 key={cat}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors ${
                   cat === "All"
-                    ? "bg-orange-500 text-white"
+                    ? "bg-orange-700 text-white"
                     : "bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-600"
                 }`}
               >
@@ -172,12 +172,12 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200"
               >
-                <div className="bg-gradient-to-br from-orange-400 to-orange-600 h-40 flex items-center justify-center">
+                <div className="bg-gradient-to-br from-orange-600 to-orange-800 h-40 flex items-center justify-center">
                   <span className="text-5xl">🏠</span>
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="bg-orange-100 text-orange-600 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    <span className="bg-orange-100 text-orange-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">
                       {post.category}
                     </span>
                   </div>

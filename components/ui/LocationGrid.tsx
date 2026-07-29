@@ -40,7 +40,7 @@ export default function LocationGrid({
           <div className="text-center mt-8">
             <Link
               href="/locations"
-              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
+              className="inline-flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
             >
               View All Service Areas <ArrowRight className="w-4 h-4" />
             </Link>

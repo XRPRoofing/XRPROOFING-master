@@ -31,7 +31,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             Free Inspection
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
@@ -110,14 +110,14 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              <div className="bg-orange-500 rounded-2xl p-6 text-white">
+              <div className="bg-orange-700 rounded-2xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-2">Emergency Roof Repair?</h3>
                 <p className="text-orange-100 text-sm mb-4 leading-relaxed">
                   Active leak or storm damage? We respond 24/7 for emergencies. Call now for immediate assistance.
                 </p>
                 <a
                   href={PHONE_HREF}
-                  className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-orange-50 transition-colors w-full justify-center"
+                  className="inline-flex items-center gap-2 bg-white text-orange-700 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-orange-50 transition-colors w-full justify-center"
                 >
                   <Phone className="w-4 h-4" />
                   Call Now: {PHONE}

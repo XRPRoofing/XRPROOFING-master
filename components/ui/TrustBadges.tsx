@@ -19,7 +19,7 @@ export default function TrustBadges({ variant = "light", cols = 6 }: TrustBadges
     variant === "dark"
       ? "bg-[#1a3a8f]/60 text-white"
       : variant === "orange"
-      ? "bg-orange-600 text-white"
+      ? "bg-orange-700 text-white"
       : "bg-white text-gray-800 border border-gray-100 shadow-sm";
 
   const sub =

@@ -10,7 +10,7 @@ export default function MobileCtaBar() {
       <div className="grid grid-cols-[1.35fr_1fr]">
         <a
           href={PHONE_HREF}
-          className="flex items-center justify-center gap-2 bg-orange-500 text-white py-4 font-bold text-sm"
+          className="flex items-center justify-center gap-2 bg-orange-700 text-white py-4 font-bold text-sm"
         >
           <Phone className="w-4 h-4" />
           Call Now: {PHONE}

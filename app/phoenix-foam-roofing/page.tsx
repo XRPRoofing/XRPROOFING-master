@@ -175,7 +175,7 @@ export default function PhoenixFoamRoofingPage() {
         </div>
         <div className="relative z-10 container mx-auto px-4 py-20">
           <div className="max-w-3xl animate-in fade-in duration-700">
-            <div className="inline-flex items-center gap-2 bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6 shadow-lg">
+            <div className="inline-flex items-center gap-2 bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6 shadow-lg">
               <Flame className="w-4 h-4" />
               Phoenix SPF Roofing & Coatings
             </div>
@@ -188,7 +188,7 @@ export default function PhoenixFoamRoofingPage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg hover:scale-105"
               >
                 Get Free Inspection <ArrowRight className="w-5 h-5" />
               </Link>
@@ -245,7 +245,7 @@ export default function PhoenixFoamRoofingPage() {
               const Icon = item.icon;
               return (
                 <div key={item.title} className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-1">
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-500 group-hover:bg-orange-700 group-hover:text-white transition-colors">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-black text-gray-900 mb-2">{item.title}</h3>
@@ -309,7 +309,7 @@ export default function PhoenixFoamRoofingPage() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Link href="/services/roof-coatings" className="inline-flex items-center justify-center gap-2 text-sm font-bold text-orange-600 hover:text-orange-700">
+                <Link href="/services/roof-coatings" className="inline-flex items-center justify-center gap-2 text-sm font-bold text-orange-700 hover:text-orange-800">
                   Learn about roof coatings <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link href="/services/flat-roofing" className="inline-flex items-center justify-center gap-2 text-sm font-bold text-[#1a3a8f] hover:text-orange-600">

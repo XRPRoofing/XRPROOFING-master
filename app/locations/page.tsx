@@ -39,7 +39,7 @@ export default function LocationsPage() {
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             Service Areas
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
@@ -52,7 +52,7 @@ export default function LocationsPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-10 bg-orange-500">
+      <section className="py-10 bg-orange-700">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
             {[
@@ -78,7 +78,7 @@ export default function LocationsPage() {
               <div className="flex items-center gap-3 mb-6">
                 <MapPin className="w-5 h-5 text-orange-500" />
                 <h2 className="text-2xl font-black text-gray-900">{county.name}</h2>
-                <span className="bg-orange-100 text-orange-600 text-xs font-bold px-2.5 py-1 rounded-full">
+                <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2.5 py-1 rounded-full">
                   {county.cities.length} cities
                 </span>
               </div>
@@ -127,7 +127,7 @@ export default function LocationsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
+            className="inline-flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
           >
             Check Your Area <ArrowRight className="w-4 h-4" />
           </Link>

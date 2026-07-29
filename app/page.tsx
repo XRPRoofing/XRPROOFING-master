@@ -68,7 +68,7 @@ export default function HomePage() {
         </div>
         <div className="relative z-10 container mx-auto px-4 py-20">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
               <Star className="w-3.5 h-3.5 fill-white" />
               Phoenix&apos;s Trusted Roofing Contractor
             </div>
@@ -82,7 +82,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href={PHONE_HREF}
-                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-colors shadow-lg"
+                className="inline-flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-8 py-4 rounded-xl font-bold text-lg transition-colors shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 Call {PHONE}
@@ -156,7 +156,7 @@ export default function HomePage() {
               <div className="mt-8 flex gap-4">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
+                  className="inline-flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
                 >
                   About XRP Roofing <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -290,7 +290,7 @@ export default function HomePage() {
           <div className="text-center mt-8">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
+              className="inline-flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
             >
               View All Services <ArrowRight className="w-4 h-4" />
             </Link>

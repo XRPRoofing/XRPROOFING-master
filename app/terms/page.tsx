@@ -19,7 +19,7 @@ export default function TermsPage() {
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             Legal
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
@@ -63,7 +63,7 @@ export default function TermsPage() {
 
               <h3 className="text-lg font-bold text-gray-900 mt-4 mb-2">How to Opt In</h3>
               <p>
-                You can opt in by submitting your phone number through a contact form on <a href={SITE_URL} className="text-orange-600 hover:underline">{SITE_URL}</a>
+                You can opt in by submitting your phone number through a contact form on <a href={SITE_URL} className="text-orange-700 hover:underline">{SITE_URL}</a>
                 {" "}and checking one or both optional consent checkboxes that state:
               </p>
               <p className="italic border-l-4 border-orange-400 pl-4 my-3 text-gray-800">
@@ -94,8 +94,8 @@ export default function TermsPage() {
 
               <h3 className="text-lg font-bold text-gray-900 mt-4 mb-2">How to Get Help</h3>
               <p>
-                Reply <strong>HELP</strong> to any message for help, or contact us at <a href={PHONE_HREF} className="text-orange-600 hover:underline">{PHONE}</a>
-                {" "}or <a href={`mailto:${EMAIL}`} className="text-orange-600 hover:underline">{EMAIL}</a>.
+                Reply <strong>HELP</strong> to any message for help, or contact us at <a href={PHONE_HREF} className="text-orange-700 hover:underline">{PHONE}</a>
+                {" "}or <a href={`mailto:${EMAIL}`} className="text-orange-700 hover:underline">{EMAIL}</a>.
               </p>
 
               <h3 className="text-lg font-bold text-gray-900 mt-4 mb-2">How to Opt Out</h3>
@@ -114,7 +114,7 @@ export default function TermsPage() {
               <h3 className="text-lg font-bold text-gray-900 mt-4 mb-2">Privacy</h3>
               <p>
                 Information you share in connection with this SMS program is handled in accordance with our{" "}
-                <Link href="/privacy-policy" className="text-orange-600 hover:underline">Privacy Policy</Link>.
+                <Link href="/privacy-policy" className="text-orange-700 hover:underline">Privacy Policy</Link>.
                 We do not share or sell your mobile phone number or SMS opt-in data with third parties or affiliates for marketing purposes.
               </p>
             </div>
@@ -182,8 +182,8 @@ export default function TermsPage() {
               <ul className="list-none space-y-1">
                 <li><strong>{SITE_NAME}</strong></li>
                 <li>{ADDRESS}</li>
-                <li>Phone: <a href={PHONE_HREF} className="text-orange-600 hover:underline">{PHONE}</a></li>
-                <li>Email: <a href={`mailto:${EMAIL}`} className="text-orange-600 hover:underline">{EMAIL}</a></li>
+                <li>Phone: <a href={PHONE_HREF} className="text-orange-700 hover:underline">{PHONE}</a></li>
+                <li>Email: <a href={`mailto:${EMAIL}`} className="text-orange-700 hover:underline">{EMAIL}</a></li>
               </ul>
             </div>
 
