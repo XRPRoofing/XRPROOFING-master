@@ -103,7 +103,7 @@ export default function ContactPage() {
                       <div className="text-gray-700 text-sm leading-relaxed">
                         Mon–Fri: 7:00 AM – 6:00 PM<br />
                         Saturday: 8:00 AM – 4:00 PM<br />
-                        <span className="text-orange-500 font-semibold">Emergency: 24/7</span>
+                        <span className="text-orange-700 font-semibold">Emergency: 24/7</span>
                       </div>
                     </div>
                   </li>
@@ -136,7 +136,7 @@ export default function ContactPage() {
                     </span>
                   ))}
                 </div>
-                <p className="text-orange-400 text-xs font-semibold mt-3">+ 20 more cities →</p>
+                <p className="text-orange-700 text-xs font-semibold mt-3">+ 20 more cities →</p>
               </div>
             </div>
           </div>

@@ -71,7 +71,6 @@ export default function ReviewSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-white border border-gray-200 shadow-md hover:shadow-lg rounded-2xl px-5 py-3 transition-all duration-200 hover:scale-105 group"
-            aria-label="See our reviews on Google"
           >
             {/* Google G logo */}
             <svg className="w-7 h-7 flex-shrink-0" viewBox="0 0 48 48" aria-hidden="true">

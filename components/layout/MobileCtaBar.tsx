@@ -11,7 +11,6 @@ export default function MobileCtaBar() {
         <a
           href={PHONE_HREF}
           className="flex items-center justify-center gap-2 bg-orange-500 text-white py-4 font-bold text-sm"
-          aria-label={`Call XRP Roofing at ${PHONE}`}
         >
           <Phone className="w-4 h-4" />
           Call Now: {PHONE}

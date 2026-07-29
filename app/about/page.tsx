@@ -149,7 +149,7 @@ export default function AboutPage() {
                   <span className="text-2xl font-black text-orange-500">{member.name[0]}</span>
                 </div>
                 <h3 className="font-bold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-sm text-orange-500 font-semibold mb-3">{member.role}</p>
+                <p className="text-sm text-orange-700 font-semibold mb-3">{member.role}</p>
                 <p className="text-sm text-gray-600 leading-relaxed">{member.description}</p>
               </div>
             ))}

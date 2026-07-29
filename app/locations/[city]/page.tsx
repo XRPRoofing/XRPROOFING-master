@@ -225,7 +225,7 @@ export default async function CityPage({
                   {service.name} in {city.name}
                 </h3>
                 <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{service.description}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-orange-500">
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-orange-700">
                   Learn More <ArrowRight className="w-3 h-3" />
                 </span>
               </Link>

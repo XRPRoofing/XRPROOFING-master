@@ -217,7 +217,6 @@ export default function Footer() {
             href={GOOGLE_REVIEW_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Leave a Google Review"
             className="group flex items-center gap-2 bg-gray-800 hover:bg-white px-3 py-2 rounded-xl transition-all duration-200 hover:shadow-lg"
           >
             <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 48 48" aria-hidden="true">

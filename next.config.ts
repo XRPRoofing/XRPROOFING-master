@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: ["lucide-react", "radix-ui"],
   },
   images: {
     formats: ["image/avif", "image/webp"],
