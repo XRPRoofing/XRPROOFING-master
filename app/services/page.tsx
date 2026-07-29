@@ -74,7 +74,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="p-5">
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">{service.description}</p>
-                  <div className="flex items-center gap-2 text-sm font-semibold text-orange-500 group-hover:text-orange-600 transition-colors">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-orange-700 group-hover:text-orange-800 transition-colors">
                     Learn More <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export default function ServicesPage() {
                 className="bg-white border border-gray-200 hover:border-orange-300 rounded-2xl p-5 transition-colors group"
               >
                 <h3 className="font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-2">{item.label}</h3>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-orange-700">
                   Compare Options <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </Link>

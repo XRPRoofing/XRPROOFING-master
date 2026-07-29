@@ -312,7 +312,7 @@ export default async function CityServicePage({
                 </p>
                 <Link
                   href={`/locations/${citySlug}`}
-                  className="flex items-center gap-1.5 text-sm font-semibold text-orange-500 hover:text-orange-600"
+                  className="flex items-center gap-1.5 text-sm font-semibold text-orange-700 hover:text-orange-800"
                 >
                   {city.name} Roofing Overview <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -326,7 +326,7 @@ export default async function CityServicePage({
                 </p>
                 <Link
                   href={`/services/${serviceSlug}`}
-                  className="flex items-center gap-1.5 text-sm font-semibold text-orange-500 hover:text-orange-600"
+                  className="flex items-center gap-1.5 text-sm font-semibold text-orange-700 hover:text-orange-800"
                 >
                   Phoenix {service.name} <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

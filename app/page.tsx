@@ -253,7 +253,7 @@ export default function HomePage() {
               </div>
               <div className="p-4">
                 <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">SPF roofing and elastomeric coatings for energy-efficient Phoenix flat roofs.</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-orange-700">
                   Learn More <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
@@ -280,7 +280,7 @@ export default function HomePage() {
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">{service.description}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-orange-500">
+                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-orange-700">
                     Learn More <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>

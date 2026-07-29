@@ -187,9 +187,9 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
             {SMS_REQUIRED_DISCLOSURE}
           </p>
           <p className="text-[11px] text-gray-500">
-            <Link href="/terms" className="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-700">Terms &amp; Conditions</Link>
+            <Link href="/terms" className="font-medium text-orange-700 underline underline-offset-2 hover:text-orange-800">Terms &amp; Conditions</Link>
             {" · "}
-            <Link href="/privacy-policy" className="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-700">Privacy Policy</Link>
+            <Link href="/privacy-policy" className="font-medium text-orange-700 underline underline-offset-2 hover:text-orange-800">Privacy Policy</Link>
           </p>
         </div>
 
@@ -299,9 +299,9 @@ export default function LeadForm({ compact = false, cityName }: LeadFormProps) {
           {SMS_REQUIRED_DISCLOSURE}
         </p>
         <p className="text-xs text-gray-500">
-          <Link href="/terms" className="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-700">Terms &amp; Conditions</Link>
+          <Link href="/terms" className="font-medium text-orange-700 underline underline-offset-2 hover:text-orange-800">Terms &amp; Conditions</Link>
           {" · "}
-          <Link href="/privacy-policy" className="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-700">Privacy Policy</Link>
+          <Link href="/privacy-policy" className="font-medium text-orange-700 underline underline-offset-2 hover:text-orange-800">Privacy Policy</Link>
         </p>
       </div>
 

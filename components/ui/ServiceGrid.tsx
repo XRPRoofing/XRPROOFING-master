@@ -36,7 +36,7 @@ export default function ServiceGrid({ citySlug, title = "Our Roofing Services", 
                     {service.description}
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-orange-500 flex items-center gap-1 mt-auto">
+                <span className="text-xs font-semibold text-orange-700 flex items-center gap-1 mt-auto">
                   Learn More <ArrowRight className="w-3 h-3" />
                 </span>
               </Link>
