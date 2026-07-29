@@ -50,7 +50,7 @@ export default function ProjectGallery() {
         <div className="text-center mt-10">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
+            className="inline-flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
           >
             Get a Free Inspection <ArrowRight className="w-4 h-4" />
           </Link>

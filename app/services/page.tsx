@@ -34,7 +34,7 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             All Services
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">

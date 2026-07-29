@@ -18,14 +18,14 @@ export default function CTASection({
       ? "bg-[#0f2156]"
       : variant === "light"
       ? "bg-gray-50"
-      : "bg-gradient-to-r from-orange-500 to-orange-600";
+      : "bg-gradient-to-r from-orange-700 to-orange-800";
 
   const titleColor = variant === "light" ? "text-gray-900" : "text-white";
   const subColor = variant === "light" ? "text-gray-600" : "text-orange-100";
   const callBtn =
     variant === "light"
-      ? "bg-orange-500 hover:bg-orange-600 text-white"
-      : "bg-white hover:bg-orange-50 text-orange-600";
+      ? "bg-orange-700 hover:bg-orange-800 text-white"
+      : "bg-white hover:bg-orange-50 text-orange-700";
   const inspBtn =
     variant === "light"
       ? "border-2 border-gray-300 hover:border-gray-400 text-gray-700"

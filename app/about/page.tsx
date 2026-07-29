@@ -56,7 +56,7 @@ export default function AboutPage() {
           />
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             About Us
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-6">
@@ -146,7 +146,7 @@ export default function AboutPage() {
             {team.map((member) => (
               <div key={member.name} className="bg-gray-50 rounded-2xl p-6 text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-black text-orange-500">{member.name[0]}</span>
+                  <span className="text-2xl font-black text-orange-700">{member.name[0]}</span>
                 </div>
                 <h3 className="font-bold text-gray-900 mb-1">{member.name}</h3>
                 <p className="text-sm text-orange-700 font-semibold mb-3">{member.role}</p>
@@ -196,7 +196,7 @@ export default function AboutPage() {
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   <a
                     href={PHONE_HREF}
-                    className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
+                    className="inline-flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors"
                   >
                     <Phone className="w-4 h-4" />
                     Call {PHONE}

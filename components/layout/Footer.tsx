@@ -201,7 +201,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-gray-800">
         <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-500 text-center sm:text-left">
+          <p className="text-xs text-gray-400 text-center sm:text-left">
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
             {" · "}
             <Link href="/privacy-policy" className="hover:text-orange-400 transition-colors">
@@ -232,7 +232,7 @@ export default function Footer() {
             </div>
             <span className="text-xs font-semibold text-gray-300 group-hover:text-gray-900 transition-colors">5.0 · Leave a Review</span>
           </a>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-400">
             Proudly serving Phoenix, AZ and the entire 100-mile metro radius.
           </p>
         </div>

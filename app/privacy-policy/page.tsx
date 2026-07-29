@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-block bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-orange-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             Legal
           </div>
           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4">
@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
               <p>
                 {SITE_NAME} (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects your privacy.
                 This Privacy Policy explains what information we collect, how we use it, and the choices you have.
-                It applies to our website <a href={SITE_URL} className="text-orange-600 hover:underline">{SITE_URL}</a>,
+                It applies to our website <a href={SITE_URL} className="text-orange-700 hover:underline">{SITE_URL}</a>,
                 our phone calls, and our SMS/text messaging program.
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function PrivacyPolicyPage() {
               <p>
                 Message frequency varies based on your service request. Message and data rates may apply.
                 You may opt out at any time by replying <strong>STOP</strong>, or get help by replying <strong>HELP</strong>.
-                See our <Link href="/terms" className="text-orange-600 hover:underline">Terms &amp; Conditions</Link> for the full SMS program terms.
+                See our <Link href="/terms" className="text-orange-700 hover:underline">Terms &amp; Conditions</Link> for the full SMS program terms.
               </p>
             </div>
 
@@ -153,8 +153,8 @@ export default function PrivacyPolicyPage() {
               <ul className="list-none space-y-1">
                 <li><strong>{SITE_NAME}</strong></li>
                 <li>{ADDRESS}</li>
-                <li>Phone: <a href={PHONE_HREF} className="text-orange-600 hover:underline">{PHONE}</a></li>
-                <li>Email: <a href={`mailto:${EMAIL}`} className="text-orange-600 hover:underline">{EMAIL}</a></li>
+                <li>Phone: <a href={PHONE_HREF} className="text-orange-700 hover:underline">{PHONE}</a></li>
+                <li>Email: <a href={`mailto:${EMAIL}`} className="text-orange-700 hover:underline">{EMAIL}</a></li>
               </ul>
             </div>
 

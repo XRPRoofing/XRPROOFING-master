@@ -112,7 +112,7 @@ export default async function CityServicePage({
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4 flex-wrap">
-              <span className="inline-flex items-center gap-1 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+              <span className="inline-flex items-center gap-1 bg-orange-700 text-white px-3 py-1 rounded-full text-xs font-semibold">
                 {service.icon} {service.shortName}
               </span>
               <span className="inline-flex items-center gap-1 bg-white/10 text-white px-3 py-1 rounded-full text-xs font-semibold">
@@ -128,7 +128,7 @@ export default async function CityServicePage({
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-7 py-3.5 rounded-xl font-bold transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-7 py-3.5 rounded-xl font-bold transition-colors"
               >
                 Free Inspection in {city.name} <ArrowRight className="w-4 h-4" />
               </Link>
@@ -269,7 +269,7 @@ export default async function CityServicePage({
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Lead Form */}
-              <div className="bg-orange-500 rounded-2xl p-6 text-white">
+              <div className="bg-orange-700 rounded-2xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-1">
                   Free {service.shortName} Inspection
                 </h3>
