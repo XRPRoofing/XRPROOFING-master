@@ -34,7 +34,6 @@ export default function Footer() {
                   height={120}
                   className="h-12 w-auto object-contain"
                   sizes="120px"
-                  quality={90}
                 />
               </div>
             </Link>

@@ -169,7 +169,7 @@ export default function PhoenixFoamRoofingPage() {
             priority
             fetchPriority="high"
             sizes="100vw"
-            quality={60}
+            quality={65}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/95 via-[#0B1F3A]/78 to-[#0B1F3A]/35" />
         </div>
