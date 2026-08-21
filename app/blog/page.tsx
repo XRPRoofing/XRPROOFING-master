@@ -28,7 +28,7 @@ const posts = [
     slug: "roof-coatings-vs-roof-replacement-phoenix",
     title: "Roof Coatings vs. Full Replacement in Phoenix: When a Coating Is Enough (and When It's Not)",
     excerpt: "A roof coating can genuinely extend the service life of a sound Phoenix roof — but applied over the wrong roof, it buys time you do not actually have. Here is how to tell which situation you are in before you spend money.",
-    date: "2025-06-19",
+    date: "2026-08-21",
     readTime: "7 min read",
     category: "Roof Coatings",
   },
