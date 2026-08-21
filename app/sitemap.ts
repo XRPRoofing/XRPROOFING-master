@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "roof-coatings-vs-roof-replacement-phoenix",
     "insurance-roof-claim-guide-arizona",
     "hoa-roofing-requirements-arizona",
     "commercial-roofing-pricing-phoenix",

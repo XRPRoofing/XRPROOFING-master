@@ -7,6 +7,59 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "roof-coatings-vs-roof-replacement-phoenix": {
+    slug: "roof-coatings-vs-roof-replacement-phoenix",
+    title: "Roof Coatings vs. Full Replacement in Phoenix: When a Coating Is Enough (and When It's Not)",
+    excerpt: "A roof coating can genuinely extend the service life of a sound Phoenix roof — but applied over the wrong roof, it buys time you do not actually have. Here is how to tell which situation you are in before you spend money.",
+    date: "2026-08-21",
+    readTime: "7 min read",
+    category: "Roof Coatings",
+    metaDescription: "Roof coatings vs roof replacement in Phoenix: how coatings work, when a roof coating is appropriate, when replacement is the better decision, and what an honest Arizona assessment should include.",
+    sections: [
+      {
+        heading: "What a Roof Coating Actually Does",
+        body: "A roof coating is a fluid-applied membrane — commonly silicone, acrylic, or an elastomeric blend — rolled or sprayed over an existing roof to form a continuous, seamless surface. On low-slope and flat roofs it can bridge small seam gaps, re-seal detail work around penetrations, and add a reflective top layer that takes the direct UV and thermal load instead of the roof beneath it. That is the honest scope of the product: a roof coating Phoenix property owners apply is a protective layer over a roof, not a new roof. It does not add structure, it does not replace saturated insulation, and it does not repair a deck that has already lost strength. Understanding that boundary is what makes the roof coating vs replacement decision straightforward instead of a gamble.",
+      },
+      {
+        heading: "Why Phoenix Roofs Are Good Candidates — and Also Easy to Get Wrong",
+        body: "Arizona is an unusual environment for roofing. Roofs here see intense year-round UV, long stretches of extreme surface heat, and daily expansion-and-contraction cycles that work at seams, laps, flashing, and sealant. Then monsoon season arrives with wind-driven rain and debris impact against a surface that has been baking for months. That combination is exactly why a reflective coating can be worthwhile on a sound flat or low-slope roof: it takes the UV and thermal cycling first. It is also why coatings fail early here when the underlying roof was not ready. Trapped moisture cannot dry out under a coating, and Arizona heat drives that moisture upward — which is how a coating ends up blistering, losing adhesion, or peeling away in sheets a couple of seasons later.",
+      },
+      {
+        heading: "When a Coating Is Enough",
+        body: "In practice, coating is a reasonable path when the roof is fundamentally intact and the problems are surface-level. The clearest indicators an assessment should confirm before recommending a roof coating in Arizona:",
+        listItems: [
+          "The deck and structure are sound, with no soft spots, deflection, or sagging underfoot",
+          "The insulation is dry — verified by moisture survey or test cuts, not by appearance alone",
+          "Leaks are isolated and traceable to seams, laps, flashing, or penetrations rather than widespread membrane failure",
+          "Drainage works: water leaves the roof instead of ponding for days after a storm",
+          "The existing membrane still holds together and can be cleaned and primed to accept adhesion",
+          "The building's expected ownership horizon fits an added service interval rather than a full replacement cycle",
+        ],
+      },
+      {
+        heading: "When Replacement Is the Better Decision",
+        body: "A coating applied over a failing roof hides the evidence without changing the outcome, and it usually costs the owner twice — once for the coating, again for the tear-off that follows. Replacement is generally the sounder decision when the roof has trapped moisture or wet insulation, when the deck shows movement or deterioration, when leaks recur in multiple unrelated areas, when the membrane has become brittle or is delaminating broadly, or when storm damage has compromised entire slopes or sections. Chronic ponding caused by inadequate slope or drainage is another case: a coating does not correct a drainage problem, and standing water will find the weakest detail regardless of what is on top. On tile and shingle roofs, the equivalent honest answer is often underlayment replacement rather than a topical product — the waterproofing layer under Arizona tile is usually what has aged out, and no surface coating substitutes for it.",
+      },
+      {
+        heading: "Long-Term Value, Maintenance, and Making the Call",
+        body: "The right comparison is not simply which option costs less today. Coatings are maintenance systems: they need the roof cleaned and prepared correctly, details treated properly, the manufacturer's specified thickness actually applied, and periodic inspection afterward to keep the warranty and the performance intact. Skip that and the value disappears. Replacement resets the entire assembly — deck, insulation, membrane, flashing, and drainage — and generally carries longer, stronger warranty options. Either way, the decision should rest on documented roof condition rather than on whichever product a contractor happens to be selling. That is why XRP Roofing assesses moisture, seams, flashing, drainage, deck condition, and remaining service life before recommending anything, and puts the findings in writing with photos so an owner can see the reasoning. If you are weighing roof coatings vs roof replacement in Phoenix, start with a free inspection — the roof itself will tell you which one it needs.",
+      },
+    ],
+    faqs: [
+      { q: "Is a roof coating cheaper than a full roof replacement in Phoenix?", a: "Coating is typically the lower up-front investment because there is no tear-off or disposal, but that only holds as value if the roof qualifies. Coating a roof with wet insulation or a deteriorated deck usually means paying for the coating and then paying for the replacement it postponed. Pricing on either option should come from a site-specific written estimate." },
+      { q: "Can you apply a roof coating over a roof that already leaks?", a: "Sometimes — if the leak is isolated and traceable to a seam, lap, flashing, or penetration, those details can be repaired and then coated. If the leak has saturated the insulation or reached the deck, the wet material has to be removed first. Coating over trapped moisture is one of the most common causes of premature coating failure in Arizona." },
+      { q: "How long does a roof coating last in Arizona?", a: "It varies with the coating chemistry, the applied thickness, the condition and preparation of the roof underneath, and ongoing maintenance. Rather than quote a number, we recommend asking for the manufacturer's warranty terms for the specific system and application thickness being proposed, in writing." },
+      { q: "Do reflective roof coatings reduce cooling costs?", a: "A reflective surface reduces how much solar heat the roof absorbs, which can help. How much it affects your utility bill depends on your insulation, ductwork, HVAC equipment, occupancy, and building design, so we do not promise a specific savings figure — any contractor who quotes an exact percentage without studying your building is guessing." },
+      { q: "Can a tile or shingle roof be coated instead of replaced?", a: "Coatings are primarily a flat and low-slope roof system. On Arizona tile roofs, the component that generally ages out is the underlayment beneath the tile, and that requires underlayment replacement rather than a surface coating. Shingle roofs near the end of their service life are usually replacement candidates." },
+      { q: "How do I know whether my roof qualifies for a coating?", a: "It takes a roof-level inspection covering deck condition, moisture in the insulation, seam and flashing integrity, drainage performance, and how much service life the existing membrane has left. XRP Roofing provides that assessment free and documents the findings with photos so you can see what drove the recommendation." },
+    ],
+    relatedServices: [
+      { label: "Roof Coatings", href: "/services/roof-coatings" },
+      { label: "Flat Roofing", href: "/services/flat-roofing" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Commercial Roofing", href: "/services/commercial-roofing" },
+    ],
+  },
   "emergency-roof-repair-arizona": {
     slug: "emergency-roof-repair-arizona",
     title: "Emergency Roof Repair in Arizona: What to Do First",

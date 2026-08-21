@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "roof-coatings-vs-roof-replacement-phoenix",
+    title: "Roof Coatings vs. Full Replacement in Phoenix: When a Coating Is Enough (and When It's Not)",
+    excerpt: "A roof coating can genuinely extend the service life of a sound Phoenix roof — but applied over the wrong roof, it buys time you do not actually have. Here is how to tell which situation you are in before you spend money.",
+    date: "2026-08-21",
+    readTime: "7 min read",
+    category: "Roof Coatings",
+  },
+  {
     slug: "emergency-roof-repair-arizona",
     title: "Emergency Roof Repair in Arizona: What to Do First",
     excerpt: "Active roof leaks and storm damage can escalate quickly in Arizona. Learn what to do first, when to call, what emergency repairs include, and how to document damage.",
@@ -122,7 +130,7 @@ const posts = [
   },
 ];
 
-const categories = ["All", "Emergency Repair", "Storm Damage", "Commercial Roofing", "HOA Roofing", "Maintenance", "Materials", "Repair & Replacement", "Arizona Climate", "Insurance"];
+const categories = ["All", "Roof Coatings", "Emergency Repair", "Storm Damage", "Commercial Roofing", "HOA Roofing", "Maintenance", "Materials", "Repair & Replacement", "Arizona Climate", "Insurance"];
 
 export default function BlogPage() {
   return (
