@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "post-monsoon-hidden-roof-damage-arizona",
+    title: "How to Spot (and Prevent) Hidden Roof Damage After Arizona's Monsoon Season",
+    excerpt: "Most monsoon roof damage does not announce itself with a ceiling stain. It sits quietly through the dry weeks that follow and shows up on the first storm of the next season. Here is what to look for once the storms stop — and what only shows up from the roof itself.",
+    date: "2026-09-01",
+    readTime: "8 min read",
+    category: "Storm Damage",
+  },
+  {
     slug: "roof-coatings-vs-roof-replacement-phoenix",
     title: "Roof Coatings vs. Full Replacement in Phoenix: When a Coating Is Enough (and When It's Not)",
     excerpt: "A roof coating can genuinely extend the service life of a sound Phoenix roof — but applied over the wrong roof, it buys time you do not actually have. Here is how to tell which situation you are in before you spend money.",

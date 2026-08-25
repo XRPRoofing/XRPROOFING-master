@@ -7,6 +7,60 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "post-monsoon-hidden-roof-damage-arizona": {
+    slug: "post-monsoon-hidden-roof-damage-arizona",
+    title: "How to Spot (and Prevent) Hidden Roof Damage After Arizona's Monsoon Season",
+    excerpt: "Most monsoon roof damage does not announce itself with a ceiling stain. It sits quietly through the dry weeks that follow and shows up on the first storm of the next season. Here is what to look for once the storms stop — and what only shows up from the roof itself.",
+    date: "2026-09-01",
+    readTime: "8 min read",
+    category: "Storm Damage",
+    metaDescription: "Post monsoon roof inspection in Phoenix: how hidden roof damage stays invisible for weeks, a homeowner checklist, what tile, shingle and foam roofs fail at, and how documentation supports an insurance claim.",
+    sections: [
+      {
+        heading: "Why Monsoon Damage Stays Hidden for Weeks",
+        body: "The end of monsoon season is the most misleading time of year for a Phoenix roof. The storms stop, the ceilings stay dry, and the roof looks the same from the driveway — so most property owners conclude nothing happened. What actually happened is that wind lifted materials and set them back down, fasteners backed out slightly, sealant separated at a penetration, or water found its way under the surface and soaked insulation or decking that has no way to dry quickly. None of that produces a visible symptom while the weather is dry. Then September and October heat goes to work on it: thermal cycling widens the separations, softened decking loses more strength under foot traffic, and shingles that lost their granule layer start aging at an accelerated rate because the asphalt underneath is now exposed to direct UV. The damage does not appear later — it was there in August. It simply had nothing to leak through until the next storm arrived.",
+      },
+      {
+        heading: "What a Homeowner Can Check — and Where That Check Stops",
+        body: "There is real value in a careful ground-level and attic walkthrough, as long as you understand what it can and cannot tell you. Stay off the roof: an Arizona roof surface in late summer is hot, tile is brittle underfoot, and storm-softened decking is exactly the kind of hazard you cannot see before you step on it. From the ground, from a window, and from inside the attic, look for:",
+        listItems: [
+          "Displaced, slipped, or cracked tiles, and ridge caps that no longer sit in a straight line",
+          "Shingle tabs that are lifted, curled, creased, or missing along the edges and hips",
+          "Granule accumulation at downspout outlets or along the base of walls, which signals surface wear",
+          "Debris left on the roof or in valleys, plus branches that made contact during high winds",
+          "Standing water on a flat or foam roof more than a day or two after rain, or new low spots",
+          "Fresh staining, streaking, or bubbling on soffits, fascia, exterior walls, or interior ceilings",
+          "In the attic: daylight through the deck, damp or matted insulation, darkened wood, or a musty smell",
+        ],
+      },
+      {
+        heading: "What Only a Professional Post-Monsoon Inspection Catches",
+        body: "The list above finds damage that has already progressed. The conditions that cause next season's leak are almost always at roof level and out of sight: underlayment displaced beneath tile, flashing that separated at a wall, chimney, or skylight, pipe boots that cracked and then reseated, fasteners that backed out and left an open path, hail bruising on shingles that has not yet opened up, membrane seams that lifted at a lap, and soft spots underfoot that indicate the deck absorbed water. A proper post monsoon roof inspection in Phoenix means a roofer on the surface checking each slope, each penetration, and each transition, then photographing findings by location — plus an attic review whenever there is any sign of moisture. That documentation is what turns a vague suspicion into a decision you can act on.",
+      },
+      {
+        heading: "How Damage Shows Up Differently on Tile, Shingle, and Flat or Foam Roofs",
+        body: "Each roofing system in the Phoenix metro fails in its own way after a monsoon. On tile, the tile itself is largely a shield — the waterproofing is the underlayment beneath it, so wind-lifted or torn underlayment and displaced ridge mortar are the real concerns, and both are completely invisible until someone lifts tile. On shingle roofs, wind creases the tab, breaks the seal strip, and strips granules, while hail leaves bruised spots that soften and open up over the following seasons. On flat, TPO, and foam roofs, the vulnerabilities are seams, laps, edge metal, drains and scuppers blocked by storm debris, and punctures from wind-driven objects — and because these roofs hold water, a small opening can saturate insulation across a wide area before anything reaches the interior. On foam specifically, impact pitting that breaks the protective coating layer exposes the foam to UV, which is a slow failure that starts the day the coating is compromised.",
+      },
+      {
+        heading: "Repair, Coating, or Replacement — and Getting the Documentation Right",
+        body: "Once the condition is known, the decision follows from it rather than from a sales pitch. Isolated flashing, boot, seam, or tile issues on an otherwise sound roof are repair work. On a flat or low-slope roof that is structurally sound with dry insulation, a protective coating can be a reasonable way to extend service life — but never over trapped moisture, so a moisture check has to come before that conversation. Widespread underlayment failure, recurring leaks in unrelated areas, storm damage across whole slopes, or a deck that has lost integrity point toward replacement. If the damage came from wind, hail, or debris impact, documentation timing matters as much as the finding itself: photos and a written contractor assessment created close to the storm establish the condition and the cause, and a claim filed from that evidence is far stronger than one built months later after the trail has faded. If a monsoon passed over your property this year, get a free post-monsoon inspection from XRP Roofing before the next season starts — the cheapest storm damage to deal with is the kind found before it leaks.",
+      },
+    ],
+    faqs: [
+      { q: "How soon after monsoon season should I have my roof inspected?", a: "Schedule once the storm activity has settled, generally late September or October. That leaves the full dry season to complete any repairs before the next monsoon, and it keeps the inspection close enough to the storms to be useful if an insurance claim becomes necessary." },
+      { q: "My ceilings are dry — do I still need a post-monsoon roof inspection?", a: "Usually yes, if a significant storm passed over your property. Dry ceilings only confirm that water has not yet found a path to the interior. Lifted underlayment, separated flashing, backed-out fasteners, and bruised shingles all sit quietly through the dry months and become leaks during the next rain event." },
+      { q: "Can I inspect the roof myself after a storm?", a: "You can do a great deal from the ground, a window, and the attic, and that is worth doing. Do not climb onto the roof — Arizona tile is brittle, summer surfaces are dangerously hot, and storm-softened decking is not visible before you put weight on it. Roof-level and attic conditions are where a professional inspection adds what you cannot see." },
+      { q: "Does homeowners insurance cover monsoon roof damage in Arizona?", a: "Sudden damage from wind, hail, or falling debris is commonly covered, while gradual wear, aging materials, and deferred maintenance generally are not. Coverage depends on your policy and deductible, so have the roof inspected and documented first — that assessment is what tells you whether filing makes sense at all." },
+      { q: "What is granule loss and why does it matter after a storm?", a: "Granules are the mineral surface layer that shields asphalt shingles from UV. Wind-driven rain and hail knock them loose, and they collect at downspouts and along wall bases. Once bare asphalt is exposed to Arizona sun, that area of the roof ages faster than the rest of it, which is why granule accumulation is worth reporting even without a leak." },
+      { q: "Does XRP Roofing charge for a post-monsoon inspection?", a: "No. Post-monsoon inspections are free and carry no obligation. You receive photo documentation of the findings and a written recommendation, whether that recommendation is repair, coating, replacement, or simply that the roof came through the season fine." },
+    ],
+    relatedServices: [
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
+      { label: "Roof Coatings", href: "/services/roof-coatings" },
+    ],
+  },
   "roof-coatings-vs-roof-replacement-phoenix": {
     slug: "roof-coatings-vs-roof-replacement-phoenix",
     title: "Roof Coatings vs. Full Replacement in Phoenix: When a Coating Is Enough (and When It's Not)",
