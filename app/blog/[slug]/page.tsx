@@ -11,7 +11,7 @@ const allPosts: Record<string, BlogPost> = {
     slug: "foam-roofing-arizona",
     title: "Foam Roofing in Arizona: How Long Does It Last and Is It Worth It?",
     excerpt: "Spray foam is one of the best-performing flat roof systems in the Phoenix valley — as long as the coating over it is maintained. Here is how SPF roofing actually works in Arizona heat, how long it lasts, what goes wrong, and how to tell whether your foam roof needs a repair, a recoat, or a replacement.",
-    date: "2026-09-08",
+    date: "2026-08-26",
     readTime: "11 min read",
     category: "Foam Roofing",
     metaDescription: "Considering a foam roof in Arizona? Learn how SPF roofing handles Phoenix heat, how long it lasts, maintenance requirements, common problems, and when repair, recoating, or replacement makes sense.",
