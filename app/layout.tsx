@@ -8,6 +8,7 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  fallback: ["Arial", "Helvetica Neue", "Helvetica", "sans-serif"],
 });
 
 export const viewport: Viewport = {
