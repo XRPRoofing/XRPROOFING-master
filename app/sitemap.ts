@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "phoenix-roof-thermal-expansion-damage",
     "foam-roofing-arizona",
     "post-monsoon-hidden-roof-damage-arizona",
     "roof-coatings-vs-roof-replacement-phoenix",
