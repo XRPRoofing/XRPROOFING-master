@@ -222,7 +222,7 @@ export default function BlogPage() {
                   <div className="flex items-center justify-between text-xs text-gray-400">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                      {new Date(`${post.date}T00:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                     </span>
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />

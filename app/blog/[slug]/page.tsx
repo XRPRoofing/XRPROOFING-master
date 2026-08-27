@@ -930,7 +930,7 @@ export default async function BlogPostPage({
           <div className="flex items-center gap-4 text-gray-400 text-sm">
             <span className="flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5" />
-              {new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+              {new Date(`${post.date}T00:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
             </span>
             <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {post.readTime}</span>
           </div>
