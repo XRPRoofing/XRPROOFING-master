@@ -33,6 +33,14 @@ const posts = [
     category: "Storm Damage",
   },
   {
+    slug: "phoenix-roof-thermal-expansion-damage",
+    title: "Why Phoenix Roofs Fail Faster Than Expected: The Hidden Role of Thermal Expansion and Contraction",
+    excerpt: "A Phoenix roof surface can pass 170°F in the afternoon and shed 40 degrees overnight — every single day, for months. Nothing on the roof is damaged by any one of those cycles, which is exactly why thermal movement is the most underestimated reason Arizona roofs wear out ahead of their rated life.",
+    date: "2026-08-26",
+    readTime: "12 min read",
+    category: "Arizona Climate",
+  },
+  {
     slug: "foam-roofing-arizona",
     title: "Foam Roofing in Arizona: How Long Does It Last and Is It Worth It?",
     excerpt: "Spray foam is one of the best-performing flat roof systems in the Phoenix valley — as long as the coating over it is maintained. Here is how SPF roofing actually works in Arizona heat, how long it lasts, what goes wrong, and how to tell whether your foam roof needs a repair, a recoat, or a replacement.",
