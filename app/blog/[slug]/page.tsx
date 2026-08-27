@@ -205,7 +205,7 @@ const allPosts: Record<string, BlogPost> = {
     slug: "post-monsoon-hidden-roof-damage-arizona",
     title: "How to Spot (and Prevent) Hidden Roof Damage After Arizona's Monsoon Season",
     excerpt: "Most monsoon roof damage does not announce itself with a ceiling stain. It sits quietly through the dry weeks that follow and shows up on the first storm of the next season. Here is what to look for once the storms stop — and what only shows up from the roof itself.",
-    date: "2026-09-01",
+    date: "2026-08-25",
     readTime: "8 min read",
     category: "Storm Damage",
     metaDescription: "Post monsoon roof inspection in Phoenix: how hidden roof damage stays invisible for weeks, a homeowner checklist, what tile, shingle and foam roofs fail at, and how documentation supports an insurance claim.",

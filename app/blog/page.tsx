@@ -25,14 +25,6 @@ export const metadata: Metadata = {
 
 const posts = [
   {
-    slug: "post-monsoon-hidden-roof-damage-arizona",
-    title: "How to Spot (and Prevent) Hidden Roof Damage After Arizona's Monsoon Season",
-    excerpt: "Most monsoon roof damage does not announce itself with a ceiling stain. It sits quietly through the dry weeks that follow and shows up on the first storm of the next season. Here is what to look for once the storms stop — and what only shows up from the roof itself.",
-    date: "2026-09-01",
-    readTime: "8 min read",
-    category: "Storm Damage",
-  },
-  {
     slug: "phoenix-roof-thermal-expansion-damage",
     title: "Why Phoenix Roofs Fail Faster Than Expected: The Hidden Role of Thermal Expansion and Contraction",
     excerpt: "A Phoenix roof surface can pass 170°F in the afternoon and shed 40 degrees overnight — every single day, for months. Nothing on the roof is damaged by any one of those cycles, which is exactly why thermal movement is the most underestimated reason Arizona roofs wear out ahead of their rated life.",
@@ -47,6 +39,14 @@ const posts = [
     date: "2026-08-26",
     readTime: "11 min read",
     category: "Foam Roofing",
+  },
+  {
+    slug: "post-monsoon-hidden-roof-damage-arizona",
+    title: "How to Spot (and Prevent) Hidden Roof Damage After Arizona's Monsoon Season",
+    excerpt: "Most monsoon roof damage does not announce itself with a ceiling stain. It sits quietly through the dry weeks that follow and shows up on the first storm of the next season. Here is what to look for once the storms stop — and what only shows up from the roof itself.",
+    date: "2026-08-25",
+    readTime: "8 min read",
+    category: "Storm Damage",
   },
   {
     slug: "roof-coatings-vs-roof-replacement-phoenix",
