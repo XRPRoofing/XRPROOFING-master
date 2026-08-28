@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "phoenix-attic-ventilation-roof-damage",
+    title: "Why Your Phoenix Attic Is Cooking Your Roof from Below — and How Proper Ventilation Stops Premature Failure",
+    excerpt: "Everyone looks at what the Arizona sun does to the top of a roof. Far fewer people look at what a sealed-up 150°F attic does to the underside of it — where the underlayment, the adhesives, the fasteners, and the deck all live. In the valley, inadequate ventilation is one of the most common reasons a roof quietly gives up years early.",
+    date: "2026-08-28",
+    readTime: "13 min read",
+    category: "Arizona Climate",
+  },
+  {
     slug: "phoenix-roof-thermal-expansion-damage",
     title: "Why Phoenix Roofs Fail Faster Than Expected: The Hidden Role of Thermal Expansion and Contraction",
     excerpt: "A Phoenix roof surface can pass 170°F in the afternoon and shed 40 degrees overnight — every single day, for months. Nothing on the roof is damaged by any one of those cycles, which is exactly why thermal movement is the most underestimated reason Arizona roofs wear out ahead of their rated life.",
