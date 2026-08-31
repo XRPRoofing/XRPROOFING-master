@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "post-monsoon-debris-settled-flashing-phoenix",
+    title: "The Quiet Week After Monsoon: Why Phoenix Roofs Still Need a Debris and Flashing Check in Early September",
+    excerpt: "The storms stop, the roof looks fine from the driveway, and the whole subject drops off the list until next June. But the two problems most likely to leak on the next rain — debris packed into places water needs to travel, and flashing that settled open after a summer of thermal movement and wind pressure — are only visible in dry weather. Early September is the window to find them.",
+    date: "2026-08-31",
+    readTime: "12 min read",
+    category: "Storm Damage",
+  },
+  {
     slug: "phoenix-attic-ventilation-roof-damage",
     title: "Why Your Phoenix Attic Is Cooking Your Roof from Below — and How Proper Ventilation Stops Premature Failure",
     excerpt: "Everyone looks at what the Arizona sun does to the top of a roof. Far fewer people look at what a sealed-up 150°F attic does to the underside of it — where the underlayment, the adhesives, the fasteners, and the deck all live. In the valley, inadequate ventilation is one of the most common reasons a roof quietly gives up years early.",

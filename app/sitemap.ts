@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "post-monsoon-debris-settled-flashing-phoenix",
     "phoenix-attic-ventilation-roof-damage",
     "phoenix-roof-thermal-expansion-damage",
     "foam-roofing-arizona",
