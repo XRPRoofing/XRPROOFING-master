@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "late-monsoon-september-roof-check-phoenix",
+    title: "Late-Monsoon Storms Are Still Possible in Early September — Why Phoenix-Metro Roofs Need One More Thorough Check Before the Season Ends",
+    excerpt: "Monsoon season does not end until September 30, and a quiet stretch in late August is not the same thing as the season being over. Highs near or above 100°F are still driving materials through a full expansion and contraction cycle every day, whatever the last storms loosened is still loose, and a late-season storm arriving on a roof in that condition does considerably more damage than the same storm would have done in June.",
+    date: "2026-09-02",
+    readTime: "12 min read",
+    category: "Storm Damage",
+  },
+  {
     slug: "post-monsoon-debris-settled-flashing-phoenix",
     title: "The Quiet Week After Monsoon: Why Phoenix Roofs Still Need a Debris and Flashing Check in Early September",
     excerpt: "The storms stop, the roof looks fine from the driveway, and the whole subject drops off the list until next June. But the two problems most likely to leak on the next rain — debris packed into places water needs to travel, and flashing that settled open after a summer of thermal movement and wind pressure — are only visible in dry weather. Early September is the window to find them.",
