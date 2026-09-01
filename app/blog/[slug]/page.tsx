@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactElement } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
@@ -22,7 +23,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "What Late-Season Storms Do Differently",
-        body: "It is not only that the roof is more vulnerable by September. Late-season storms tend to behave differently from early ones, and the combination is what produces the leaks we get called about in October and November:",
+        body: "It is not only that the roof is more vulnerable by September. Late-season storms tend to behave differently from early ones, and the combination is what produces the [storm damage](/services/storm-damage-roofing) we get called about in October and November:",
         listItems: [
           "They arrive on a roof that is already loaded. An early-season storm hits clear valleys and tight flashing. A September storm hits valleys packed with fronds and grit, drains partially choked with monsoon silt, and sealant that has spent ten weeks at 160°F surface temperatures. The same rainfall now has somewhere to go that it did not have in June.",
           "Late-season cells often carry more moisture. As the season matures, storms in the valley more frequently deliver sustained rainfall rather than a brief violent burst. Sustained rain is what finds a slow water path — a brief burst runs off before it has time to exploit one.",
@@ -36,11 +37,11 @@ const allPosts: Record<string, BlogPost> = {
         heading: "The Points That Matter Most Right Now",
         body: "A late-season inspection is not a generic once-over. There is a specific short list of locations where this season's wear concentrates, and it is where a good inspection spends its time:",
         listItems: [
-          "Valleys, eaves, and gutter lines. Packed debris and settled granules in the channels that carry the most water. Granule accumulation at eaves and downspout outlets also tells you which specific area of a shingle roof has lost its UV shield this summer.",
-          "Flashing, counter-flashing, and pipe boots. Every wall, chimney, skylight, curb, and penetration, checked for the millimeter-scale gaps that open when metal cycles through a summer of thermal movement and sealant stretches instead of holding. These are invisible from the ground and wide open to wind-driven rain.",
+          "Valleys, eaves, and gutter lines. Packed debris and settled granules in the channels that carry the most water, which is the same pattern we covered in [the quiet-week debris and flashing check](/blog/post-monsoon-debris-settled-flashing-phoenix). Granule accumulation at eaves and downspout outlets also tells you which specific area of a [shingle roof](/services/shingle-roofing) has lost its UV shield this summer.",
+          "Flashing, counter-flashing, and pipe boots. Every wall, chimney, skylight, curb, and penetration, checked for the millimeter-scale gaps that open when metal cycles through [a summer of thermal expansion and contraction](/blog/phoenix-roof-thermal-expansion-damage) and sealant stretches instead of holding. These are invisible from the ground and wide open to wind-driven rain.",
           "Ridge and hip lines. Fresh hairline cracks in mortar, caps that rock slightly, and tiles that have slipped out of course. All of it held during the storms that moved it, which is exactly why nobody noticed, and all of it admits water on the next rain.",
-          "Soft spots and staining from residual moisture. Areas that read soft underfoot, decking that has darkened, matted or damp insulation, and ceiling or soffit staining that only surfaces once remaining heat drives trapped moisture through. This is the category that gets dramatically more expensive if it takes another storm.",
-          "Coating and foam systems. Impact pitting that broke the coating layer, thinning or delamination starting at termination bars, parapet transitions, and drain flanges, plus any spot where summer UV and heat accelerated wear. On foam, a broken coating means the foam underneath is exposed to UV from that day forward.",
+          "Soft spots and staining from residual moisture. Areas that read soft underfoot, decking that has darkened, matted or damp insulation, and ceiling or soffit staining that only surfaces once remaining heat drives trapped moisture through — the [hidden post-storm damage](/blog/post-monsoon-hidden-roof-damage-arizona) that is dramatically more expensive if it takes another storm to reveal it.",
+          "Coating and foam systems. Impact pitting that broke the coating layer, thinning or delamination starting at termination bars, parapet transitions, and drain flanges, plus any spot where summer UV and heat accelerated wear. On [foam roofing](/phoenix-foam-roofing), a broken coating means the foam underneath is exposed to UV from that day forward, which is why a timely [roof coating](/services/roof-coatings) matters more here than on any other system.",
           "Flat-roof drainage. Drains, scuppers, and crickets carrying compacted monsoon silt. A drain running at half capacity handles ordinary rain and fails on a heavy one, and a flat roof responds to blocked drainage by holding the water rather than shedding it.",
           "Attic side. Daylight through the deck, rust on nail points, staining at valleys and penetrations, and any musty smell — the fastest way to confirm whether water actually got in this season rather than guessing from the surface.",
         ],
@@ -51,12 +52,12 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "What This Looks Like Across the Valley",
-        body: "The metro is not one roofing market, and the late-season pattern shows up differently depending on where the house is and what it is made of. XRP Roofing works across Phoenix and the surrounding metro within a 100-mile radius, and the recurring themes by area are worth knowing:",
+        body: "The metro is not one roofing market, and the late-season pattern shows up differently depending on where the house is and what it is made of. XRP Roofing works [across Phoenix and the surrounding metro](/locations) within a 100-mile radius, and the recurring themes by area are worth knowing:",
         listItems: [
-          "Phoenix and the central corridor. Older housing stock and a high proportion of flat and low-slope sections, including additions and patio covers. Silt-choked drainage and coating edges that have started to lift are the dominant late-season findings, and older tile roofs here frequently have original underlayment well past its service life beneath perfectly sound tile.",
-          "Scottsdale and Paradise Valley. Heavy concentration of luxury tile, complex rooflines with many valleys and transitions, and a lot of roof-mounted equipment — which means far more flashing and far more wind-shadowed pockets where debris piles up on top of the roof's most vulnerable details. HOA and architectural committee requirements also mean material and color approvals need to be factored into repair timelines rather than discovered mid-project.",
-          "East Valley — Mesa, Chandler, Gilbert, Tempe, and Queen Creek. A great deal of newer construction, where the roofs themselves are young but the details are not immune: fastener movement, sealant that was never intended to be a permanent waterproofing layer, and builder-grade flashing at penetrations. Newer roofs still leak, and a roof under warranty is exactly the roof you want documented properly before a claim window closes.",
-          "West Valley — Glendale, Peoria, Surprise, Goodyear, and Buckeye. More open exposure and less mature tree cover on the newer edges of the metro means wind loads are a bigger factor here than debris, so lifted shingle tabs, displaced ridge caps, and membrane laps deserve extra attention. Active-adult communities also carry community standards and, often, homeowners who should not be climbing onto a roof to check anything.",
+          "[Phoenix](/locations/phoenix-az) and the central corridor. Older housing stock and a high proportion of [flat and low-slope](/services/flat-roofing) sections, including additions and patio covers. Silt-choked drainage and coating edges that have started to lift are the dominant late-season findings, and older tile roofs here frequently have original underlayment well past its service life beneath perfectly sound tile.",
+          "[Scottsdale](/locations/scottsdale-az) and [Paradise Valley](/locations/paradise-valley-az). Heavy concentration of luxury [tile](/services/tile-roofing), complex rooflines with many valleys and transitions, and a lot of roof-mounted equipment — which means far more flashing and far more wind-shadowed pockets where debris piles up on top of the roof's most vulnerable details. [HOA and architectural committee requirements](/blog/hoa-roofing-requirements-arizona) also mean material and color approvals need to be factored into repair timelines rather than discovered mid-project.",
+          "East Valley — [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Tempe](/locations/tempe-az), and [Queen Creek](/locations/queen-creek-az). A great deal of newer construction, where the roofs themselves are young but the details are not immune: fastener movement, sealant that was never intended to be a permanent waterproofing layer, and builder-grade flashing at penetrations. Newer roofs still leak, and a roof under warranty is exactly the roof you want documented properly before a claim window closes.",
+          "West Valley — [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), [Surprise](/locations/surprise-az), [Goodyear](/locations/goodyear-az), and [Buckeye](/locations/buckeye-az). More open exposure and less mature tree cover on the newer edges of the metro means wind loads are a bigger factor here than debris, so lifted shingle tabs, displaced ridge caps, and membrane laps deserve extra attention. Active-adult communities also carry community standards and, often, homeowners who should not be climbing onto a roof to check anything.",
         ],
       },
       {
@@ -75,24 +76,24 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Emergency Now, or Planned Work This Month?",
-        body: "The distinction is worth being clear about, because both mistakes are costly. Call for emergency service today if water is actively entering the building, if a ceiling is stained, sagging, or dripping, if you can see daylight through the roof deck from the attic, if tile or roofing material has come off and left an area exposed, if a tree limb or debris has impacted the roof, or if a flat roof is holding standing water it has not shed in days. Those conditions get worse by the hour and they do not wait for a scheduling window — XRP Roofing provides emergency roof repair across the metro with same-day response. Everything else on this page is planned work, and planned is where you want to be. A settled flashing gap, debris in a valley, cracked ridge mortar, a silted scupper, a thinning coating edge — none of those are emergencies today, and all of them are considerably cheaper to address now than after the rain that uses them. The whole purpose of a September inspection is to move as much of your roof as possible out of the first category and into the second, before the weather makes the choice for you.",
+        body: "The distinction is worth being clear about, because both mistakes are costly. Call for emergency service today if water is actively entering the building, if a ceiling is stained, sagging, or dripping, if you can see daylight through the roof deck from the attic, if tile or roofing material has come off and left an area exposed, if a tree limb or debris has impacted the roof, or if a flat roof is holding standing water it has not shed in days. Those conditions get worse by the hour and they do not wait for a scheduling window — XRP Roofing provides [emergency roof repair](/services/emergency-roof-repair) across the metro with same-day response. Everything else on this page is planned work, and planned is where you want to be. A settled flashing gap, debris in a valley, cracked ridge mortar, a silted scupper, a thinning coating edge — none of those are emergencies today, and all of them are considerably cheaper to address now than after the rain that uses them. The whole purpose of a September inspection is to move as much of your roof as possible out of the first category and into the second, before the weather makes the choice for you.",
       },
       {
         heading: "What a Free XRP Roofing Inspection Includes",
-        body: "Inspections are free, carry no obligation, and are available throughout Phoenix, Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, Buckeye, Queen Creek, Paradise Valley, and the rest of the metro within a 100-mile radius — residential and commercial, on tile, shingle, metal, foam, and flat systems. Here is what you actually get:",
+        body: "Inspections are free, carry no obligation, and are available throughout [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Tempe](/locations/tempe-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), [Surprise](/locations/surprise-az), [Goodyear](/locations/goodyear-az), and [every other community we serve](/locations) within a 100-mile radius — residential and commercial, on tile, shingle, metal, foam, and flat systems. Here is what you actually get:",
         listItems: [
           "A roof-level walk of every slope, penetration, and transition — not a look from the driveway — with tile lifted where the geometry says to look.",
           "An attic-side review for daylight, moisture, staining, and deck condition wherever access allows.",
           "Photo documentation organized by location, so you can see exactly what we saw without going up there yourself.",
           "A plain explanation of what needs attention now, what is worth monitoring, and what is fine — including telling you the roof came through the season in good shape when that is the answer.",
           "A written estimate for whatever work is genuinely warranted, with repair, coating, and replacement options laid out where more than one is legitimate.",
-          "Help documenting an insurance claim if storm damage turns up, separated clearly from ordinary wear so you know where the line falls before you file.",
+          "Help documenting [an insurance claim](/blog/insurance-roof-claim-guide-arizona) if storm damage turns up, separated clearly from ordinary wear so you know where the line falls before you file.",
           "A workmanship warranty on the work we perform, from a licensed and insured Arizona contractor.",
         ],
       },
       {
         heading: "Get It Booked While the Season Is Still Open",
-        body: "The value of this particular window closes with the season. Right now the storms are recent enough for documentation to carry weight, the roof is dry enough to read properly and to work on safely, and there is still time to complete repairs before the first fall wind event and the next real rain. In a month, some of that is gone — and anything a late-season storm finds in the meantime is a larger job than what is on your roof today. If you have not had eyes on your roof since the storms started in June, this is the check to get done. Same-day and next-day scheduling is usually available across the metro. Call XRP Roofing at (623) 223-8856 to book a free late-monsoon roof inspection, or reach us through the contact form and we will get back to you the same day.",
+        body: "The value of this particular window closes with the season. Right now the storms are recent enough for documentation to carry weight, the roof is dry enough to read properly and to work on safely, and there is still time to complete [roof repair](/services/roof-repair) work before the first fall wind event and the next real rain. In a month, some of that is gone — and anything a late-season storm finds in the meantime is a larger job than what is on your roof today. If you have not had eyes on your roof since the storms started in June, this is the check to get done. Same-day and next-day scheduling is usually available [across the metro](/locations). Call XRP Roofing at (623) 223-8856 to book a free late-monsoon roof inspection, or reach us through the [contact form](/contact) and we will get back to you the same day.",
       },
     ],
     faqs: [
@@ -1129,6 +1130,32 @@ interface BlogSection {
   listItems?: string[];
 }
 
+const LINK_PATTERN = /\[([^\]]+)\]\((\/[^\s)]*)\)/g;
+
+function renderRichText(text: string) {
+  const nodes: Array<string | ReactElement> = [];
+  let cursor = 0;
+
+  for (const match of text.matchAll(LINK_PATTERN)) {
+    const [raw, label, href] = match;
+    const start = match.index ?? 0;
+    if (start > cursor) nodes.push(text.slice(cursor, start));
+    nodes.push(
+      <Link
+        key={`${href}-${start}`}
+        href={href}
+        className="text-orange-700 underline underline-offset-2 hover:text-orange-500 transition-colors"
+      >
+        {label}
+      </Link>
+    );
+    cursor = start + raw.length;
+  }
+
+  if (cursor < text.length) nodes.push(text.slice(cursor));
+  return nodes;
+}
+
 interface BlogPost {
   slug: string;
   title: string;
@@ -1234,14 +1261,14 @@ export default async function BlogPostPage({
                 <div key={i}>
                   <h2 className="text-2xl font-black text-gray-900 mt-8 mb-4">{section.heading}</h2>
                   {section.body && (
-                    <p className="text-gray-700 leading-relaxed mb-4">{section.body}</p>
+                    <p className="text-gray-700 leading-relaxed mb-4">{renderRichText(section.body)}</p>
                   )}
                   {section.listItems && (
                     <ul className="space-y-3 text-gray-700 mb-6">
                       {section.listItems.map((item, j) => (
                         <li key={j} className="flex items-start gap-2">
                           <span className="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center text-orange-700 font-bold text-xs flex-shrink-0 mt-0.5">{j + 1}</span>
-                          {item}
+                          <span>{renderRichText(item)}</span>
                         </li>
                       ))}
                     </ul>
