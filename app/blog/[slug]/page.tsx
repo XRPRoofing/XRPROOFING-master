@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
@@ -23,6 +24,11 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "What Is Standing Seam Metal Roofing?",
+        image: {
+          src: "/images/blog/metal-roofing/standing-seam-metal-roof-residential.jpg",
+          alt: "Aerial view of a home with a dark standing seam metal roof showing clean vertical seams and no exposed fasteners",
+          caption: "Standing seam panels lock together at raised vertical seams, keeping every fastener hidden beneath the metal.",
+        },
         body: "Standing seam metal roofing is a premium metal roofing system made from long, continuous metal panels. The panels connect at raised vertical seams that run from the ridge of the roof toward the eaves. One of the biggest advantages of standing seam roofing is that the fasteners are concealed underneath the panels. Instead of screws being exposed directly to the weather, the panels are secured using clips or concealed fastening systems. This creates a clean, modern appearance while also protecting the fastening system from Arizona's sun, rain, wind, and temperature changes. Because the panels can expand and contract on their clips without relying on exposed screws, standing seam systems are especially well suited to areas with large daily temperature swings — which describes Phoenix from May through September. Standing seam offers:",
         listItems: [
           "Concealed fasteners protected from UV, rain, and wind.",
@@ -37,6 +43,11 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "What Is Corrugated Metal Roofing?",
+        image: {
+          src: "/images/blog/metal-roofing/corrugated-metal-roof-exposed-fasteners.jpg",
+          alt: "Close-up of a ribbed corrugated metal roof with rows of exposed screws installed through the face of the panels",
+          caption: "Corrugated and ribbed panels are fastened through the face of the metal, leaving screws and washers exposed to the weather.",
+        },
         body: "Corrugated metal roofing uses metal panels with repeating ribs or waves that give the panels additional strength. Unlike most standing seam systems, corrugated metal panels are typically installed using exposed fasteners: screws with sealing washers are driven through the face of the panel and into the roof structure. Corrugated metal can provide excellent protection while generally being more affordable than a standing seam system. It is commonly used on patios, garages, workshops, barns, sheds, commercial buildings, and residential properties where the owner wants a more traditional or industrial metal-roof appearance.",
       },
       {
@@ -60,6 +71,11 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Which Metal Roof Is Better for Arizona?",
+        image: {
+          src: "/images/blog/metal-roofing/standing-seam-metal-roof-aerial.jpg",
+          alt: "Aerial view of a long single-story building with a brown standing seam metal roof",
+          caption: "Roof slope, design, drainage, budget, and intended use all factor into which metal system fits a property.",
+        },
         body: "There is not one answer for every property. For a homeowner looking for a premium, long-term roofing system with concealed fasteners and a clean appearance, standing seam metal roofing is usually the better option, and it is often worth the additional investment for appearance, longevity, and lower maintenance. For someone who wants a durable metal roofing system at a more affordable price, corrugated metal may make more sense, and it can be an excellent option when it is installed correctly and its fasteners are checked periodically. The roof's slope, design, drainage, existing structure, budget, and intended use should all be considered before selecting a system. The most important factor with either is choosing the correct roofing system for the structure and having it installed properly.",
       },
       {
@@ -1299,10 +1315,17 @@ const allPosts: Record<string, BlogPost> = {
   },
 };
 
+interface BlogImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 interface BlogSection {
   heading: string;
   body?: string;
   listItems?: string[];
+  image?: BlogImage;
 }
 
 const LINK_PATTERN = /\[([^\]]+)\]\((\/[^\s)]*)\)/g;
@@ -1435,6 +1458,21 @@ export default async function BlogPostPage({
               {post.sections.map((section, i) => (
                 <div key={i}>
                   <h2 className="text-2xl font-black text-gray-900 mt-8 mb-4">{section.heading}</h2>
+                  {section.image && (
+                    <figure className="mb-6">
+                      <Image
+                        src={section.image.src}
+                        alt={section.image.alt}
+                        width={1600}
+                        height={1200}
+                        sizes="(max-width: 1024px) 100vw, 66vw"
+                        className="w-full h-auto rounded-xl"
+                      />
+                      {section.image.caption && (
+                        <figcaption className="text-gray-500 text-sm mt-2">{section.image.caption}</figcaption>
+                      )}
+                    </figure>
+                  )}
                   {section.body && (
                     <p className="text-gray-700 leading-relaxed mb-4">{renderRichText(section.body)}</p>
                   )}
