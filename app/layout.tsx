@@ -69,7 +69,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://www.google.com" />
         <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900 pb-16 lg:pb-0">
         <AppChrome>{children}</AppChrome>
