@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "september-dry-window-monsoon-damage-repair-phoenix",
     "late-monsoon-september-roof-check-phoenix",
     "post-monsoon-debris-settled-flashing-phoenix",
     "phoenix-attic-ventilation-roof-damage",
