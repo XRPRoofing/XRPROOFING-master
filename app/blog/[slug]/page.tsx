@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
@@ -8,6 +9,99 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "standing-seam-vs-corrugated-metal-roofing-arizona": {
+    slug: "standing-seam-vs-corrugated-metal-roofing-arizona",
+    title: "Standing Seam vs. Corrugated Metal Roofing: What's the Difference?",
+    excerpt: "Metal roofing has become an increasingly popular choice for Arizona homeowners because of its durability, long lifespan, and ability to handle the desert climate. But not all metal roofing systems are the same. Standing seam and corrugated metal are both metal, and both can protect a home well — but they differ significantly in appearance, fastening, installation, maintenance, and cost.",
+    date: "2026-09-03",
+    readTime: "10 min read",
+    category: "Materials",
+    metaDescription: "Standing seam vs. corrugated metal roofing for Arizona homes: how concealed and exposed fasteners differ, appearance, maintenance, durability, cost, slope requirements, and which system makes sense for your property. Free inspections from XRP Roofing.",
+    sections: [
+      {
+        heading: "Two Metal Roofs, Two Very Different Systems",
+        body: "Metal roofing has become an increasingly popular choice for Arizona homeowners because of its durability, long lifespan, and ability to handle the intense desert climate. But not all metal roofing systems are the same. Two common options are standing seam metal roofing and corrugated metal roofing. While both are made from metal and can provide excellent protection, they differ significantly in appearance, installation, fastening systems, maintenance, and cost. If you are considering a [metal roof](/services/metal-roofing) for your Arizona home, understanding these differences will help you decide which system is right for your property. For the broader case for and against metal in the valley, see [our metal roofing pros and cons guide](/blog/metal-roofing-phoenix-pros-cons); this article focuses specifically on the choice between the two panel systems.",
+      },
+      {
+        heading: "What Is Standing Seam Metal Roofing?",
+        image: {
+          src: "/images/blog/metal-roofing/standing-seam-metal-roof-residential.jpg",
+          alt: "Aerial view of a home with a dark standing seam metal roof showing clean vertical seams and no exposed fasteners",
+          caption: "Standing seam panels lock together at raised vertical seams, keeping every fastener hidden beneath the metal.",
+        },
+        body: "Standing seam metal roofing is a premium metal roofing system made from long, continuous metal panels. The panels connect at raised vertical seams that run from the ridge of the roof toward the eaves. One of the biggest advantages of standing seam roofing is that the fasteners are concealed underneath the panels. Instead of screws being exposed directly to the weather, the panels are secured using clips or concealed fastening systems. This creates a clean, modern appearance while also protecting the fastening system from Arizona's sun, rain, wind, and temperature changes. Because the panels can expand and contract on their clips without relying on exposed screws, standing seam systems are especially well suited to areas with large daily temperature swings — which describes Phoenix from May through September. Standing seam offers:",
+        listItems: [
+          "Concealed fasteners protected from UV, rain, and wind.",
+          "A clean, modern appearance with straight vertical seams.",
+          "Excellent resistance to wind and weather.",
+          "Reduced maintenance compared with exposed-fastener systems.",
+          "Long service life when properly installed.",
+          "An excellent fit for residential and custom homes.",
+          "Many available colors and finishes, including reflective options.",
+          "Strong performance in Arizona's extreme heat.",
+        ],
+      },
+      {
+        heading: "What Is Corrugated Metal Roofing?",
+        image: {
+          src: "/images/blog/metal-roofing/corrugated-metal-roof-exposed-fasteners.jpg",
+          alt: "Close-up of a ribbed corrugated metal roof with rows of exposed screws installed through the face of the panels",
+          caption: "Corrugated and ribbed panels are fastened through the face of the metal, leaving screws and washers exposed to the weather.",
+        },
+        body: "Corrugated metal roofing uses metal panels with repeating ribs or waves that give the panels additional strength. Unlike most standing seam systems, corrugated metal panels are typically installed using exposed fasteners: screws with sealing washers are driven through the face of the panel and into the roof structure. Corrugated metal can provide excellent protection while generally being more affordable than a standing seam system. It is commonly used on patios, garages, workshops, barns, sheds, commercial buildings, and residential properties where the owner wants a more traditional or industrial metal-roof appearance.",
+      },
+      {
+        heading: "Standing Seam vs. Corrugated: The Key Differences",
+        body: "Although both systems use metal panels, their construction is very different, and the differences show up in five places:",
+        listItems: [
+          "Fastening system. Standing seam conceals its fasteners underneath the panels, protecting screws and clips from direct weather exposure. Corrugated metal installs screws through the surface of the panel, leaving the fastener and its washer exposed. Over time, exposed screws and washers need inspection as the roof expands and contracts.",
+          "Appearance. Standing seam provides a smooth, streamlined look with straight vertical seams, and is the usual choice for modern homes, custom homes, and owners who want a premium system. Corrugated metal has visible ribs and exposed fasteners, giving a traditional, agricultural, rustic, or industrial look. Both can look great — the right choice depends on the style of the property.",
+          "Maintenance. Standing seam generally requires less maintenance because the fastening system is protected. Corrugated roofs should have their exposed fasteners inspected periodically: Arizona's temperature swings work the panels back and forth against the screws, and washers that have baked through several summers eventually lose their seal. Proper installation is critical with either system.",
+          "Durability. Both provide excellent durability when properly installed. Metal does not crack, blister, or shed granules the way other roofing products can under Arizona's sunlight. The performance of any metal roof, however, depends heavily on installation quality, flashing details, underlayment, penetrations, panel attachment, and drainage — not on the panel alone.",
+          "Cost. Corrugated metal is generally the more economical option because the panels and installation are simpler. Standing seam typically costs more because of the panel system, concealed fasteners, specialized installation, and additional labor. Many homeowners choose it anyway for its appearance, lower maintenance, and long-term performance.",
+        ],
+      },
+      {
+        heading: "Why Metal Roofing Works Well in Arizona",
+        body: "Arizona roofs face some demanding conditions: intense sunlight, high summer temperatures, strong winds, dust, and monsoon storms. A properly designed and installed metal roofing system is an excellent match for those conditions. Metal roofing can provide long-term durability, excellent weather resistance, reflective finish options that reduce heat gain, low maintenance, a clean appearance, and a wide range of colors and panel styles. The caveat is the one that applies to every roof in the valley: the panels are only part of the system. Proper underlayment and flashing are just as important as the metal itself, and a quality metal roof should be installed as a complete roofing system rather than simply placing panels over the structure. That is doubly true here, where [thermal expansion and contraction](/blog/phoenix-roof-thermal-expansion-damage) works every seam, fastener, and flashing leg daily through the summer.",
+      },
+      {
+        heading: "What About Roof Slope?",
+        body: "Roof slope is an important consideration when installing metal roofing. Different metal roofing systems have different minimum slope requirements, and the correct system depends on the panel manufacturer, roof design, seam type, fastening method, and waterproofing requirements. Low-slope areas may require a different roofing system or additional waterproofing measures — many Phoenix homes combine a pitched main roof with a flat or low-slope section over a patio or addition, and those sections are often better served by a [foam](/phoenix-foam-roofing) or [flat roofing](/services/flat-roofing) system than by metal panels that were designed for steeper pitches. Before installing standing seam or corrugated metal, a professional roofing contractor should evaluate the roof to determine whether the selected panel system is appropriate for the slope.",
+      },
+      {
+        heading: "Which Metal Roof Is Better for Arizona?",
+        image: {
+          src: "/images/blog/metal-roofing/standing-seam-metal-roof-aerial.jpg",
+          alt: "Aerial view of a long single-story building with a brown standing seam metal roof",
+          caption: "Roof slope, design, drainage, budget, and intended use all factor into which metal system fits a property.",
+        },
+        body: "There is not one answer for every property. For a homeowner looking for a premium, long-term roofing system with concealed fasteners and a clean appearance, standing seam metal roofing is usually the better option, and it is often worth the additional investment for appearance, longevity, and lower maintenance. For someone who wants a durable metal roofing system at a more affordable price, corrugated metal may make more sense, and it can be an excellent option when it is installed correctly and its fasteners are checked periodically. The roof's slope, design, drainage, existing structure, budget, and intended use should all be considered before selecting a system. The most important factor with either is choosing the correct roofing system for the structure and having it installed properly.",
+      },
+      {
+        heading: "Need Help Choosing a Metal Roof in Arizona?",
+        body: "At XRP Roofing, we help Arizona homeowners determine which roofing system makes the most sense for their property, budget, and roof design. Whether you are considering standing seam metal roofing, corrugated metal roofing, [foam roofing](/phoenix-foam-roofing), [tile](/services/tile-roofing), [shingles](/services/shingle-roofing), or a combination of systems, our team can inspect the property and explain your options in plain language. If you are planning a [new metal roof](/services/new-roof-installation) or [replacing an existing roofing system](/services/roof-replacement), call XRP Roofing at (623) 223-8856 or [contact us online](/contact) to schedule a free inspection and receive a written estimate. Licensed, bonded, and insured, serving homeowners [throughout the Phoenix metropolitan area](/locations) and surrounding Arizona communities.",
+      },
+    ],
+    faqs: [
+      { q: "What is the main difference between standing seam and corrugated metal roofing?", a: "The fastening system. Standing seam panels are attached with concealed clips or fasteners hidden beneath the panels; corrugated panels are attached with exposed screws driven through the face of the metal. That one difference drives most of the others — appearance, maintenance, and cost." },
+      { q: "Is standing seam worth the extra cost in Arizona?", a: "For many homeowners, yes. Concealed fasteners are protected from UV and thermal movement, which means less maintenance over the life of the roof, and the clean vertical-seam appearance is what most people picture when they think of a premium metal roof. If budget is the primary concern, a properly installed corrugated roof is still a durable choice." },
+      { q: "Do corrugated metal roofs leak at the screws?", a: "Not when installed correctly and maintained. The risk comes from the sealing washers, which are exposed to Arizona sun and worked by daily expansion and contraction. Over years they can harden or loosen, which is why exposed-fastener roofs should have their screws inspected periodically." },
+      { q: "How long does a metal roof last in Arizona?", a: "Both systems can last for decades when installed as a complete system with proper underlayment and flashing. Standing seam typically has the longer service life because its fasteners are protected. The actual lifespan of either depends far more on installation quality and detailing than on the panel type." },
+      { q: "Does a metal roof make my house hotter in the summer?", a: "No — with the right finish, the opposite. Reflective and light-colored metal finishes reject a large share of solar heat, and metal cools quickly after sunset. Combined with proper attic ventilation and underlayment, a metal roof is one of the better-performing options for Arizona heat." },
+      { q: "Can I install standing seam or corrugated metal on a low-slope roof?", a: "It depends on the panel system. Each has a minimum slope set by the manufacturer, and many corrugated and some standing seam profiles are not rated for low slopes. Low-slope sections often need a different system or additional waterproofing, which is why the roof should be evaluated before a panel system is chosen." },
+      { q: "Is corrugated metal only for barns and sheds?", a: "No. It is common on patios, garages, workshops, and commercial buildings, but it is also used on homes where the owner wants a traditional, rustic, or industrial look at a lower cost than standing seam." },
+      { q: "Can a metal roof be installed over my existing roof?", a: "Sometimes, depending on the existing roof, the structure, and local code. It is not the right answer for every home — the condition of the deck and the details at flashings and penetrations matter more than saving the tear-off — and it should be decided after an on-roof inspection rather than assumed." },
+      { q: "Do metal roofs hold up to monsoon wind and hail?", a: "Properly attached metal panels perform very well in high wind, and standing seam systems in particular are known for wind resistance. Hail can dent panels cosmetically but rarely compromises them. As with any roof, the flashing and attachment details determine how a storm goes." },
+      { q: "Does XRP Roofing install both systems?", a: "Yes. We install standing seam and corrugated metal roofing as well as tile, shingle, foam, and flat systems across the Phoenix metro. A free inspection lets us look at slope, structure, drainage, and design and recommend the system that fits the property rather than a one-size answer." },
+    ],
+    relatedServices: [
+      { label: "Metal Roofing", href: "/services/metal-roofing" },
+      { label: "New Roof Installation", href: "/services/new-roof-installation" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+    ],
+  },
   "september-dry-window-monsoon-damage-repair-phoenix": {
     slug: "september-dry-window-monsoon-damage-repair-phoenix",
     title: "September's Dry Window: Why Early Fall Is the Smartest Time for Phoenix-Metro Homeowners to Fix Monsoon Damage Before It Becomes a Winter Leak",
@@ -1221,10 +1315,17 @@ const allPosts: Record<string, BlogPost> = {
   },
 };
 
+interface BlogImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 interface BlogSection {
   heading: string;
   body?: string;
   listItems?: string[];
+  image?: BlogImage;
 }
 
 const LINK_PATTERN = /\[([^\]]+)\]\((\/[^\s)]*)\)/g;
@@ -1357,6 +1458,21 @@ export default async function BlogPostPage({
               {post.sections.map((section, i) => (
                 <div key={i}>
                   <h2 className="text-2xl font-black text-gray-900 mt-8 mb-4">{section.heading}</h2>
+                  {section.image && (
+                    <figure className="mb-6">
+                      <Image
+                        src={section.image.src}
+                        alt={section.image.alt}
+                        width={1600}
+                        height={1200}
+                        sizes="(max-width: 1024px) 100vw, 66vw"
+                        className="w-full h-auto rounded-xl"
+                      />
+                      {section.image.caption && (
+                        <figcaption className="text-gray-500 text-sm mt-2">{section.image.caption}</figcaption>
+                      )}
+                    </figure>
+                  )}
                   {section.body && (
                     <p className="text-gray-700 leading-relaxed mb-4">{renderRichText(section.body)}</p>
                   )}

@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "standing-seam-vs-corrugated-metal-roofing-arizona",
+    title: "Standing Seam vs. Corrugated Metal Roofing: What's the Difference?",
+    excerpt: "Metal roofing has become an increasingly popular choice for Arizona homeowners because of its durability, long lifespan, and ability to handle the desert climate. But not all metal roofing systems are the same. Standing seam and corrugated metal are both metal, and both can protect a home well — but they differ significantly in appearance, fastening, installation, maintenance, and cost.",
+    date: "2026-09-03",
+    readTime: "10 min read",
+    category: "Materials",
+  },
+  {
     slug: "september-dry-window-monsoon-damage-repair-phoenix",
     title: "September's Dry Window: Why Early Fall Is the Smartest Time for Phoenix-Metro Homeowners to Fix Monsoon Damage Before It Becomes a Winter Leak",
     excerpt: "Arizona's monsoon season does not officially end until September 30, yet by the first week of September many Phoenix-metro roofs have entered a quiet, deceptive phase. The storms have slowed, the roof looks fine from the driveway, and roofing drops off most homeowners' lists until next June. That quiet stretch is exactly when the real work should happen — it is the last reliable dry window of the season.",
