@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "september-dry-window-monsoon-damage-repair-phoenix",
+    title: "September's Dry Window: Why Early Fall Is the Smartest Time for Phoenix-Metro Homeowners to Fix Monsoon Damage Before It Becomes a Winter Leak",
+    excerpt: "Arizona's monsoon season does not officially end until September 30, yet by the first week of September many Phoenix-metro roofs have entered a quiet, deceptive phase. The storms have slowed, the roof looks fine from the driveway, and roofing drops off most homeowners' lists until next June. That quiet stretch is exactly when the real work should happen — it is the last reliable dry window of the season.",
+    date: "2026-09-03",
+    readTime: "11 min read",
+    category: "Maintenance",
+  },
+  {
     slug: "late-monsoon-september-roof-check-phoenix",
     title: "Late-Monsoon Storms Are Still Possible in Early September — Why Phoenix-Metro Roofs Need One More Thorough Check Before the Season Ends",
     excerpt: "Monsoon season does not end until September 30, and a quiet stretch in late August is not the same thing as the season being over. Highs near or above 100°F are still driving materials through a full expansion and contraction cycle every day, whatever the last storms loosened is still loose, and a late-season storm arriving on a roof in that condition does considerably more damage than the same storm would have done in June.",
