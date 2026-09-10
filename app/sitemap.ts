@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "shingles-vs-tile-after-monsoon-season-phoenix",
     "standing-seam-vs-corrugated-metal-roofing-arizona",
     "september-dry-window-monsoon-damage-repair-phoenix",
     "late-monsoon-september-roof-check-phoenix",
