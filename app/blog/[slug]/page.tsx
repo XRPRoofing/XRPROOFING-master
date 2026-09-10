@@ -9,6 +9,114 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "shingles-vs-tile-after-monsoon-season-phoenix": {
+    slug: "shingles-vs-tile-after-monsoon-season-phoenix",
+    title: "Shingles vs. Tile After Arizona's Monsoon Season: Which Protects Phoenix-Metro Homes Better Going into Fall?",
+    excerpt: "The storms have slowed, the roof is dry, and for many Phoenix-metro homeowners the question after this monsoon season is not whether to fix the roof but what to fix it with. Shingles or tile? The answer depends on your budget horizon, your HOA, and — more than most people realize — the underlayment underneath whichever material you choose.",
+    date: "2026-09-10",
+    readTime: "11 min read",
+    category: "Materials",
+    metaDescription: "Shingles vs. tile for Phoenix-metro homes after monsoon season: Arizona lifespan, wind uplift, heat and UV performance, HOA rules, total cost over 25–50 years, and why the underlayment matters more than the surface material. Free inspections from XRP Roofing.",
+    sections: [
+      {
+        heading: "The Post-Monsoon Window Is the Right Time to Decide",
+        body: "Arizona's monsoon season officially runs through September 30, but by mid-September the storm cells have mostly passed and the valley enters its last reliable dry stretch before the cooler-season rains of late fall and winter. That makes right now the best — and last comfortable — window to evaluate a roof that took a beating this summer and decide what it should be rebuilt with. If your roof came through the season with lifted shingles, slid tiles, or a leak that finally showed up on a ceiling, you are likely weighing the same question many homeowners in [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), and [Tempe](/locations/tempe-az) are weighing: stay with shingles, move to tile, or repair what is there. We covered the general comparison in our [Tile vs. Shingle Roofing in Arizona](/blog/tile-vs-shingle-roofing-arizona) guide. This article is the seasonal, decision-focused version: how each material actually behaved through a Phoenix summer, what that means going into fall 2026, and why the layer you cannot see matters more than the one you can.",
+      },
+      {
+        heading: "How Shingles Held Up — and What That Means for Fall",
+        image: {
+          src: "/images/blog/shingles-vs-tile/architectural-shingle-roof-phoenix.jpg",
+          alt: "Completed architectural asphalt shingle roof on a Phoenix-area home with a new skylight and flashing",
+          caption: "Architectural shingles are the fastest and least expensive system to repair or replace after wind damage — but they age faster under Arizona sun than anywhere else in the country.",
+        },
+        body: "Asphalt shingles are the most common residential roof in the country, and they have real advantages in a post-storm situation. Repairs are fast, materials are widely stocked, and partial work is easy to match on a roof that is only a few years old. When microburst winds lift a section of [shingles](/services/shingle-roofing), a crew can typically have it re-nailed, re-sealed, or replaced within a day. The trade-off is lifespan. A shingle rated for 30 years in a moderate climate realistically delivers 18–25 years in Phoenix, because rooftop surface temperatures above 170°F cook the asphalt binder, UV breaks down the granule adhesion, and the daily expand-and-contract cycle fatigues the seal strips that keep wind from getting underneath. After a monsoon season, look for these shingle-specific warning signs:",
+        listItems: [
+          "Lifted or creased tabs along the eaves and ridges — the seal strip has released and wind can now get under the shingle.",
+          "Heavy granule loss in gutters or at downspout outlets, exposing the asphalt mat to direct UV.",
+          "Blistering or bubbling on south- and west-facing slopes, a sign the shingle is overheating from above or from an under-vented attic below.",
+          "Exposed nail heads or backed-out fasteners where thermal movement has worked them loose.",
+          "Shingles that crack or crumble when a section is lifted for inspection — the material has lost its flexibility and is near the end of its Arizona service life.",
+        ],
+      },
+      {
+        heading: "How Tile Held Up — and Where It Is Actually Vulnerable",
+        image: {
+          src: "/images/blog/shingles-vs-tile/clay-tile-roof-arizona-home-aerial.jpg",
+          alt: "Aerial view of a large Arizona home with a clay tile roof surrounded by desert landscaping",
+          caption: "Concrete and clay tile shrug off Arizona sun for 50 years or more. The underlayment beneath them does not.",
+        },
+        body: "Concrete and clay [tile](/services/tile-roofing) are the dominant roof in Arizona's master-planned communities for good reason. The tile itself is effectively immune to UV, does not soften in heat, and creates an air gap above the deck that measurably reduces heat transfer into the attic. A tile roof that survived this monsoon season with a few cracked or slid pieces is, in most cases, in far better shape than it looks from the street. But tile has a vulnerability homeowners consistently misunderstand: the tile is not the waterproof layer. The underlayment beneath it is. Tile sheds most of the water, but wind-driven monsoon rain routinely gets under and around the tiles, and the felt or synthetic underlayment is what actually keeps it out of the house. In Phoenix, that underlayment typically lasts 20–25 years, sometimes less on older homes with a single layer of 30-pound felt. When it fails, the tile above it is usually still perfect — which is exactly why so many tile roofs in Scottsdale, Paradise Valley, and North Phoenix look great and leak anyway. Post-monsoon tile warning signs:",
+        listItems: [
+          "Cracked, chipped, or slid tiles, especially at hips, ridges, and valleys where wind concentrates.",
+          "Debris packed into valleys and behind chimneys or skylights — it holds moisture against the underlayment.",
+          "Staining or drip marks at the eave edge, indicating water is running along the underlayment rather than off the tile.",
+          "Interior stains with no visible tile damage — the classic sign of failed underlayment, not failed tile.",
+          "Roofs 20+ years old that have never had a lift-and-reset — the underlayment is on borrowed time regardless of how the tile looks.",
+        ],
+      },
+      {
+        heading: "Why the Underlayment Matters More Than the Surface Material",
+        image: {
+          src: "/images/blog/shingles-vs-tile/underlayment-installation-phoenix-roof.jpg",
+          alt: "XRP Roofing crew installing new underlayment and shingles on a residential roof in the Phoenix area",
+          caption: "Whether the finish is tile or shingle, the underlayment is the real waterproofing layer — and the place where Arizona roofs most often fail first.",
+        },
+        body: "Here is the part of the shingle-versus-tile debate that gets skipped: on both systems, the underlayment is doing more of the waterproofing work than most homeowners realize, and Arizona is uniquely hard on it. Under shingles, the underlayment is a secondary barrier that becomes the primary one the moment a shingle lifts or cracks. Under tile, it is the primary barrier from day one. In both cases it lives in an environment where the deck routinely exceeds 150°F, the attic below may be pushing 140°F, and every day brings a 40–60 degree swing that stretches and relaxes the material. Standard 30-pound felt was never designed for that. Modern high-temperature synthetic underlayments and self-adhered membranes are, and the difference in service life is measured in decades, not years. Practical implications for a post-monsoon decision:",
+        listItems: [
+          "If you are replacing shingles, the underlayment specification matters as much as the shingle brand. Ask what is going under the shingles and what its rated temperature tolerance is.",
+          "If your tile roof is 20–25 years old and leaking, you almost certainly need a lift-and-reset (remove tile, replace underlayment, reinstall tile) rather than a new roof. Most of your tile is reusable.",
+          "If you are switching from shingles to tile, the deck, framing, and underlayment must all be evaluated for the added weight and the different water path. This is not a tile-over-shingle job.",
+          "On either material, flashings, penetrations, and valley metal are the second most common failure point after underlayment — and the first place monsoon wind-driven rain finds its way in.",
+        ],
+      },
+      {
+        heading: "The Arizona Differentiators That Should Drive Your Choice",
+        body: "Outside the desert Southwest, the shingle-versus-tile choice is mostly about budget and aesthetics. In the Phoenix metro, five climate and community factors shift the math:",
+        listItems: [
+          "Heat and UV: Tile does not degrade under UV; shingles lose 20–40% of their rated life to it. This is the single largest factor in Arizona total cost of ownership.",
+          "Daily thermal cycling: Both systems move, but tile moves as individual rigid pieces on a batten or direct-deck system, while shingles rely on adhesive seal strips that fatigue with every cycle. See [our thermal expansion guide](/blog/phoenix-roof-thermal-expansion-damage) for the mechanics.",
+          "Monsoon wind uplift: Properly installed and sealed architectural shingles are rated for high wind, but aged shingles with released seal strips lift easily. Tile resists uplift by weight, but individual pieces can slide or crack when struck by debris.",
+          "HOA requirements: Many master-planned communities in Scottsdale, Chandler, Gilbert, and Queen Creek require tile or restrict shingle color and profile. Check your CC&Rs before pricing either option — our [HOA roofing requirements guide](/blog/hoa-roofing-requirements-arizona) explains the process.",
+          "Cooling cost: The air gap under tile and the availability of reflective tile finishes reduce attic heat gain relative to dark shingles. The savings are real but modest; do not choose tile for energy alone, but count it in a 30-year comparison.",
+        ],
+      },
+      {
+        heading: "Total Cost of Ownership Over 25–50 Years",
+        body: "Shingles win on upfront cost, typically by a wide margin. Tile wins on lifespan. The honest comparison depends on how long you plan to own the home and how you value the intermediate maintenance. A typical Phoenix architectural shingle roof lasts 18–25 years, so a 50-year horizon means two full replacements plus periodic wind repairs. A tile roof installed today over a high-temperature synthetic underlayment can reasonably be expected to need one lift-and-reset at 25–30 years, with the tile itself lasting the full 50. Because a lift-and-reset costs substantially less than a full tile roof — you are paying for labor and underlayment, not new tile — the 50-year total for tile often lands close to or below the total for shingles, despite the higher day-one price. For homeowners planning to sell within 10 years, shingles are usually the rational choice unless the HOA requires tile. For homeowners staying 20 years or more, tile's higher upfront cost tends to be recovered. Either way, the underlayment specification is what determines whether those projections hold.",
+      },
+      {
+        heading: "Repair, Lift-and-Reset, or Full Replacement: How to Decide This Fall",
+        body: "After a monsoon season, most roofs fall into one of three categories, and the right answer is different for each:",
+        listItems: [
+          "Localized storm damage on a roof with years of life left: [Repair](/services/roof-repair) it. Re-secure lifted shingles or replace slid tiles, re-seal flashings, and clear debris. Document everything with photos in case a [storm damage](/services/storm-damage-roofing) claim becomes necessary.",
+          "Tile roof 20+ years old with leaks but mostly intact tile: Lift-and-reset. Replace the underlayment and flashings, reinstall the existing tile, replace the broken pieces. This is the most common tile job in the Phoenix metro and the one most often mis-sold as a full replacement.",
+          "Shingle roof 18+ years old with widespread granule loss, brittleness, or repeated wind damage: [Full replacement](/services/roof-replacement). Patching a shingle roof at the end of its Arizona life is money spent twice. This is also the moment to decide whether to stay with shingles or move to tile, since the deck is exposed either way.",
+        ],
+      },
+      {
+        heading: "What a Free XRP Roofing Inspection Covers",
+        body: "A material decision this large should start with facts about your specific roof, not a general article. XRP Roofing provides free, no-obligation inspections across the Phoenix metro. For a post-monsoon shingle-or-tile evaluation, we photograph and document the surface condition on every slope, check every flashing and penetration, clear and inspect valleys and drainage paths, lift representative tiles or shingles to assess the underlayment directly, check the attic for heat and moisture clues, and — where the HOA is a factor — help you understand what materials and profiles are permitted. You receive written findings in plain language and a written estimate for each realistic option: repair, lift-and-reset, or replacement in either material. No pressure, and no recommending a full replacement when a repair or reset will do. If your roof went through this monsoon season, the dry weeks ahead are the right time to get a clear picture of what it needs. Call (623) 223-8856 or [request your free inspection online](/contact). For related seasonal guidance, see [September's Dry Window](/blog/september-dry-window-monsoon-damage-repair-phoenix), our [late-monsoon roof check](/blog/late-monsoon-september-roof-check-phoenix), and [hidden roof damage after storms](/blog/post-monsoon-hidden-roof-damage-arizona).",
+      },
+    ],
+    faqs: [
+      { q: "How long do shingles last in Phoenix compared to tile?", a: "Architectural asphalt shingles typically last 18–25 years in the Phoenix metro, well short of their 30-year rating, because of heat and UV. Concrete and clay tile lasts 50 years or more, but the underlayment beneath it typically needs replacement at 20–25 years." },
+      { q: "My tile roof is leaking but the tiles look fine. Do I need a new roof?", a: "Usually not. Interior leaks under intact tile almost always mean the underlayment has failed. The standard fix is a lift-and-reset: remove the tile, replace the underlayment and flashings, and reinstall the original tile. It costs significantly less than a full tile roof." },
+      { q: "Is tile or shingle better against monsoon wind?", a: "Both perform well when new and properly installed. Aged shingles with released seal strips are the most wind-vulnerable roof in Arizona. Tile resists uplift by weight but individual tiles can slide or crack from debris impact. The underlayment and flashing details matter more than the surface material for keeping wind-driven rain out." },
+      { q: "Can I switch from shingles to tile after storm damage?", a: "Often yes, but it requires a structural evaluation. Tile weighs roughly three to four times more than shingles, so the deck and framing must be verified for the load, and the underlayment system must be designed for tile rather than shingles. It is never a tile-over-shingle installation." },
+      { q: "Does my HOA require tile?", a: "Many master-planned communities in Scottsdale, Chandler, Gilbert, Queen Creek, and North Phoenix require tile or restrict shingle profiles and colors. Check your CC&Rs and architectural guidelines before pricing either option. XRP Roofing can help you identify what is permitted." },
+      { q: "What underlayment should go under shingles in Arizona?", a: "Ask for a high-temperature-rated synthetic underlayment rather than standard 30-pound felt. Arizona roof decks routinely exceed 150°F, which degrades traditional felt far faster than its rated life. The underlayment specification is as important as the shingle brand." },
+      { q: "Is tile cheaper than shingles over the long run?", a: "Often, yes, over a 30–50 year horizon. Shingles cost less upfront but require two full replacements over 50 years in Phoenix. Tile requires one lift-and-reset, which is much cheaper than a new roof because the tile is reused. For ownership under 10 years, shingles are usually the more economical choice." },
+      { q: "Does tile really lower cooling costs?", a: "Modestly. The air gap between tile and deck reduces heat transfer into the attic, and reflective tile finishes help further. It is a legitimate factor in a long-term comparison but not a reason on its own to choose tile." },
+      { q: "When should I schedule the work if I decide this fall?", a: "As soon as possible after your inspection. Mid-September through October offers dry, warm conditions ideal for sealants and adhesives to cure, and schedules fill quickly once the first cooler-season rain exposes leaks across the valley." },
+      { q: "Does XRP Roofing help with insurance documentation?", a: "Yes. Every free inspection includes photo documentation and written findings. If storm damage is involved, we provide the assessment adjusters need and can support you through the claims process." },
+    ],
+    relatedServices: [
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+      { label: "Shingle Roofing", href: "/services/shingle-roofing" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+    ],
+  },
   "standing-seam-vs-corrugated-metal-roofing-arizona": {
     slug: "standing-seam-vs-corrugated-metal-roofing-arizona",
     title: "Standing Seam vs. Corrugated Metal Roofing: What's the Difference?",

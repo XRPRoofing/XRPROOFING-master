@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "shingles-vs-tile-after-monsoon-season-phoenix",
+    title: "Shingles vs. Tile After Arizona's Monsoon Season: Which Protects Phoenix-Metro Homes Better Going into Fall?",
+    excerpt: "The storms have slowed, the roof is dry, and for many Phoenix-metro homeowners the question after this monsoon season is not whether to fix the roof but what to fix it with. Shingles or tile? The answer depends on your budget horizon, your HOA, and — more than most people realize — the underlayment underneath whichever material you choose.",
+    date: "2026-09-10",
+    readTime: "11 min read",
+    category: "Materials",
+  },
+  {
     slug: "standing-seam-vs-corrugated-metal-roofing-arizona",
     title: "Standing Seam vs. Corrugated Metal Roofing: What's the Difference?",
     excerpt: "Metal roofing has become an increasingly popular choice for Arizona homeowners because of its durability, long lifespan, and ability to handle the desert climate. But not all metal roofing systems are the same. Standing seam and corrugated metal are both metal, and both can protect a home well — but they differ significantly in appearance, fastening, installation, maintenance, and cost.",
