@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "tile-roof-repair-lift-relay-or-replace-arizona",
+    title: "Repair, Lift & Relay, or Replace? How Arizona Homeowners Should Decide What Their Tile Roof Really Needs",
+    excerpt: "From the street, an Arizona tile roof can look perfectly fine. But the tile is only part of the story — underneath it is the underlayment, flashings, valleys, and decking that actually keep water out. Here is how to tell whether your roof needs a localized repair, a tile lift-and-relay with new underlayment, or a complete replacement.",
+    date: "2026-09-14",
+    readTime: "10 min read",
+    category: "Repair & Replacement",
+  },
+  {
     slug: "shingles-vs-tile-after-monsoon-season-phoenix",
     title: "Shingles vs. Tile After Arizona's Monsoon Season: Which Protects Phoenix-Metro Homes Better Going into Fall?",
     excerpt: "The storms have slowed, the roof is dry, and for many Phoenix-metro homeowners the question after this monsoon season is not whether to fix the roof but what to fix it with. Shingles or tile? The answer depends on your budget horizon, your HOA, and — more than most people realize — the underlayment underneath whichever material you choose.",

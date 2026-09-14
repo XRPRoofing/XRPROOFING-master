@@ -9,6 +9,194 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "tile-roof-repair-lift-relay-or-replace-arizona": {
+    slug: "tile-roof-repair-lift-relay-or-replace-arizona",
+    title: "Repair, Lift & Relay, or Replace? How Arizona Homeowners Should Decide What Their Tile Roof Really Needs",
+    excerpt: "From the street, an Arizona tile roof can look perfectly fine. But the tile is only part of the story — underneath it is the underlayment, flashings, valleys, and decking that actually keep water out. Here is how to tell whether your roof needs a localized repair, a tile lift-and-relay with new underlayment, or a complete replacement.",
+    date: "2026-09-14",
+    readTime: "10 min read",
+    category: "Repair & Replacement",
+    metaDescription: "Not sure whether your Arizona tile roof needs a repair, lift-and-relay, or full replacement? Learn what Phoenix-area homeowners should check first — and the questions to ask before approving any tile roof work.",
+    sections: [
+      {
+        heading: "The Tile Is Only Part of the Story",
+        body: "From the street, an Arizona tile roof can look perfectly fine. The tiles may still have good color. There may only be a few cracked pieces. You may not even see an obvious problem. But the condition of the tile is only part of the story. Underneath your tile is the roofing system that actually helps keep water out of your home: underlayment, flashings, valleys, battens, roof penetrations, and the roof decking itself. That is why one of the most common questions we hear from Phoenix-area homeowners is: \"Do I just need a repair, or is it time to redo the roof?\" The answer is not always \"replace everything.\" Depending on the age and condition of the roof, you may need a localized [tile roof repair](/services/roof-repair), a tile lift-and-relay with new underlayment, or a complete [tile roof replacement](/services/roof-replacement). Here is how to understand the difference.",
+      },
+      {
+        heading: "Option 1: Localized Tile Roof Repair",
+        body: "A roof repair makes the most sense when the problem is limited to a specific area and the rest of the roofing system is still performing properly. Examples may include:",
+        listItems: [
+          "A handful of broken or slipped tiles",
+          "Wind-damaged rake or edge tiles",
+          "Cracked mortar around ridge or hip tiles",
+          "A leaking roof penetration",
+          "Minor flashing problems",
+          "Localized [storm damage](/services/storm-damage-roofing)",
+          "A small section of exposed underlayment",
+          "A limited valley or transition problem",
+        ],
+      },
+      {
+        heading: "But There Is an Important Catch",
+        body: "In these situations, removing an entire roof may not make financial sense. A qualified roofer can lift the necessary tiles, investigate the area underneath, repair the waterproofing or flashing, and reinstall compatible tiles. But a visible broken tile does not automatically mean the tile caused the leak. During an inspection, we often have to look beneath the tile to determine whether the problem is actually coming from deteriorated underlayment, improper flashing, an old repair, damaged decking, or another part of the roof system. That is why simply replacing a broken tile is not always enough.",
+      },
+      {
+        heading: "Option 2: Tile Lift & Relay / Underlayment Replacement",
+        image: {
+          src: "/images/blog/tile-repair-relay-replace/tile-lift-and-relay-new-underlayment-phoenix.jpg",
+          alt: "XRP Roofing crew performing a tile lift-and-relay on a Phoenix-area home, with the existing clay tiles stacked on the roof and new underlayment being installed beneath them",
+          caption: "A lift-and-relay in progress: the existing tile is stacked and set aside while the old underlayment is removed and a new waterproofing system goes down. The same tile goes back on when the deck is done.",
+        },
+        body: "This is one of the most misunderstood roofing options in Arizona. A [tile roof](/services/tile-roofing) may still have perfectly usable concrete or clay tiles while the waterproofing underneath has reached the point where repairs are becoming less practical. Instead of throwing away good tile, a roofing contractor may be able to perform a lift-and-relay. The process generally involves carefully removing the existing tiles, removing the old underlayment and other necessary components, inspecting the roof deck, installing a new waterproofing system, and then reinstalling the usable existing tile. Depending on the roof, the project may also involve new:",
+        listItems: [
+          "Underlayment",
+          "Battens",
+          "Valley metal",
+          "Flashings",
+          "Pipe-jack flashings",
+          "Drip edge",
+          "Bird stop",
+          "Roof penetration waterproofing",
+          "Damaged roof decking",
+        ],
+      },
+      {
+        heading: "Why This Is So Important in Arizona",
+        body: "A lift-and-relay essentially renews the waterproofing system while allowing the homeowner to keep much of the existing tile. Arizona's extreme heat puts roofing materials through demanding conditions year after year. The tile itself can remain serviceable for a very long time, but the materials underneath it do not necessarily age at the same rate. That means a homeowner can have a roof that looks good from the ground while the underlayment underneath is becoming brittle, damaged, or unreliable. The condition depends on much more than age alone. Installation quality, underlayment material, roof orientation, [ventilation](/blog/phoenix-attic-ventilation-roof-damage), drainage, previous repairs, storm exposure, penetrations, and maintenance can all affect how long the roofing system performs. This is why we do not recommend replacing a roof based only on its birthday. We recommend looking at the roof itself. For a deeper look at how [daily thermal cycling](/blog/phoenix-roof-thermal-expansion-damage) ages the layers you cannot see, read our guide on why Phoenix roofs fail faster than expected.",
+      },
+      {
+        heading: "Signs a Lift & Relay May Make More Sense Than Another Repair",
+        image: {
+          src: "/images/blog/tile-repair-relay-replace/tile-roof-relay-aerial-arizona.jpg",
+          alt: "Aerial view of a tile roof relay job on an Arizona home, with sections of tile removed and stacked while crews work on the exposed roof deck",
+          caption: "When leaks keep appearing in unrelated areas, the problem is usually the underlayment as a whole — not any one tile.",
+        },
+        body: "One repair does not necessarily mean you need a new underlayment system. But repeated problems can tell a different story. You should consider having the complete roofing system evaluated if you are seeing:",
+        listItems: [
+          "Multiple leaks in different areas — fixing one isolated leak is different from chasing leaks across several sections of the roof. If repairs keep appearing in unrelated areas, deterioration beneath the tile may be more widespread.",
+          "Brittle or deteriorated underlayment — if the underlayment breaks apart easily when tiles are lifted, localized patching may only postpone a larger project.",
+          "Repeated valley problems — valleys carry a significant amount of water during Arizona storms. Old underlayment, deteriorated valley metal, debris buildup, or improper installation can create recurring problems.",
+          "Numerous previous repairs — a roof with patches on top of patches can become increasingly difficult to repair correctly. At some point, rebuilding the waterproofing system may be more practical than continuing to repair individual areas.",
+          "Aging flashings and penetrations — HVAC penetrations, vents, plumbing pipes, skylights, chimneys, walls, and roof transitions all require proper waterproofing. When several of these components are reaching the end of their useful condition at the same time, a larger roofing project may make sense.",
+        ],
+      },
+      {
+        heading: "Option 3: Complete Tile Roof Replacement",
+        image: {
+          src: "/images/blog/tile-repair-relay-replace/completed-tile-roof-arizona-home.jpg",
+          alt: "Aerial view of a large Arizona home with a complete clay tile roof surrounded by desert landscaping",
+          caption: "A full replacement rebuilds the roof from the decking up — new underlayment, new metals, and new tile.",
+        },
+        body: "A full replacement goes beyond installing new underlayment. The existing tile is removed and replaced with a new tile roofing system. This may be the better option when:",
+        listItems: [
+          "Existing tile is severely damaged",
+          "A significant amount of tile is broken",
+          "The tile profile has been discontinued or is difficult to source",
+          "Previous additions created complicated tie-ins",
+          "The homeowner wants a different tile style or color",
+          "Matching the existing roof is becoming impractical",
+          "The roof requires major reconstruction",
+          "Keeping and sorting the old tile no longer makes financial sense",
+        ],
+      },
+      {
+        heading: "What About Discontinued Tile?",
+        body: "A complete replacement also gives the contractor the opportunity to rebuild the roof system from the decking up and address components that may have been installed incorrectly in the past. Discontinued tile is especially important on older Arizona homes. Roof tile manufacturers change colors, profiles, product lines, and manufacturing processes over time. If your existing tile has been discontinued, finding an exact match may be difficult or impossible. Sometimes compatible replacement pieces can be sourced. Sometimes existing tiles can be moved strategically to less visible areas. And sometimes there is simply not enough matching material available to perform the project properly. A professional inspection should consider tile availability before a homeowner invests heavily in repeated repairs.",
+      },
+      {
+        heading: "Repair vs. Lift & Relay vs. Replacement at a Glance",
+        body: "A simple way to think about it:",
+        listItems: [
+          "Repair: the problem is localized and the surrounding roof system is still in serviceable condition.",
+          "Lift & Relay: the existing tile is worth keeping, but the waterproofing system underneath needs substantial renewal.",
+          "Full Replacement: both the roofing system underneath and the tile itself should be replaced, or keeping the existing tile is no longer practical.",
+          "There is no single answer that applies to every home. Two neighboring homes built in the same year can have very different roof conditions.",
+        ],
+      },
+      {
+        heading: "What We Look at During a Tile Roof Inspection",
+        body: "At XRP Roofing, we look beyond the visible tile. Depending on the situation, our inspection may include evaluating:",
+        listItems: [
+          "Broken and slipped tiles",
+          "Ridge, hip, and rake tiles",
+          "Mortar caps",
+          "Valleys",
+          "Flashings and roof-to-wall transitions",
+          "Pipe penetrations and skylights",
+          "Underlayment condition where accessible",
+          "Signs of previous repairs",
+          "Decking condition where visible",
+          "Drainage issues",
+          "Interior signs of leaking",
+          "Areas affected by wind or [monsoon storms](/blog/post-monsoon-hidden-roof-damage-arizona)",
+        ],
+      },
+      {
+        heading: "Phoenix-Metro Homes Have Different Roofing Challenges",
+        body: "The goal is not simply to tell you that your roof is \"old.\" The goal is to determine what is actually failing and what level of work makes sense. Tile roofing is common throughout [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Tempe](/locations/tempe-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. But the conditions from one property to another can vary significantly. A roof with heavy sun exposure may age differently than a roof with more shade. A home with several valleys may experience different drainage stresses than a simple gable roof. Homes with solar systems, additions, skylights, patio roofs, HVAC penetrations, or previous remodeling may have additional waterproofing details that should be inspected carefully. This is why an estimate based only on square footage cannot tell the whole story.",
+      },
+      {
+        heading: "Don't Wait for a Ceiling Stain to Inspect the Roof",
+        body: "One of the biggest mistakes homeowners make is assuming that no interior leak means the roof is fine. Water intrusion may begin slowly. Moisture can affect roof decking or other components before a noticeable stain appears inside the home. After Arizona's monsoon season, it is especially helpful to inspect older tile roofs for damage caused by wind, movement, debris, and heavy rainfall — our [September dry-window guide](/blog/september-dry-window-monsoon-damage-repair-phoenix) explains why early fall is the right time. Catching a problem early may give you more repair options.",
+      },
+      {
+        heading: "Questions to Ask Before Approving Tile Roof Work",
+        body: "Before signing a roofing proposal, ask:",
+        listItems: [
+          "What exactly is failing?",
+          "Is the problem localized or widespread?",
+          "What condition is the underlayment in?",
+          "Can my existing tile be reused?",
+          "Is my existing tile still manufactured?",
+          "What happens if damaged decking is discovered?",
+          "Are new flashings and roof metals included?",
+          "What workmanship and material warranties apply?",
+          "Are there areas that cannot be fully evaluated until tile is removed?",
+          "Would another repair realistically extend the roof's life, or am I postponing a larger project?",
+        ],
+      },
+      {
+        heading: "The Bottom Line",
+        body: "A good roofing contractor should be able to explain the reasoning behind the recommended scope — not just give you a price. A tile roof does not automatically need to be replaced just because it is older. And replacing a few broken tiles does not automatically solve an aging waterproofing system. The right solution depends on what is happening underneath the tile. For some Phoenix-area homeowners, a localized repair is all that is needed. For others, keeping the existing tile and replacing the underlayment through a lift-and-relay can provide a more comprehensive solution. And when the existing tile, waterproofing system, or overall roof condition no longer makes sense to preserve, a complete replacement may be the better long-term investment. The most important first step is getting the roof inspected properly.",
+      },
+      {
+        heading: "Schedule a Free Tile Roof Inspection",
+        body: "Not sure whether your Arizona tile roof needs a repair, lift-and-relay, or complete replacement? XRP Roofing can inspect the roof, document what we find, and explain your options before you make a decision. We provide roofing services throughout the Phoenix metro area, including Phoenix, Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, and surrounding communities. Free roof inspection, free written estimate. Licensed, bonded, and insured. Call (623) 223-8856 or [request your inspection online](/contact).",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can you replace the underlayment without replacing the roof tile?",
+        a: "In many cases, yes. If the existing tile is still in usable condition, it may be carefully removed and reinstalled after the underlayment and necessary roofing components are replaced. This is commonly referred to as a tile lift-and-relay.",
+      },
+      {
+        q: "How do I know if my tile roof underlayment is failing?",
+        a: "Possible signs include recurring leaks, deteriorated material visible beneath broken or slipped tiles, problems around valleys or penetrations, and repeated repairs in different areas. The best way to determine its condition is through a professional roof inspection.",
+      },
+      {
+        q: "Should I repair an older tile roof or replace the underlayment?",
+        a: "Age alone should not determine the answer. If the problem is isolated and the surrounding roof system remains serviceable, repair may make sense. If deterioration is widespread or leaks continue appearing in different areas, more extensive underlayment work may be worth considering.",
+      },
+      {
+        q: "Do broken roof tiles automatically cause leaks?",
+        a: "Not necessarily. Tile protects the roofing system and helps shed water, but the waterproofing system underneath is also critical. A broken tile should be addressed, but the area underneath should also be evaluated for damage.",
+      },
+      {
+        q: "What happens if my existing tile has been discontinued?",
+        a: "A roofer can determine whether compatible tile is available and whether existing pieces can be reused. If matching material is extremely limited, that may affect whether repair, lift-and-relay, or replacement is the most practical option.",
+      },
+      {
+        q: "Can XRP Roofing inspect my tile roof before I decide?",
+        a: "Yes. XRP Roofing provides free roof inspections and estimates throughout the Phoenix metro area to help homeowners understand whether their roof needs localized repairs or more extensive work.",
+      },
+    ],
+    relatedServices: [
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+    ],
+  },
   "shingles-vs-tile-after-monsoon-season-phoenix": {
     slug: "shingles-vs-tile-after-monsoon-season-phoenix",
     title: "Shingles vs. Tile After Arizona's Monsoon Season: Which Protects Phoenix-Metro Homes Better Going into Fall?",
