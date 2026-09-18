@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
               <p className="mb-3">We only share personal information in the following limited circumstances:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Service providers:</strong> companies that help us operate our business (for example, our SMS platform Twilio, our email provider, scheduling software, and payment processor), who are contractually required to protect your data and use it only to provide services to us.</li>
-                <li><strong>Insurance &amp; warranty partners:</strong> when you specifically ask us to assist with an insurance claim or manufacturer warranty.</li>
+                <li><strong>Insurance companies &amp; warranty providers:</strong> when you specifically ask us to share inspection documentation or estimates with your insurer or a manufacturer.</li>
                 <li><strong>Legal compliance:</strong> when required by law, subpoena, court order, or to protect our rights, property, or safety.</li>
               </ul>
               <p className="mt-3 font-semibold text-gray-900">

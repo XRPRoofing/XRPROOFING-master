@@ -159,11 +159,11 @@ export const services: Service[] = [
     name: "Storm Damage Roofing",
     shortName: "Storm Damage",
     description:
-      "Monsoon and storm damage assessment, repair, and insurance claim assistance. Protect your home after Arizona's severe weather.",
+      "Monsoon and storm damage assessment, documentation, and repair. Protect your home after Arizona's severe weather.",
     icon: "⛈️",
     heroImage: "/images/xrp-roofing/2025-01-26-5.jpg",
     metaDescription:
-      "Storm damage roofing repair in Phoenix AZ. Insurance claim help, free inspections after monsoons and high winds.",
+      "Storm damage roofing repair in Phoenix AZ. Photo documentation and free inspections after monsoons and high winds.",
     keywords: ["storm damage roofing Phoenix", "monsoon roof damage AZ", "hail damage roof repair", "wind damage roof Phoenix"],
     relatedServices: ["emergency-roof-repair", "roof-repair", "roof-replacement", "roof-coatings"],
   },

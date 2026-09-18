@@ -36,7 +36,7 @@ const homepageFaqs = [
   { q: "Do you offer free roof inspections?", a: "Yes — we provide free, no-obligation roof inspections for all residential and commercial properties in our service area. Our inspectors get on the roof, document findings with photos, and provide a detailed written estimate with no pressure." },
   { q: "Are you licensed and insured?", a: "Yes. XRP Roofing holds all required Arizona contractor licenses and carries comprehensive general liability and workers' compensation insurance. We provide proof of coverage before any project begins." },
   { q: "How soon can you start my roofing project?", a: "We typically schedule non-emergency work within one to two weeks of estimate approval. Emergency repairs are prioritized and can often be scheduled same-day or next day." },
-  { q: "Do you help with insurance claims?", a: "Absolutely. We provide comprehensive storm damage documentation and work directly with insurance adjusters. We can meet your adjuster on-site and advocate for a fair assessment of damage." },
+  { q: "Do you provide documentation for storm damage?", a: "Yes. We inspect the roof, document damage with photos and measurements, and prepare a written repair estimate. If your adjuster inspects the roof, we can be on-site to walk through the physical damage we documented and explain the repair requirements. We do not negotiate or interpret insurance coverage — decisions about your claim are between you and your insurer." },
   { q: "What roofing materials do you work with?", a: "We install and repair all major roofing materials including concrete and clay tile, architectural asphalt shingles, standing seam metal, TPO and EPDM membranes, modified bitumen, and elastomeric and silicone roof coatings." },
 ];
 
@@ -144,7 +144,7 @@ export default function HomePage() {
                   "Materials selected for Arizona desert performance",
                   "Free inspections — no pressure, no obligation",
                   "Written estimates with no hidden fees",
-                  "Insurance claim documentation & assistance",
+                  "Storm damage documentation for your records",
                   "Financing available for qualifying projects",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
@@ -200,7 +200,7 @@ export default function HomePage() {
                   "Free on-site inspection by a licensed roofing professional",
                   "Detailed written estimate with no hidden fees",
                   "Same-day emergency response available",
-                  "Insurance claim assistance included",
+                  "Photo documentation & written estimate included",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-gray-300">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />

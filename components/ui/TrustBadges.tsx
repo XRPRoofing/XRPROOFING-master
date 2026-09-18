@@ -6,7 +6,7 @@ const badges = [
   { icon: Clock, label: "Fast Response", sub: "Same-Day Emergency Service" },
   { icon: Award, label: "10+ Years Experience", sub: "Arizona Roofing Experts" },
   { icon: DollarSign, label: "Financing Available", sub: "Flexible Payment Plans" },
-  { icon: FileCheck, label: "Insurance Claims", sub: "We Handle the Paperwork" },
+  { icon: FileCheck, label: "Storm Damage Documentation", sub: "Photos, Measurements & Written Findings" },
 ];
 
 interface TrustBadgesProps {
