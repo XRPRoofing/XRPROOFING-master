@@ -188,7 +188,7 @@ export default function Footer() {
                 <li className="text-xs text-gray-300">✓ {LICENSE_NOTE}</li>
                 <li className="text-xs text-gray-300">✓ {SERVICE_AREA}</li>
                 <li className="text-xs text-gray-300">✓ Free Inspections & Estimates</li>
-                <li className="text-xs text-gray-300">✓ Insurance Claim Assistance</li>
+                <li className="text-xs text-gray-300">✓ Storm Damage Documentation & Estimates</li>
                 <li className="text-xs text-gray-300">✓ Written Workmanship Warranty</li>
                 <li className="text-xs text-gray-300">✓ Financing Available</li>
               </ul>

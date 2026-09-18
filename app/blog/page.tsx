@@ -155,7 +155,7 @@ const posts = [
   {
     slug: "insurance-roof-claim-guide-arizona",
     title: "Insurance Roof Claim Guide for Arizona Homeowners",
-    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjusters, deductibles, supplements, and when not to file.",
+    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjuster visits, deductibles, and questions to ask your insurer.",
     date: "2025-05-08",
     readTime: "9 min read",
     category: "Insurance",
@@ -195,7 +195,7 @@ const posts = [
   {
     slug: "understanding-arizona-roof-insurance-claims",
     title: "A Homeowner's Guide to Roof Insurance Claims in Arizona",
-    excerpt: "Navigating a roofing insurance claim after a monsoon or hail event can be overwhelming. This guide walks you through the entire process — from initial damage assessment to final settlement.",
+    excerpt: "Navigating a roofing insurance claim after a monsoon or hail event can be overwhelming. This guide explains what to expect — from roof inspection and documentation to repairs.",
     date: "2025-02-20",
     readTime: "9 min read",
     category: "Insurance",

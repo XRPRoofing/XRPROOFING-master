@@ -296,7 +296,7 @@ const allPosts: Record<string, BlogPost> = {
       { q: "Is tile cheaper than shingles over the long run?", a: "Often, yes, over a 30–50 year horizon. Shingles cost less upfront but require two full replacements over 50 years in Phoenix. Tile requires one lift-and-reset, which is much cheaper than a new roof because the tile is reused. For ownership under 10 years, shingles are usually the more economical choice." },
       { q: "Does tile really lower cooling costs?", a: "Modestly. The air gap between tile and deck reduces heat transfer into the attic, and reflective tile finishes help further. It is a legitimate factor in a long-term comparison but not a reason on its own to choose tile." },
       { q: "When should I schedule the work if I decide this fall?", a: "As soon as possible after your inspection. Mid-September through October offers dry, warm conditions ideal for sealants and adhesives to cure, and schedules fill quickly once the first cooler-season rain exposes leaks across the valley." },
-      { q: "Does XRP Roofing help with insurance documentation?", a: "Yes. Every free inspection includes photo documentation and written findings. If storm damage is involved, we provide the assessment adjusters need and can support you through the claims process." },
+      { q: "Does XRP Roofing help with insurance documentation?", a: "Yes. Every free inspection includes photo documentation and written findings you may share with your insurer." },
     ],
     relatedServices: [
       { label: "Tile Roofing", href: "/services/tile-roofing" },
@@ -442,7 +442,7 @@ const allPosts: Record<string, BlogPost> = {
         listItems: [
           "Materials perform better in consistent warm, dry conditions. Adhesives and sealants cure properly, coatings bond as designed, and crews can work efficiently without weather delays or the compromises that come with working between storms.",
           "Scheduling is still open. Once the first cooler-season rain or the final monsoon storm hits, emergency and repair demand spikes across the valley. Planned work in September happens at a normal pace; the same work in November is competing with every active leak in the metro.",
-          "Insurance documentation is cleaner. Photos and written assessments taken in dry weather, close to the storms that caused the damage, give adjusters a clearer picture if a claim becomes necessary later. Evidence weathers, and storm dates blur — [an insurance claim](/blog/insurance-roof-claim-guide-arizona) built on fresh documentation is on much stronger footing.",
+          "Insurance documentation is cleaner. Photos and written assessments taken in dry weather, close to the storms that caused the damage, give you a clearer record of the roof's condition if you later need to discuss it with your insurer. See our [insurance claim guide](/blog/insurance-roof-claim-guide-arizona) for what to expect.",
           "Small repairs stay small. A resealed flashing or a cleared valley today is often a fraction of the cost of interior water damage and mold remediation in November or December. The size of a roof problem is largely a function of how long it goes unaddressed.",
         ],
       },
@@ -467,7 +467,7 @@ const allPosts: Record<string, BlogPost> = {
           "On-roof inspection with detailed photo documentation, organized by location so you can see exactly what we saw without going up there yourself.",
           "Clear written findings in plain language — what needs attention now, what is worth monitoring, and what is fine.",
           "Honest recommendations. We repair only what needs repair, with no pressure to replace, and we will tell you the roof came through the season in good shape when that is the answer.",
-          "Written estimates and, when applicable, insurance claim support that separates storm damage from ordinary wear before you file.",
+          "Written estimates and, when applicable, written findings that separate storm damage from ordinary wear.",
           "A workmanship warranty on the work we perform, from a licensed and insured Arizona contractor.",
         ],
       },
@@ -483,7 +483,7 @@ const allPosts: Record<string, BlogPost> = {
       { q: "What is the most common monsoon damage you find in September?", a: "Opened or settled flashing at walls, chimneys, skylights, and penetrations; debris packed into valleys and drainage paths; cracked or dried-out sealant; and slipped or cracked tile and lifted shingle tabs. On flat and foam roofs, it is silted drains and coating wear at edges and around drains." },
       { q: "Can I do any of this myself?", a: "You can do a useful check from the ground and from inside the house: look for slid or missing tiles and shingles, check gutters and downspouts for debris, note any new ceiling stains or musty smells, and watch for ponding on flat sections after rain. Do not climb the roof. Anything involving flashings, underlayment, or structure should be handled by a licensed Arizona contractor." },
       { q: "Will a September repair last through the winter?", a: "That is the point of doing it now. Sealants and adhesives applied in warm, dry September conditions cure as designed, which is what gives a repair its full service life. The same repair done in cool, damp conditions, or as an emergency between storms, is more likely to need revisiting." },
-      { q: "Does homeowners insurance cover monsoon damage found in September?", a: "Sudden damage from wind, hail, or debris impact is commonly covered; gradual wear, aged sealant, and debris accumulation are generally treated as maintenance. Most roofs have some of both, which is why documentation that separates the two matters. Photos and a written assessment taken in September, close to the storms, carry more weight with an adjuster than a claim assembled months later." },
+      { q: "Does homeowners insurance cover monsoon damage found in September?", a: "Sudden damage from wind, hail, or debris impact is commonly covered; gradual wear, aged sealant, and debris accumulation are generally treated as maintenance. Most roofs have some of both, which is why documentation that separates the two matters. Photos and a written assessment taken in September, close to the storms, provide a clearer record than one assembled months later." },
       { q: "How much does it cost to fix monsoon damage?", a: "It depends on what is found, which is why the inspection is free and the estimate is written. Most September findings are single-visit repairs — resealing flashing, clearing drainage, reseating tile, replacing a pipe boot, or spot-coating an edge. The same problems left until they leak in winter add interior repair, insulation replacement, and sometimes mold remediation to the bill." },
       { q: "Does the timing matter differently for tile, shingle, foam, and metal roofs?", a: "The window is the same; what you are looking for differs. On tile, the question is underlayment condition beneath sound tile. On shingle, it is sealant and flashing at penetrations plus granule loss. On foam and flat roofs, it is coating condition and drainage. On metal, it is fastener back-out and seam sealant. All of them benefit from being addressed in dry, warm conditions." },
       { q: "How quickly can XRP Roofing come out?", a: "Same-day or next-day scheduling is usually available for free inspections across the Phoenix metro, including Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, and the surrounding communities within a 100-mile radius. Emergency response for active leaks is same-day." },
@@ -574,7 +574,7 @@ const allPosts: Record<string, BlogPost> = {
           "Photo documentation organized by location, so you can see exactly what we saw without going up there yourself.",
           "A plain explanation of what needs attention now, what is worth monitoring, and what is fine — including telling you the roof came through the season in good shape when that is the answer.",
           "A written estimate for whatever work is genuinely warranted, with repair, coating, and replacement options laid out where more than one is legitimate.",
-          "Help documenting [an insurance claim](/blog/insurance-roof-claim-guide-arizona) if storm damage turns up, separated clearly from ordinary wear so you know where the line falls before you file.",
+          "Photo documentation and written findings if [storm damage](/blog/insurance-roof-claim-guide-arizona) turns up, separated clearly from ordinary wear.",
           "A workmanship warranty on the work we perform, from a licensed and insured Arizona contractor.",
         ],
       },
@@ -1017,7 +1017,7 @@ const allPosts: Record<string, BlogPost> = {
       { q: "How soon after monsoon season should I have my roof inspected?", a: "Schedule once the storm activity has settled, generally late September or October. That leaves the full dry season to complete any repairs before the next monsoon, and it keeps the inspection close enough to the storms to be useful if an insurance claim becomes necessary." },
       { q: "My ceilings are dry — do I still need a post-monsoon roof inspection?", a: "Usually yes, if a significant storm passed over your property. Dry ceilings only confirm that water has not yet found a path to the interior. Lifted underlayment, separated flashing, backed-out fasteners, and bruised shingles all sit quietly through the dry months and become leaks during the next rain event." },
       { q: "Can I inspect the roof myself after a storm?", a: "You can do a great deal from the ground, a window, and the attic, and that is worth doing. Do not climb onto the roof — Arizona tile is brittle, summer surfaces are dangerously hot, and storm-softened decking is not visible before you put weight on it. Roof-level and attic conditions are where a professional inspection adds what you cannot see." },
-      { q: "Does homeowners insurance cover monsoon roof damage in Arizona?", a: "Sudden damage from wind, hail, or falling debris is commonly covered, while gradual wear, aging materials, and deferred maintenance generally are not. Coverage depends on your policy and deductible, so have the roof inspected and documented first — that assessment is what tells you whether filing makes sense at all." },
+      { q: "Does homeowners insurance cover monsoon roof damage in Arizona?", a: "Sudden damage from wind, hail, or falling debris is commonly covered, while gradual wear, aging materials, and deferred maintenance generally are not. Coverage is determined by your policy and insurer. Our inspection documents the roof's condition so you have accurate information to discuss with them." },
       { q: "What is granule loss and why does it matter after a storm?", a: "Granules are the mineral surface layer that shields asphalt shingles from UV. Wind-driven rain and hail knock them loose, and they collect at downspouts and along wall bases. Once bare asphalt is exposed to Arizona sun, that area of the roof ages faster than the rest of it, which is why granule accumulation is worth reporting even without a leak." },
       { q: "Does XRP Roofing charge for a post-monsoon inspection?", a: "No. Post-monsoon inspections are free and carry no obligation. You receive photo documentation of the findings and a written recommendation, whether that recommendation is repair, coating, replacement, or simply that the roof came through the season fine." },
     ],
@@ -1088,7 +1088,7 @@ const allPosts: Record<string, BlogPost> = {
     date: "2025-06-12",
     readTime: "7 min read",
     category: "Emergency Repair",
-    metaDescription: "Emergency roof repair in Arizona: what to do during an active leak, when to call a roofer, insurance documentation tips, and what emergency repairs include.",
+    metaDescription: "Emergency roof repair in Arizona: what to do during an active leak, when to call a roofer, documentation for your records, and what emergency repairs include.",
     sections: [
       {
         heading: "When Emergency Roof Repair Is Actually Urgent",
@@ -1110,12 +1110,12 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Insurance Documentation Matters",
-        body: "If the emergency was caused by wind, hail, falling debris, or sudden storm damage, documentation can directly affect claim outcomes. A contractor report created before permanent repair helps establish the condition, cause, and mitigation steps taken to prevent further damage.",
+        body: "If the emergency was caused by wind, hail, falling debris, or sudden storm damage, documentation creates a record of condition, cause, and mitigation steps.",
       },
     ],
     faqs: [
       { q: "What counts as an emergency roof repair in Arizona?", a: "Active leaks, exposed roof decking, wind-torn materials, storm punctures, and damage that could allow water into the building during the next rain event generally qualify as emergency roof repair situations." },
-      { q: "Should I call insurance before emergency roof repair?", a: "You can notify your carrier, but first prevent additional damage and document everything. A licensed roofer can provide photos and a written emergency repair description that supports your claim." },
+      { q: "Should I call insurance before emergency roof repair?", a: "You can notify your carrier, but first prevent additional damage and document everything. A licensed roofer can provide photos and a written emergency repair description you may share with your insurer." },
       { q: "Is a tarp a permanent roof repair?", a: "No. A tarp is temporary weatherproofing designed to limit further damage until permanent repairs can be completed safely and correctly." },
     ],
     relatedServices: [
@@ -1160,7 +1160,7 @@ const allPosts: Record<string, BlogPost> = {
     faqs: [
       { q: "How much does roof leak repair cost in Arizona?", a: "Simple leak repairs can be relatively modest, while underlayment, decking, flat-roof seam, or storm-related repairs cost more. The accurate number depends on roof type, leak source, access, urgency, and hidden moisture. XRP Roofing provides free written estimates." },
       { q: "Why does my ceiling leak appear far from the roof damage?", a: "Water travels along rafters, underlayment, insulation, and drywall before it appears inside. The visible stain is often not directly under the roof entry point." },
-      { q: "Can roof leak repair be covered by insurance?", a: "If the leak was caused by sudden storm damage, wind, hail, or falling debris, insurance may apply. Age-related wear, poor maintenance, or old sealant failure is usually not covered." },
+      { q: "Can roof leak repair be covered by insurance?", a: "Coverage depends on your policy — confirm with your insurer." },
     ],
     relatedServices: [
       { label: "Roof Repair", href: "/services/roof-repair" },
@@ -1175,7 +1175,7 @@ const allPosts: Record<string, BlogPost> = {
     date: "2025-05-29",
     readTime: "7 min read",
     category: "Storm Damage",
-    metaDescription: "Storm damage roof inspection in Arizona: what roofers check after monsoon wind, hail, debris impact, and how documentation supports insurance claims.",
+    metaDescription: "Storm damage roof inspection in Arizona: what roofers check after monsoon wind, hail, debris impact, and how roof-level documentation records storm damage.",
     sections: [
       {
         heading: "Why Ground-Level Checks Miss Storm Damage",
@@ -1189,7 +1189,7 @@ const allPosts: Record<string, BlogPost> = {
           "Hail impact assessment on shingles, tile, metal, vents, and soft metals",
           "Photo documentation tied to specific slopes and roof areas",
           "Interior and attic review when stains or active leaks are present",
-          "Written repair or replacement recommendation for claim support",
+          "Written repair or replacement recommendation",
         ],
       },
       {
@@ -1197,8 +1197,8 @@ const allPosts: Record<string, BlogPost> = {
         body: "The best time to inspect is shortly after the storm, before temporary drying hides evidence and before another rain event expands the damage. Fast documentation creates a clearer timeline for insurance review and helps prevent small vulnerabilities from becoming interior damage.",
       },
       {
-        heading: "When to File an Insurance Claim",
-        body: "A contractor inspection should happen before filing whenever possible. If the damage is minor and below deductible, a claim may not make financial sense. If the inspection shows widespread storm damage, a clear report gives the carrier stronger evidence from the start.",
+        heading: "Before You Contact Your Insurer",
+        body: "Have the roof inspected first so you have documented findings to discuss with your insurer.",
       },
     ],
     faqs: [
@@ -1303,11 +1303,11 @@ const allPosts: Record<string, BlogPost> = {
   "insurance-roof-claim-guide-arizona": {
     slug: "insurance-roof-claim-guide-arizona",
     title: "Insurance Roof Claim Guide for Arizona Homeowners",
-    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjusters, deductibles, supplements, and when not to file.",
+    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjuster visits, deductibles, and questions to ask your insurer.",
     date: "2025-05-08",
     readTime: "9 min read",
     category: "Insurance",
-    metaDescription: "Insurance roof claim guide for Arizona homeowners: storm damage inspections, documentation, adjuster meetings, deductibles, supplements, and claim mistakes to avoid.",
+    metaDescription: "Insurance roof claim guide for Arizona homeowners: storm damage inspections, documentation, adjuster visits, deductibles, and questions to ask your insurer.",
     sections: [
       {
         heading: "Start With Inspection and Documentation",
@@ -1318,11 +1318,10 @@ const allPosts: Record<string, BlogPost> = {
         listItems: [
           "Schedule a contractor inspection and collect photo documentation",
           "Review whether damage appears storm-related or age-related",
-          "Compare likely repair cost against your deductible before filing",
+          "Review your policy and deductible with your agent before deciding whether to file",
           "File the claim with date of loss, photos, and contractor report",
           "Meet the adjuster on-site when possible",
-          "Review the carrier estimate for missing code, flashing, underlayment, or material items",
-          "Submit supplements when legitimate scope items were missed",
+          "Compare the carrier's estimate with your contractor's repair estimate and ask your insurer about any differences",
         ],
       },
       {
@@ -1331,11 +1330,11 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "When Not to File a Claim",
-        body: "If the repair is clearly below deductible or caused by age-related wear, filing may not make sense. XRP Roofing helps homeowners understand whether a claim appears justified based on observed damage before they start the process.",
+        body: "If the repair is clearly below deductible or caused by age-related wear, filing may not make sense. XRP Roofing documents the observed damage and separates storm damage from ordinary wear in its written findings; whether to file is your decision.",
       },
     ],
     faqs: [
-      { q: "Should I get a roof inspection before filing an insurance claim?", a: "Yes. A documented contractor inspection helps determine whether the damage appears claim-worthy and provides evidence for the carrier if you file." },
+      { q: "Should I get a roof inspection before filing an insurance claim?", a: "Yes. A documented contractor inspection gives you a documented record of the roof's condition to review with your insurer." },
       { q: "What is a supplemental roof claim?", a: "A supplement is an additional request to the carrier when legitimate scope items were missed in the initial estimate, such as flashing, code items, underlayment, or hidden damage discovered during work." },
       { q: "Can a roofer waive my deductible in Arizona?", a: "No. Deductible waiver can be considered insurance fraud. Be cautious of contractors promising free roofs or rebate schemes." },
     ],
@@ -1367,7 +1366,7 @@ const allPosts: Record<string, BlogPost> = {
           "Inspect valley flashings and ridge caps for lifted edges or missing mortar",
           "Trim trees overhanging the roof to reduce branch impact and debris risk",
           "Check attic ventilation — blocked soffits trap heat that damages underlayment",
-          "Document your roof condition with photographs for insurance baseline purposes",
+          "Document your roof condition with photographs for your records",
         ],
       },
       {
@@ -1456,7 +1455,7 @@ const allPosts: Record<string, BlogPost> = {
           "Widespread granule loss on shingles: Bare or near-bare asphalt shingles across large areas cannot be effectively repaired — replacement is required",
           "Failed underlayment beneath intact tile: If moisture scans show wet insulation and attic staining despite intact tile surfaces, underlayment replacement is needed",
           "Sagging or soft spots: Any structural deck softness indicates long-term moisture intrusion and requires full assessment — often replacement",
-          "Post-hail damage across the entire surface: If hail has impacted more than 20–30% of shingles, insurance-covered full replacement is almost always the right decision",
+          "Post-hail damage across the entire surface: If hail has impacted more than 20–30% of shingles, full replacement is usually the right construction decision",
           "Energy bills rising without explanation: Aged or failing roofing systems lose insulating value — a new roof with proper ventilation consistently reduces cooling costs",
         ],
       },
@@ -1468,7 +1467,7 @@ const allPosts: Record<string, BlogPost> = {
     faqs: [
       { q: "How do I know if my Arizona roof needs repair or full replacement?", a: "Age, extent of damage, and underlayment condition are the three key factors. Roofs under 15 years old with isolated damage are usually repair candidates. Roofs over 20 years (shingles) or with failed underlayment (tile) are typically replacement candidates. A free professional inspection gives you a definitive answer." },
       { q: "How much does a full roof replacement cost in Phoenix?", a: "Residential roof replacement in Phoenix typically ranges from $8,000–$18,000 for shingles and $15,000–$35,000+ for tile, depending on size, pitch, complexity, and material selection. We provide detailed written estimates at no charge." },
-      { q: "Will my insurance cover roof replacement in Arizona?", a: "Storm-caused damage (hail, wind) that necessitates replacement is typically covered less your deductible. Age-related wear is not. We provide full documentation for storm-related claims and work with all major carriers." },
+      { q: "Will my insurance cover roof replacement in Arizona?", a: "Coverage depends on your policy — confirm with your insurer. We document storm damage and provide a repair or replacement estimate." },
     ],
     relatedServices: [
       { label: "Roof Replacement", href: "/services/roof-replacement" },
@@ -1519,7 +1518,7 @@ const allPosts: Record<string, BlogPost> = {
   "understanding-arizona-roof-insurance-claims": {
     slug: "understanding-arizona-roof-insurance-claims",
     title: "A Homeowner's Guide to Roof Insurance Claims in Arizona",
-    excerpt: "Navigating a roofing insurance claim after a monsoon or hail event can be overwhelming. This guide walks you through the entire process — from initial damage assessment to final settlement.",
+    excerpt: "Navigating a roofing insurance claim after a monsoon or hail event can be overwhelming. This guide explains what to expect — from roof inspection and documentation to repairs.",
     date: "2025-02-20",
     readTime: "9 min read",
     category: "Insurance",
@@ -1527,7 +1526,7 @@ const allPosts: Record<string, BlogPost> = {
     sections: [
       {
         heading: "Step 1: Get a Contractor Inspection Before Calling Your Insurer",
-        body: "The single most impactful thing an Arizona homeowner can do after a storm is get a licensed contractor's written inspection report before filing a claim. A detailed report with photographs, damage description, and repair scope gives your carrier everything needed to process the claim accurately — and is far more powerful than a phone report based on a satellite image. XRP Roofing provides storm damage documentation reports at no charge.",
+        body: "Having the roof inspected and documented promptly gives you an accurate record of the roof's condition that you may share with your carrier. XRP Roofing provides roof inspections with photo documentation at no charge.",
       },
       {
         heading: "Step 2: Understanding What Is and Isn't Covered",
@@ -1537,19 +1536,20 @@ const allPosts: Record<string, BlogPost> = {
           "Not covered: Gradual wear, age-related deterioration, deferred maintenance",
           "Not covered: Pre-existing conditions that were not caused by the claimed event",
           "Gray area: Damage to a roof that had deferred maintenance — carriers may apply partial coverage or depreciation",
+          "General information only — coverage is determined by your policy and insurer",
         ],
       },
       {
         heading: "Step 3: The Adjuster Visit",
-        body: "Request that your carrier send a field adjuster rather than accepting a desk review based on satellite imagery — field inspections consistently result in more accurate assessments for complex storm damage. XRP Roofing offers to meet your adjuster on-site and walk through our damage documentation. This is the single most effective way to ensure all damage is captured in the initial assessment and reduces the need for supplemental claims.",
+        body: "If your carrier sends an adjuster to inspect the roof, XRP Roofing can be on-site to point out the physical damage we documented and answer questions about repair requirements.",
       },
       {
         heading: "Step 4: Supplemental Claims",
-        body: "If the initial adjuster estimate is insufficient to cover the scope of work required, a supplemental claim can be filed with additional documentation. This is common for large hail events where hidden damage (underlayment, decking, flashing) is not initially assessed. We prepare supplemental documentation as a standard part of our insurance claim support service.",
+        body: "If additional damage (underlayment, decking, flashing) is discovered once work begins, XRP Roofing documents it with photos and provides an updated repair estimate. How that is handled with your insurer is between you and your carrier.",
       },
     ],
     faqs: [
-      { q: "Should I call my insurance company or a roofer first after storm damage?", a: "Call a licensed contractor first. A professional damage report strengthens your claim significantly. Calling your carrier without documentation often results in lower initial estimates." },
+      { q: "Should I call my insurance company or a roofer first after storm damage?", a: "Having the roof inspected and documented promptly gives you an accurate record of its condition before repairs change it. You can then decide with your insurer how to proceed." },
       { q: "How long do I have to file a storm damage claim in Arizona?", a: "Arizona homeowner's policies typically have a 1–2 year window for storm damage claims. Check your specific policy. Document damage as soon as possible after an event regardless of when you plan to file." },
       { q: "Will my insurance rates go up if I file a roof claim?", a: "Possibly — filing a claim can affect your renewal rates. For small repairs, it may be worth weighing the claim value against potential premium increases. For major storm damage requiring full replacement, filing almost always makes financial sense given the cost offset." },
     ],

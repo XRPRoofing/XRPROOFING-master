@@ -25,7 +25,7 @@ const ctrMetadata: Record<string, { title: string; description: string }> = {
   },
   "storm-damage-roofing": {
     title: `Storm Damage Roof Inspection Phoenix, AZ | ${SITE_NAME}`,
-    description: "Storm damage roof inspections in Phoenix after monsoon wind, hail, and debris impact. Get roof-level photos, written findings, and claim support.",
+    description: "Storm damage roof inspections in Phoenix after monsoon wind, hail, and debris impact. Get roof-level photos, written findings, and a repair estimate.",
   },
   "roof-replacement": {
     title: `Roof Replacement Phoenix, AZ | Repair vs Replace Guidance | ${SITE_NAME}`,
@@ -86,14 +86,14 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
     body: [
       "Arizona's UV radiation, extreme heat cycles, and monsoon storms work together to stress every component of your roofing system. Shingles blister and crack. Underlayment dries out and becomes brittle. Flashing pulls away from penetrations. What looks like a simple leak often has multiple contributing causes — which is why accurate diagnosis is critical before any repair begins.",
       "Our repair process starts with a comprehensive inspection of the entire roof surface — not just the area showing symptoms. We use moisture detection tools, photograph all problem areas, and identify both the immediate failure and any developing issues. You receive a detailed written estimate before any work begins, with no pressure to approve a larger scope than your roof actually needs.",
-      "We stock a wide inventory of common Arizona roofing materials so most repairs can be completed quickly without waiting for special orders. All repair work is backed by our written workmanship warranty and fully documented with photographs for your records and any insurance claims.",
+      "We stock a wide inventory of common Arizona roofing materials so most repairs can be completed quickly without waiting for special orders. All repair work is backed by our written workmanship warranty and fully documented with photographs for your records.",
     ],
     whyChoose: [
       "Complete roof inspection — not just the visible leak point",
       "Accurate root-cause diagnosis before any repair work",
       "In-stock matching materials for faster turnaround",
       "Written workmanship warranty on all repair work",
-      "Insurance claim documentation provided if storm-related",
+      "Photo documentation of storm damage provided on request",
       "Same-day emergency response for active leaks",
     ],
   },
@@ -133,7 +133,7 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
     intro: "Concrete and clay tile is Arizona's most popular roofing choice for good reason — exceptional durability, natural heat resistance, and a classic aesthetic that suits the desert landscape. XRP Roofing specializes in tile installation, repair, and underlayment replacement throughout the Phoenix metro.",
     body: [
       "Tile itself is extraordinarily durable in Arizona — properly maintained concrete tile can last 50+ years and clay tile even longer. But the tile is only half the system. The underlayment beneath the tile typically has a 20–30 year lifespan in Arizona's heat, and when it fails, the tile above often looks perfectly intact. Many Phoenix homeowners are surprised to discover that their 'tile leak' is actually an underlayment failure — requiring tile removal, new underlayment, and tile reinstallation rather than tile replacement.",
-      "Our tile roofing services cover the full spectrum: new tile installation on new construction or replacements, tile repair and color matching for isolated damage, ridge cap remortar and refoam, underlayment-only replacement (tile off/on), and storm damage assessment with insurance documentation. We maintain distributor relationships with all major Arizona tile lines including Boral, Eagle, US Tile, and others — giving us access to current and discontinued profiles for repair matching.",
+      "Our tile roofing services cover the full spectrum: new tile installation on new construction or replacements, tile repair and color matching for isolated damage, ridge cap remortar and refoam, underlayment-only replacement (tile off/on), and storm damage assessment with photo documentation. We maintain distributor relationships with all major Arizona tile lines including Boral, Eagle, US Tile, and others — giving us access to current and discontinued profiles for repair matching.",
       "For HOA communities requiring specific tile profiles and colors, we handle the architectural review process from sample submission through approval. Our estimators are experienced with the specific requirements of managed communities throughout Scottsdale, Gilbert, Chandler, Peoria, and the broader metro.",
     ],
     whyChoose: [
@@ -246,31 +246,31 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
     body: [
       "Emergency roof situations in Phoenix most commonly follow monsoon storms — wind-displaced tiles or shingles, separated flashing, fallen debris, or sudden structural failure. The priority in every emergency is getting the building weatherproofed quickly to prevent water from reaching ceilings, insulation, drywall, and flooring. Our emergency response process starts with immediate tarp installation or emergency sealing, followed by thorough documentation of all damage for insurance purposes.",
       "We respond to emergency calls as quickly as possible and prioritize active leak situations above standard scheduling. Our crews carry emergency materials including heavy-duty tarps, emergency sealants that cure in wet conditions, peel-and-stick membrane, and OSB panels for structural gaps. Most emergency weatherproofing is completed within the day; permanent repairs typically follow within three to five business days depending on material availability.",
-      "Our emergency response documentation — photographs, written damage assessment, and repair description — is prepared specifically to support insurance claim submission. We can meet your insurance adjuster on-site and provide supplemental documentation if the initial claim assessment is disputed. Getting the documentation right from the start is critical to a smooth claims process.",
+      "Our emergency response documentation — photographs, written damage assessment, and repair description — documents the roof's condition at the time of the emergency. If your adjuster inspects the roof, we can be on-site to point out the physical damage we documented. If additional damage is discovered during repairs, we document it and update our repair estimate.",
     ],
     whyChoose: [
       "Priority response for active leak situations throughout Phoenix metro",
       "Emergency weatherproofing completed within hours",
-      "Complete insurance documentation — photos, written assessment, repair description",
-      "Adjuster meet service available for complex or disputed claims",
+      "Complete damage documentation — photos, written assessment, repair description",
+      "Available to walk your adjuster through documented roof damage on-site",
       "Permanent repair follow-through scheduled immediately after stabilization",
       "After-hours emergency response capability",
     ],
   },
   "storm-damage-roofing": {
-    intro: "Arizona's monsoon season delivers some of the most intense storm events in North America — high winds, large hail, flash flooding, and airborne debris that test every component of your roofing system. XRP Roofing provides complete storm damage assessment, repair, and insurance claim support throughout the Phoenix metro.",
+    intro: "Arizona's monsoon season delivers some of the most intense storm events in North America — high winds, large hail, flash flooding, and airborne debris that test every component of your roofing system. XRP Roofing provides complete storm damage assessment, documentation, and repair throughout the Phoenix metro.",
     body: [
       "Storm damage assessment requires getting on the roof — not just looking from the ground. Hail damage on shingles often appears as random impact marks that cause granule displacement, leaving exposed asphalt vulnerable to rapid UV degradation. Wind damage frequently displaces tiles or shingles in ways that look minor from the street but create significant waterproofing vulnerabilities. Our inspection documents every damage point with photographs and a written report formatted for insurance submission.",
-      "One of the most important steps any Phoenix homeowner can take after a significant storm is to call a qualified contractor before calling the insurance company. A thorough inspection report from an experienced contractor is far more powerful during the claims process than a carrier's phone assessment. We provide complete storm damage documentation that carriers can use directly — in many cases eliminating the need for a separate adjuster visit.",
-      "For properties where storm damage qualifies for full replacement, we manage the entire process — from insurance submission through material selection, permitting, installation, and final inspection. We work with all major carriers and have extensive experience navigating the Arizona homeowner's insurance claims process, including supplemental claims when initial estimates are inadequate.",
+      "A roof-level inspection with photos and measurements gives you a clear, documented record of the roof's condition. You may share our written findings and repair estimate with your insurer; whether and how to file a claim is your decision and your carrier's determination.",
+      "For properties where storm damage requires full replacement, we manage the entire construction process — material selection, permitting, installation, and final inspection. We provide itemized construction estimates and, if additional damage is uncovered during work, we document it and provide an updated estimate.",
     ],
     whyChoose: [
       "Complete roof-level inspection with photographic documentation",
-      "Insurance claim report prepared for carrier submission",
-      "Adjuster meet service — we advocate for a fair assessment",
-      "Experience with all major Arizona homeowner's insurance carriers",
+      "Written inspection report with photos and measurements",
+      "On-site walkthrough of documented damage with your adjuster, on request",
+      "Estimates formatted in industry-standard line-item detail",
       "Class 4 impact-resistant shingle upgrade available (potential premium discount)",
-      "Full replacement management from claim to final inspection",
+      "Full replacement management from contract to final inspection",
     ],
   },
 };
@@ -282,19 +282,19 @@ const authoritySections: Record<string, { comparison: string; pricing: string; w
     comparison: "Repair is usually the right choice when the leak is isolated, the surrounding roof system is still serviceable, and the source can be corrected without chasing multiple failures. Replacement becomes the better investment when leaks are recurring, shingles are brittle, tile underlayment is failing across multiple slopes, or repair cost begins approaching the value of a new roof system.",
     pricing: "Roof leak repair pricing depends on roof type, access, leak source, material matching, urgency, and hidden moisture. Pipe boots and simple flashing repairs are usually less complex than tile underlayment failures, flat-roof seam separation, or decking repair. XRP Roofing provides written estimates so you can compare repair scope, replacement risk, and warranty coverage clearly.",
     whenToCall: "Call when you see ceiling stains, active dripping, missing tiles or shingles, lifted flashing, cracked pipe boots, ponding on flat sections, or new leaks after monsoon rain. The sooner the leak source is documented, the easier it is to prevent insulation, drywall, and mold damage.",
-    trust: ["Root-cause leak diagnosis", "Photo documentation", "Written repair estimate", "Workmanship warranty", "Insurance documentation when storm-related"],
+    trust: ["Root-cause leak diagnosis", "Photo documentation", "Written repair estimate", "Workmanship warranty", "Photo documentation when storm-related"],
   },
   "emergency-roof-repair": {
     comparison: "Emergency repair is the first step when the roof must be weatherproofed immediately. It may include tarping, temporary sealing, or securing displaced material. Permanent repair follows after conditions are safe, material needs are confirmed, and hidden damage is documented.",
     pricing: "Emergency pricing depends on response timing, roof access, tarp size, temporary material needs, weather conditions, and permanent repair scope. After-hours or storm-response work may carry a premium, but fast mitigation can prevent much larger interior damage costs.",
     whenToCall: "Call immediately for active leaks, ceiling collapse risk, storm punctures, exposed decking, missing roof sections, or water entering near electrical fixtures. Do not climb on the roof during rain, wind, lightning, or darkness.",
-    trust: ["Emergency weatherproofing", "Active leak response", "Storm documentation", "Temporary-to-permanent repair plan", "Adjuster-ready photos"],
+    trust: ["Emergency weatherproofing", "Active leak response", "Storm documentation", "Temporary-to-permanent repair plan", "Roof-level photo documentation"],
   },
   "storm-damage-roofing": {
-    comparison: "Storm damage may require targeted repair, emergency weatherproofing, or full replacement depending on impact severity and roof age. A documented inspection helps determine whether damage is isolated, widespread, claim-worthy, or below deductible.",
-    pricing: "Storm repair cost depends on whether the damage is localized or roof-wide, whether materials are discontinued, whether decking or underlayment is compromised, and whether insurance scope includes code upgrades or replacement. Documentation is critical before permanent repairs begin.",
+    comparison: "Storm damage may require targeted repair, emergency weatherproofing, or full replacement depending on impact severity and roof age. A documented inspection helps determine whether damage is isolated or widespread, and what repair scope is required.",
+    pricing: "Storm repair cost depends on whether the damage is localized or roof-wide, whether materials are discontinued, whether decking or underlayment is compromised, and whether code-required upgrades or replacement are needed. Documentation is critical before permanent repairs begin.",
     whenToCall: "Call after hail, high winds, fallen branches, missing shingles, displaced tile, new leaks, or visible impact marks. Ground-level checks often miss lifted materials, bruised shingles, cracked tile edges, and flashing separation.",
-    trust: ["Roof-level storm inspections", "Carrier-ready photo reports", "Adjuster meet support", "Supplement documentation", "Class 4 upgrade guidance"],
+    trust: ["Roof-level storm inspections", "Roof-level photo reports", "Adjuster walkthrough on request", "Updated estimates for newly discovered damage", "Class 4 upgrade guidance"],
   },
   "roof-replacement": {
     comparison: "Replacement is usually the smarter option when damage is widespread, the roof is near the end of its Arizona service life, underlayment is failing, leaks are recurring, or repair costs are no longer protecting long-term value. Repair is still appropriate for isolated issues on an otherwise healthy system.",
@@ -326,7 +326,7 @@ const revenueFaqs: Record<string, Array<{ q: string; a: string }>> = {
     { q: "Do emergency roof repairs include permanent repair?", a: "Emergency service focuses first on stopping active water intrusion with tarps, sealants, or temporary patches. Permanent repair is then scheduled after conditions are safe and materials are confirmed." },
   ],
   "storm-damage-roofing": [
-    { q: "Should I get a roof inspection before filing a storm damage claim?", a: "Yes. A roof-level inspection with photos and written documentation helps determine whether the damage is claim-worthy and gives the insurance carrier clearer evidence." },
+    { q: "Should I get a roof inspection before filing a storm damage claim?", a: "Yes. A roof-level inspection with photos and written documentation documents the damage so you and your insurer have a clear record of the roof's condition." },
     { q: "What storm damage is commonly missed from the ground?", a: "Lifted shingles, cracked tile edges, hail bruising, displaced ridge caps, separated flashing, and exposed underlayment are commonly missed without roof-level inspection." },
   ],
   "commercial-roofing": [
@@ -335,7 +335,7 @@ const revenueFaqs: Record<string, Array<{ q: string; a: string }>> = {
   ],
   "roof-replacement": [
     { q: "When is roof replacement better than repair in Arizona?", a: "Replacement is usually better when damage is widespread, shingles are brittle, tile underlayment is failing, leaks are recurring, decking is soft, or the repair cost approaches the value of a new roof system." },
-    { q: "Can insurance pay for roof replacement?", a: "Storm-caused wind, hail, or debris damage may be covered less your deductible. Age-related wear is usually not covered. XRP Roofing documents storm damage for claim review when applicable." },
+    { q: "Can insurance pay for roof replacement?", a: "Coverage depends on your policy — check with your insurer or agent. XRP Roofing inspects and documents roof damage and provides a repair estimate; we do not determine coverage." },
   ],
   "tile-roofing": [
     { q: "Can tile roof leaks be fixed without replacing all tile?", a: "Often, yes. Many Arizona tile roof leaks come from failed underlayment beneath intact tile. The tile can frequently be removed, underlayment replaced, and tile reinstalled." },
@@ -354,7 +354,7 @@ const revenueCtas: Record<string, { title: string; subtitle: string }> = {
   },
   "storm-damage-roofing": {
     title: "Schedule a Storm Damage Roof Inspection",
-    subtitle: "Get roof-level photos, written findings, and insurance-ready documentation after monsoon wind, hail, or debris damage.",
+    subtitle: "Get roof-level photos, written findings, and a repair estimate after monsoon wind, hail, or debris damage.",
   },
   "commercial-roofing": {
     title: "Request a Commercial Roofing Estimate",
@@ -408,7 +408,7 @@ export default async function ServicePage({
   const baseFaqs = [
     { q: `How do I know if I need ${service.name} in Phoenix?`, a: `Signs you need ${service.name.toLowerCase()} include visible damage, leaks following rain events, material aging past its rated lifespan, or storm damage. A free professional inspection from XRP Roofing gives you an honest assessment of your roof's condition.` },
     { q: `How long does ${service.name} take in Phoenix, AZ?`, a: `Timeline depends on project scope, material availability, and weather. Most residential projects complete within one to three days. We provide an accurate schedule during the estimate process and communicate any changes promptly.` },
-    { q: `Is ${service.name} covered by homeowner's insurance?`, a: `Storm-related damage requiring ${service.name.toLowerCase()} is typically covered. Gradual wear and deferred maintenance generally are not. We provide documentation suitable for insurance claim submission and work with all major carriers.` },
+    { q: `Is ${service.name} covered by homeowner's insurance?`, a: `Coverage varies by policy — confirm with your insurer. We inspect and document roof damage and provide a written repair estimate you may share with your carrier.` },
     { q: `What makes XRP Roofing the right choice for ${service.name} in Phoenix?`, a: `We're locally based, licensed, insured, and experienced with Phoenix's specific climate and HOA requirements. We provide honest assessments, written estimates, and stand behind our work with warranties.` },
     { q: `Do you offer financing for ${service.name} projects?`, a: `Yes — we work with financing partners to offer payment plans for qualifying projects. Ask about current options when you call for your free estimate.` },
     { q: `What areas do you serve for ${service.name}?`, a: `We provide ${service.name.toLowerCase()} throughout Phoenix and a 100-mile radius including Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, and 20+ additional cities.` },

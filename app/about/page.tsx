@@ -36,7 +36,7 @@ const values = [
 const team = [
   { name: "Operations Team", role: "Field Supervision & Quality Control", description: "Our field supervisors oversee every project from start to finish, ensuring materials are installed correctly and the job site is left clean." },
   { name: "Inspection Team", role: "Licensed Roof Inspectors", description: "Our inspectors are licensed professionals who document findings thoroughly and explain everything in plain language — no pressure, no upsell." },
-  { name: "Customer Service", role: "Project Coordination", description: "Our office team handles scheduling, insurance coordination, permits, and keeps you informed throughout your project." },
+  { name: "Customer Service", role: "Project Coordination", description: "Our office team handles scheduling, documentation, permits, and keeps you informed throughout your project." },
 ];
 
 export default function AboutPage() {
@@ -183,7 +183,7 @@ export default function AboutPage() {
                     "Free, no-obligation inspections and estimates",
                     "Written workmanship warranties",
                     "Materials specifically rated for Arizona's desert climate",
-                    "Insurance claim documentation and adjuster coordination",
+                    "Storm damage documentation (photos, measurements, written findings)",
                     "Financing available for qualifying projects",
                     "Serving 30+ cities across the Phoenix metro and beyond",
                   ].map((item) => (

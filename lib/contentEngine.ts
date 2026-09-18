@@ -61,7 +61,7 @@ const serviceRichContent: Record<string, ServiceRichContent> = {
         { q: "Do you repair flat roofs as well as pitched roofs?", a: "Yes — we repair all roof types including TPO, modified bitumen, built-up roofing, tile, shingle, and metal. Each system requires different materials and techniques, and our crews are experienced with all of them." },
       ],
       [
-        { q: "Will my homeowner's insurance cover roof repairs in Arizona?", a: "Insurance covers sudden and accidental damage (storm, wind, hail, falling objects) but not gradual deterioration or lack of maintenance. After a monsoon or wind event, call us before your insurance company — our documented inspection report is far more useful during claim negotiation than a phone assessment." },
+        { q: "Will my homeowner's insurance cover roof repairs in Arizona?", a: "Coverage depends on your policy; your insurer makes that determination. A roof-level inspection with photos and written findings gives you a documented record of the roof's condition that you may share with your insurer." },
         { q: "How do I know if a roofer found the actual leak source?", a: "Legitimate roof contractors test their repair by using water simulation or waiting for rain — and provide you with photos of both the problem area and the completed repair. Be skeptical of any contractor who won't show you exactly what they found and why they repaired it. We photograph every step." },
         { q: "Is it safe to walk on my roof?", a: "Generally, we don't recommend homeowners walk on their roofs. Tile can crack under improper weight distribution, shingles can be damaged by foot traffic, and the risk of falls is significant. Our inspectors are trained to access roofs safely and carry proper safety equipment." },
         { q: "Can a roof repair be done during monsoon season?", a: "Yes — and active leak situations during monsoon season are exactly when we respond fastest. We waterproof emergency repair areas first and complete permanent repairs once conditions allow. We never leave a roof open to additional rainfall overnight." },
@@ -429,7 +429,7 @@ const serviceRichContent: Record<string, ServiceRichContent> = {
       "Emergency response premium for after-hours, weekend, or holiday calls",
       "Extent of temporary weatherproofing required (tarp area, complexity)",
       "Scope of permanent repair following emergency stabilization",
-      "Interior damage documentation for insurance purposes (additional time)",
+      "Interior damage documentation (additional time)",
       "Material sourcing — emergency stock availability vs. special order",
       "Structural damage requiring engineering assessment or permit",
     ],
@@ -437,7 +437,7 @@ const serviceRichContent: Record<string, ServiceRichContent> = {
       [
         { q: "What should I do immediately when I have an active roof leak?", a: "First, move valuables and place buckets to catch water — interior water damage escalates quickly. Do not go on the roof yourself during active rain or wind. Call XRP Roofing immediately — we respond to emergencies and can provide guidance by phone while en route. Document the damage with photos for insurance purposes but prioritize safety." },
         { q: "Do you respond to emergencies at night or on weekends?", a: "Yes — we have emergency response capability for urgent situations. Call our main line and follow prompts for emergency service. After-hours response carries a premium but prevents the interior damage costs that accumulate when leaks go unaddressed for days." },
-        { q: "Will insurance cover emergency roof repair after a storm?", a: "Storm-caused emergency roof damage is typically covered under standard homeowner's insurance policies. We provide complete emergency response documentation including photos, damage assessment, and temporary repair description — everything needed for your claim. We also offer adjuster meet services." },
+        { q: "Will insurance cover emergency roof repair after a storm?", a: "We document the emergency condition with photos and a written description of temporary repairs. Whether the damage is covered is determined by your policy and insurer. If your adjuster inspects the roof, we can be on-site to point out the documented damage." },
         { q: "Is emergency tarp installation a permanent fix?", a: "No — a tarp installation is weatherproofing only, intended to prevent further interior damage until permanent repairs can be completed. Tarps can shift in wind and are not a long-term solution. We always schedule permanent repairs as quickly as possible following emergency weatherproofing." },
       ],
     ],
@@ -460,21 +460,21 @@ const serviceRichContent: Record<string, ServiceRichContent> = {
       "Drip edge and rake metal as needed for edge damage",
       "FEMA-compliant hurricane strap installation where required",
     ],
-    timeline: "Emergency weatherproofing is completed same-day. Insurance assessment documentation (photos, written report) is provided within 24–48 hours. Permanent repair timeline depends on insurance claim processing and material availability — typically one to four weeks from claim approval. We can expedite for documented active leaks.",
+    timeline: "Emergency weatherproofing is completed same-day. Written damage documentation is provided within 24–48 hours. Permanent repair timeline depends on material availability and your authorization to proceed — typically one to four weeks. We can expedite for documented active leaks.",
     costFactors: [
       "Storm damage scope — isolated vs. widespread impact across the full roof",
-      "Insurance deductible (homeowner's responsibility) vs. insurance-covered portion",
+      "Scope of permanent repair required",
       "Material matching difficulty for older or discontinued roofing products",
-      "Whether storm damage qualifies for full replacement vs. repair under the policy",
-      "Supplemental documentation requirements from your insurance carrier",
+      "Whether storm damage requires full replacement vs. targeted repair",
+      "Material availability and lead times for permanent repair",
       "Code compliance upgrades required when permitted work exceeds 50% of roof value",
     ],
     faqSets: [
       [
         { q: "How do I know if my roof has hail damage?", a: "Hail damage on shingles typically appears as random impact marks causing granule displacement — creating circular dark spots with exposed asphalt beneath. On tile, look for cracks or chips, especially on the leading edge of tiles. Metal shows visible dents. The full extent of damage often requires roof-level inspection — ground-level assessment can miss significant damage." },
-        { q: "Should I call my insurance company or a roofer first?", a: "Call a roofer first. A thorough, documented inspection report from a qualified contractor is far more useful in the claims process than a phone report to your carrier. We provide complete photographic documentation with a written damage assessment that your carrier can use directly. Some carriers will accept our report in lieu of sending their own adjuster." },
-        { q: "What are public adjusters and should I use one?", a: "Public adjusters represent policyholders (not the insurance company) and advocate for maximum claim value on your behalf, typically for a percentage of the claim. For large, complex claims, they can be valuable. For straightforward storm damage claims, an experienced roofing contractor with good documentation often achieves comparable results without the adjuster's fee." },
-        { q: "My neighbor got a free roof after the last monsoon — can I get the same?", a: "Be very cautious of 'storm chasers' who promise free roofs or offer to waive your deductible. Deductible waiver is insurance fraud in Arizona. Legitimate insurance claims cover documented storm damage after your deductible. If your neighbor got a full replacement covered by insurance, they had documented damage that met their carrier's threshold — which may or may not apply to your roof." },
+        { q: "Should I call my insurance company or a roofer first?", a: "Having the roof inspected and documented promptly gives you an accurate record of its condition. You may share our photos, written findings, and estimate with your insurer at your discretion." },
+        { q: "What are public adjusters and should I use one?", a: "Public adjusters represent policyholders (not the insurance company) and advocate for maximum claim value on your behalf, typically for a percentage of the claim. For large, complex claims, they can be valuable. Public adjusters are licensed by the Arizona Department of Insurance. XRP Roofing is a roofing contractor, not a public adjuster — we inspect, document, estimate, and repair roofs; we do not represent homeowners in claim negotiations." },
+        { q: "My neighbor got a free roof after the last monsoon — can I get the same?", a: "Be very cautious of 'storm chasers' who promise free roofs or offer to waive your deductible. Deductible waiver is insurance fraud in Arizona. Whether damage is covered is determined by your policy and insurer, not by a contractor." },
       ],
     ],
   },
@@ -518,7 +518,7 @@ export const cityFaqSets: Array<Array<{ q: string; a: string }>> = [
     { q: "Does extreme Arizona heat void roofing warranties?", a: "No — major manufacturers design products specifically for high-temperature climates and their warranties account for desert conditions. What can void warranties is improper installation, inadequate ventilation, or use of products not rated for high-temperature environments. We always specify materials appropriate for Arizona." },
     { q: "How long does a typical roof last in the Phoenix area?", a: "Concrete tile lasts 30–50+ years (underlayment may need replacement earlier). Architectural shingles last 20–25 years in Arizona conditions. Metal roofing lasts 40–70 years. Flat roofing systems last 20–30 years. Proper installation and periodic maintenance extend these estimates." },
     { q: "Do you offer financing for roofing projects?", a: "Yes — we work with financing partners to offer payment plans that fit your budget. Options range from short-term no-interest plans to longer-term installment financing. Ask us about current financing offers when you call for your free estimate." },
-    { q: "Can you help with my insurance claim?", a: "Absolutely. XRP Roofing provides comprehensive storm damage documentation including photographs, written damage reports, and detailed repair estimates suitable for insurance submission. We work with all major carriers and can meet with your adjuster on-site." },
+    { q: "Do you document storm damage?", a: "Yes. We inspect the roof, photograph and measure the damage, and prepare a written repair estimate you may share with your insurer. If your adjuster inspects the roof, we can be on-site to walk through the documented damage. We do not negotiate or interpret insurance coverage." },
     { q: "What is the best time of year to replace a roof in Arizona?", a: "Fall and spring are ideal — cooler temperatures make installation safer for workers and reduce the thermal stress on materials during installation. However, we complete roofing projects year-round and take precautions in extreme summer heat to protect both our crews and materials." },
   ],
   [
@@ -559,7 +559,7 @@ export function cityPageContent(city: City): CityPageContent {
     [
       { title: `Tile Re-Roof in ${city.neighborhoods[0] || city.name}`, description: `A ${city.name} homeowner contacted us after discovering active leaks following a monsoon storm. Our inspection revealed 25-year-old underlayment had failed across both south-facing slopes while the concrete tile remained largely intact. We completed full tile removal, underlayment replacement, and tile reinstallation over four days, restoring complete weatherproofing.` },
       { title: `Commercial Flat Roof Restoration in ${city.name}`, description: `A retail property in the ${city.neighborhoods[1] || "commercial"} area of ${city.name} was experiencing multiple leak points across its aging built-up roof. Our assessment confirmed the deck was sound and dry, making it an ideal coating candidate. We applied a full silicone coating system with reinforced seams, extending the roof's life by an estimated 15+ years at a fraction of replacement cost.` },
-      { title: `Emergency Storm Repair in ${city.name}`, description: `A ${city.name} family called us after a monsoon storm displaced a section of roofing on their home near the ${city.neighborhoods[2] || "north"} area. We arrived the same day, installed temporary weatherproofing, documented the damage for their insurance claim, and completed permanent repairs within the week. The entire process was covered under their homeowner's policy.` },
+      { title: `Emergency Storm Repair in ${city.name}`, description: `A ${city.name} family called us after a monsoon storm displaced a section of roofing on their home near the ${city.neighborhoods[2] || "north"} area. We arrived the same day, installed temporary weatherproofing, documented the damage with photos, and completed permanent repairs within the week. The entire process was covered under their homeowner's policy.` },
     ],
     [
       { title: `Shingle Replacement near ${city.neighborhoods[0] || city.name}`, description: `After a ${city.name} homeowner noticed extensive granule loss and blistering on their 18-year-old asphalt shingle roof, we recommended full replacement. We installed 30-year architectural shingles rated for high-temperature climates and upgraded the attic ventilation — a critical step that would have reduced the new roof's lifespan if left unaddressed.` },
@@ -643,7 +643,7 @@ export function cityServiceContent(city: City, service: Service): CityServiceCon
     : [
         { q: `How do I know if I need ${svc.shortName} in ${city.name}?`, a: `Signs include visible material damage, active leaks, or a roof past its rated Arizona lifespan. A free professional inspection from XRP Roofing will give you a clear, honest assessment.` },
         { q: `How long does ${svc.shortName} take in ${city.name}?`, a: `Timeline depends on project scope and material availability. We provide an accurate schedule during the estimate process. Most residential projects complete within one to five days.` },
-        { q: `Is ${svc.shortName} covered by homeowner's insurance in ${city.name}?`, a: `Storm-caused damage is typically covered after your deductible. Gradual wear is not. We provide documentation for insurance submission and work with all major carriers.` },
+        { q: `Is ${svc.shortName} covered by homeowner's insurance in ${city.name}?`, a: `Coverage is determined by your policy and insurer. We inspect and document damage and provide a written repair estimate you may share with your carrier.` },
         { q: `What makes XRP Roofing the right choice for ${svc.shortName} in ${city.name}?`, a: `We're locally based, licensed, insured, and experienced with ${city.name}'s specific climate and HOA requirements. Honest assessments, written estimates, backed by warranty.` },
       ];
 

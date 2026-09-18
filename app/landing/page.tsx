@@ -31,7 +31,7 @@ import { LocalBusinessSchema, ReviewSchema, ServiceSchema } from "@/components/u
 export const metadata: Metadata = {
   title: `${SITE_NAME} Landing | Free Roof Inspection`,
   description:
-    "Get a free roof inspection from XRP Roofing. Fast roofing repairs, replacements, storm restoration, commercial roofing, and insurance claim assistance across Arizona.",
+    "Get a free roof inspection from XRP Roofing. Fast roofing repairs, replacements, storm restoration, commercial roofing, and storm damage documentation across Arizona.",
   alternates: { canonical: `${SITE_URL}/landing` },
   robots: { index: false, follow: true },
   openGraph: {
@@ -45,14 +45,14 @@ const stats = [
   { value: "500+", label: "Projects Completed", icon: Trophy },
   { value: "Same-Day", label: "Response Available", icon: Clock3 },
   { value: "Licensed", label: "& Fully Insured", icon: ShieldCheck },
-  { value: "Claims", label: "Assistance Included", icon: FileCheck2 },
+  { value: "Photos", label: "Documentation Included", icon: FileCheck2 },
 ];
 
 const services = [
   { title: "Roof Repair", description: "Stop leaks fast and prevent minor roof issues from becoming expensive property damage.", icon: Wrench, href: "/services/roof-repair" },
   { title: "Roof Replacement", description: "Upgrade your roof with durable materials, clean installation, and reliable project timelines.", icon: Home, href: "/services/roof-replacement" },
   { title: "Storm Damage Restoration", description: "Get rapid help after wind, hail, monsoon rain, and severe Arizona storm events.", icon: Zap, href: "/services/storm-damage-roofing" },
-  { title: "Insurance Claim Assistance", description: "Receive clear damage documentation and support through the claim process.", icon: ClipboardCheck, href: "/services/storm-damage-roofing" },
+  { title: "Storm Damage Documentation", description: "Receive roof-level photos, measurements, and a written repair estimate you can share with your insurer.", icon: ClipboardCheck, href: "/services/storm-damage-roofing" },
   { title: "Commercial Roofing", description: "Protect offices, retail properties, multifamily buildings, and managed assets.", icon: Building2, href: "/services/commercial-roofing" },
 ];
 
@@ -108,7 +108,7 @@ export default function LandingPage() {
       <ServiceSchema
         serviceName="Free Roof Inspection"
         serviceSlug="free-roof-inspection"
-        description="Free roof inspections for Arizona homeowners and property managers, including roof repair, replacement, storm damage, commercial roofing, and insurance claim support."
+        description="Free roof inspections for Arizona homeowners and property managers, including roof repair, replacement, storm damage, commercial roofing, and storm damage documentation."
         pagePath="/landing"
       />
       <ReviewSchema authorName={testimonials[0].name} reviewBody={testimonials[0].review} />
