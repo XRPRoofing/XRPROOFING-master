@@ -925,7 +925,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "How Often Should an Arizona Foam Roof Be Inspected?",
-        body: "Twice a year is a reasonable baseline for a foam roof in the Phoenix metro, with additional inspections triggered by weather. Inspect before monsoon season so that cracked coating, open detail work, and blocked drains and scuppers are addressed while the roof is dry, and again after monsoon season to catch what the storms did — wind damage, impact punctures, debris left in low areas, and newly opened blisters. Any significant wind or hail event deserves its own look regardless of the calendar, and the same goes for anytime work has been performed on rooftop equipment, because HVAC service traffic is one of the most common sources of foam roof damage. A useful inspection covers the coating condition and thickness, any areas of exposed foam, adhesion and soft spots underfoot, drains and scuppers, all penetrations and equipment curbs, parapet and wall terminations, standing water patterns, and the condition of every previous repair, with photographs organized by location so conditions can be tracked over time rather than re-litigated each visit. That photo record is what makes a recoat decision straightforward — and, if a storm caused the damage, it is also what supports an insurance claim.",
+        body: "Twice a year is a reasonable baseline for a foam roof in the Phoenix metro, with additional inspections triggered by weather. Inspect before monsoon season so that cracked coating, open detail work, and blocked drains and scuppers are addressed while the roof is dry, and again after monsoon season to catch what the storms did — wind damage, impact punctures, debris left in low areas, and newly opened blisters. Any significant wind or hail event deserves its own look regardless of the calendar, and the same goes for anytime work has been performed on rooftop equipment, because HVAC service traffic is one of the most common sources of foam roof damage. A useful inspection covers the coating condition and thickness, any areas of exposed foam, adhesion and soft spots underfoot, drains and scuppers, all penetrations and equipment curbs, parapet and wall terminations, standing water patterns, and the condition of every previous repair, with photographs organized by location so conditions can be tracked over time rather than re-litigated each visit. That photo record is what makes a recoat decision straightforward — and, if a storm caused the damage, it is also a record you may share with your insurer.",
       },
       {
         heading: "When Does a Foam Roof Need to Be Recoated?",
@@ -981,7 +981,7 @@ const allPosts: Record<string, BlogPost> = {
     date: "2026-08-25",
     readTime: "8 min read",
     category: "Storm Damage",
-    metaDescription: "Post monsoon roof inspection in Phoenix: how hidden roof damage stays invisible for weeks, a homeowner checklist, what tile, shingle and foam roofs fail at, and how documentation supports an insurance claim.",
+    metaDescription: "Post monsoon roof inspection in Phoenix: how hidden roof damage stays invisible for weeks, a homeowner checklist, what tile, shingle and foam roofs fail at, and how photo documentation records storm damage.",
     sections: [
       {
         heading: "Why Monsoon Damage Stays Hidden for Weeks",
@@ -1106,7 +1106,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "What Emergency Roof Repair Usually Includes",
-        body: "Emergency service usually starts with tarp installation, emergency sealant, temporary membrane patches, loose material removal, or securing wind-lifted areas. Permanent repair is scheduled after the roof is stable and materials are confirmed. XRP Roofing documents the emergency condition with photos and written notes so homeowners have a record for insurance review.",
+        body: "Emergency service usually starts with tarp installation, emergency sealant, temporary membrane patches, loose material removal, or securing wind-lifted areas. Permanent repair is scheduled after the roof is stable and materials are confirmed. XRP Roofing documents the emergency condition with photos and written notes so homeowners have a dated record of the roof's condition.",
       },
       {
         heading: "Insurance Documentation Matters",
@@ -1204,7 +1204,7 @@ const allPosts: Record<string, BlogPost> = {
     faqs: [
       { q: "Do I need a storm damage roof inspection after every monsoon?", a: "Not after every storm, but you should schedule one after high winds, hail, visible debris impact, new leaks, missing materials, or if neighbors are reporting roof damage." },
       { q: "Can hail damage be invisible from the ground?", a: "Yes. Shingle bruising, granule displacement, cracked tile edges, and soft metal dents usually require roof-level inspection to confirm." },
-      { q: "Will a roofer meet my insurance adjuster?", a: "If your adjuster inspects the roof, XRP Roofing can be on-site to walk through the documented physical damage and repair requirements." },
+      { q: "Will a roofer meet my insurance adjuster?", a: "With your permission, if your adjuster inspects the roof, XRP Roofing can be on-site to walk through the documented physical damage and repair requirements." },
     ],
     relatedServices: [
       { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
@@ -1539,7 +1539,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Step 3: The Adjuster Visit",
-        body: "If your carrier sends an adjuster to inspect the roof, XRP Roofing can be on-site to point out the physical damage we documented and answer questions about repair requirements.",
+        body: "With your permission, if your carrier sends an adjuster to inspect the roof, XRP Roofing can be on-site to point out the physical damage we documented and answer questions about repair requirements.",
       },
       {
         heading: "Step 4: Additional Damage Found During Repairs",

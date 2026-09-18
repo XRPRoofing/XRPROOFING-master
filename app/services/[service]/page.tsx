@@ -21,7 +21,7 @@ const ctrMetadata: Record<string, { title: string; description: string }> = {
   },
   "emergency-roof-repair": {
     title: `Emergency Roof Repair Phoenix | Active Leak Help | ${SITE_NAME}`,
-    description: "Emergency roof repair in Phoenix for active leaks, monsoon damage, tarping, temporary weatherproofing, and insurance-ready documentation. Call now.",
+    description: "Emergency roof repair in Phoenix for active leaks, monsoon damage, tarping, temporary weatherproofing, and photo documentation. Call now.",
   },
   "storm-damage-roofing": {
     title: `Storm Damage Roof Inspection Phoenix, AZ | ${SITE_NAME}`,
@@ -244,9 +244,9 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
   "emergency-roof-repair": {
     intro: "An active roof leak in Phoenix can cause thousands of dollars in interior damage within hours. XRP Roofing provides emergency roof repair response throughout the Phoenix metro — weatherproofing your property fast and completing permanent repairs as quickly as possible.",
     body: [
-      "Emergency roof situations in Phoenix most commonly follow monsoon storms — wind-displaced tiles or shingles, separated flashing, fallen debris, or sudden structural failure. The priority in every emergency is getting the building weatherproofed quickly to prevent water from reaching ceilings, insulation, drywall, and flooring. Our emergency response process starts with immediate tarp installation or emergency sealing, followed by thorough documentation of all damage for insurance purposes.",
+      "Emergency roof situations in Phoenix most commonly follow monsoon storms — wind-displaced tiles or shingles, separated flashing, fallen debris, or sudden structural failure. The priority in every emergency is getting the building weatherproofed quickly to prevent water from reaching ceilings, insulation, drywall, and flooring. Our emergency response process starts with immediate tarp installation or emergency sealing, followed by thorough photo documentation of all damage for your records.",
       "We respond to emergency calls as quickly as possible and prioritize active leak situations above standard scheduling. Our crews carry emergency materials including heavy-duty tarps, emergency sealants that cure in wet conditions, peel-and-stick membrane, and OSB panels for structural gaps. Most emergency weatherproofing is completed within the day; permanent repairs typically follow within three to five business days depending on material availability.",
-      "Our emergency response documentation — photographs, written damage assessment, and repair description — documents the roof's condition at the time of the emergency. If your adjuster inspects the roof, we can be on-site to point out the physical damage we documented. If additional damage is discovered during repairs, we document it and update our repair estimate.",
+      "Our emergency response documentation — photographs, written damage assessment, and repair description — documents the roof's condition at the time of the emergency. With your permission, if your adjuster inspects the roof, we can be on-site to point out the physical damage we documented. If additional damage is discovered during repairs, we document it and update our repair estimate.",
     ],
     whyChoose: [
       "Priority response for active leak situations throughout Phoenix metro",
@@ -260,7 +260,7 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
   "storm-damage-roofing": {
     intro: "Arizona's monsoon season delivers some of the most intense storm events in North America — high winds, large hail, flash flooding, and airborne debris that test every component of your roofing system. XRP Roofing provides complete storm damage assessment, documentation, and repair throughout the Phoenix metro.",
     body: [
-      "Storm damage assessment requires getting on the roof — not just looking from the ground. Hail damage on shingles often appears as random impact marks that cause granule displacement, leaving exposed asphalt vulnerable to rapid UV degradation. Wind damage frequently displaces tiles or shingles in ways that look minor from the street but create significant waterproofing vulnerabilities. Our inspection documents every damage point with photographs and a written report formatted for insurance submission.",
+      "Storm damage assessment requires getting on the roof — not just looking from the ground. Hail damage on shingles often appears as random impact marks that cause granule displacement, leaving exposed asphalt vulnerable to rapid UV degradation. Wind damage frequently displaces tiles or shingles in ways that look minor from the street but create significant waterproofing vulnerabilities. Our inspection documents every damage point with photographs and a written report you may share with your insurer.",
       "A roof-level inspection with photos and measurements gives you a clear, documented record of the roof's condition. You may share our written findings and repair estimate with your insurer; whether and how to file a claim is your decision and your carrier's determination.",
       "For properties where storm damage requires full replacement, we manage the entire construction process — material selection, permitting, installation, and final inspection. We provide itemized construction estimates and, if additional damage is uncovered during work, we document it and provide an updated estimate.",
     ],
