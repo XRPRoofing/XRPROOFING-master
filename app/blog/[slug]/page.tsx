@@ -1194,17 +1194,17 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Why Inspection Timing Matters",
-        body: "The best time to inspect is shortly after the storm, before temporary drying hides evidence and before another rain event expands the damage. Fast documentation creates a clearer timeline for insurance review and helps prevent small vulnerabilities from becoming interior damage.",
+        body: "The best time to inspect is shortly after the storm, before temporary drying hides evidence and before another rain event expands the damage. Prompt photo documentation creates a clear, dated record of the roof's condition and helps prevent small vulnerabilities from becoming interior damage.",
       },
       {
-        heading: "Before You Contact Your Insurer",
-        body: "Have the roof inspected first so you have documented findings to discuss with your insurer.",
+        heading: "Document Promptly and Follow Your Policy's Notice Requirements",
+        body: "Have the roof inspected and photographed as soon as it is safe to do so. Whether to file a claim, and how coverage applies, is a decision for you and your insurance adviser based on your policy — XRP Roofing's role is to inspect the physical damage, document it, and provide a written repair or replacement estimate. Do not delay any notice your policy requires while waiting for an inspection.",
       },
     ],
     faqs: [
       { q: "Do I need a storm damage roof inspection after every monsoon?", a: "Not after every storm, but you should schedule one after high winds, hail, visible debris impact, new leaks, missing materials, or if neighbors are reporting roof damage." },
       { q: "Can hail damage be invisible from the ground?", a: "Yes. Shingle bruising, granule displacement, cracked tile edges, and soft metal dents usually require roof-level inspection to confirm." },
-      { q: "Will a roofer meet my insurance adjuster?", a: "XRP Roofing can meet adjusters on-site and walk through documented roof damage so all relevant conditions are reviewed." },
+      { q: "Will a roofer meet my insurance adjuster?", a: "If your adjuster inspects the roof, XRP Roofing can be on-site to walk through the documented physical damage and repair requirements." },
     ],
     relatedServices: [
       { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
@@ -1303,25 +1303,25 @@ const allPosts: Record<string, BlogPost> = {
   "insurance-roof-claim-guide-arizona": {
     slug: "insurance-roof-claim-guide-arizona",
     title: "Insurance Roof Claim Guide for Arizona Homeowners",
-    excerpt: "A practical guide to roof insurance claims in Arizona: inspections, documentation, adjuster visits, deductibles, and questions to ask your insurer.",
+    excerpt: "A practical guide for Arizona homeowners: roof inspections, storm damage documentation, adjuster visits, and questions to ask your insurance adviser.",
     date: "2025-05-08",
     readTime: "9 min read",
     category: "Insurance",
-    metaDescription: "Insurance roof claim guide for Arizona homeowners: storm damage inspections, documentation, adjuster visits, deductibles, and questions to ask your insurer.",
+    metaDescription: "Insurance roof claim guide for Arizona homeowners: storm damage inspections, photo documentation, repair estimates, adjuster visits, and questions to ask your insurance adviser.",
     sections: [
       {
         heading: "Start With Inspection and Documentation",
-        body: "The strongest Arizona roof claims begin with a documented contractor inspection. Photos, slope notes, damage descriptions, and repair recommendations give the insurance carrier a clearer basis for review than a phone description alone. This is especially important after monsoon wind, hail, or debris impact.",
+        body: "After monsoon wind, hail, or debris impact, start with a documented roof inspection. XRP Roofing assesses the physical roof damage and provides photos, slope notes, damage descriptions, and a written construction estimate. You may share those findings with your insurer; how they are used in a claim is between you and your insurance adviser.",
       },
       {
         heading: "The Roof Claim Process",
         listItems: [
           "Schedule a contractor inspection and collect photo documentation",
-          "Review whether damage appears storm-related or age-related",
-          "Review your policy and deductible with your agent before deciding whether to file",
-          "File the claim with date of loss, photos, and contractor report",
+          "Receive written inspection findings describing the observed physical damage",
+          "Review your policy, deductible, and notice requirements with your insurance adviser",
+          "If you file, provide your insurer the date of loss, photos, and inspection report",
           "Meet the adjuster on-site when possible",
-          "Compare the carrier's estimate with your contractor's repair estimate and ask your insurer about any differences",
+          "Compare the carrier's estimate with your contractor's construction estimate and ask your insurer about any differences",
         ],
       },
       {
@@ -1329,12 +1329,12 @@ const allPosts: Record<string, BlogPost> = {
         body: "Arizona homeowners should be cautious of anyone promising a free roof or deductible waiver. Your deductible is part of the policy contract. A legitimate contractor focuses on accurate documentation, proper scope, and compliant installation — not illegal shortcuts that can create problems for the homeowner.",
       },
       {
-        heading: "When Not to File a Claim",
-        body: "If the repair is clearly below deductible or caused by age-related wear, filing may not make sense. XRP Roofing documents the observed damage and separates storm damage from ordinary wear in its written findings; whether to file is your decision.",
+        heading: "Who Decides Whether to File",
+        body: "XRP Roofing does not determine whether a claim is justified or what your policy covers. We inspect the roof, document the observed physical damage with photos and measurements, and provide a construction estimate. Whether to file a claim, and how your coverage applies, is a decision for you and your insurance adviser.",
       },
     ],
     faqs: [
-      { q: "Should I get a roof inspection before filing an insurance claim?", a: "Yes. A documented contractor inspection gives you a documented record of the roof's condition to review with your insurer." },
+      { q: "Should I get a roof inspection before filing an insurance claim?", a: "A documented roof inspection gives you photos, written findings, and a repair estimate describing the roof's physical condition. Whether to file is your decision, made with your insurance adviser; check your policy's notice requirements and do not delay them." },
       { q: "What is a supplemental roof claim?", a: "A supplement is an additional request to the carrier when legitimate scope items were missed in the initial estimate, such as flashing, code items, underlayment, or hidden damage discovered during work." },
       { q: "Can a roofer waive my deductible in Arizona?", a: "No. Deductible waiver can be considered insurance fraud. Be cautious of contractors promising free roofs or rebate schemes." },
     ],
@@ -1518,25 +1518,23 @@ const allPosts: Record<string, BlogPost> = {
   "understanding-arizona-roof-insurance-claims": {
     slug: "understanding-arizona-roof-insurance-claims",
     title: "A Homeowner's Guide to Roof Insurance Claims in Arizona",
-    excerpt: "Navigating a roofing insurance claim after a monsoon or hail event can be overwhelming. This guide explains what to expect — from roof inspection and documentation to repairs.",
+    excerpt: "After a monsoon or hail event, know what to expect from your roofing contractor — from roof inspection and photo documentation to repair estimates and repairs.",
     date: "2025-02-20",
     readTime: "9 min read",
     category: "Insurance",
-    metaDescription: "How to navigate a roof insurance claim in Arizona after monsoon or hail damage. Step-by-step guide for Phoenix homeowners from XRP Roofing.",
+    metaDescription: "What Arizona homeowners can expect from a roofing contractor after monsoon or hail damage: inspection, photo documentation, repair estimates, and repairs. From XRP Roofing.",
     sections: [
       {
-        heading: "Step 1: Get a Contractor Inspection Before Calling Your Insurer",
-        body: "Having the roof inspected and documented promptly gives you an accurate record of the roof's condition that you may share with your carrier. XRP Roofing provides roof inspections with photo documentation at no charge.",
+        heading: "Step 1: Get the Roof Inspected and Documented Promptly",
+        body: "Having the roof inspected and photographed promptly gives you an accurate, dated record of its physical condition that you may share with your insurer. XRP Roofing provides roof inspections with photo documentation and a written repair estimate at no charge. Check your policy's notice requirements and do not delay them while arranging an inspection.",
       },
       {
-        heading: "Step 2: Understanding What Is and Isn't Covered",
+        heading: "Step 2: Coverage Depends on Your Policy",
         listItems: [
-          "Covered: Storm damage from hail, high wind, fallen trees, and other sudden weather events",
-          "Covered: Damage resulting from a covered event (interior water damage from storm-caused roof failure)",
-          "Not covered: Gradual wear, age-related deterioration, deferred maintenance",
-          "Not covered: Pre-existing conditions that were not caused by the claimed event",
-          "Gray area: Damage to a roof that had deferred maintenance — carriers may apply partial coverage or depreciation",
-          "General information only — coverage is determined by your policy and insurer",
+          "Coverage is determined by your policy and your insurer — XRP Roofing does not interpret coverage",
+          "Policies commonly distinguish sudden storm damage from gradual wear, aging, or deferred maintenance; your policy defines how",
+          "Our written findings describe the physical damage we observed and its apparent cause so you have accurate information to review with your insurance adviser",
+          "Ask your insurer or adviser about deductibles, depreciation, and any notice or filing deadlines that apply to you",
         ],
       },
       {
@@ -1544,14 +1542,14 @@ const allPosts: Record<string, BlogPost> = {
         body: "If your carrier sends an adjuster to inspect the roof, XRP Roofing can be on-site to point out the physical damage we documented and answer questions about repair requirements.",
       },
       {
-        heading: "Step 4: Supplemental Claims",
-        body: "If additional damage (underlayment, decking, flashing) is discovered once work begins, XRP Roofing documents it with photos and provides an updated repair estimate. How that is handled with your insurer is between you and your carrier.",
+        heading: "Step 4: Additional Damage Found During Repairs",
+        body: "If additional damage (underlayment, decking, flashing) is discovered once work begins, XRP Roofing documents it with photos and provides a revised construction estimate. How that is handled with your insurer is between you and your carrier.",
       },
     ],
     faqs: [
-      { q: "Should I call my insurance company or a roofer first after storm damage?", a: "Having the roof inspected and documented promptly gives you an accurate record of its condition before repairs change it. You can then decide with your insurer how to proceed." },
-      { q: "How long do I have to file a storm damage claim in Arizona?", a: "Arizona homeowner's policies typically have a 1–2 year window for storm damage claims. Check your specific policy. Document damage as soon as possible after an event regardless of when you plan to file." },
-      { q: "Will my insurance rates go up if I file a roof claim?", a: "Possibly — filing a claim can affect your renewal rates. For small repairs, it may be worth weighing the claim value against potential premium increases. For major storm damage requiring full replacement, filing almost always makes financial sense given the cost offset." },
+      { q: "Should I call my insurance company or a roofer first after storm damage?", a: "Do both promptly. Follow any notice requirements in your policy, and have the roof inspected and photographed before repairs change its condition. XRP Roofing provides the photos, written findings, and repair estimate; decisions about the claim are between you and your insurer." },
+      { q: "How long do I have to file a storm damage claim in Arizona?", a: "Filing and notice deadlines vary by policy. Check your policy's notice and filing requirements or ask your insurance adviser, and act promptly. Document the damage as soon as it is safe to do so." },
+      { q: "Will my insurance rates go up if I file a roof claim?", a: "Filing a claim can affect renewal rates depending on your insurer and policy. That is a question for your insurance adviser. XRP Roofing's role is to document the physical roof damage and provide a repair estimate you can use in that conversation." },
     ],
     relatedServices: [
       { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
