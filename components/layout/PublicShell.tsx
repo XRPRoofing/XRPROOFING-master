@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import FloatingBookingWidget from "@/components/layout/FloatingBookingWidget";
 
 const STANDALONE_PREFIXES = ["/crm", "/proposal", "/invoice", "/login", "/signup", "/forgot-password", "/reset-password"];
 
@@ -25,6 +26,7 @@ export default function PublicShell({ children, header, footer, mobileCta }: Pub
       <main>{children}</main>
       {footer}
       {mobileCta}
+      <FloatingBookingWidget />
     </>
   );
 }

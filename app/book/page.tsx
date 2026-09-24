@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
-import { OG_IMAGE, PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { BOOKING_WIDGET_URL, OG_IMAGE, PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
-
-const BOOKING_WIDGET_URL =
-  "https://booking.zuperpro.com/?region=us-west-1c&widget_uid=580150e4-a108-49a5-aa11-fdd1025d327c";
 
 const DESCRIPTION =
   "Book your free roof inspection online with XRP Roofing. Pick a date and time that works for you and we'll confirm your appointment. Serving the entire Phoenix metro.";

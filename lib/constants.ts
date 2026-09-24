@@ -2,6 +2,8 @@ export const SITE_NAME = "XRP Roofing";
 export const SITE_URL = "https://www.xrproofing.com";
 export const PHONE = "(623) 223-8856";
 export const PHONE_HREF = "tel:+16232238856";
+export const BOOKING_WIDGET_URL =
+  "https://booking.zuperpro.com/?region=us-west-1c&widget_uid=580150e4-a108-49a5-aa11-fdd1025d327c";
 export const EMAIL = "info@xrproofing.com";
 export const ADDRESS = "2843 W McDowell Rd, Phoenix, AZ 85009";
 export const SERVICE_AREA = "Phoenix Metro and 100-mile radius";
