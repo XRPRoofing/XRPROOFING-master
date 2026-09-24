@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Calendar, X } from "lucide-react";
 import { BOOKING_WIDGET_URL } from "@/lib/constants";
@@ -8,17 +8,43 @@ import { BOOKING_WIDGET_URL } from "@/lib/constants";
 export default function FloatingBookingWidget() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
+    closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        "button, iframe, [href], [tabindex]:not([tabindex='-1'])"
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      triggerRef.current?.focus();
     };
   }, [open]);
 
@@ -27,6 +53,7 @@ export default function FloatingBookingWidget() {
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Book a free roof inspection online"
@@ -45,12 +72,14 @@ export default function FloatingBookingWidget() {
           aria-label="Book a free roof inspection"
         >
           <div
+            ref={dialogRef}
             className="relative bg-white w-full sm:max-w-3xl h-[92vh] sm:h-[85vh] rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50">
               <h2 className="font-bold text-gray-900 text-sm sm:text-base">Book Your Free Roof Inspection</h2>
               <button
+                ref={closeRef}
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close booking widget"
