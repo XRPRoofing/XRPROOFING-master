@@ -6,22 +6,21 @@ import { Calendar, X } from "lucide-react";
 import { BOOKING_WIDGET_URL } from "@/lib/constants";
 
 export default function FloatingBookingWidget() {
-  const [open, setOpen] = useState(false);
+  const [openedOn, setOpenedOn] = useState<string | null>(null);
   const pathname = usePathname();
+  const open = openedOn !== null && openedOn === pathname;
+  const setOpen = (next: boolean) => setOpenedOn(next ? pathname : null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     if (!open) return;
+    const trigger = triggerRef.current;
     closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setOpen(false);
+        setOpenedOn(null);
         return;
       }
       if (e.key !== "Tab" || !dialogRef.current) return;
@@ -44,7 +43,7 @@ export default function FloatingBookingWidget() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
-      triggerRef.current?.focus();
+      trigger?.focus();
     };
   }, [open]);
 
