@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "september-30-deadline-final-roof-inspection-phoenix",
     "tile-roof-repair-lift-relay-or-replace-arizona",
     "shingles-vs-tile-after-monsoon-season-phoenix",
     "standing-seam-vs-corrugated-metal-roofing-arizona",
