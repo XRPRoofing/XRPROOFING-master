@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { OG_IMAGE, PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
 import LeadForm from "@/components/ui/LeadForm";
@@ -55,6 +56,12 @@ export default function ContactPage() {
                   Describe your roofing needs and we&apos;ll contact you within one business hour to schedule your free, no-obligation inspection.
                 </p>
                 <LeadForm />
+                <p className="text-sm text-gray-600 mt-6 text-center">
+                  Prefer to pick a time yourself?{" "}
+                  <Link href="/book" className="text-orange-700 font-semibold hover:text-orange-800">
+                    Book your inspection online →
+                  </Link>
+                </p>
               </div>
             </div>
 
