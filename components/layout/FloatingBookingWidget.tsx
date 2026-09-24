@@ -56,8 +56,9 @@ export default function FloatingBookingWidget() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Book a free roof inspection online"
-        className="fixed z-50 right-4 bottom-20 lg:bottom-6 lg:right-6 flex items-center gap-2 bg-[#0f2156] hover:bg-[#1a3a8f] text-white font-bold text-sm px-4 py-3 rounded-full shadow-xl transition-colors"
+        className="fixed z-50 right-4 bottom-20 lg:bottom-6 lg:right-6 flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-bold text-base px-5 py-3.5 rounded-full ring-4 ring-white shadow-[0_8px_30px_rgba(234,88,12,0.55)] hover:scale-105 transition-all"
       >
+        <span className="absolute inset-0 rounded-full bg-orange-500 opacity-60 animate-ping motion-reduce:hidden -z-10" aria-hidden="true" />
         <Calendar className="w-5 h-5" />
         <span className="hidden sm:inline">Book Online</span>
       </button>
