@@ -109,6 +109,9 @@ export default function Header() {
             <Link href="/contact" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
               Contact
             </Link>
+            <Link href="/book" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
+              Book Online
+            </Link>
           </nav>
 
           {/* CTA */}
@@ -172,6 +175,7 @@ export default function Header() {
               { href: "/about", label: "About" },
               { href: "/blog", label: "Blog" },
               { href: "/contact", label: "Contact" },
+              { href: "/book", label: "Book Online" },
             ].map((item) => (
               <Link
                 key={item.href}
