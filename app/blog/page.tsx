@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "september-30-deadline-final-roof-inspection-phoenix",
+    title: "The September 30 Deadline: Why Phoenix-Metro Homeowners Need One Final Roof Inspection Before Monsoon Season Officially Ends — and What Happens If You Wait Until October",
+    excerpt: "Arizona's monsoon season officially ends September 30. The roof may look fine from the driveway, but residual moisture, loosened flashings, and the coming temperature drop create a short, high-risk window that closes fast. Here is why the final week matters, what a proper end-of-season inspection covers, and what waiting until October actually costs.",
+    date: "2026-09-25",
+    readTime: "11 min read",
+    category: "Maintenance",
+  },
+  {
     slug: "tile-roof-repair-lift-relay-or-replace-arizona",
     title: "Repair, Lift & Relay, or Replace? How Arizona Homeowners Should Decide What Their Tile Roof Really Needs",
     excerpt: "From the street, an Arizona tile roof can look perfectly fine. But the tile is only part of the story — underneath it is the underlayment, flashings, valleys, and decking that actually keep water out. Here is how to tell whether your roof needs a localized repair, a tile lift-and-relay with new underlayment, or a complete replacement.",
