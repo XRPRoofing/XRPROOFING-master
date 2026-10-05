@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "how-often-roof-inspection-phoenix",
+    title: "How Often Should You Have Your Roof Inspected in Phoenix? A Homeowner's Guide",
+    excerpt: "Your roof protects your home from Arizona's intense heat, monsoon storms, strong winds, and sudden weather changes. But because many roofing problems start small, homeowners may not notice damage until it becomes a costly repair. Here is how often Phoenix homeowners should have the roof inspected, what a proper inspection includes, and when to call sooner.",
+    date: "2026-10-05",
+    readTime: "8 min read",
+    category: "Maintenance",
+  },
+  {
     slug: "september-30-deadline-final-roof-inspection-phoenix",
     title: "The September 30 Deadline: Why Phoenix-Metro Homeowners Need One Final Roof Inspection Before Monsoon Season Officially Ends — and What Happens If You Wait Until October",
     excerpt: "Arizona's monsoon season officially ends September 30. The roof may look fine from the driveway, but residual moisture, loosened flashings, and the coming temperature drop create a short, high-risk window that closes fast. Here is why the final week matters, what a proper end-of-season inspection covers, and what waiting until October actually costs.",
