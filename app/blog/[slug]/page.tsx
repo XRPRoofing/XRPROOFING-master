@@ -9,6 +9,132 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "how-often-roof-inspection-phoenix": {
+    slug: "how-often-roof-inspection-phoenix",
+    title: "How Often Should You Have Your Roof Inspected in Phoenix? A Homeowner's Guide",
+    excerpt: "Your roof protects your home from Arizona's intense heat, monsoon storms, strong winds, and sudden weather changes. But because many roofing problems start small, homeowners may not notice damage until it becomes a costly repair. Here is how often Phoenix homeowners should have the roof inspected, what a proper inspection includes, and when to call sooner.",
+    date: "2026-10-05",
+    readTime: "8 min read",
+    category: "Maintenance",
+    metaDescription: "How often should you have your roof inspected in Phoenix? Learn the recommended schedule for Arizona homeowners, what a professional inspection includes, and the warning signs that mean you should not wait.",
+    sections: [
+      {
+        heading: "Why Roof Inspections Matter in Phoenix",
+        body: "Your roof protects your home from Arizona's intense heat, monsoon storms, strong winds, and sudden weather changes. But because many roofing problems start small, homeowners may not notice damage until it becomes a costly repair. So, how often should you have your roof inspected in Phoenix? For most homeowners, having a professional roof inspection at least once a year is a smart part of routine home maintenance. Additional inspections are recommended after severe weather, before buying or selling a home, or whenever you notice signs of roof damage. Phoenix roofs experience conditions that can accelerate wear and tear. Long periods of intense sunlight and high temperatures can gradually affect roofing materials, while monsoon storms can bring heavy rain, strong winds, and debris. Even when your roof looks fine from the ground, there may be problems that aren't immediately visible. A professional inspection can help identify:",
+        listItems: [
+          "Damaged or missing shingles",
+          "Cracked or broken tiles",
+          "Loose roofing materials",
+          "Damaged flashing",
+          "Deteriorated sealants",
+          "Signs of water intrusion",
+          "Problems around vents, chimneys, and other roof penetrations",
+          "Areas where water may collect",
+          "Early signs of structural damage",
+        ],
+      },
+      {
+        heading: "1. Schedule an Inspection Once a Year",
+        body: "Finding these issues early can help prevent a small repair from becoming a major roofing problem. An annual roof inspection is a good general guideline for homeowners in Phoenix. Regular inspections allow a roofing professional to identify normal wear and potential problems before they become more serious. You don't necessarily need a [roof replacement](/services/roof-replacement) simply because your roof is aging. An inspection can help determine whether your roof needs maintenance, [repairs](/services/roof-repair), or continued monitoring.",
+      },
+      {
+        heading: "2. Inspect Your Roof After Monsoon Season",
+        body: "Arizona's monsoon season can expose your roof to heavy rain, strong winds, lightning, and flying debris. After a significant storm, it's a good idea to have your roof checked for [storm damage](/services/storm-damage-roofing) — even if you don't see an obvious leak. Storm damage isn't always visible from the ground. A professional inspection can help identify damage that may otherwise go unnoticed. For a closer look at what the season leaves behind, see our guides on [hidden roof damage after the monsoon](/blog/post-monsoon-hidden-roof-damage-arizona) and the [final end-of-season inspection](/blog/september-30-deadline-final-roof-inspection-phoenix).",
+      },
+      {
+        heading: "3. Get an Inspection If You Notice a Roof Problem",
+        body: "Don't wait for your annual inspection if you notice something unusual. Contact a roofing professional if you see:",
+        listItems: [
+          "Water stains on ceilings or walls",
+          "Missing or damaged shingles",
+          "Cracked or broken tiles",
+          "Granules collecting in gutters",
+          "Visible roof deterioration",
+          "Sagging areas",
+          "Damaged flashing",
+          "Signs of moisture in the attic",
+          "Unexpected increases in interior moisture",
+        ],
+      },
+      {
+        heading: "Why Arizona Heat Can Affect Your Roof",
+        body: "Addressing these warning signs early may help reduce repair costs and prevent additional damage. Phoenix is known for its extreme summer temperatures, and prolonged exposure to heat and sunlight can contribute to roofing deterioration over time. Repeated expansion and contraction of roofing materials can also place stress on certain components of the roof system — something we cover in depth in [how thermal expansion damages Phoenix roofs](/blog/phoenix-roof-thermal-expansion-damage). That's why regular inspections are particularly important for Arizona homes. A professional roofer can evaluate the condition of your roof and help you understand whether normal maintenance is enough or whether repairs may be needed.",
+      },
+      {
+        heading: "What Does a Professional Roof Inspection Include?",
+        body: "A thorough inspection should involve more than simply looking at the roof from the ground. Depending on the roof type and property, a roofing professional may evaluate:",
+        listItems: [
+          "Roofing materials — the inspector checks for cracked, broken, missing, loose, or deteriorated [tile](/services/tile-roofing), [shingle](/services/shingle-roofing), or other roofing materials.",
+          "Flashing — flashing helps protect vulnerable areas where the roof meets walls, chimneys, vents, and other structures. Damaged or deteriorated flashing can contribute to water intrusion.",
+          "Roof penetrations — vents, pipes, skylights, and other penetrations need proper sealing to help prevent leaks.",
+          "Drainage — water should be able to drain properly from the roof. Areas where water collects may require additional attention.",
+          "Attic and interior signs — depending on the inspection, the roofing professional may also look for evidence of moisture intrusion, staining, or other signs that a roof problem may be affecting the interior of the home.",
+        ],
+      },
+      {
+        heading: "Roof Inspection vs. Roof Replacement",
+        body: "One of the biggest misconceptions among homeowners is that an inspection automatically means a roof replacement is necessary. That's not always the case. A roof inspection is designed to determine the current condition of your roofing system. Depending on what is found, the recommendation could be:",
+        listItems: [
+          "Routine maintenance",
+          "Minor repairs",
+          "More extensive repairs",
+          "Continued monitoring",
+          "Roof replacement",
+        ],
+      },
+      {
+        heading: "Should You Inspect Your Roof Before Selling Your Home?",
+        body: "The right solution depends on the roof's age, condition, materials, damage, and overall performance. If you're planning to sell your Phoenix home, having the roof inspected beforehand can help you understand its condition before a buyer's inspection takes place. A professional inspection can help you identify potential concerns and address appropriate repairs ahead of time. It can also give you useful documentation about the condition of your roof when discussing the property with potential buyers.",
+      },
+      {
+        heading: "What Should You Do After a Storm?",
+        body: "If a major storm has passed through your area, check your property for obvious signs of damage — but don't attempt to climb onto the roof yourself. Instead:",
+        listItems: [
+          "Look for visible damage from the ground.",
+          "Check ceilings and walls for new water stains.",
+          "Look for fallen roofing materials or debris around the property.",
+          "Take photos of any visible damage.",
+          "Contact a qualified roofing professional for an inspection.",
+        ],
+      },
+      {
+        heading: "Protect Your Phoenix Home With Regular Roof Inspections",
+        body: "If you suspect storm damage, getting the roof inspected sooner rather than later can help you understand the extent of the problem. Your roof is one of the most important parts of your home, and regular inspections can help you stay ahead of expensive problems. For most Phoenix homeowners, an annual roof inspection is a good starting point, with additional inspections after significant storms or whenever you notice signs of damage. Don't wait until a small roofing issue turns into a major problem.",
+      },
+      {
+        heading: "Schedule a Free Roof Inspection With XRP Roofing",
+        body: "If you're concerned about the condition of your roof, XRP Roofing can help you understand what your roofing system needs. Whether you're dealing with storm damage, an aging roof, or simply want peace of mind, a professional inspection can help you make an informed decision about your home. We serve [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. Licensed, bonded, and insured — Arizona ROC #350898. Call (623) 223-8856 or [contact XRP Roofing today to schedule your free roof inspection](/contact).",
+      },
+    ],
+    faqs: [
+      {
+        q: "How often should I have my roof inspected in Phoenix?",
+        a: "For most homeowners, an annual professional roof inspection is a good maintenance schedule. Additional inspections may be appropriate after severe storms or when signs of damage appear.",
+      },
+      {
+        q: "Should I inspect my roof after a monsoon storm?",
+        a: "Yes. Strong winds, heavy rain, and debris can cause damage that isn't always visible from the ground. A professional inspection can help identify potential problems.",
+      },
+      {
+        q: "How do I know if my roof needs to be replaced?",
+        a: "The best way to determine whether replacement is necessary is through a professional assessment of the roof's age, condition, materials, and any existing damage.",
+      },
+      {
+        q: "Can I inspect my roof myself?",
+        a: "You can look for obvious signs of damage from the ground, but climbing onto a roof can be dangerous. A qualified roofing professional can perform a more thorough inspection safely.",
+      },
+      {
+        q: "Does a roof inspection mean I need a new roof?",
+        a: "No. An inspection may reveal that your roof only needs maintenance or repairs. Replacement is recommended only when the condition of the roofing system warrants it.",
+      },
+    ],
+    relatedServices: [
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+      { label: "Free Roof Inspection", href: "/contact" },
+    ],
+  },
   "september-30-deadline-final-roof-inspection-phoenix": {
     slug: "september-30-deadline-final-roof-inspection-phoenix",
     title: "The September 30 Deadline: Why Phoenix-Metro Homeowners Need One Final Roof Inspection Before Monsoon Season Officially Ends — and What Happens If You Wait Until October",

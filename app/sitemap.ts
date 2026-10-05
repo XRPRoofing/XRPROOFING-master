@@ -43,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "how-often-roof-inspection-phoenix",
     "september-30-deadline-final-roof-inspection-phoenix",
     "tile-roof-repair-lift-relay-or-replace-arizona",
     "shingles-vs-tile-after-monsoon-season-phoenix",
