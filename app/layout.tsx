@@ -20,12 +20,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${SITE_NAME} | Licensed Roofing Contractor in Phoenix, AZ`,
-    template: `%s | ${SITE_NAME}`,
-  },
+  title: `${SITE_NAME} | Licensed Roofing Contractor in Phoenix, AZ`,
   description:
-    "XRP Roofing is Phoenix's trusted roofing contractor. Roof repair, replacement, tile, shingle, metal, flat & commercial roofing. Licensed & insured. Free inspections.",
+    "XRP Roofing is a licensed Phoenix roofing contractor for residential and commercial roof repair, replacement, tile, shingle, foam, and storm damage restoration. Free inspections.",
   keywords: ["roofing contractor Phoenix AZ", "roof repair Phoenix", "roof replacement Arizona", "tile roofing Phoenix", "XRP Roofing"],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,

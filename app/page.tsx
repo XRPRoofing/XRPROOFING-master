@@ -16,11 +16,12 @@ import ProjectGallery from "@/components/ui/ProjectGallery";
 export const metadata: Metadata = {
   title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ | Repair, Replacement & More`,
   description:
-    "XRP Roofing is Phoenix's #1 trusted roofing contractor. Expert roof repair, replacement, tile, shingle, metal, flat & commercial roofing. Licensed & insured. Free inspections. Serving the entire Phoenix metro and 100-mile radius.",
+    "XRP Roofing is a licensed Phoenix roofing contractor for residential and commercial roof repair, roof replacement, tile, shingle, and foam roofing, and storm damage restoration. Free inspections across the Phoenix metro.",
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ`,
     description: "Phoenix's trusted roofing contractor. Free inspections. Licensed & insured. Serving 30+ cities.",
+    url: SITE_URL,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
@@ -37,7 +38,7 @@ const homepageFaqs = [
   { q: "Are you licensed and insured?", a: "Yes. XRP Roofing holds all required Arizona contractor licenses and carries comprehensive general liability and workers' compensation insurance. We provide proof of coverage before any project begins." },
   { q: "How soon can you start my roofing project?", a: "We typically schedule non-emergency work within one to two weeks of estimate approval. Emergency repairs are prioritized and can often be scheduled same-day or next day." },
   { q: "Do you provide documentation for storm damage?", a: "Yes. We inspect the roof, document damage with photos and measurements, and prepare a written repair estimate. With your permission, we can meet your adjuster on-site to explain the physical damage we documented and the repair requirements. We do not negotiate or interpret insurance coverage — decisions about your claim are between you and your insurer." },
-  { q: "What roofing materials do you work with?", a: "We install and repair all major roofing materials including concrete and clay tile, architectural asphalt shingles, standing seam metal, TPO and EPDM membranes, modified bitumen, and elastomeric and silicone roof coatings." },
+  { q: "What roofing materials do you work with?", a: "We install and repair all major roofing materials including concrete and clay tile, architectural asphalt shingles, spray polyurethane foam (SPF), standing seam metal, TPO and EPDM membranes, modified bitumen, and elastomeric and silicone roof coatings." },
 ];
 
 export default function HomePage() {
@@ -73,11 +74,11 @@ export default function HomePage() {
               Phoenix&apos;s Trusted Roofing Contractor
             </div>
             <h1 className="text-4xl lg:text-6xl font-black text-white leading-tight mb-6">
-              Phoenix&apos;s #1 Roofing Contractor —{" "}
+              Phoenix Roofing Contractor —{" "}
               <span className="text-orange-400">Licensed, Insured & Local</span>
             </h1>
             <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-              From emergency repairs to full tile replacements, XRP Roofing protects Phoenix metro homes and businesses from Arizona&apos;s brutal heat, monsoons, and storm damage. Free inspections. Written warranties. Real results.
+              From emergency repairs to full tile replacements, XRP Roofing protects Phoenix metro homes and businesses from Arizona&apos;s brutal heat, monsoons, and storm damage — backed by our team&apos;s 15 years of roofing industry experience. Free inspections. Written warranties. Real results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

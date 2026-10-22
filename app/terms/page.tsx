@@ -9,6 +9,10 @@ export const metadata: Metadata = {
     "XRP Roofing Terms & Conditions, including our SMS/text messaging program terms: program description, message frequency, rates, HELP and STOP instructions, and support contact.",
   alternates: { canonical: `${SITE_URL}/terms` },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: `Terms & Conditions | ${SITE_NAME}`,
+    url: `${SITE_URL}/terms`,
+  },
 };
 
 const EFFECTIVE_DATE = "April 16, 2026";

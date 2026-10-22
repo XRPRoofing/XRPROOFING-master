@@ -8,6 +8,10 @@ export const metadata: Metadata = {
     "XRP Roofing Privacy Policy: what data we collect, how it is used, your choices, and our SMS/text messaging data practices. We do not share or sell phone numbers or SMS opt-in data.",
   alternates: { canonical: `${SITE_URL}/privacy-policy` },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: `Privacy Policy | ${SITE_NAME}`,
+    url: `${SITE_URL}/privacy-policy`,
+  },
 };
 
 const EFFECTIVE_DATE = "April 16, 2026";

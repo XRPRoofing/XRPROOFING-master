@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import AuthForm from "@/components/crm/AuthForm";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

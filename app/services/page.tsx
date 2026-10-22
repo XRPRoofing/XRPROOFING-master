@@ -103,7 +103,7 @@ export default function ServicesPage() {
               { label: "Commercial Roofing Pricing", href: "/services/commercial-roofing" },
             ].map((item) => (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 className="bg-white border border-gray-200 hover:border-orange-300 rounded-2xl p-5 transition-colors group"
               >

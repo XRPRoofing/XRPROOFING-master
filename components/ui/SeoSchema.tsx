@@ -35,8 +35,7 @@ interface ReviewSchemaProps {
   ratingValue?: number;
 }
 
-export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaProps) {
-  const pageUrl = citySlug ? `${SITE_URL}/locations/${citySlug}` : SITE_URL;
+export function LocalBusinessSchema({ cityName }: LocalBusinessSchemaProps) {
   const areaServed = cityName
     ? {
         "@type": "City",
@@ -46,8 +45,8 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
         "@type": "GeoCircle",
         geoMidpoint: {
           "@type": "GeoCoordinates",
-          latitude: "33.4734",
-          longitude: "-112.1226",
+          latitude: "33.4656",
+          longitude: "-112.1210",
         },
         geoRadius: "160934",
       };
@@ -58,8 +57,8 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
     "@id": `${SITE_URL}/#localbusiness`,
     name: SITE_NAME,
     legalName: "AZ Pro Contractors LLC",
-    description: "XRP Roofing (AZ Pro Contractors LLC) is a licensed and insured roofing contractor serving Phoenix, AZ and the 100-mile metro radius. ROC #350898. Specializing in tile roofing, shingle, flat, foam, metal, commercial roofing, emergency repairs, and storm damage. Free inspections and written estimates.",
-    url: pageUrl,
+    description: "XRP Roofing (AZ Pro Contractors LLC) is a licensed and insured roofing contractor serving Phoenix, AZ and the 100-mile metro radius. ROC #350898. Residential and commercial roofing including tile, concrete tile, shingle, foam (SPF), and flat roofing; roof installation, roof replacement, roof repair, and storm damage restoration. Free inspections and written estimates.",
+    url: SITE_URL,
     image: `${SITE_URL}${OG_IMAGE}`,
     logo: {
       "@type": "ImageObject",
@@ -79,8 +78,8 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "33.4734",
-      longitude: "-112.1226",
+      latitude: "33.4656",
+      longitude: "-112.1210",
     },
     hasMap: GOOGLE_MAPS_URL,
     areaServed,
@@ -101,13 +100,18 @@ export function LocalBusinessSchema({ cityName, citySlug }: LocalBusinessSchemaP
       },
     ],
     sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok, GOOGLE_MAPS_URL],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5",
-      bestRating: "5",
-      worstRating: "1",
-      reviewCount: "147",
-    },
+    knowsAbout: [
+      "Residential roofing",
+      "Commercial roofing",
+      "Tile roofing",
+      "Concrete tile roofing",
+      "Shingle roofing",
+      "Foam roofing",
+      "Roof installation",
+      "Roof replacement",
+      "Roof repair",
+      "Storm damage restoration",
+    ],
   };
 
   return (
@@ -274,11 +278,6 @@ export function WebSiteSchema() {
       "@id": `${SITE_URL}/#localbusiness`,
     },
     inLanguage: "en-US",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/?s={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (
