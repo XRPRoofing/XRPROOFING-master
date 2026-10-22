@@ -10,18 +10,18 @@ import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 export const metadata: Metadata = {
   title: "About XRP Roofing | Licensed Roofing Contractor in Phoenix, AZ",
   description:
-    "Learn about XRP Roofing — Phoenix's trusted, locally owned roofing contractor. Licensed, insured, and built for Arizona's extreme climate. Serving the Phoenix metro and 100-mile radius.",
+    "Learn about XRP Roofing, a locally owned, licensed Phoenix roofing contractor whose team brings 15 years of roofing industry experience to residential and commercial roofs across the Phoenix metro.",
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: {
     title: `About XRP Roofing | Phoenix Roofing Contractor`,
-    description: "Learn about XRP Roofing — Phoenix's trusted, locally owned roofing contractor. Licensed, insured, and built for Arizona's extreme climate. Serving the Phoenix metro and 100-mile radius.",
+    description: "Learn about XRP Roofing, a locally owned, licensed Phoenix roofing contractor whose team brings 15 years of roofing industry experience to residential and commercial roofs across the Phoenix metro.",
     url: `${SITE_URL}/about`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
     title: `About XRP Roofing | Phoenix Roofing Contractor`,
-    description: "Learn about XRP Roofing — Phoenix's trusted, locally owned roofing contractor. Licensed, insured, and built for Arizona's extreme climate. Serving the Phoenix metro and 100-mile radius.",
+    description: "Learn about XRP Roofing, a locally owned, licensed Phoenix roofing contractor whose team brings 15 years of roofing industry experience to residential and commercial roofs across the Phoenix metro.",
     images: [OG_IMAGE],
   },
 };
@@ -63,7 +63,7 @@ export default function AboutPage() {
             Phoenix&apos;s Trusted Roofing Contractor
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            XRP Roofing is a locally owned and operated roofing contractor serving Phoenix and the entire 100-mile metro radius. We were built for Arizona&apos;s extreme climate — and we prove it every day.
+            XRP Roofing is a locally owned and operated roofing contractor serving Phoenix and the entire 100-mile metro radius. Our team brings 15 years of roofing industry experience to every residential and commercial project — and we were built for Arizona&apos;s extreme climate.
           </p>
         </div>
       </section>
@@ -80,6 +80,9 @@ export default function AboutPage() {
                 </p>
                 <p>
                   We built XRP Roofing to be different. Every member of our team has been trained specifically for Arizona conditions. We source materials from manufacturers with proven desert performance records. We provide detailed written estimates before any work begins. And we back everything with written workmanship warranties.
+                </p>
+                <p>
+                  That approach is grounded in our team&apos;s 15 years of roofing industry experience across the systems Phoenix properties actually use: <Link href="/services/tile-roofing" className="text-orange-700 hover:text-orange-800 font-semibold">tile and concrete tile roofing</Link>, <Link href="/services/shingle-roofing" className="text-orange-700 hover:text-orange-800 font-semibold">shingle roofing</Link>, <Link href="/phoenix-foam-roofing" className="text-orange-700 hover:text-orange-800 font-semibold">foam roofing</Link>, and <Link href="/services/commercial-roofing" className="text-orange-700 hover:text-orange-800 font-semibold">commercial flat roofs</Link>. Whether you need <Link href="/services/roof-repair" className="text-orange-700 hover:text-orange-800 font-semibold">roof repair</Link>, a full <Link href="/services/roof-replacement" className="text-orange-700 hover:text-orange-800 font-semibold">roof replacement</Link>, or <Link href="/services/storm-damage-roofing" className="text-orange-700 hover:text-orange-800 font-semibold">storm damage restoration</Link>, you get the same honest, documented process.
                 </p>
                 <p>
                   Today, XRP Roofing serves homeowners, property managers, and business owners throughout the Phoenix metro and a 100-mile radius — from Wickenburg to Payson, from Buckeye to Apache Junction. Our growth has been built entirely on referrals and repeat business, which tells us everything we need to know about whether we&apos;re doing our job right.

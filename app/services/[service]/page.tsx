@@ -13,6 +13,7 @@ import LeadForm from "@/components/ui/LeadForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
+const FOAM_RELATED_SLUGS = ["flat-roofing", "tpo-roofing", "roof-coatings", "commercial-roofing"];
 
 const ctrMetadata: Record<string, { title: string; description: string }> = {
   "roof-repair": {
@@ -126,7 +127,6 @@ const serviceDetailContent: Record<string, { intro: string; body: string[]; whyC
       "Full permit-pulling and inspection coordination included",
       "HOA architectural review documentation handled",
       "Complete ventilation system — ridge, soffit, and baffles",
-      "Solar-ready installation options available",
     ],
   },
   "tile-roofing": {
@@ -575,6 +575,17 @@ export default async function ServicePage({
                         </Link>
                       </li>
                     ))}
+                    {FOAM_RELATED_SLUGS.includes(serviceSlug) && (
+                      <li>
+                        <Link
+                          href="/phoenix-foam-roofing"
+                          className="flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors"
+                        >
+                          <span>🧱</span>
+                          Foam Roofing (SPF) in Phoenix
+                        </Link>
+                      </li>
+                    )}
                   </ul>
                 </div>
               )}

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Phoenix Roofing | ${SITE_NAME}`,
     description: "Phoenix roofing services with free inspections, roof repairs, replacements, storm restoration, and damage documentation.",
+    url: `${SITE_URL}/phoenix-roofing`,
     images: [{ url: OG_IMAGE }],
   },
 };
