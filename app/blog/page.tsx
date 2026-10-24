@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "post-monsoon-roof-checklist-phoenix",
+    title: "How to Prepare Your Phoenix Roof for Monsoon Season: The Complete Checklist (And Why Late October Is the Smartest Time to Use It)",
+    excerpt: "Arizona's official monsoon season runs June 15 through September 30. The storms are gone for now, and Phoenix is sitting in a stretch of mild, dry, sunny weather — perfect conditions for a thorough roof check. Here is the complete checklist, updated for the current post-monsoon window.",
+    date: "2026-10-23",
+    readTime: "6 min read",
+    category: "Maintenance",
+  },
+  {
     slug: "how-often-roof-inspection-phoenix",
     title: "How Often Should You Have Your Roof Inspected in Phoenix? A Homeowner's Guide",
     excerpt: "Your roof protects your home from Arizona's intense heat, monsoon storms, strong winds, and sudden weather changes. But because many roofing problems start small, homeowners may not notice damage until it becomes a costly repair. Here is how often Phoenix homeowners should have the roof inspected, what a proper inspection includes, and when to call sooner.",

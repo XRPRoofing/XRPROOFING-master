@@ -9,6 +9,117 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "post-monsoon-roof-checklist-phoenix": {
+    slug: "post-monsoon-roof-checklist-phoenix",
+    title: "How to Prepare Your Phoenix Roof for Monsoon Season: The Complete Checklist (And Why Late October Is the Smartest Time to Use It)",
+    excerpt: "Arizona's official monsoon season runs June 15 through September 30. The storms are gone for now, and Phoenix is sitting in a stretch of mild, dry, sunny weather — perfect conditions for a thorough roof check. Here is the complete checklist, updated for the current post-monsoon window.",
+    date: "2026-10-23",
+    readTime: "6 min read",
+    category: "Maintenance",
+    metaDescription: "The complete post-monsoon roof checklist for Phoenix homeowners. Why late October is the smartest time to inspect, clear, reseal, and document your roof before the next storm season.",
+    sections: [
+      {
+        heading: "Why Late October Is the Smartest Time to Prepare Your Roof",
+        body: "Arizona's official monsoon season runs June 15 through September 30. The storms are gone for now, and Phoenix is sitting in a stretch of mild, dry, sunny weather — perfect conditions for a thorough roof check. Many homeowners think \"monsoon prep\" only matters in May or June. In reality, the weeks right after the season ends are often the most valuable time to act. Any damage the storms caused is still fresh and easy to document, crews are no longer slammed with emergency calls, and the weather is ideal for repairs before cooler nights and the next round of winter weather arrive. Here is the complete checklist, updated for the current post-monsoon window.",
+      },
+      {
+        heading: "Why This Checklist Still Matters Right Now",
+        body: "Even if your roof looked fine during the storms, monsoon damage is often hidden — see our guide to [hidden roof damage after the monsoon](/blog/post-monsoon-hidden-roof-damage-arizona). Common hidden problems include:",
+        listItems: [
+          "Lifted or shifted tiles that reseated themselves",
+          "Cracked or missing sealant at penetrations",
+          "Debris that packed into valleys and scuppers",
+          "Underlayment that got wet and is now compromised",
+          "Ridge or hip mortar that loosened",
+        ],
+      },
+      {
+        heading: "The Weather Is on Your Side",
+        body: "The dry, mild weather we're having this weekend (sunny, highs in the upper 70s, almost no wind) makes it safe and easy to inspect and schedule work. Waiting until the first winter storm or next June only increases the chance that small issues turn into leaks.",
+      },
+      {
+        heading: "1. Schedule a Professional Roof Inspection While the Weather Is Cooperative",
+        body: "This remains the highest-impact step. A proper inspection walks the roof, checks underlayment condition (especially critical on [tile](/services/tile-roofing)), examines every penetration and flashing detail, and provides photo documentation. Late October and November are excellent times — crews have availability and the roof is dry. Not sure how often you need one? Read [how often you should have your roof inspected in Phoenix](/blog/how-often-roof-inspection-phoenix).",
+      },
+      {
+        heading: "2. Clear Gutters, Valleys, Scuppers, and Downspouts",
+        body: "Dust, palm fronds, and debris that accumulated over the summer (and any late-season storms) can still be sitting there. Clear them now so the next rain has a clear path off the roof.",
+      },
+      {
+        heading: "3. Inspect and Reseal Flashing and Penetrations",
+        body: "Pipe boots, skylight curbs, chimney flashings, and roof-to-wall transitions are the most common entry points. Arizona heat continues to bake sealant even after monsoon ends. Fresh UV-rated sealant applied in mild weather lasts longer.",
+      },
+      {
+        heading: "4. Check for Lifted, Cracked, Missing, or Displaced Materials",
+        body: "Do this from the ground with binoculars if needed. Do not walk a roof that still has residual moisture or is heavily dusted.",
+        listItems: [
+          "[Tile roofs](/services/tile-roofing): Look carefully at ridges, hips, and any areas that took wind. Even tiles that look seated can have broken mortar or shifted enough to expose underlayment.",
+          "[Shingle roofs](/services/shingle-roofing): Check for curled, missing, or lifted shingles, especially on south and west slopes.",
+          "[Flat / foam roofs](/phoenix-foam-roofing): Look for blistering, open seams, and any remaining ponding areas.",
+        ],
+      },
+      {
+        heading: "5. Trim Trees and Remove Potential Projectiles",
+        body: "Any branches that moved closer during summer storms should be cut back now while it's comfortable to work outside.",
+      },
+      {
+        heading: "6. Document Everything With Dated Photos",
+        body: "Take clear photos of every slope and any visible issues. If you need to file an insurance claim for [storm damage](/services/storm-damage-roofing) from this past season, these photos (taken while the evidence is still fresh) strengthen your position.",
+      },
+      {
+        heading: "7. Review Your Insurance and Note Any Open Items",
+        body: "Confirm wind/hail coverage and deductibles. If you suspect storm damage from 2026, check your policy's notice and filing requirements and report it promptly.",
+      },
+      {
+        heading: "Roof-Type Priorities After Monsoon",
+        body: "What to prioritize now, by roof type:",
+        listItems: [
+          "Concrete / Clay Tile: Ridge/hip mortar, underlayment condition, flashing",
+          "Asphalt Shingles: Lifted edges, granule loss, south/west slopes",
+          "Flat / Foam / SPF: Drains, scuppers, coating integrity, ponding",
+        ],
+      },
+      {
+        heading: "Safety Note for This Weekend's Weather",
+        body: "Conditions are currently mild and dry — ideal for ground-level checks and professional inspections. Still avoid climbing onto the roof yourself unless you are experienced and properly equipped. Hot residual heat in the roof deck and fine dust can make footing unpredictable.",
+      },
+      {
+        heading: "When to Call Right Away",
+        body: "Schedule an inspection this month if you notice any of the following — small issues like these are usually a straightforward [roof repair](/services/roof-repair) when caught early:",
+        listItems: [
+          "Any new water stains (even small ones)",
+          "Missing, cracked, or obviously shifted tiles or shingles",
+          "Dried or cracked sealant at vents or flashings",
+          "A roof 15+ years old with no recent professional look",
+          "Debris still sitting in valleys or gutters after the season",
+        ],
+      },
+      {
+        heading: "Get Your Roof Checked While the Weather Is Perfect",
+        body: "The sunny, calm stretch we're in right now will not last forever. A free, no-obligation roof inspection from XRP Roofing gives you clear photos, an honest assessment of any monsoon-related issues, and a written plan — whether that means a simple reseal, a targeted repair, or simply peace of mind that everything looks solid. We serve [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. Licensed, bonded, and insured — Arizona ROC #350898. Call (623) 223-8856 or [request your free inspection online today](/contact). Protect your home while the weather is cooperating. The next storm will eventually find whatever is left unaddressed.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is it too late to \"prep\" for monsoon?",
+        a: "No. The official season is over, but this is the best recovery and readiness window of the year. Fixing issues now prepares your roof for the rest of fall, winter, and next summer's storms.",
+      },
+      {
+        q: "Why is October a good time for roof work in Phoenix?",
+        a: "Mild temperatures, low humidity, dry conditions, and better contractor availability make it one of the most efficient times of year for inspections and repairs.",
+      },
+      {
+        q: "Should I still get an inspection if I didn't notice any leaks during the storms?",
+        a: "Yes. Many monsoon problems stay hidden until the next significant rain. A professional inspection catches them while they are still inexpensive to address.",
+      },
+    ],
+    relatedServices: [
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+      { label: "Storm Damage Roofing", href: "/services/storm-damage-roofing" },
+      { label: "Free Roof Inspection", href: "/contact" },
+    ],
+  },
   "how-often-roof-inspection-phoenix": {
     slug: "how-often-roof-inspection-phoenix",
     title: "How Often Should You Have Your Roof Inspected in Phoenix? A Homeowner's Guide",
