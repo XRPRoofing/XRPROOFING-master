@@ -78,7 +78,7 @@ export default function HomePage() {
               <span className="text-orange-400">Licensed, Insured & Local</span>
             </h1>
             <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-              From emergency repairs to full tile replacements, XRP Roofing protects Phoenix metro homes and businesses from Arizona&apos;s brutal heat, monsoons, and storm damage — backed by our team&apos;s 15 years of roofing industry experience. Free inspections. Written warranties. Real results.
+              From emergency repairs to full tile replacements, XRP Roofing protects Phoenix metro homes and businesses from Arizona&apos;s brutal heat, monsoons, and storm damage — backed by our team&apos;s 25 years of roofing industry experience. Free inspections. Written warranties. Real results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
