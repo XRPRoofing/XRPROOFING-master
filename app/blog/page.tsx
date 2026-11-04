@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "hidden-water-damage-mold-after-roof-leak-phoenix",
+    title: "The Hidden Damage After a Roof Leak: What Phoenix Homeowners Need to Know About Water Damage and Mold",
+    excerpt: "A small ceiling stain may be the first visible warning of a much larger moisture problem. Here's what Arizona homeowners should know before a minor roof leak turns into an expensive repair.",
+    date: "2026-11-04",
+    readTime: "7 min read",
+    category: "Repair & Replacement",
+  },
+  {
     slug: "post-monsoon-roof-checklist-phoenix",
     title: "How to Prepare Your Phoenix Roof for Monsoon Season: The Complete Checklist (And Why Late October Is the Smartest Time to Use It)",
     excerpt: "Arizona's official monsoon season runs June 15 through September 30. The storms are gone for now, and Phoenix is sitting in a stretch of mild, dry, sunny weather — perfect conditions for a thorough roof check. Here is the complete checklist, updated for the current post-monsoon window.",

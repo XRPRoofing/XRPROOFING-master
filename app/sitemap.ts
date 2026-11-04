@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "hidden-water-damage-mold-after-roof-leak-phoenix",
     "post-monsoon-roof-checklist-phoenix",
     "how-often-roof-inspection-phoenix",
     "september-30-deadline-final-roof-inspection-phoenix",
