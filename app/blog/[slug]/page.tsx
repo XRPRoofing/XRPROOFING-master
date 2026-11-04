@@ -25,9 +25,9 @@ const allPosts: Record<string, BlogPost> = {
       {
         heading: "1. Why a Small Roof Leak Can Become a Bigger Problem",
         image: {
-          src: "/images/blog/roof-leak-water-damage/stained-roof-decking-exposed-during-repair-phoenix.jpg",
-          alt: "XRP Roofing job in the Phoenix area with the old roofing removed, showing worn, stained roof decking with new plywood sections installed around the edges",
-          caption: "Once the roofing comes off, the decking underneath tells the real story. Here, worn and stained sections are exposed, with new plywood going in where the old deck was replaced.",
+          src: "/images/blog/roof-leak-water-damage/mold-water-stain-ceiling-below-roof-leak.jpg",
+          alt: "Dark mold and water staining spreading across a white ceiling and running down the wall below a leaking roof",
+          caption: "Water from a roof leak spread across this ceiling and down the wall, leaving staining and mold growth well beyond where the water first came in.",
         },
         body: "Water rarely travels in a perfectly straight line. A leak around a roof penetration, damaged flashing, deteriorated underlayment, or blocked valley can allow moisture to enter the roofing system. From there, water may travel along framing or decking before reaching an interior ceiling. This means the ceiling stain you see may not be directly below the actual roof leak. Common hidden problems include:",
         listItems: [
@@ -41,14 +41,29 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Not Every Leak Means Major Damage",
+        image: {
+          src: "/images/blog/roof-leak-water-damage/stained-roof-decking-exposed-during-repair-phoenix.jpg",
+          alt: "XRP Roofing job in the Phoenix area with the old roofing removed, showing worn, stained roof decking with new plywood sections installed around the edges",
+          caption: "An inspection shows how far the damage really goes. Here, worn and stained sections are exposed, with new plywood going in where the old deck was replaced.",
+        },
         body: "Not every roof leak causes significant structural damage or mold. However, a professional inspection can help determine how far the moisture has traveled and what repairs may be necessary. If you have already found a leak, see our guide to [roof leak repair costs in Arizona](/blog/roof-leak-repair-cost-arizona).",
       },
       {
         heading: "2. Can Mold Develop After a Roof Leak?",
+        image: {
+          src: "/images/blog/roof-leak-water-damage/mold-on-damp-wall-around-light-switch.jpg",
+          alt: "Black mold spots spreading across a damp interior wall around a light switch plate",
+          caption: "Mold can spread across damp wall surfaces, including around electrical fixtures like this light switch.",
+        },
         body: "Yes. Mold can begin developing on damp, susceptible building materials within approximately 24–48 hours under favorable conditions. Drywall paper, wood, and dust-covered surfaces can provide materials on which mold grows when moisture is present. Arizona's dry climate does not eliminate this risk. Enclosed cavities, wet insulation, and poorly ventilated areas can retain moisture even when the air outside is hot and dry — one more reason [attic ventilation](/blog/phoenix-attic-ventilation-roof-damage) matters. If your ceiling or walls have been exposed to water, it is important to identify the source of the leak and address any remaining moisture. Visible mold, persistent musty odors, or repeated water damage may require additional professional evaluation.",
       },
       {
         heading: "3. Five Warning Signs of Hidden Water Damage",
+        image: {
+          src: "/images/blog/roof-leak-water-damage/water-damaged-ceiling-peeling-paint.jpg",
+          alt: "Ceiling drywall with large sections of peeling paint and brown water stains",
+          caption: "Peeling paint and brown stains on ceiling drywall are common signs that moisture has reached the ceiling.",
+        },
         body: "Watch for these signs inside your home:",
         listItems: [
           "Brown or yellow ceiling stains — ceiling discoloration is often one of the first visible indications that water has entered the home.",
@@ -78,9 +93,9 @@ const allPosts: Record<string, BlogPost> = {
       {
         heading: "6. Roof Repair and Water Damage Restoration: Why Both Matter",
         image: {
-          src: "/images/blog/roof-leak-water-damage/new-underlayment-battens-tile-staged-phoenix.jpg",
-          alt: "Phoenix-area tile roof with new underlayment and wood battens installed and the clay tile stacked in rows, ready to be reinstalled",
-          caption: "Roof work fixes the exterior source: new underlayment and battens are in, and the tile is staged to go back on. Drying any wet materials inside the home is a separate step.",
+          src: "/images/blog/roof-leak-water-damage/removing-water-damaged-drywall.jpg",
+          alt: "Homeowner cutting out water-damaged drywall with a saw, exposing the wall framing and insulation behind it",
+          caption: "Restoration can mean cutting out wet drywall and insulation so the framing behind it can dry. That work is separate from fixing the roof.",
         },
         body: "Roofing repairs and interior water damage restoration address different parts of the problem. Roofing work, such as a [roof repair](/services/roof-repair), focuses on locating and correcting the exterior source of water intrusion. Restoration work may include evaluating moisture, removing water-damaged materials where necessary, drying affected areas, and checking whether additional cleaning or remediation is needed. A proper recovery plan considers both the roof and the building materials below it. Painting over a ceiling stain without confirming that the leak has stopped and the materials are dry can conceal an unresolved problem.",
       },
@@ -90,6 +105,11 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Protect Your Phoenix Home Before Hidden Damage Gets Worse",
+        image: {
+          src: "/images/blog/roof-leak-water-damage/new-underlayment-battens-tile-staged-phoenix.jpg",
+          alt: "Phoenix-area tile roof with new underlayment and wood battens installed and the clay tile stacked in rows, ready to be reinstalled",
+          caption: "An XRP Roofing tile project: new underlayment and battens are installed, and the tile is staged to go back on.",
+        },
         body: "At XRP Roofing, we understand the challenges that Arizona's extreme temperatures, monsoon storms, and seasonal rainfall place on residential roofing systems. Our team provides professional roof inspections and repairs for [tile](/services/tile-roofing), [shingle](/services/shingle-roofing), [foam](/phoenix-foam-roofing), and flat roofing systems throughout the Phoenix metropolitan area. Whether you have noticed a small ceiling stain or are dealing with an active roof leak, identifying the cause early is an important step toward protecting your property.",
       },
       {
