@@ -193,6 +193,40 @@ export default function Footer() {
                 <li className="text-xs text-gray-300">✓ Financing Available</li>
               </ul>
             </div>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <a
+                href="https://www.bbb.org/us/az/phoenix/profile/roofing-contractors/xrp-roofing-1126-1000165671/#sealclick"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="inline-block bg-white rounded-xl p-2 transition-transform duration-200 hover:scale-105"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://seal-central-northern-western-arizona.bbb.org/seals/blue-seal-200-42-bbb-1000165671.png"
+                  style={{ border: 0 }}
+                  alt="XRP Roofing BBB Business Review"
+                  width={200}
+                  height={42}
+                  loading="lazy"
+                />
+              </a>
+              <a
+                href="https://www.bbb.org/pacific-southwest/customer-reviews/roofing-contractors/xrp-roofing-in-phoenix-az-1000165671/add/"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="inline-block bg-white rounded-xl p-2 transition-transform duration-200 hover:scale-105"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://seal-central-northern-western-arizona.bbb.org/customer-reviews/badge-7-bbb-1000165671.png"
+                  style={{ border: 0 }}
+                  alt="XRP Roofing BBB Business Review"
+                  width={120}
+                  height={60}
+                  loading="lazy"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
