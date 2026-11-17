@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/services";
+import ServiceIcon from "@/components/ui/ServiceIcon";
 
 interface ServiceGridProps {
   citySlug?: string;
@@ -27,7 +28,7 @@ export default function ServiceGrid({ citySlug, title = "Our Roofing Services", 
                 href={href}
                 className="group bg-gray-50 hover:bg-[#eef2fb] border border-gray-200 hover:border-[#1a3a8f]/30 rounded-2xl p-5 transition-all duration-200 flex flex-col gap-3"
               >
-                <span className="text-3xl">{service.icon}</span>
+                <ServiceIcon slug={service.slug} />
                 <div>
                   <h3 className="font-bold text-gray-900 group-hover:text-[#1a3a8f] transition-colors text-sm leading-snug">
                     {service.name}

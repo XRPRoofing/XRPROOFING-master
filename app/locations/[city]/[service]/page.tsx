@@ -14,6 +14,7 @@ import FAQSection from "@/components/ui/FAQSection";
 import LeadForm from "@/components/ui/LeadForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
+import ServiceIcon from "@/components/ui/ServiceIcon";
 
 export async function generateStaticParams() {
   const params: { city: string; service: string }[] = [];
@@ -113,8 +114,9 @@ export default async function CityServicePage({
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4 flex-wrap">
-              <span className="inline-flex items-center gap-1 bg-orange-700 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                {service.icon} {service.shortName}
+              <span className="inline-flex items-center gap-1.5 bg-orange-700 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                <ServiceIcon slug={service.slug} variant="inline" className="h-3.5 w-3.5 text-white" />
+                {service.shortName}
               </span>
               <span className="inline-flex items-center gap-1 bg-white/10 text-white px-3 py-1 rounded-full text-xs font-semibold">
                 <MapPin className="w-3 h-3" /> {city.name}, {city.state}
@@ -295,7 +297,7 @@ export default async function CityServicePage({
                           href={`/locations/${citySlug}/${s.slug}`}
                           className="flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors"
                         >
-                          <span>{s.icon}</span>
+                          <ServiceIcon slug={s.slug} size="sm" />
                           {s.name} in {city.name}
                           <ArrowRight className="w-3 h-3 ml-auto text-gray-400" />
                         </Link>

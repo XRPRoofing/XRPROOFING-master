@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { services } from "@/lib/services";
 import CTASection from "@/components/ui/CTASection";
+import ServiceIcon from "@/components/ui/ServiceIcon";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 
 export const metadata: Metadata = {
@@ -66,7 +67,7 @@ export default function ServicesPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className="text-2xl">{service.icon}</span>
+                    <ServiceIcon slug={service.slug} />
                   </div>
                   <div className="absolute bottom-4 left-4 right-4">
                     <h2 className="text-white font-bold text-lg">{service.name}</h2>
