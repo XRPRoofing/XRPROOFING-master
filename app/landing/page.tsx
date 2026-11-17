@@ -31,7 +31,7 @@ import { LocalBusinessSchema, ReviewSchema, ServiceSchema } from "@/components/u
 export const metadata: Metadata = {
   title: `${SITE_NAME} Landing | Free Roof Inspection`,
   description:
-    "Get a free roof inspection from XRP Roofing. Fast roofing repairs, replacements, storm restoration, commercial roofing, and storm damage documentation across Arizona.",
+    "Free roof inspection from XRP Roofing for repairs, replacements, storm damage, and commercial roofing across Arizona.",
   alternates: { canonical: `${SITE_URL}/landing` },
   robots: { index: false, follow: true },
   openGraph: {
@@ -101,7 +101,15 @@ const trustBadges = [
   { label: "GAF", sub: "Roofing materials trusted nationwide", icon: Hammer },
 ];
 
-export default function LandingPage() {
+type LandingPageProps = {
+  headline?: string;
+  intro?: string;
+};
+
+export default function LandingPage({
+  headline = "Protect Your Home With Roofing You Can Trust",
+  intro = "Professional roofing solutions for residential and commercial properties. From inspections and repairs to full roof replacements, XRP Roofing delivers dependable service and lasting results.",
+}: LandingPageProps = {}) {
   return (
     <>
       <LocalBusinessSchema />
@@ -114,7 +122,8 @@ export default function LandingPage() {
       <ReviewSchema authorName={testimonials[0].name} reviewBody={testimonials[0].review} />
       <main className="scroll-smooth bg-slate-950 text-slate-950">
       <section className="relative isolate overflow-hidden bg-slate-950 text-white">
-        <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="luxury Arizona home roof completed by XRP Roofing" fill priority fetchPriority="high" sizes="100vw" className="-z-20 object-cover opacity-55" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/xrp-roofing/landing-hero.webp" alt="luxury Arizona home roof completed by XRP Roofing" width={1600} height={900} fetchPriority="high" decoding="sync" className="absolute inset-0 -z-20 h-full w-full object-cover opacity-55" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(37,99,235,0.55),transparent_34%),linear-gradient(105deg,rgba(2,6,23,0.96)_0%,rgba(15,23,42,0.9)_45%,rgba(30,64,175,0.5)_100%)]" />
         <div className="container mx-auto grid min-h-[860px] items-center gap-12 px-4 py-12 lg:grid-cols-[1.03fr_0.97fr] lg:py-20">
           <div className="animate-[fadeIn_0.7s_ease-out]">
@@ -123,10 +132,10 @@ export default function LandingPage() {
               Free roof inspection campaign
             </div>
             <h1 className="max-w-5xl text-6xl font-black leading-[0.88] tracking-[-0.07em] text-white sm:text-7xl lg:text-8xl">
-              Protect Your Home With Roofing You Can Trust
+              {headline}
             </h1>
             <p className="mt-8 max-w-2xl text-xl font-medium leading-9 text-blue-50 sm:text-2xl">
-              Professional roofing solutions for residential and commercial properties. From inspections and repairs to full roof replacements, XRP Roofing delivers dependable service and lasting results.
+              {intro}
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link href="#contact" className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-9 py-5 text-lg font-black text-blue-800 shadow-2xl shadow-blue-950/30 transition-all hover:-translate-y-1 hover:scale-[1.02] hover:bg-blue-50">
@@ -160,7 +169,7 @@ export default function LandingPage() {
             </div>
             <div className="relative overflow-hidden rounded-[2.25rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="relative h-[560px] overflow-hidden rounded-[1.75rem] bg-slate-200">
-                <Image src="/images/xrp-roofing/landing-luxury-roof.jpg.jpeg" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" loading="lazy" />
+                <Image src="/images/xrp-roofing/landing-hero.webp" alt="premium luxury roofing project by XRP Roofing" fill sizes="(max-width: 1024px) 100vw, 50vw" unoptimized className="object-cover" loading="lazy" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-7">
                   <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-200">Completed roofing project</p>
                   <p className="mt-2 text-2xl font-black">Clean roof repairs, coatings, and tile work handled by local pros.</p>

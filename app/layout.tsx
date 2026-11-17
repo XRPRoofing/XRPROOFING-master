@@ -20,10 +20,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `${SITE_NAME} | Licensed Roofing Contractor in Phoenix, AZ`,
+  title: `${SITE_NAME} | Phoenix Roofers`,
   description:
-    "XRP Roofing is a licensed Phoenix roofing contractor for residential and commercial roof repair, replacement, tile, shingle, foam, and storm damage restoration. Free inspections.",
-  keywords: ["roofing contractor Phoenix AZ", "roof repair Phoenix", "roof replacement Arizona", "tile roofing Phoenix", "XRP Roofing"],
+    "XRP Roofing is a licensed roofing company in Phoenix, AZ. Repair, replacement, tile, and storm damage. Free inspections.",
+  keywords: ["roofers in Phoenix AZ", "roofing company Phoenix", "roofing contractor Phoenix AZ", "roof repair Phoenix", "XRP Roofing"],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   robots: { index: true, follow: true },
@@ -43,15 +43,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | Licensed Roofing Contractor in Phoenix, AZ`,
+    title: `${SITE_NAME} | Phoenix Roofers`,
     description:
-      "XRP Roofing is Phoenix's trusted roofing contractor. Serving the Phoenix metro and 100-mile radius. Free inspections. Licensed & insured.",
+      "XRP Roofing is a licensed roofing company in Phoenix, AZ. Repair, replacement, tile, and storm damage. Free inspections.",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "XRP Roofing – Phoenix's Trusted Roofing Contractor" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Licensed Roofing Contractor in Phoenix, AZ`,
-    description: "XRP Roofing – Phoenix's trusted roofing contractor. Free inspections. Licensed & insured.",
+    title: `${SITE_NAME} | Phoenix Roofers`,
+    description: "Licensed Phoenix roofing company. Free inspections for repair, replacement, and storm damage.",
     images: [OG_IMAGE],
   },
 };
@@ -63,10 +63,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <head>
-        <link rel="preconnect" href="https://www.google.com" />
-        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
-      </head>
       <body className="font-sans antialiased bg-white text-gray-900 pb-16 lg:pb-0">
         <AppChrome>{children}</AppChrome>
       </body>

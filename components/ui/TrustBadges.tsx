@@ -1,8 +1,9 @@
 import { Shield, Star, Clock, Award, DollarSign, FileCheck } from "lucide-react";
+import { GOOGLE_REVIEW_LABEL } from "@/lib/constants";
 
 const badges = [
   { icon: Shield, label: "Licensed & Insured", sub: "ROC Licensed Contractor" },
-  { icon: Star, label: "5-Star Rated", sub: "Hundreds of Reviews" },
+  { icon: Star, label: "5-Star Rated", sub: GOOGLE_REVIEW_LABEL },
   { icon: Clock, label: "Fast Response", sub: "Same-Day Emergency Service" },
   { icon: Award, label: "25 Years Experience", sub: "Arizona Roofing Experts" },
   { icon: DollarSign, label: "Financing Available", sub: "Flexible Payment Plans" },

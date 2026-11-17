@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SITE_URL } from "@/lib/constants";
+import { cityServiceDescription, cityServiceTitle } from "@/lib/seo";
 import { cities, getCity, getNearbyCities } from "@/lib/cities";
 import { services, getService, getRelatedServices } from "@/lib/services";
 import { cityServiceContent } from "@/lib/contentEngine";
@@ -34,8 +35,8 @@ export async function generateMetadata({
   const service = getService(serviceSlug);
   if (!city || !service) return {};
 
-  const title = `${service.name} in ${city.name}, AZ | Licensed Roofing Contractor | ${SITE_NAME}`;
-  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, AZ with local inspections, written estimates, Arizona-rated materials, and licensed roofing crews. Free inspection from XRP Roofing.`;
+  const title = cityServiceTitle(city, service);
+  const description = cityServiceDescription(city, service);
   const canonical = `${SITE_URL}/locations/${citySlug}/${serviceSlug}`;
   const shouldIndex = city.featuredServices.includes(serviceSlug);
   const image = getServiceImage(serviceSlug).src;

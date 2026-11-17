@@ -85,6 +85,9 @@ export default function FloatingBookingWidget() {
               width={badge.width}
               height={badge.height}
               className={badge.className}
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
             />
           </a>
         ))}

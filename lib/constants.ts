@@ -1,7 +1,11 @@
 export const SITE_NAME = "XRP Roofing";
 export const SITE_URL = "https://www.xrproofing.com";
-export const PHONE = "(623) 223-8856";
-export const PHONE_HREF = "tel:+16232238856";
+/** Single public phone number. Display copy, tel: links, and JSON-LD all read this. */
+export const PHONE = "(623) 300-8097";
+export const PHONE_HREF = "tel:+16233008097";
+/** Floor that stays true as the Google review count grows. Do not claim a precise total. */
+export const GOOGLE_RATING = "5.0";
+export const GOOGLE_REVIEW_LABEL = "130+ five-star Google reviews";
 export const BOOKING_WIDGET_URL =
   "https://booking.zuperpro.com/?region=us-west-1c&widget_uid=580150e4-a108-49a5-aa11-fdd1025d327c";
 export const EMAIL = "info@xrproofing.com";

@@ -9,18 +9,18 @@ import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 export const metadata: Metadata = {
   title: `Roofing Service Areas in Phoenix Metro, AZ | ${SITE_NAME}`,
   description:
-    "XRP Roofing serves 30+ cities throughout the Phoenix metro and a 100-mile radius. Find your city and get a free roofing inspection from Arizona's trusted contractor.",
+    "XRP Roofing serves 30+ cities in the Phoenix metro and a 100-mile radius. Find your city and book a free roof inspection.",
   alternates: { canonical: `${SITE_URL}/locations` },
   openGraph: {
     title: `Phoenix Metro Roofing Service Areas | XRP Roofing`,
-    description: "XRP Roofing serves 30+ cities throughout the Phoenix metro and a 100-mile radius. Find your city and get a free roofing inspection from Arizona's trusted contractor.",
+    description: "XRP Roofing serves 30+ cities in the Phoenix metro and a 100-mile radius. Find your city and book a free roof inspection.",
     url: `${SITE_URL}/locations`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Phoenix Metro Roofing Service Areas | XRP Roofing`,
-    description: "XRP Roofing serves 30+ cities throughout the Phoenix metro and a 100-mile radius. Find your city and get a free roofing inspection from Arizona's trusted contractor.",
+    description: "XRP Roofing serves 30+ cities in the Phoenix metro and a 100-mile radius. Find your city and book a free roof inspection.",
     images: [OG_IMAGE],
   },
 };

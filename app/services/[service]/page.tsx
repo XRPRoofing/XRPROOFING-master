@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { PHONE, PHONE_HREF, SITE_URL } from "@/lib/constants";
+import { servicePageDescription, servicePageH1, servicePageTitle } from "@/lib/seo";
 import { services, getService, getRelatedServices } from "@/lib/services";
 import { cities } from "@/lib/cities";
 import { getServiceImage } from "@/lib/images";
@@ -14,33 +15,6 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
 const FOAM_RELATED_SLUGS = ["flat-roofing", "tpo-roofing", "roof-coatings", "commercial-roofing"];
-
-const ctrMetadata: Record<string, { title: string; description: string }> = {
-  "roof-repair": {
-    title: `Roof Repair Phoenix, AZ | Leak Repair + Free Inspection | ${SITE_NAME}`,
-    description: "Roof leak repair in Phoenix with free inspections, written estimates, storm documentation, and licensed crews. Fast help for tile, shingle, flat, and flashing leaks.",
-  },
-  "emergency-roof-repair": {
-    title: `Emergency Roof Repair Phoenix | Active Leak Help | ${SITE_NAME}`,
-    description: "Emergency roof repair in Phoenix for active leaks, monsoon damage, tarping, temporary weatherproofing, and photo documentation. Call now.",
-  },
-  "storm-damage-roofing": {
-    title: `Storm Damage Roof Inspection Phoenix, AZ | ${SITE_NAME}`,
-    description: "Storm damage roof inspections in Phoenix after monsoon wind, hail, and debris impact. Get roof-level photos, written findings, and a repair estimate.",
-  },
-  "roof-replacement": {
-    title: `Roof Replacement Phoenix, AZ | Repair vs Replace Guidance | ${SITE_NAME}`,
-    description: "Roof replacement in Phoenix with Arizona-rated materials, ventilation review, written warranties, and honest repair vs replacement guidance. Free inspection.",
-  },
-  "commercial-roofing": {
-    title: `Commercial Roofing Phoenix | TPO, Flat Roofs + Pricing | ${SITE_NAME}`,
-    description: "Commercial roofing in Phoenix for TPO, flat roofs, coatings, repairs, replacement, moisture scans, warranties, and site-specific pricing. Free estimate.",
-  },
-  "tile-roofing": {
-    title: `Tile Roofing Phoenix, AZ | Repair, Underlayment + HOA Help | ${SITE_NAME}`,
-    description: "Tile roofing in Phoenix for repairs, underlayment replacement, leak diagnosis, HOA documentation, and clay or concrete tile systems. Free inspection.",
-  },
-};
 
 export async function generateStaticParams() {
   return services.map((s) => ({ service: s.slug }));
@@ -55,9 +29,8 @@ export async function generateMetadata({
   const service = getService(serviceSlug);
   if (!service) return {};
 
-  const ctr = ctrMetadata[serviceSlug];
-  const title = ctr?.title ?? `${service.name} in Phoenix, AZ | Licensed Roofing Contractor | ${SITE_NAME}`;
-  const description = ctr?.description ?? `${service.metaDescription} Serving Phoenix, Scottsdale, Mesa, Chandler, Gilbert, and the 100-mile metro radius. Free roof inspections.`;
+  const title = servicePageTitle(service);
+  const description = servicePageDescription(service);
   const canonical = `${SITE_URL}/services/${serviceSlug}`;
   const image = getServiceImage(serviceSlug).src;
 
@@ -453,10 +426,10 @@ export default async function ServicePage({
               {service.icon} {service.name}
             </div>
             <h1 className="text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
-              {service.name} in Phoenix, AZ
+              {servicePageH1(service)}
             </h1>
             <p className="text-lg text-gray-200 mb-6 leading-relaxed">
-              {service.description} Licensed & insured. Free inspections. Serving Phoenix and the 100-mile metro radius.
+              {service.description} Licensed and insured, with free inspections across Phoenix and the 100-mile radius.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link

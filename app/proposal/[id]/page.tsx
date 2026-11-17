@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { EMAIL, PHONE } from "@/lib/constants";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -44,7 +45,7 @@ const oldDefaultTerms = "Payment terms, change orders, warranty coverage, permit
 
 const defaultTerms = `AZPRO Contractor LLC DBA XRP Roofing
 2843 W McDowell Rd, Phoenix, AZ 85009
-Phone: (623) 300-8097 | Email: info@xrproofing.com
+Phone: ${PHONE} | Email: ${EMAIL}
 ROC # 350898
 
 Arizona Registrar of Contractors Licensed & Insured Contractor

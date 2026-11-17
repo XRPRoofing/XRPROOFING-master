@@ -8,18 +8,18 @@ import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 export const metadata: Metadata = {
   title: "Contact XRP Roofing | Free Roof Inspection in Phoenix, AZ",
   description:
-    "Contact XRP Roofing for a free roof inspection and estimate in Phoenix, AZ. Call us or fill out the form. We respond within 1 business hour. Serving the entire Phoenix metro.",
+    "Contact XRP Roofing for a free roof inspection in Phoenix. Call or use the form. We reply within one business hour.",
   alternates: { canonical: `${SITE_URL}/contact` },
   openGraph: {
     title: `Contact XRP Roofing | Free Roof Inspection`,
-    description: "Contact XRP Roofing for a free roof inspection and estimate in Phoenix, AZ. Call us or fill out the form. We respond within 1 business hour. Serving the entire Phoenix metro.",
+    description: "Contact XRP Roofing for a free roof inspection in Phoenix. Call or use the form. We reply within one business hour.",
     url: `${SITE_URL}/contact`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Contact XRP Roofing | Free Roof Inspection`,
-    description: "Contact XRP Roofing for a free roof inspection and estimate in Phoenix, AZ. Call us or fill out the form. We respond within 1 business hour. Serving the entire Phoenix metro.",
+    description: "Contact XRP Roofing for a free roof inspection in Phoenix. Call or use the form. We reply within one business hour.",
     images: [OG_IMAGE],
   },
 };

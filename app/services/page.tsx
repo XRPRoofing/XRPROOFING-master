@@ -10,18 +10,18 @@ import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 export const metadata: Metadata = {
   title: `Roofing Services in Phoenix, AZ | ${SITE_NAME}`,
   description:
-    "Complete roofing services in Phoenix AZ: roof repair, replacement, tile, shingle, metal, TPO, flat, commercial, coatings, and emergency service. Licensed & insured. Free inspections.",
+    "Phoenix roofing services: repair, replacement, tile, shingle, metal, flat, commercial, coatings, and emergency help. Free inspections.",
   alternates: { canonical: `${SITE_URL}/services` },
   openGraph: {
     title: `Roofing Services in Phoenix, AZ | XRP Roofing`,
-    description: "Complete roofing services in Phoenix AZ: roof repair, replacement, tile, shingle, metal, TPO, flat, commercial, coatings, and emergency service. Licensed & insured. Free inspections.",
+    description: "Phoenix roofing services: repair, replacement, tile, shingle, metal, flat, commercial, coatings, and emergency help. Free inspections.",
     url: `${SITE_URL}/services`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Roofing Services in Phoenix, AZ | XRP Roofing`,
-    description: "Complete roofing services in Phoenix AZ: roof repair, replacement, tile, shingle, metal, TPO, flat, commercial, coatings, and emergency service. Licensed & insured. Free inspections.",
+    description: "Phoenix roofing services: repair, replacement, tile, shingle, metal, flat, commercial, coatings, and emergency help. Free inspections.",
     images: [OG_IMAGE],
   },
 };
