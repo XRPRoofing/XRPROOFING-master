@@ -5,7 +5,7 @@ import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: `Arizona Roofers | ${SITE_NAME}`,
   description:
-    "Looking for trusted Arizona roofers? Get a free roof inspection from XRP Roofing for roof repair, replacement, storm damage restoration, and storm damage documentation.",
+    "Arizona roofers for repair, replacement, and storm damage. Free roof inspections from XRP Roofing.",
   alternates: { canonical: `${SITE_URL}/landing` },
   robots: { index: false, follow: true },
   openGraph: {

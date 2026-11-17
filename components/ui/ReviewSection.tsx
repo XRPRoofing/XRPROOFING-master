@@ -1,5 +1,5 @@
 import { Star, ExternalLink } from "lucide-react";
-import { GOOGLE_REVIEW_URL } from "@/lib/constants";
+import { GOOGLE_RATING, GOOGLE_REVIEW_LABEL, GOOGLE_REVIEW_URL } from "@/lib/constants";
 
 const reviews = [
   {
@@ -62,7 +62,7 @@ export default function ReviewSection() {
           </div>
           <h2 className="text-3xl font-black text-gray-900 mb-3">What Our Customers Say</h2>
           <p className="text-gray-600 max-w-2xl mx-auto mb-6">
-            Hundreds of Arizona homeowners and businesses trust XRP Roofing. Here&apos;s what they have to say.
+            Homeowners and businesses across Arizona rate XRP Roofing {GOOGLE_RATING} on Google. Here&apos;s what they have to say.
           </p>
 
           {/* Google Rating Badge */}
@@ -82,14 +82,14 @@ export default function ReviewSection() {
             </svg>
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-1.5">
-                <span className="text-xl font-black text-gray-900">5.0</span>
+                <span className="text-xl font-black text-gray-900">{GOOGLE_RATING}</span>
                 <div className="flex gap-0.5">
                   {[1,2,3,4,5].map((i) => (
                     <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
               </div>
-              <span className="text-xs text-gray-500 font-medium">Google Reviews · 147+ reviews</span>
+              <span className="text-xs text-gray-500 font-medium">{GOOGLE_REVIEW_LABEL}</span>
             </div>
             <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-colors ml-1" />
           </a>

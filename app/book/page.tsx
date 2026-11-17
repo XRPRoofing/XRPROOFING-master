@@ -4,21 +4,21 @@ import { BOOKING_WIDGET_URL, OG_IMAGE, PHONE, PHONE_HREF, SITE_NAME, SITE_URL } 
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 
 const DESCRIPTION =
-  "Book your free roof inspection online with XRP Roofing. Pick a date and time that works for you and we'll confirm your appointment. Serving the entire Phoenix metro.";
+  "Book a free roof inspection online with XRP Roofing. Pick a time and we will confirm. Serving the Phoenix metro.";
 
 export const metadata: Metadata = {
-  title: "Book a Free Roof Inspection Online | XRP Roofing Phoenix, AZ",
+  title: "Book a Free Roof Inspection | XRP Roofing",
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/book` },
   openGraph: {
-    title: "Book a Free Roof Inspection Online | XRP Roofing",
+    title: "Book a Free Roof Inspection | XRP Roofing",
     description: DESCRIPTION,
     url: `${SITE_URL}/book`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Book a Free Roof Inspection Online | XRP Roofing",
+    title: "Book a Free Roof Inspection | XRP Roofing",
     description: DESCRIPTION,
     images: [OG_IMAGE],
   },

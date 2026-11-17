@@ -8,20 +8,20 @@ import TrustBadges from "@/components/ui/TrustBadges";
 import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 
 export const metadata: Metadata = {
-  title: "About XRP Roofing | Licensed Roofing Contractor in Phoenix, AZ",
+  title: "About XRP Roofing | Phoenix, AZ",
   description:
-    "Learn about XRP Roofing, a locally owned, licensed Phoenix roofing contractor whose team brings 25 years of roofing industry experience to residential and commercial roofs across the Phoenix metro.",
+    "XRP Roofing is a licensed Phoenix roofing company. Local crews, free inspections, and written estimates across the Valley.",
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: {
-    title: `About XRP Roofing | Phoenix Roofing Contractor`,
-    description: "Learn about XRP Roofing, a locally owned, licensed Phoenix roofing contractor whose team brings 25 years of roofing industry experience to residential and commercial roofs across the Phoenix metro.",
+    title: "About XRP Roofing | Phoenix, AZ",
+    description: "XRP Roofing is a licensed Phoenix roofing company. Local crews, free inspections, and written estimates across the Valley.",
     url: `${SITE_URL}/about`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `About XRP Roofing | Phoenix Roofing Contractor`,
-    description: "Learn about XRP Roofing, a locally owned, licensed Phoenix roofing contractor whose team brings 25 years of roofing industry experience to residential and commercial roofs across the Phoenix metro.",
+    title: "About XRP Roofing | Phoenix, AZ",
+    description: "XRP Roofing is a licensed Phoenix roofing company. Local crews, free inspections, and written estimates across the Valley.",
     images: [OG_IMAGE],
   },
 };

@@ -5,7 +5,7 @@ import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/co
 export const metadata: Metadata = {
   title: `Privacy Policy | ${SITE_NAME}`,
   description:
-    "XRP Roofing Privacy Policy: what data we collect, how it is used, your choices, and our SMS/text messaging data practices. We do not share or sell phone numbers or SMS opt-in data.",
+    "XRP Roofing privacy policy: data we collect, how we use it, your choices, and how we handle phone numbers and texts.",
   alternates: { canonical: `${SITE_URL}/privacy-policy` },
   robots: { index: true, follow: true },
   openGraph: {

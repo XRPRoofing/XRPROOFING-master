@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
-import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, SITE_URL } from "@/lib/constants";
 import CTASection from "@/components/ui/CTASection";
 
 export const metadata: Metadata = {
-  title: `Roofing Blog | Arizona Roofing Tips & Guides | ${SITE_NAME}`,
+  title: "Arizona Roofing Blog | XRP Roofing",
   description:
-    "Expert roofing tips, guides, and advice for Arizona homeowners. Learn about roof maintenance, monsoon prep, material selection, and more from XRP Roofing.",
+    "Roofing tips for Phoenix homeowners: monsoon prep, leaks, tile, shingles, and when to repair or replace.",
   alternates: { canonical: `${SITE_URL}/blog` },
   openGraph: {
-    title: `Arizona Roofing Tips & Guides | XRP Roofing`,
-    description: "Expert roofing tips, guides, and advice for Arizona homeowners. Learn about roof maintenance, monsoon prep, material selection, and more from XRP Roofing.",
+    title: "Arizona Roofing Blog | XRP Roofing",
+    description: "Roofing tips for Phoenix homeowners: monsoon prep, leaks, tile, shingles, and when to repair or replace.",
     url: `${SITE_URL}/blog`,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `Arizona Roofing Tips & Guides | XRP Roofing`,
-    description: "Expert roofing tips, guides, and advice for Arizona homeowners. Learn about roof maintenance, monsoon prep, material selection, and more from XRP Roofing.",
+    title: "Arizona Roofing Blog | XRP Roofing",
+    description: "Roofing tips for Phoenix homeowners: monsoon prep, leaks, tile, shingles, and when to repair or replace.",
     images: [OG_IMAGE],
   },
 };

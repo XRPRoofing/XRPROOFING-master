@@ -31,9 +31,9 @@ const pagePath = "/phoenix-foam-roofing";
 const heroImage = "/images/xrp-roofing/foam-roofing-coated-flat-roof.jpeg";
 
 export const metadata: Metadata = {
-  title: "Phoenix Foam Roofing & Elastomeric Coatings | XRP Roofing",
+  title: "Phoenix Foam Roofing | XRP Roofing",
   description:
-    "Professional foam roofing and elastomeric roof coating services in Phoenix, Arizona. Energy-efficient SPF roofing systems for residential and commercial properties.",
+    "Foam roofing and elastomeric coatings in Phoenix for flat and low-slope roofs. Free inspections from XRP Roofing.",
   keywords: [
     "Phoenix Foam Roofing",
     "Foam Roofing Contractor Phoenix AZ",
@@ -44,17 +44,17 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${SITE_URL}${pagePath}` },
   openGraph: {
-    title: "Phoenix Foam Roofing & Elastomeric Coatings | XRP Roofing",
+    title: "Phoenix Foam Roofing | XRP Roofing",
     description:
-      "Energy-efficient SPF foam roofing and elastomeric coating systems for Phoenix residential and commercial flat roofs.",
+      "Foam roofing and elastomeric coatings in Phoenix for flat and low-slope roofs. Free inspections from XRP Roofing.",
     url: `${SITE_URL}${pagePath}`,
     images: [{ url: heroImage }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Phoenix Foam Roofing & Elastomeric Coatings | XRP Roofing",
+    title: "Phoenix Foam Roofing | XRP Roofing",
     description:
-      "Professional foam roofing and elastomeric roof coating services in Phoenix, Arizona.",
+      "Foam roofing and elastomeric coatings in Phoenix for flat and low-slope roofs. Free inspections from XRP Roofing.",
     images: [heroImage],
   },
 };

@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import LandingPage from "../landing/page";
-import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, SITE_URL } from "@/lib/constants";
+import { PHOENIX_ROOFING_DESCRIPTION, PHOENIX_ROOFING_H1, PHOENIX_ROOFING_INTRO, PHOENIX_ROOFING_TITLE } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: `Phoenix Roofing | ${SITE_NAME}`,
-  description:
-    "Need Phoenix roofing services? Get a free roof inspection from XRP Roofing for roof repair, replacement, storm damage restoration, and storm damage documentation.",
+  title: PHOENIX_ROOFING_TITLE,
+  description: PHOENIX_ROOFING_DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/phoenix-roofing` },
   robots: { index: true, follow: true },
   openGraph: {
-    title: `Phoenix Roofing | ${SITE_NAME}`,
-    description: "Phoenix roofing services with free inspections, roof repairs, replacements, storm restoration, and damage documentation.",
+    title: PHOENIX_ROOFING_TITLE,
+    description: PHOENIX_ROOFING_DESCRIPTION,
     url: `${SITE_URL}/phoenix-roofing`,
     images: [{ url: OG_IMAGE }],
   },
 };
 
-export default LandingPage;
+export default function PhoenixRoofingPage() {
+  return <LandingPage headline={PHOENIX_ROOFING_H1} intro={PHOENIX_ROOFING_INTRO} />;
+}

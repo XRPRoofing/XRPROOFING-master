@@ -133,7 +133,7 @@ export function ServiceSchema({ serviceName, serviceSlug, description, cityName,
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${pageUrl}#service`,
-    name: cityName ? `${serviceName} in ${cityName}, AZ` : `${serviceName} in Phoenix, AZ`,
+    name: cityName ? `${serviceName} in ${cityName}, AZ` : `${serviceName} for the Phoenix Metro`,
     serviceType: serviceName,
     description,
     provider: {

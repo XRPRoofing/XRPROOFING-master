@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, ArrowRight, CheckCircle, Star } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
+import { PHONE, PHONE_HREF, SITE_URL, OG_IMAGE } from "@/lib/constants";
+import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo";
 import { services } from "@/lib/services";
 import { LocalBusinessSchema, FAQSchema, WebSiteSchema } from "@/components/ui/SeoSchema";
 import TrustBadges from "@/components/ui/TrustBadges";
@@ -14,20 +15,27 @@ import LocationGrid from "@/components/ui/LocationGrid";
 import ProjectGallery from "@/components/ui/ProjectGallery";
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ | Repair, Replacement & More`,
-  description:
-    "XRP Roofing is a licensed Phoenix roofing contractor for residential and commercial roof repair, roof replacement, tile, shingle, and foam roofing, and storm damage restoration. Free inspections across the Phoenix metro.",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  keywords: [
+    "roofers in Phoenix AZ",
+    "roofing",
+    "roofing companies Phoenix",
+    "roofing company Phoenix",
+    "roofing contractor in Phoenix AZ",
+    "roofing contractor Phoenix AZ",
+  ],
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ`,
-    description: "Phoenix's trusted roofing contractor. Free inspections. Licensed & insured. Serving 30+ cities.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     url: SITE_URL,
     images: [{ url: OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Roofing Contractor Phoenix, AZ`,
-    description: "Phoenix roofing contractor for repair, replacement, storm damage, tile, shingle, flat, and commercial roofing.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: [OG_IMAGE],
   },
 };
@@ -52,18 +60,17 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/xrp-roofing/2025-01-26.jpg"
+        <div className="absolute inset-0 z-0 bg-[#0f2156]">
+          {/* Native img so the LCP photo is preloaded and decoded immediately, without the image optimizer. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/xrp-roofing/hero.webp"
             alt="XRP Roofing crew completing a roof replacement in Phoenix Arizona"
-            fill
-            className="object-cover"
-            priority
+            width={680}
+            height={510}
             fetchPriority="high"
-            sizes="100vw"
-            quality={65}
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAFAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgUEA//EAB8QAAICAQUBAAAAAAAAAAAAAAECAwQREiExQf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCbD5NNFQcZK5tLm0DtNXiHUKT0oA9DwAAAAAA/9k="
+            decoding="sync"
+            className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f2156]/90 via-[#0f2156]/70 to-[#0f2156]/40" />
         </div>
@@ -74,11 +81,11 @@ export default function HomePage() {
               Phoenix&apos;s Trusted Roofing Contractor
             </div>
             <h1 className="text-4xl lg:text-6xl font-black text-white leading-tight mb-6">
-              Phoenix Roofing Contractor —{" "}
-              <span className="text-orange-400">Licensed, Insured & Local</span>
+              Roofers in Phoenix for{" "}
+              <span className="text-orange-400">Homes and Businesses</span>
             </h1>
             <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-              From emergency repairs to full tile replacements, XRP Roofing protects Phoenix metro homes and businesses from Arizona&apos;s brutal heat, monsoons, and storm damage — backed by our team&apos;s 25 years of roofing industry experience. Free inspections. Written warranties. Real results.
+              XRP Roofing is a Phoenix roofing company for repair, replacement, tile, shingle, flat, and commercial work. We protect homes and businesses from desert heat, monsoons, and storm damage — with free inspections, written estimates, and 25 years of roofing industry experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

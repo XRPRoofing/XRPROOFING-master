@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
-import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE, PHONE, SITE_URL } from "@/lib/constants";
+import { blogSeo } from "@/lib/seo";
 import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
@@ -114,7 +115,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Schedule a Roof Inspection With XRP Roofing",
-        body: "Serving [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Peoria](/locations/peoria-az), [Glendale](/locations/glendale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Goodyear](/locations/goodyear-az), and surrounding communities. Licensed, bonded, and insured — Arizona ROC #350898. Call (623) 223-8856 or [request an inspection online](/contact). This article provides general homeowner education. Actual moisture damage and repair requirements depend on the conditions found during an inspection.",
+        body: "Serving [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Peoria](/locations/peoria-az), [Glendale](/locations/glendale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Goodyear](/locations/goodyear-az), and surrounding communities. Licensed, bonded, and insured — Arizona ROC #350898. Call {{PHONE}} or [request an inspection online](/contact). This article provides general homeowner education. Actual moisture damage and repair requirements depend on the conditions found during an inspection.",
       },
     ],
     faqs: [
@@ -225,7 +226,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Get Your Roof Checked While the Weather Is Perfect",
-        body: "The sunny, calm stretch we're in right now will not last forever. A free, no-obligation roof inspection from XRP Roofing gives you clear photos, an honest assessment of any monsoon-related issues, and a written plan — whether that means a simple reseal, a targeted repair, or simply peace of mind that everything looks solid. We serve [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. Licensed, bonded, and insured — Arizona ROC #350898. Call (623) 223-8856 or [request your free inspection online today](/contact). Protect your home while the weather is cooperating. The next storm will eventually find whatever is left unaddressed.",
+        body: "The sunny, calm stretch we're in right now will not last forever. A free, no-obligation roof inspection from XRP Roofing gives you clear photos, an honest assessment of any monsoon-related issues, and a written plan — whether that means a simple reseal, a targeted repair, or simply peace of mind that everything looks solid. We serve [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. Licensed, bonded, and insured — Arizona ROC #350898. Call {{PHONE}} or [request your free inspection online today](/contact). Protect your home while the weather is cooperating. The next storm will eventually find whatever is left unaddressed.",
       },
     ],
     faqs: [
@@ -343,7 +344,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Schedule a Free Roof Inspection With XRP Roofing",
-        body: "If you're concerned about the condition of your roof, XRP Roofing can help you understand what your roofing system needs. Whether you're dealing with storm damage, an aging roof, or simply want peace of mind, a professional inspection can help you make an informed decision about your home. We serve [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. Licensed, bonded, and insured — Arizona ROC #350898. Call (623) 223-8856 or [contact XRP Roofing today to schedule your free roof inspection](/contact).",
+        body: "If you're concerned about the condition of your roof, XRP Roofing can help you understand what your roofing system needs. Whether you're dealing with storm damage, an aging roof, or simply want peace of mind, a professional inspection can help you make an informed decision about your home. We serve [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Gilbert](/locations/gilbert-az), [Glendale](/locations/glendale-az), [Peoria](/locations/peoria-az), and the surrounding Valley. Licensed, bonded, and insured — Arizona ROC #350898. Call {{PHONE}} or [contact XRP Roofing today to schedule your free roof inspection](/contact).",
       },
     ],
     faqs: [
@@ -437,7 +438,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Schedule Your Final Monsoon-Season Inspection Before September 30",
-        body: "The official end of monsoon season is five days away. XRP Roofing provides free, no-obligation roof inspections throughout the Phoenix metro — including Phoenix, Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, and surrounding communities. We walk every slope, photograph what we find, and give you written findings and a written estimate in plain language. If the roof is fine, we will tell you it is fine. Licensed, bonded, and insured — Arizona ROC #350898. Call (623) 223-8856 or [request your free inspection online](/contact) and get on the schedule before the season officially closes.",
+        body: "The official end of monsoon season is five days away. XRP Roofing provides free, no-obligation roof inspections throughout the Phoenix metro — including Phoenix, Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, and surrounding communities. We walk every slope, photograph what we find, and give you written findings and a written estimate in plain language. If the roof is fine, we will tell you it is fine. Licensed, bonded, and insured — Arizona ROC #350898. Call {{PHONE}} or [request your free inspection online](/contact) and get on the schedule before the season officially closes.",
       },
     ],
     faqs: [
@@ -627,7 +628,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Schedule a Free Tile Roof Inspection",
-        body: "Not sure whether your Arizona tile roof needs a repair, lift-and-relay, or complete replacement? XRP Roofing can inspect the roof, document what we find, and explain your options before you make a decision. We provide roofing services throughout the Phoenix metro area, including Phoenix, Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, and surrounding communities. Free roof inspection, free written estimate. Licensed, bonded, and insured. Call (623) 223-8856 or [request your inspection online](/contact).",
+        body: "Not sure whether your Arizona tile roof needs a repair, lift-and-relay, or complete replacement? XRP Roofing can inspect the roof, document what we find, and explain your options before you make a decision. We provide roofing services throughout the Phoenix metro area, including Phoenix, Scottsdale, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, and surrounding communities. Free roof inspection, free written estimate. Licensed, bonded, and insured. Call {{PHONE}} or [request your inspection online](/contact).",
       },
     ],
     faqs: [
@@ -749,7 +750,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "What a Free XRP Roofing Inspection Covers",
-        body: "A material decision this large should start with facts about your specific roof, not a general article. XRP Roofing provides free, no-obligation inspections across the Phoenix metro. For a post-monsoon shingle-or-tile evaluation, we photograph and document the surface condition on every slope, check every flashing and penetration, clear and inspect valleys and drainage paths, lift representative tiles or shingles to assess the underlayment directly, check the attic for heat and moisture clues, and — where the HOA is a factor — help you understand what materials and profiles are permitted. You receive written findings in plain language and a written estimate for each realistic option: repair, lift-and-reset, or replacement in either material. No pressure, and no recommending a full replacement when a repair or reset will do. If your roof went through this monsoon season, the dry weeks ahead are the right time to get a clear picture of what it needs. Call (623) 223-8856 or [request your free inspection online](/contact). For related seasonal guidance, see [September's Dry Window](/blog/september-dry-window-monsoon-damage-repair-phoenix), our [late-monsoon roof check](/blog/late-monsoon-september-roof-check-phoenix), and [hidden roof damage after storms](/blog/post-monsoon-hidden-roof-damage-arizona).",
+        body: "A material decision this large should start with facts about your specific roof, not a general article. XRP Roofing provides free, no-obligation inspections across the Phoenix metro. For a post-monsoon shingle-or-tile evaluation, we photograph and document the surface condition on every slope, check every flashing and penetration, clear and inspect valleys and drainage paths, lift representative tiles or shingles to assess the underlayment directly, check the attic for heat and moisture clues, and — where the HOA is a factor — help you understand what materials and profiles are permitted. You receive written findings in plain language and a written estimate for each realistic option: repair, lift-and-reset, or replacement in either material. No pressure, and no recommending a full replacement when a repair or reset will do. If your roof went through this monsoon season, the dry weeks ahead are the right time to get a clear picture of what it needs. Call {{PHONE}} or [request your free inspection online](/contact). For related seasonal guidance, see [September's Dry Window](/blog/september-dry-window-monsoon-damage-repair-phoenix), our [late-monsoon roof check](/blog/late-monsoon-september-roof-check-phoenix), and [hidden roof damage after storms](/blog/post-monsoon-hidden-roof-damage-arizona).",
       },
     ],
     faqs: [
@@ -842,7 +843,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Need Help Choosing a Metal Roof in Arizona?",
-        body: "At XRP Roofing, we help Arizona homeowners determine which roofing system makes the most sense for their property, budget, and roof design. Whether you are considering standing seam metal roofing, corrugated metal roofing, [foam roofing](/phoenix-foam-roofing), [tile](/services/tile-roofing), [shingles](/services/shingle-roofing), or a combination of systems, our team can inspect the property and explain your options in plain language. If you are planning a [new metal roof](/services/new-roof-installation) or [replacing an existing roofing system](/services/roof-replacement), call XRP Roofing at (623) 223-8856 or [contact us online](/contact) to schedule a free inspection and receive a written estimate. Licensed, bonded, and insured, serving homeowners [throughout the Phoenix metropolitan area](/locations) and surrounding Arizona communities.",
+        body: "At XRP Roofing, we help Arizona homeowners determine which roofing system makes the most sense for their property, budget, and roof design. Whether you are considering standing seam metal roofing, corrugated metal roofing, [foam roofing](/phoenix-foam-roofing), [tile](/services/tile-roofing), [shingles](/services/shingle-roofing), or a combination of systems, our team can inspect the property and explain your options in plain language. If you are planning a [new metal roof](/services/new-roof-installation) or [replacing an existing roofing system](/services/roof-replacement), call XRP Roofing at {{PHONE}} or [contact us online](/contact) to schedule a free inspection and receive a written estimate. Licensed, bonded, and insured, serving homeowners [throughout the Phoenix metropolitan area](/locations) and surrounding Arizona communities.",
       },
     ],
     faqs: [
@@ -939,7 +940,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Don't Let the Quiet Fool You",
-        body: "Whether you have a tile roof in Paradise Valley, a shingle roof in Chandler, a metal system in Peoria, or a commercial flat roof in Tempe, the same climate-driven principles apply. The difference is in the details of how each system was stressed this summer and how it should be corrected for Arizona conditions. The storms may have quieted, but the damage they left behind has not. Early September is the last practical chance to address it under ideal working conditions. By the time the first winter rain or the final monsoon cell arrives, the opportunity — and the cost difference — will have changed. If your roof went through this monsoon season, give it one thorough professional look while the weather still cooperates. Call XRP Roofing at (623) 223-8856 to request your free September roof inspection, or [request it online](/contact). Licensed and insured, serving Phoenix and the full 100-mile metro, written estimates, no pressure.",
+        body: "Whether you have a tile roof in Paradise Valley, a shingle roof in Chandler, a metal system in Peoria, or a commercial flat roof in Tempe, the same climate-driven principles apply. The difference is in the details of how each system was stressed this summer and how it should be corrected for Arizona conditions. The storms may have quieted, but the damage they left behind has not. Early September is the last practical chance to address it under ideal working conditions. By the time the first winter rain or the final monsoon cell arrives, the opportunity — and the cost difference — will have changed. If your roof went through this monsoon season, give it one thorough professional look while the weather still cooperates. Call XRP Roofing at {{PHONE}} to request your free September roof inspection, or [request it online](/contact). Licensed and insured, serving Phoenix and the full 100-mile metro, written estimates, no pressure.",
       },
     ],
     faqs: [
@@ -1046,7 +1047,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Get It Booked While the Season Is Still Open",
-        body: "The value of this particular window closes with the season. Right now the storms are recent enough for documentation to carry weight, the roof is dry enough to read properly and to work on safely, and there is still time to complete [roof repair](/services/roof-repair) work before the first fall wind event and the next real rain. In a month, some of that is gone — and anything a late-season storm finds in the meantime is a larger job than what is on your roof today. If you have not had eyes on your roof since the storms started in June, this is the check to get done. Same-day and next-day scheduling is usually available [across the metro](/locations). Call XRP Roofing at (623) 223-8856 to book a free late-monsoon roof inspection, or reach us through the [contact form](/contact) and we will get back to you the same day.",
+        body: "The value of this particular window closes with the season. Right now the storms are recent enough for documentation to carry weight, the roof is dry enough to read properly and to work on safely, and there is still time to complete [roof repair](/services/roof-repair) work before the first fall wind event and the next real rain. In a month, some of that is gone — and anything a late-season storm finds in the meantime is a larger job than what is on your roof today. If you have not had eyes on your roof since the storms started in June, this is the check to get done. Same-day and next-day scheduling is usually available [across the metro](/locations). Call XRP Roofing at {{PHONE}} to book a free late-monsoon roof inspection, or reach us through the [contact form](/contact) and we will get back to you the same day.",
       },
     ],
     faqs: [
@@ -1129,7 +1130,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Book the Check While the Weather Is Still Cooperating",
-        body: "The window that makes this worth doing now is not long. Storm activity has eased, the roof is dry and readable, and there is still a full stretch of mild, dry weather ahead in which to complete any repair comfortably and at normal scheduling — before the first fall rain, and well before winter. XRP Roofing provides free roof inspections across Phoenix and the surrounding metro area within a 100-mile radius, on tile, shingle, metal, foam, and flat systems, residential and commercial. You get a roof-level and attic assessment, photo documentation organized by location so you can see what we saw, a plain explanation of what matters now versus what is worth monitoring, a written estimate for whatever work is genuinely warranted, help documenting an insurance claim if storm damage turns up, and a workmanship warranty on the work we perform. If your roof came through this monsoon in good shape and just needs debris cleared, we will tell you that — it happens often, and it is a good outcome. Call XRP Roofing at (623) 223-8856 to schedule your free post-monsoon debris and flashing check.",
+        body: "The window that makes this worth doing now is not long. Storm activity has eased, the roof is dry and readable, and there is still a full stretch of mild, dry weather ahead in which to complete any repair comfortably and at normal scheduling — before the first fall rain, and well before winter. XRP Roofing provides free roof inspections across Phoenix and the surrounding metro area within a 100-mile radius, on tile, shingle, metal, foam, and flat systems, residential and commercial. You get a roof-level and attic assessment, photo documentation organized by location so you can see what we saw, a plain explanation of what matters now versus what is worth monitoring, a written estimate for whatever work is genuinely warranted, help documenting an insurance claim if storm damage turns up, and a workmanship warranty on the work we perform. If your roof came through this monsoon in good shape and just needs debris cleared, we will tell you that — it happens often, and it is a good outcome. Call XRP Roofing at {{PHONE}} to schedule your free post-monsoon debris and flashing check.",
       },
     ],
     faqs: [
@@ -1224,7 +1225,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Have the Attic Looked At, Not Just the Roof",
-        body: "A thorough roof inspection should not stop at the surface, and ours does not. XRP Roofing provides free roof inspections throughout Phoenix and the surrounding metro area, and on every one we look at the attic side as well: soffit and eave intake, exhaust type and capacity and whether the two are balanced, insulation depth and whether it is blocking the eaves, the condition of the sheathing and its fasteners, any signs of past condensation or moisture, ductwork and equipment conditions, and the underlayment wherever it can be assessed. You get photo documentation of the attic and roof deck organized by location, a plain explanation of what we found and what it means for how long your roof will last, a written estimate for whatever work is genuinely warranted, help documenting an insurance claim if storm damage turns up alongside the wear, and a workmanship warranty on the work we perform. If your ventilation is adequate and your roof simply needs monitoring, we will tell you that — it is a common and entirely welcome outcome. Call XRP Roofing at (623) 223-8856 to schedule a free roof inspection.",
+        body: "A thorough roof inspection should not stop at the surface, and ours does not. XRP Roofing provides free roof inspections throughout Phoenix and the surrounding metro area, and on every one we look at the attic side as well: soffit and eave intake, exhaust type and capacity and whether the two are balanced, insulation depth and whether it is blocking the eaves, the condition of the sheathing and its fasteners, any signs of past condensation or moisture, ductwork and equipment conditions, and the underlayment wherever it can be assessed. You get photo documentation of the attic and roof deck organized by location, a plain explanation of what we found and what it means for how long your roof will last, a written estimate for whatever work is genuinely warranted, help documenting an insurance claim if storm damage turns up alongside the wear, and a workmanship warranty on the work we perform. If your ventilation is adequate and your roof simply needs monitoring, we will tell you that — it is a common and entirely welcome outcome. Call XRP Roofing at {{PHONE}} to schedule a free roof inspection.",
       },
     ],
     faqs: [
@@ -1311,7 +1312,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Get a Thermal-Stress Inspection Before It Becomes a Leak",
-        body: "XRP Roofing provides free roof inspections throughout Phoenix and the surrounding metro area, and we look specifically at the components thermal cycling attacks first: flashings and terminations, sealant joints, fasteners, seams, penetrations, ridge and hip details, coating condition, and underlayment where it can be assessed — along with attic conditions and ventilation. You get photo documentation organized by location, a written estimate for whatever work is warranted, help documenting a claim if storm damage turns up alongside the wear, and a workmanship warranty on the work we perform. If the roof simply needs monitoring, that is what we will tell you. Call XRP Roofing at (623) 223-8856 to schedule a free roof inspection.",
+        body: "XRP Roofing provides free roof inspections throughout Phoenix and the surrounding metro area, and we look specifically at the components thermal cycling attacks first: flashings and terminations, sealant joints, fasteners, seams, penetrations, ridge and hip details, coating condition, and underlayment where it can be assessed — along with attic conditions and ventilation. You get photo documentation organized by location, a written estimate for whatever work is warranted, help documenting a claim if storm damage turns up alongside the wear, and a workmanship warranty on the work we perform. If the roof simply needs monitoring, that is what we will tell you. Call XRP Roofing at {{PHONE}} to schedule a free roof inspection.",
       },
     ],
     faqs: [
@@ -1419,7 +1420,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Get Your Foam Roof Assessed Before You Decide",
-        body: "Not sure what condition your foam roof is in? XRP Roofing provides free roof inspections throughout Phoenix and the surrounding metro area. We inspect the foam, the coating, drainage, penetrations, scuppers, and any existing repairs, document the findings with photographs, and explain plainly whether your roof needs a repair, a recoat, or a replacement — including when the honest answer is that it needs nothing yet. Call XRP Roofing at (623) 223-8856 to schedule a free roof inspection.",
+        body: "Not sure what condition your foam roof is in? XRP Roofing provides free roof inspections throughout Phoenix and the surrounding metro area. We inspect the foam, the coating, drainage, penetrations, scuppers, and any existing repairs, document the findings with photographs, and explain plainly whether your roof needs a repair, a recoat, or a replacement — including when the honest answer is that it needs nothing yet. Call XRP Roofing at {{PHONE}} to schedule a free roof inspection.",
       },
     ],
     faqs: [
@@ -2091,13 +2092,14 @@ interface BlogSection {
 const LINK_PATTERN = /\[([^\]]+)\]\((\/[^\s)]*)\)/g;
 
 function renderRichText(text: string) {
+  const source = text.replaceAll("{{PHONE}}", PHONE);
   const nodes: Array<string | ReactElement> = [];
   let cursor = 0;
 
-  for (const match of text.matchAll(LINK_PATTERN)) {
+  for (const match of source.matchAll(LINK_PATTERN)) {
     const [raw, label, href] = match;
     const start = match.index ?? 0;
-    if (start > cursor) nodes.push(text.slice(cursor, start));
+    if (start > cursor) nodes.push(source.slice(cursor, start));
     nodes.push(
       <Link
         key={`${href}-${start}`}
@@ -2110,7 +2112,7 @@ function renderRichText(text: string) {
     cursor = start + raw.length;
   }
 
-  if (cursor < text.length) nodes.push(text.slice(cursor));
+  if (cursor < source.length) nodes.push(source.slice(cursor));
   return nodes;
 }
 
@@ -2140,16 +2142,18 @@ export async function generateMetadata({
   const post = allPosts[slug];
   if (!post) return {};
 
-  const title = `${post.title} | ${SITE_NAME}`;
+  const seo = blogSeo[slug];
+  const title = seo?.title ?? post.title;
+  const description = seo?.description ?? post.metaDescription;
   const canonical = `${SITE_URL}/blog/${slug}`;
 
   return {
     title,
-    description: post.metaDescription,
+    description,
     alternates: { canonical },
     openGraph: {
       title,
-      description: post.metaDescription,
+      description,
       url: canonical,
       type: "article",
       publishedTime: post.date,
@@ -2158,7 +2162,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description: post.metaDescription,
+      description,
       images: [OG_IMAGE],
     },
   };
@@ -2172,12 +2176,13 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = allPosts[slug];
   if (!post) notFound();
+  const description = blogSeo[slug]?.description ?? post.metaDescription;
 
   return (
     <>
       <ArticleSchema
         title={post.title}
-        description={post.metaDescription}
+        description={description}
         slug={post.slug}
         datePublished={post.date}
       />

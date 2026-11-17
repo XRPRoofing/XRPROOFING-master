@@ -6,7 +6,7 @@ import { MARKETING_SMS_CONSENT, NON_MARKETING_SMS_CONSENT, SMS_REQUIRED_DISCLOSU
 export const metadata: Metadata = {
   title: `Terms & Conditions | ${SITE_NAME}`,
   description:
-    "XRP Roofing Terms & Conditions, including our SMS/text messaging program terms: program description, message frequency, rates, HELP and STOP instructions, and support contact.",
+    "XRP Roofing terms, including text-message rules, message frequency, rates, HELP and STOP, and how to reach us.",
   alternates: { canonical: `${SITE_URL}/terms` },
   robots: { index: true, follow: true },
   openGraph: {

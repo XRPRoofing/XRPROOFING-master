@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SITE_URL } from "@/lib/constants";
+import { cityPageDescription, cityPageTitle } from "@/lib/seo";
 import { cities, getCity, getNearbyCities } from "@/lib/cities";
 import { services, getService } from "@/lib/services";
 import { cityPageContent } from "@/lib/contentEngine";
@@ -28,13 +29,8 @@ export async function generateMetadata({
   const city = getCity(citySlug);
   if (!city) return {};
 
-  const primaryServices = city.featuredServices
-    .map((slug) => getService(slug)?.shortName)
-    .filter(Boolean)
-    .slice(0, 3)
-    .join(", ");
-  const title = `Roofing Company in ${city.name}, AZ | ${primaryServices} | ${SITE_NAME}`;
-  const description = `Licensed roofing contractor in ${city.name}, AZ for ${primaryServices.toLowerCase()}. Local roof inspections, repair, replacement, storm damage, and HOA-ready roofing solutions.`;
+  const title = cityPageTitle(city);
+  const description = cityPageDescription(city);
   const canonical = `${SITE_URL}/locations/${citySlug}`;
   const image = getCityImage(citySlug).src;
 
