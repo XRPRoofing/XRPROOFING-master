@@ -3,7 +3,6 @@ export interface Service {
   name: string;
   shortName: string;
   description: string;
-  icon: string;
   heroImage: string;
   metaDescription: string;
   keywords: string[];
@@ -17,7 +16,6 @@ export const services: Service[] = [
     shortName: "Roof Repair",
     description:
       "Expert roof repair services for leaks, storm damage, missing shingles, and more. Fast response, lasting results.",
-    icon: "🔧",
     heroImage: "/images/xrp-roofing/2024-05-09.jpg",
     metaDescription:
       "Professional roof repair in Phoenix AZ. We fix leaks, storm damage, missing shingles, and more. Licensed & insured. Free inspections.",
@@ -30,7 +28,6 @@ export const services: Service[] = [
     shortName: "Roof Replacement",
     description:
       "Full roof replacement with premium materials engineered for Arizona's extreme heat, UV exposure, and monsoon season.",
-    icon: "🏠",
     heroImage: "/images/xrp-roofing/2025-01-26.jpg",
     metaDescription:
       "Roof replacement in Phoenix AZ by licensed contractors. Quality materials, expert installation, and warranties you can trust.",
@@ -43,7 +40,6 @@ export const services: Service[] = [
     shortName: "New Roof",
     description:
       "New construction and new roof installations for residential and commercial properties throughout the Phoenix metro area.",
-    icon: "🏗️",
     heroImage: "/images/xrp-roofing/2025-01-26-2.jpg",
     metaDescription:
       "New roof installation in Phoenix AZ. Expert installation for new construction and replacements. Residential & commercial.",
@@ -56,7 +52,6 @@ export const services: Service[] = [
     shortName: "Tile Roofing",
     description:
       "Clay and concrete tile roofing — Arizona's most popular choice for durability, beauty, and heat resistance.",
-    icon: "🟧",
     heroImage: "/images/xrp-roofing/2024-07-05.jpg",
     metaDescription:
       "Tile roofing installation and repair in Phoenix AZ. Clay and concrete tile specialists serving the entire Phoenix metro area.",
@@ -69,7 +64,6 @@ export const services: Service[] = [
     shortName: "Shingle Roofing",
     description:
       "Asphalt shingle roofing installation, repair, and replacement. Cost-effective, versatile, and durable for Arizona homes.",
-    icon: "🔲",
     heroImage: "/images/xrp-roofing/2024-05-13.jpg",
     metaDescription:
       "Shingle roofing services in Phoenix AZ. Asphalt shingle installation, repair, and replacement by licensed contractors.",
@@ -82,7 +76,6 @@ export const services: Service[] = [
     shortName: "Metal Roofing",
     description:
       "Standing seam and metal panel roofing systems — energy-efficient, long-lasting, and ideal for Arizona's intense sun.",
-    icon: "⚡",
     heroImage: "/images/xrp-roofing/2024-06-27.jpg",
     metaDescription:
       "Metal roofing installation in Phoenix AZ. Energy-efficient, durable metal roofing systems for residential and commercial properties.",
@@ -95,7 +88,6 @@ export const services: Service[] = [
     shortName: "TPO Roofing",
     description:
       "Thermoplastic Polyolefin (TPO) flat roofing systems for commercial buildings. Reflective, energy-efficient, and durable.",
-    icon: "🏢",
     heroImage: "/images/xrp-roofing/2024-09-18-1.jpg",
     metaDescription:
       "TPO roofing installation in Phoenix AZ. Commercial flat roof systems that reflect heat and reduce energy costs.",
@@ -108,7 +100,6 @@ export const services: Service[] = [
     shortName: "Flat Roofing",
     description:
       "Flat and low-slope roofing systems for commercial and residential properties. Built-up, modified bitumen, and membrane systems.",
-    icon: "▬",
     heroImage: "/images/xrp-roofing/2024-07-05-1.jpg",
     metaDescription:
       "Flat roofing services in Phoenix AZ. Expert installation and repair of flat and low-slope roofing systems.",
@@ -121,7 +112,6 @@ export const services: Service[] = [
     shortName: "Commercial",
     description:
       "Full-service commercial roofing for warehouses, retail, office buildings, HOA communities, and industrial facilities.",
-    icon: "🏭",
     heroImage: "/images/xrp-roofing/2025-01-26-3.jpg",
     metaDescription:
       "Commercial roofing services in Phoenix AZ. Flat roofs, TPO, metal, and more for businesses of all sizes.",
@@ -134,7 +124,6 @@ export const services: Service[] = [
     shortName: "Roof Coatings",
     description:
       "Protective roof coatings to extend roof life, improve energy efficiency, and stop leaks without full replacement.",
-    icon: "🎨",
     heroImage: "/images/xrp-roofing/2025-01-26-4.jpg",
     metaDescription:
       "Roof coatings in Phoenix AZ. Silicone, elastomeric, and acrylic coatings to extend roof life and cut energy costs.",
@@ -147,7 +136,6 @@ export const services: Service[] = [
     shortName: "Emergency Repair",
     description:
       "24/7 emergency roof repair for active leaks, storm damage, and structural failures. Fast response across the Phoenix metro.",
-    icon: "🚨",
     heroImage: "/images/xrp-roofing/2024-05-09-1.jpg",
     metaDescription:
       "Emergency roof repair in Phoenix AZ. 24/7 response for leaks, storm damage, and roof failures. Call now.",
@@ -160,7 +148,6 @@ export const services: Service[] = [
     shortName: "Storm Damage",
     description:
       "Monsoon and storm damage assessment, documentation, and repair. Protect your home after Arizona's severe weather.",
-    icon: "⛈️",
     heroImage: "/images/xrp-roofing/2025-01-26-5.jpg",
     metaDescription:
       "Storm damage roofing repair in Phoenix AZ. Photo documentation and free inspections after monsoons and high winds.",

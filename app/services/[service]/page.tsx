@@ -13,6 +13,7 @@ import FAQSection from "@/components/ui/FAQSection";
 import LeadForm from "@/components/ui/LeadForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { ServiceSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
+import ServiceIcon from "@/components/ui/ServiceIcon";
 
 const FOAM_RELATED_SLUGS = ["flat-roofing", "tpo-roofing", "roof-coatings", "commercial-roofing"];
 
@@ -422,8 +423,9 @@ export default async function ServicePage({
         </div>
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-2xl">
-            <div className="inline-block bg-orange-700 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
-              {service.icon} {service.name}
+            <div className="inline-flex items-center gap-2 bg-orange-700 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
+              <ServiceIcon slug={service.slug} variant="inline" className="h-4 w-4 text-white" />
+              {service.name}
             </div>
             <h1 className="text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
               {servicePageH1(service)}
@@ -543,7 +545,7 @@ export default async function ServicePage({
                           href={`/services/${s.slug}`}
                           className="flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors"
                         >
-                          <span>{s.icon}</span>
+                          <ServiceIcon slug={s.slug} size="sm" />
                           {s.name}
                         </Link>
                       </li>
@@ -554,7 +556,7 @@ export default async function ServicePage({
                           href="/phoenix-foam-roofing"
                           className="flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors"
                         >
-                          <span>🧱</span>
+                          <ServiceIcon slug="flat-roofing" size="sm" />
                           Foam Roofing (SPF) in Phoenix
                         </Link>
                       </li>

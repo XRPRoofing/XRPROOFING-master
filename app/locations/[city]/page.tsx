@@ -14,6 +14,7 @@ import FAQSection from "@/components/ui/FAQSection";
 import LeadForm from "@/components/ui/LeadForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ReviewSection from "@/components/ui/ReviewSection";
+import ServiceIcon from "@/components/ui/ServiceIcon";
 import { LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
 export async function generateStaticParams() {
@@ -216,7 +217,7 @@ export default async function CityPage({
                 href={`/locations/${citySlug}/${service.slug}`}
                 className="group bg-white hover:bg-orange-50 border border-gray-200 hover:border-orange-300 rounded-2xl p-5 transition-all duration-200"
               >
-                <div className="text-2xl mb-2">{service.icon}</div>
+                <div className="mb-2"><ServiceIcon slug={service.slug} /></div>
                 <h3 className="font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-1">
                   {service.name} in {city.name}
                 </h3>
@@ -233,7 +234,7 @@ export default async function CityPage({
                 className="group bg-orange-700 hover:bg-orange-800 rounded-2xl p-5 transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-2xl mb-2">🏠</div>
+                  <div className="mb-2"><ServiceIcon slug="overview" /></div>
                   <h3 className="font-bold text-white mb-1">Complete Roofing Services in {city.name}</h3>
                   <p className="text-xs text-orange-100">Compare repair, replacement, tile, shingle, flat, and commercial roofing options in {city.name}.</p>
                 </div>
