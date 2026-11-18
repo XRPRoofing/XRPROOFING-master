@@ -55,6 +55,11 @@ export function servicePageH1(service: Pick<Service, "name">): string {
 type BlogSeo = { title: string; description: string };
 
 export const blogSeo: Record<string, BlogSeo> = {
+  "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat": {
+    title: "Why Phoenix Tile Roofs Fail Inside Out | XRP",
+    description:
+      "Why Phoenix tile roofs leak from the inside out: underlayment, flashing, and heat, and when a lift and relay makes sense.",
+  },
   "hidden-water-damage-mold-after-roof-leak-phoenix": {
     title: "Hidden Roof Leak Damage in Phoenix | XRP",
     description:
