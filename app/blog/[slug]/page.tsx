@@ -10,6 +10,133 @@ import CTASection from "@/components/ui/CTASection";
 import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
+  "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat": {
+    slug: "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat",
+    title: "Why Phoenix Tile Roofs Fail From the Inside Out: Understanding Underlayment, Flashing & Heat",
+    excerpt: "Many Phoenix homeowners believe their concrete or clay tile roof is the primary defense against water. While tile is extremely durable, it is only one part of the system. In Arizona's extreme climate, most tile roofs fail from the inside out — long before the tiles themselves wear out.",
+    date: "2026-11-18",
+    readTime: "6 min read",
+    category: "Materials",
+    metaDescription: "Most Phoenix tile roofs fail from the inside out. Learn how underlayment, flashing, and Arizona heat affect a tile roof, why it can look fine but still leak, and when a lift and relay makes sense.",
+    sections: [
+      {
+        heading: "Tile Is Only One Part of the System",
+        body: "This guide explains how a Phoenix [tile roof](/services/tile-roofing) actually works, why underlayment and flashing fail first, and what that means for your home in [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), and across the Valley.",
+      },
+      {
+        heading: "How a Phoenix Tile Roof System Really Works",
+        image: {
+          src: "/images/blog/tile-inside-out/tile-roof-layers-deck-battens-exposed-phoenix.jpg",
+          alt: "Aerial view of an XRP Roofing job in the Phoenix area with the tile lifted, showing the roof deck, underlayment, and wood battens beneath the tile",
+          caption: "With the tile lifted, you can see the layers that actually keep water out: the roof deck, the underlayment, and the battens the tile sits on.",
+        },
+        body: "A properly installed tile roof has several layers working together:",
+        listItems: [
+          "Tile — The visible surface. It sheds the majority of water and protects the layers underneath from UV and physical damage. Concrete and clay tile can last 40–50+ years in the Valley.",
+          "Underlayment — The true waterproofing layer. This is the continuous membrane or felt system installed directly on the roof deck. It is what actually keeps water out of your home.",
+          "Flashing — Metal pieces that seal critical transitions (pipe penetrations, chimneys, skylights, walls, valleys, and eaves).",
+          "Roof deck — The plywood or OSB sheathing that supports everything.",
+        ],
+      },
+      {
+        heading: "The Tile Protects the Underlayment. The Underlayment Protects the House.",
+        body: "When the underlayment fails, water can enter even if every tile still looks perfect from the street.",
+      },
+      {
+        heading: "Why Arizona Heat Destroys Underlayment Faster",
+        body: "Phoenix roof surfaces regularly reach 150–170°F in summer. This extreme heat, combined with intense UV exposure, accelerates the breakdown of underlayment materials. Learn more about [how Arizona UV damages your roof](/blog/how-arizona-uv-damages-your-roof) and [thermal expansion damage on Phoenix roofs](/blog/phoenix-roof-thermal-expansion-damage). Common issues include:",
+        listItems: [
+          "Dry-out and cracking of traditional felt underlayments",
+          "Loss of flexibility in modified bitumen and synthetic membranes",
+          "Thermal expansion and contraction that stresses seams and fasteners over thousands of daily cycles",
+          "UV degradation of any underlayment that becomes exposed when tiles shift or crack",
+        ],
+      },
+      {
+        heading: "Underlayment Wears Out Before the Tile Does",
+        body: "Most underlayment systems in the Phoenix area have a realistic lifespan of 15–25 years — significantly shorter than the tile above them. Once underlayment begins to fail, small amounts of water can migrate beneath the tile and into the deck or attic without any obvious exterior signs.",
+      },
+      {
+        heading: "The Role of Flashing and Penetrations",
+        image: {
+          src: "/images/blog/tile-inside-out/tile-roof-wall-flashing-transition-arizona.jpg",
+          alt: "Arizona tile roof meeting a stucco wall and chimney, with metal flashing running along the transition",
+          caption: "Where tile meets a wall or chimney, metal flashing seals the transition. These spots take constant heat and UV and are common leak points.",
+        },
+        body: "Flashing is one of the most common failure points on Phoenix tile roofs. Pipe boots, skylight curbs, chimney flashings, and wall transitions rely on sealants and metal that degrade under constant heat and UV. When sealant dries and cracks, or when flashing lifts, monsoon rain and wind-driven water can enter directly. Because tile roofs are designed to shed water over the surface, any breach at a penetration or transition allows water to run underneath the tile and reach the underlayment. See our guide to [debris, settled tile, and flashing after the monsoon](/blog/post-monsoon-debris-settled-flashing-phoenix).",
+      },
+      {
+        heading: "Why Your Roof Can Look Fine but Still Leak",
+        image: {
+          src: "/images/blog/tile-inside-out/tile-roofs-look-fine-from-above-phoenix.jpg",
+          alt: "Aerial view of Phoenix-area homes with clay tile roofs that look intact from above",
+          caption: "From the street or even from above, a tile roof can look perfect. The underlayment underneath is what tells the real story.",
+        },
+        body: "This is one of the most frequent surprises for Phoenix homeowners:",
+        listItems: [
+          "Tiles can shift slightly during high winds and then settle back into place, leaving no obvious missing tiles.",
+          "Cracked or broken tiles may be present but hidden from ground view.",
+          "Underlayment can develop cracks, holes, or seam failures while the tile field still appears intact.",
+          "Water can travel horizontally under the tile before finding a way into the attic or living space.",
+        ],
+      },
+      {
+        heading: "Leaks Often Show Up Long After the Damage",
+        body: "As a result, many leaks appear months or years after the original damage occurred, often showing up as ceiling stains far from the actual entry point. Read more about [the hidden damage after a roof leak](/blog/hidden-water-damage-mold-after-roof-leak-phoenix).",
+      },
+      {
+        heading: "What “Lift and Relay” Means",
+        image: {
+          src: "/images/blog/tile-inside-out/tile-lift-and-relay-in-progress-arizona.jpg",
+          alt: "Aerial view of an XRP Roofing lift and relay in Arizona, with the tile removed and stacked while crew members install new underlayment",
+          caption: "An XRP Roofing lift and relay in progress: the tile is lifted and stacked, the old underlayment comes off, and new waterproofing goes down before the tile is reinstalled.",
+        },
+        body: "When underlayment reaches the end of its life but the tile is still in good condition, the standard solution is a lift and relay. In this process, the existing tiles are carefully removed, the old underlayment is stripped, a new waterproofing system is installed, and the original tiles are reinstalled. This approach preserves the tile (which is usually still functional) while restoring the critical waterproofing layer underneath. It is typically far more cost-effective than a full [roof replacement](/services/roof-replacement) when the tile itself is still serviceable. Compare your options in our guide to [tile roof repair, lift & relay, or replacement](/blog/tile-roof-repair-lift-relay-or-replace-arizona).",
+      },
+      {
+        heading: "Key Takeaways for Phoenix Homeowners",
+        listItems: [
+          "The tile is not the waterproofing — the underlayment is.",
+          "Arizona heat and UV shorten underlayment life well before the tile fails.",
+          "Flashing and penetrations are high-risk areas that require regular attention.",
+          "A roof can look excellent from the ground and still have active underlayment issues.",
+          "Professional inspections focus on the layers and details that homeowners cannot easily evaluate.",
+        ],
+      },
+      {
+        heading: "Next Step",
+        body: "If your Phoenix home has a tile roof that is 15–20 years old or older, or if you've noticed any signs of staining, the underlayment system is worth evaluating. A thorough inspection can determine whether the waterproofing layer is still intact or if a lift and relay (or other [repair](/services/roof-repair)) is recommended. Not sure when to schedule one? Read [how often you should have your roof inspected in Phoenix](/blog/how-often-roof-inspection-phoenix).",
+      },
+      {
+        heading: "Schedule a Tile Roof Evaluation With XRP Roofing",
+        body: "Contact XRP Roofing to schedule a professional roof evaluation. We'll assess the full system — tile, underlayment, flashing, and drainage — and give you a clear picture of your roof's condition. Serving [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), [Peoria](/locations/peoria-az), [Glendale](/locations/glendale-az), [Mesa](/locations/mesa-az), [Chandler](/locations/chandler-az), [Goodyear](/locations/goodyear-az), and surrounding communities. Licensed, bonded, and insured — Arizona ROC #350898. Call {{PHONE}} or [request an inspection online](/contact).",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is the tile the waterproofing layer on a Phoenix tile roof?",
+        a: "No. The tile sheds most of the water and protects the layers below from UV and physical damage, but the underlayment installed on the roof deck is the true waterproofing layer.",
+      },
+      {
+        q: "How long does tile roof underlayment last in Phoenix?",
+        a: "Most underlayment systems in the Phoenix area have a realistic lifespan of 15–25 years, significantly shorter than concrete or clay tile, which can last 40–50+ years.",
+      },
+      {
+        q: "Can a tile roof leak if the tiles look fine?",
+        a: "Yes. Underlayment can crack or fail at the seams, and flashing can lift or lose its sealant, while the tile field still looks intact from the ground.",
+      },
+      {
+        q: "What is a lift and relay?",
+        a: "The existing tiles are carefully removed, the old underlayment is stripped, a new waterproofing system is installed, and the original tiles are reinstalled. It is typically far more cost-effective than a full replacement when the tile is still serviceable.",
+      },
+    ],
+    relatedServices: [
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+      { label: "Roof Repair", href: "/services/roof-repair" },
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Schedule a Roof Inspection", href: "/contact" },
+    ],
+  },
   "hidden-water-damage-mold-after-roof-leak-phoenix": {
     slug: "hidden-water-damage-mold-after-roof-leak-phoenix",
     title: "The Hidden Damage After a Roof Leak: What Phoenix Homeowners Need to Know About Water Damage and Mold",

@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat",
+    title: "Why Phoenix Tile Roofs Fail From the Inside Out: Understanding Underlayment, Flashing & Heat",
+    excerpt: "Many Phoenix homeowners believe their concrete or clay tile roof is the primary defense against water. While tile is extremely durable, it is only one part of the system. In Arizona's extreme climate, most tile roofs fail from the inside out — long before the tiles themselves wear out.",
+    date: "2026-11-18",
+    readTime: "6 min read",
+    category: "Materials",
+  },
+  {
     slug: "hidden-water-damage-mold-after-roof-leak-phoenix",
     title: "The Hidden Damage After a Roof Leak: What Phoenix Homeowners Need to Know About Water Damage and Mold",
     excerpt: "A small ceiling stain may be the first visible warning of a much larger moisture problem. Here's what Arizona homeowners should know before a minor roof leak turns into an expensive repair.",
