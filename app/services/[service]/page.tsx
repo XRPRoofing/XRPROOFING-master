@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_URL } from "@/lib/constants";
-import { servicePageDescription, servicePageH1, servicePageTitle } from "@/lib/seo";
+import { PHONE, PHONE_HREF } from "@/lib/constants";
+import { pageMetadata, servicePageDescription, servicePageH1, servicePageTitle } from "@/lib/seo";
 import { services, getService, getRelatedServices } from "@/lib/services";
 import { cities } from "@/lib/cities";
 import { getServiceImage } from "@/lib/images";
@@ -32,26 +32,16 @@ export async function generateMetadata({
 
   const title = servicePageTitle(service);
   const description = servicePageDescription(service);
-  const canonical = `${SITE_URL}/services/${serviceSlug}`;
   const image = getServiceImage(serviceSlug).src;
 
   return {
-    title,
-    description,
+    ...pageMetadata({
+      title,
+      description,
+      path: `/services/${serviceSlug}`,
+      image,
+    }),
     keywords: service.keywords,
-    alternates: { canonical },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      images: [{ url: image }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
   };
 }
 
@@ -401,7 +391,7 @@ export default async function ServicePage({
       <ServiceSchema
         serviceName={service.name}
         serviceSlug={serviceSlug}
-        description={service.metaDescription}
+        description={servicePageDescription(service)}
       />
       <FAQSchema faqs={faqs} />
       <BreadcrumbSchema items={breadcrumbItems} />

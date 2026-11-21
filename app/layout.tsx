@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AppChrome from "@/components/layout/AppChrome";
+import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
 import { SITE_NAME, SITE_URL, OG_IMAGE } from "@/lib/constants";
+import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,9 +22,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `${SITE_NAME} | Phoenix Roofers`,
-  description:
-    "XRP Roofing is a licensed roofing company in Phoenix, AZ. Repair, replacement, tile, and storm damage. Free inspections.",
+  title: {
+    default: HOME_TITLE,
+    template: "%s",
+  },
+  description: HOME_DESCRIPTION,
   keywords: ["roofers in Phoenix AZ", "roofing company Phoenix", "roofing contractor Phoenix AZ", "roof repair Phoenix", "XRP Roofing"],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -43,15 +47,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | Phoenix Roofers`,
-    description:
-      "XRP Roofing is a licensed roofing company in Phoenix, AZ. Repair, replacement, tile, and storm damage. Free inspections.",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "XRP Roofing – Phoenix's Trusted Roofing Contractor" }],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "XRP Roofing, a Phoenix roofing contractor" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Phoenix Roofers`,
-    description: "Licensed Phoenix roofing company. Free inspections for repair, replacement, and storm damage.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: [OG_IMAGE],
   },
 };
@@ -64,6 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased bg-white text-gray-900 pb-16 lg:pb-0">
+        <LocalBusinessSchema />
         <AppChrome>{children}</AppChrome>
       </body>
     </html>

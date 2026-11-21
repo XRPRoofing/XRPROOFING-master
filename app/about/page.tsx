@@ -2,29 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle, ArrowRight, Phone } from "lucide-react";
-import { OG_IMAGE, PHONE, PHONE_HREF, SITE_URL } from "@/lib/constants";
+import { PHONE, PHONE_HREF } from "@/lib/constants";
+import { ABOUT_DESCRIPTION, ABOUT_TITLE, pageMetadata } from "@/lib/seo";
 import CTASection from "@/components/ui/CTASection";
 import TrustBadges from "@/components/ui/TrustBadges";
-import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
+import { BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
-export const metadata: Metadata = {
-  title: "About XRP Roofing | Phoenix, AZ",
-  description:
-    "XRP Roofing is a licensed Phoenix roofing company. Local crews, free inspections, and written estimates across the Valley.",
-  alternates: { canonical: `${SITE_URL}/about` },
-  openGraph: {
-    title: "About XRP Roofing | Phoenix, AZ",
-    description: "XRP Roofing is a licensed Phoenix roofing company. Local crews, free inspections, and written estimates across the Valley.",
-    url: `${SITE_URL}/about`,
-    images: [{ url: OG_IMAGE }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About XRP Roofing | Phoenix, AZ",
-    description: "XRP Roofing is a licensed Phoenix roofing company. Local crews, free inspections, and written estimates across the Valley.",
-    images: [OG_IMAGE],
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: ABOUT_TITLE,
+  description: ABOUT_DESCRIPTION,
+  path: "/about",
+});
 
 const values = [
   { title: "Honesty First", description: "We never recommend more work than your roof actually needs. Our inspections are thorough, our estimates are itemized, and our pricing is transparent." },
@@ -42,7 +30,7 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      <LocalBusinessSchema />
+      <BreadcrumbSchema items={[{ label: "About" }]} />
 
       {/* Hero */}
       <section className="relative py-20 bg-gray-900 overflow-hidden">

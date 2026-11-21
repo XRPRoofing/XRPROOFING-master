@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, ArrowRight, CheckCircle, Star } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_URL, OG_IMAGE } from "@/lib/constants";
-import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/seo";
+import { PHONE, PHONE_HREF } from "@/lib/constants";
+import { HOME_DESCRIPTION, HOME_TITLE, pageMetadata } from "@/lib/seo";
 import { services } from "@/lib/services";
-import { LocalBusinessSchema, FAQSchema, WebSiteSchema } from "@/components/ui/SeoSchema";
+import { FAQSchema, WebSiteSchema } from "@/components/ui/SeoSchema";
 import TrustBadges from "@/components/ui/TrustBadges";
 import LeadForm from "@/components/ui/LeadForm";
 import ServiceGrid from "@/components/ui/ServiceGrid";
@@ -15,8 +15,7 @@ import LocationGrid from "@/components/ui/LocationGrid";
 import ProjectGallery from "@/components/ui/ProjectGallery";
 
 export const metadata: Metadata = {
-  title: HOME_TITLE,
-  description: HOME_DESCRIPTION,
+  ...pageMetadata({ title: HOME_TITLE, description: HOME_DESCRIPTION, path: "/" }),
   keywords: [
     "roofers in Phoenix AZ",
     "roofing",
@@ -25,19 +24,6 @@ export const metadata: Metadata = {
     "roofing contractor in Phoenix AZ",
     "roofing contractor Phoenix AZ",
   ],
-  alternates: { canonical: SITE_URL },
-  openGraph: {
-    title: HOME_TITLE,
-    description: HOME_DESCRIPTION,
-    url: SITE_URL,
-    images: [{ url: OG_IMAGE }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: HOME_TITLE,
-    description: HOME_DESCRIPTION,
-    images: [OG_IMAGE],
-  },
 };
 
 const homepageFaqs = [
@@ -54,7 +40,6 @@ export default function HomePage() {
 
   return (
     <>
-      <LocalBusinessSchema />
       <WebSiteSchema />
       <FAQSchema faqs={homepageFaqs} />
 

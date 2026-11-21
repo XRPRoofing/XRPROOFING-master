@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { pageMetadata, PRIVACY_DESCRIPTION, PRIVACY_TITLE } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
-export const metadata: Metadata = {
-  title: `Privacy Policy | ${SITE_NAME}`,
-  description:
-    "XRP Roofing privacy policy: data we collect, how we use it, your choices, and how we handle phone numbers and texts.",
-  alternates: { canonical: `${SITE_URL}/privacy-policy` },
-  robots: { index: true, follow: true },
-  openGraph: {
-    title: `Privacy Policy | ${SITE_NAME}`,
-    url: `${SITE_URL}/privacy-policy`,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: PRIVACY_TITLE,
+  description: PRIVACY_DESCRIPTION,
+  path: "/privacy-policy",
+});
 
 const EFFECTIVE_DATE = "April 16, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <BreadcrumbSchema items={[{ label: "Privacy Policy" }]} />
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">

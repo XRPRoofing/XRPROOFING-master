@@ -55,14 +55,14 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center flex-shrink-0" aria-label={SITE_NAME}>
+          <Link href="/" className="flex items-center min-w-0 flex-shrink" aria-label={SITE_NAME}>
             <Image
               src="/images/logo.png"
               alt="XRP Roofing Logo"
               width={344}
               height={140}
-              className="h-12 lg:h-14 w-auto object-contain"
-              sizes="(max-width: 1024px) 120px, 140px"
+              className="h-10 sm:h-12 lg:h-14 w-auto object-contain"
+              sizes="(max-width: 640px) 96px, (max-width: 1024px) 120px, 140px"
             />
           </Link>
 
@@ -118,10 +118,10 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href={PHONE_HREF}
-              className="hidden sm:flex items-center gap-2 bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors"
+              className="flex shrink-0 items-center gap-1.5 bg-orange-700 hover:bg-orange-800 text-white px-2.5 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-colors"
             >
-              <Phone className="w-4 h-4" />
-              {PHONE}
+              <Phone className="w-4 h-4 shrink-0" />
+              <span className="whitespace-nowrap">{PHONE}</span>
             </a>
             <Button
               variant="ghost"

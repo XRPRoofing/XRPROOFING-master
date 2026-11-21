@@ -24,22 +24,17 @@ import {
   Wrench,
   Zap,
 } from "lucide-react";
-import { PHONE, PHONE_HREF, SITE_NAME, SITE_URL, OG_IMAGE, GOOGLE_REVIEW_URL } from "@/lib/constants";
+import { PHONE, PHONE_HREF, GOOGLE_REVIEW_URL, SITE_URL } from "@/lib/constants";
+import { LANDING_DESCRIPTION, LANDING_TITLE, pageMetadata } from "@/lib/seo";
 import LandingContactForm from "@/components/ui/LandingContactForm";
-import { LocalBusinessSchema, ReviewSchema, ServiceSchema } from "@/components/ui/SeoSchema";
+import { BreadcrumbSchema, ReviewSchema, ServiceSchema } from "@/components/ui/SeoSchema";
 
-export const metadata: Metadata = {
-  title: `${SITE_NAME} Landing | Free Roof Inspection`,
-  description:
-    "Free roof inspection from XRP Roofing for repairs, replacements, storm damage, and commercial roofing across Arizona.",
-  alternates: { canonical: `${SITE_URL}/landing` },
-  robots: { index: false, follow: true },
-  openGraph: {
-    title: `${SITE_NAME} | Free Roof Inspection`,
-    description: "A high-converting roofing landing page for inspections, repairs, replacements, storm restoration, and emergency roofing support.",
-    images: [{ url: OG_IMAGE }],
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: LANDING_TITLE,
+  description: LANDING_DESCRIPTION,
+  path: "/landing",
+  index: false,
+});
 
 const stats = [
   { value: "500+", label: "Projects Completed", icon: Trophy },
@@ -104,15 +99,17 @@ const trustBadges = [
 type LandingPageProps = {
   headline?: string;
   intro?: string;
+  breadcrumbLabel?: string;
 };
 
 export default function LandingPage({
   headline = "Protect Your Home With Roofing You Can Trust",
   intro = "Professional roofing solutions for residential and commercial properties. From inspections and repairs to full roof replacements, XRP Roofing delivers dependable service and lasting results.",
+  breadcrumbLabel = "Free Roof Inspection",
 }: LandingPageProps = {}) {
   return (
     <>
-      <LocalBusinessSchema />
+      <BreadcrumbSchema items={[{ label: breadcrumbLabel }]} />
       <ServiceSchema
         serviceName="Free Roof Inspection"
         serviceSlug="free-roof-inspection"

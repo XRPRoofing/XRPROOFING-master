@@ -1,9 +1,5 @@
-import { ADDRESS, EMAIL, GOOGLE_MAPS_URL, LOGO_IMAGE, LOGO_IMAGE_WIDTH, LOGO_IMAGE_HEIGHT, OG_IMAGE, PHONE, SITE_NAME, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
-
-interface LocalBusinessSchemaProps {
-  cityName?: string;
-  citySlug?: string;
-}
+import { LOGO_IMAGE, LOGO_IMAGE_WIDTH, LOGO_IMAGE_HEIGHT, OG_IMAGE, PHONE, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { buildBreadcrumbSchema, buildRoofingContractorSchema, serializeJsonLd } from "@/lib/roofing-schema";
 
 interface ServiceSchemaProps {
   serviceName: string;
@@ -35,89 +31,11 @@ interface ReviewSchemaProps {
   ratingValue?: number;
 }
 
-export function LocalBusinessSchema({ cityName }: LocalBusinessSchemaProps) {
-  const areaServed = cityName
-    ? {
-        "@type": "City",
-        name: `${cityName}, AZ`,
-      }
-    : {
-        "@type": "GeoCircle",
-        geoMidpoint: {
-          "@type": "GeoCoordinates",
-          latitude: "33.4656",
-          longitude: "-112.1210",
-        },
-        geoRadius: "160934",
-      };
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "RoofingContractor",
-    "@id": `${SITE_URL}/#localbusiness`,
-    name: SITE_NAME,
-    legalName: "AZ Pro Contractors LLC",
-    description: "XRP Roofing (AZ Pro Contractors LLC) is a licensed and insured roofing contractor serving Phoenix, AZ and the 100-mile metro radius. ROC #350898. Residential and commercial roofing including tile, concrete tile, shingle, foam (SPF), and flat roofing; roof installation, roof replacement, roof repair, and storm damage restoration. Free inspections and written estimates.",
-    url: SITE_URL,
-    image: `${SITE_URL}${OG_IMAGE}`,
-    logo: {
-      "@type": "ImageObject",
-      url: `${SITE_URL}${LOGO_IMAGE}`,
-      width: LOGO_IMAGE_WIDTH,
-      height: LOGO_IMAGE_HEIGHT,
-    },
-    telephone: PHONE,
-    email: EMAIL,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: ADDRESS.split(",")[0],
-      addressLocality: "Phoenix",
-      addressRegion: "AZ",
-      postalCode: "85009",
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "33.4656",
-      longitude: "-112.1210",
-    },
-    hasMap: GOOGLE_MAPS_URL,
-    areaServed,
-    priceRange: "$$",
-    openingHours: ["Mo-Fr 07:00-18:00", "Sa 08:00-16:00"],
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "07:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "08:00",
-        closes: "16:00",
-      },
-    ],
-    sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok, GOOGLE_MAPS_URL],
-    knowsAbout: [
-      "Residential roofing",
-      "Commercial roofing",
-      "Tile roofing",
-      "Concrete tile roofing",
-      "Shingle roofing",
-      "Foam roofing",
-      "Roof installation",
-      "Roof replacement",
-      "Roof repair",
-      "Storm damage restoration",
-    ],
-  };
-
+export function LocalBusinessSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildRoofingContractorSchema()) }}
     />
   );
 }
@@ -153,7 +71,7 @@ export function ServiceSchema({ serviceName, serviceSlug, description, cityName,
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }
@@ -175,28 +93,16 @@ export function FAQSchema({ faqs }: FAQSchemaProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }
 
 export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
-  const allItems = [{ label: "Home", href: "/" }, ...items];
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: allItems.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.label,
-      ...(item.href ? { item: `${SITE_URL}${item.href}` } : {}),
-    })),
-  };
-
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildBreadcrumbSchema(items)) }}
     />
   );
 }
@@ -231,7 +137,7 @@ export function ArticleSchema({ title, description, slug, datePublished }: Artic
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }
@@ -262,7 +168,7 @@ export function ReviewSchema({ authorName, reviewBody, ratingValue = 5 }: Review
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }
@@ -283,7 +189,7 @@ export function WebSiteSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

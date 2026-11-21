@@ -8,6 +8,7 @@ import {
   ADDRESS,
   SITE_NAME,
   SERVICE_AREA,
+  LICENSE_LINE,
   LICENSE_NOTE,
   SOCIAL_LINKS,
   GOOGLE_REVIEW_URL,
@@ -198,8 +199,13 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="container mx-auto px-4 pt-4 pb-24 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="border-t border-white/15">
+        <div className="container mx-auto px-4 pt-5 pb-2">
+          <p className="text-sm sm:text-base font-semibold text-white text-center leading-relaxed">
+            {LICENSE_LINE}
+          </p>
+        </div>
+        <div className="container mx-auto px-4 pt-3 pb-24 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-400 text-center sm:text-left">
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
             {" · "}

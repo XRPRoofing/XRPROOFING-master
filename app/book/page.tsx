@@ -1,33 +1,19 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
-import { BOOKING_WIDGET_URL, OG_IMAGE, PHONE, PHONE_HREF, SITE_NAME, SITE_URL } from "@/lib/constants";
-import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
+import { BOOKING_WIDGET_URL, PHONE, PHONE_HREF, SITE_NAME } from "@/lib/constants";
+import { BOOK_DESCRIPTION, BOOK_TITLE, pageMetadata } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
-const DESCRIPTION =
-  "Book a free roof inspection online with XRP Roofing. Pick a time and we will confirm. Serving the Phoenix metro.";
-
-export const metadata: Metadata = {
-  title: "Book a Free Roof Inspection | XRP Roofing",
-  description: DESCRIPTION,
-  alternates: { canonical: `${SITE_URL}/book` },
-  openGraph: {
-    title: "Book a Free Roof Inspection | XRP Roofing",
-    description: DESCRIPTION,
-    url: `${SITE_URL}/book`,
-    images: [{ url: OG_IMAGE }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Book a Free Roof Inspection | XRP Roofing",
-    description: DESCRIPTION,
-    images: [OG_IMAGE],
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: BOOK_TITLE,
+  description: BOOK_DESCRIPTION,
+  path: "/book",
+});
 
 export default function BookPage() {
   return (
     <>
-      <LocalBusinessSchema />
+      <BreadcrumbSchema items={[{ label: "Book Online" }]} />
 
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">

@@ -2,24 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { MARKETING_SMS_CONSENT, NON_MARKETING_SMS_CONSENT, SMS_REQUIRED_DISCLOSURE } from "@/lib/sms-compliance";
+import { pageMetadata, TERMS_DESCRIPTION, TERMS_TITLE } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
-export const metadata: Metadata = {
-  title: `Terms & Conditions | ${SITE_NAME}`,
-  description:
-    "XRP Roofing terms, including text-message rules, message frequency, rates, HELP and STOP, and how to reach us.",
-  alternates: { canonical: `${SITE_URL}/terms` },
-  robots: { index: true, follow: true },
-  openGraph: {
-    title: `Terms & Conditions | ${SITE_NAME}`,
-    url: `${SITE_URL}/terms`,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: TERMS_TITLE,
+  description: TERMS_DESCRIPTION,
+  path: "/terms",
+});
 
 const EFFECTIVE_DATE = "April 16, 2026";
 
 export default function TermsPage() {
   return (
     <>
+      <BreadcrumbSchema items={[{ label: "Terms and Conditions" }]} />
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">

@@ -1,27 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
-import { OG_IMAGE, SITE_URL } from "@/lib/constants";
+import { BLOG_DESCRIPTION, BLOG_TITLE, pageMetadata } from "@/lib/seo";
 import CTASection from "@/components/ui/CTASection";
+import { BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
-export const metadata: Metadata = {
-  title: "Arizona Roofing Blog | XRP Roofing",
-  description:
-    "Roofing tips for Phoenix homeowners: monsoon prep, leaks, tile, shingles, and when to repair or replace.",
-  alternates: { canonical: `${SITE_URL}/blog` },
-  openGraph: {
-    title: "Arizona Roofing Blog | XRP Roofing",
-    description: "Roofing tips for Phoenix homeowners: monsoon prep, leaks, tile, shingles, and when to repair or replace.",
-    url: `${SITE_URL}/blog`,
-    images: [{ url: OG_IMAGE }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Arizona Roofing Blog | XRP Roofing",
-    description: "Roofing tips for Phoenix homeowners: monsoon prep, leaks, tile, shingles, and when to repair or replace.",
-    images: [OG_IMAGE],
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: BLOG_TITLE,
+  description: BLOG_DESCRIPTION,
+  path: "/blog",
+});
 
 const posts = [
   {
@@ -255,6 +243,7 @@ const categories = ["All", "Roof Coatings", "Emergency Repair", "Storm Damage", 
 export default function BlogPage() {
   return (
     <>
+      <BreadcrumbSchema items={[{ label: "Roofing Blog" }]} />
       {/* Hero */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
