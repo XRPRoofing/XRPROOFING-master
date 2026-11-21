@@ -21,19 +21,23 @@ import {
   ThermometerSun,
   Wrench,
 } from "lucide-react";
-import { PHONE_HREF, SITE_URL } from "@/lib/constants";
+import { PHONE_HREF } from "@/lib/constants";
+import { FOAM_DESCRIPTION, FOAM_TITLE, pageMetadata } from "@/lib/seo";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CTASection from "@/components/ui/CTASection";
 import FAQSection from "@/components/ui/FAQSection";
-import { BreadcrumbSchema, FAQSchema, LocalBusinessSchema, ServiceSchema } from "@/components/ui/SeoSchema";
+import { BreadcrumbSchema, FAQSchema, ServiceSchema } from "@/components/ui/SeoSchema";
 
 const pagePath = "/phoenix-foam-roofing";
 const heroImage = "/images/xrp-roofing/foam-roofing-coated-flat-roof.jpeg";
 
 export const metadata: Metadata = {
-  title: "Phoenix Foam Roofing | XRP Roofing",
-  description:
-    "Foam roofing and elastomeric coatings in Phoenix for flat and low-slope roofs. Free inspections from XRP Roofing.",
+  ...pageMetadata({
+    title: FOAM_TITLE,
+    description: FOAM_DESCRIPTION,
+    path: pagePath,
+    image: heroImage,
+  }),
   keywords: [
     "Phoenix Foam Roofing",
     "Foam Roofing Contractor Phoenix AZ",
@@ -42,21 +46,6 @@ export const metadata: Metadata = {
     "Flat Roof Coatings Phoenix",
     "Commercial Foam Roofing",
   ],
-  alternates: { canonical: `${SITE_URL}${pagePath}` },
-  openGraph: {
-    title: "Phoenix Foam Roofing | XRP Roofing",
-    description:
-      "Foam roofing and elastomeric coatings in Phoenix for flat and low-slope roofs. Free inspections from XRP Roofing.",
-    url: `${SITE_URL}${pagePath}`,
-    images: [{ url: heroImage }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Phoenix Foam Roofing | XRP Roofing",
-    description:
-      "Foam roofing and elastomeric coatings in Phoenix for flat and low-slope roofs. Free inspections from XRP Roofing.",
-    images: [heroImage],
-  },
 };
 
 const trustItems = [
@@ -147,11 +136,10 @@ const breadcrumbItems = [
 export default function PhoenixFoamRoofingPage() {
   return (
     <>
-      <LocalBusinessSchema />
       <ServiceSchema
         serviceName="Foam Roofing & Elastomeric Coatings"
         serviceSlug="phoenix-foam-roofing"
-        description="Professional foam roofing, SPF roofing, elastomeric coatings, and flat roof coating services in Phoenix, Arizona."
+        description={FOAM_DESCRIPTION}
         pagePath={pagePath}
       />
       <FAQSchema faqs={faqs} />

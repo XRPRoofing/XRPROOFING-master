@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
-import { OG_IMAGE, PHONE, SITE_URL } from "@/lib/constants";
-import { blogSeo } from "@/lib/seo";
+import { PHONE, PHONE_HREF } from "@/lib/constants";
+import { blogSeo, pageMetadata } from "@/lib/seo";
 import CTASection from "@/components/ui/CTASection";
-import { ArticleSchema, FAQSchema } from "@/components/ui/SeoSchema";
+import { ArticleSchema, BreadcrumbSchema, FAQSchema } from "@/components/ui/SeoSchema";
 
 const allPosts: Record<string, BlogPost> = {
   "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat": {
@@ -2218,6 +2218,27 @@ interface BlogSection {
 
 const LINK_PATTERN = /\[([^\]]+)\]\((\/[^\s)]*)\)/g;
 
+function withPhoneLinks(text: string, key: string): Array<string | ReactElement> {
+  if (!text.includes(PHONE)) return text ? [text] : [];
+  const parts = text.split(PHONE);
+  const nodes: Array<string | ReactElement> = [];
+  parts.forEach((part, index) => {
+    if (part) nodes.push(part);
+    if (index < parts.length - 1) {
+      nodes.push(
+        <a
+          key={`${key}-phone-${index}`}
+          href={PHONE_HREF}
+          className="text-orange-700 underline underline-offset-2 hover:text-orange-500 transition-colors"
+        >
+          {PHONE}
+        </a>
+      );
+    }
+  });
+  return nodes;
+}
+
 function renderRichText(text: string) {
   const source = text.replaceAll("{{PHONE}}", PHONE);
   const nodes: Array<string | ReactElement> = [];
@@ -2226,7 +2247,7 @@ function renderRichText(text: string) {
   for (const match of source.matchAll(LINK_PATTERN)) {
     const [raw, label, href] = match;
     const start = match.index ?? 0;
-    if (start > cursor) nodes.push(source.slice(cursor, start));
+    if (start > cursor) nodes.push(...withPhoneLinks(source.slice(cursor, start), `text-${start}`));
     nodes.push(
       <Link
         key={`${href}-${start}`}
@@ -2239,7 +2260,7 @@ function renderRichText(text: string) {
     cursor = start + raw.length;
   }
 
-  if (cursor < source.length) nodes.push(source.slice(cursor));
+  if (cursor < source.length) nodes.push(...withPhoneLinks(source.slice(cursor), `text-${cursor}`));
   return nodes;
 }
 
@@ -2272,25 +2293,19 @@ export async function generateMetadata({
   const seo = blogSeo[slug];
   const title = seo?.title ?? post.title;
   const description = seo?.description ?? post.metaDescription;
-  const canonical = `${SITE_URL}/blog/${slug}`;
-
-  return {
+  const metadata = pageMetadata({
     title,
     description,
-    alternates: { canonical },
+    path: `/blog/${slug}`,
+    ogType: "article",
+  });
+
+  return {
+    ...metadata,
     openGraph: {
-      title,
-      description,
-      url: canonical,
+      ...metadata.openGraph,
       type: "article",
       publishedTime: post.date,
-      images: [{ url: OG_IMAGE }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [OG_IMAGE],
     },
   };
 }
@@ -2314,6 +2329,12 @@ export default async function BlogPostPage({
         datePublished={post.date}
       />
       <FAQSchema faqs={post.faqs} />
+      <BreadcrumbSchema
+        items={[
+          { label: "Blog", href: "/blog" },
+          { label: post.title },
+        ]}
+      />
 
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4 max-w-3xl">

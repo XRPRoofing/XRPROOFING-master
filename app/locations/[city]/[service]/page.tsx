@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { SITE_URL } from "@/lib/constants";
-import { cityServiceDescription, cityServiceTitle } from "@/lib/seo";
+import { cityServiceDescription, cityServiceTitle, pageMetadata } from "@/lib/seo";
 import { cities, getCity, getNearbyCities } from "@/lib/cities";
 import { services, getService, getRelatedServices } from "@/lib/services";
 import { cityServiceContent } from "@/lib/contentEngine";
@@ -38,28 +37,18 @@ export async function generateMetadata({
 
   const title = cityServiceTitle(city, service);
   const description = cityServiceDescription(city, service);
-  const canonical = `${SITE_URL}/locations/${citySlug}/${serviceSlug}`;
   const shouldIndex = city.featuredServices.includes(serviceSlug);
   const image = getServiceImage(serviceSlug).src;
 
   return {
-    title,
-    description,
+    ...pageMetadata({
+      title,
+      description,
+      path: `/locations/${citySlug}/${serviceSlug}`,
+      image,
+      index: shouldIndex,
+    }),
     keywords: [...service.keywords, `${service.name} ${city.name}`, `roofing contractor ${city.name} AZ`],
-    alternates: { canonical },
-    robots: { index: shouldIndex, follow: true },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      images: [{ url: image }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
   };
 }
 
@@ -89,7 +78,7 @@ export default async function CityServicePage({
       <ServiceSchema
         serviceName={service.name}
         serviceSlug={serviceSlug}
-        description={service.metaDescription}
+        description={cityServiceDescription(city, service)}
         cityName={city.name}
         citySlug={citySlug}
       />

@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import LandingPage from "../landing/page";
-import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { ARIZONA_ROOFERS_DESCRIPTION, ARIZONA_ROOFERS_TITLE, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Arizona Roofers | ${SITE_NAME}`,
-  description:
-    "Arizona roofers for repair, replacement, and storm damage. Free roof inspections from XRP Roofing.",
-  alternates: { canonical: `${SITE_URL}/landing` },
-  robots: { index: false, follow: true },
-  openGraph: {
-    title: `Arizona Roofers | ${SITE_NAME}`,
-    description: "Trusted Arizona roofers offering free inspections, repairs, replacements, storm restoration, and damage documentation.",
-    images: [{ url: OG_IMAGE }],
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: ARIZONA_ROOFERS_TITLE,
+  description: ARIZONA_ROOFERS_DESCRIPTION,
+  path: "/landing",
+  index: false,
+});
 
 export default LandingPage;

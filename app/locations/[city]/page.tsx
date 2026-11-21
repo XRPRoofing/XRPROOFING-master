@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
-import { SITE_URL } from "@/lib/constants";
-import { cityPageDescription, cityPageTitle } from "@/lib/seo";
+import { cityPageDescription, cityPageTitle, pageMetadata } from "@/lib/seo";
 import { cities, getCity, getNearbyCities } from "@/lib/cities";
 import { services, getService } from "@/lib/services";
 import { cityPageContent } from "@/lib/contentEngine";
@@ -15,7 +14,7 @@ import LeadForm from "@/components/ui/LeadForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ReviewSection from "@/components/ui/ReviewSection";
 import ServiceIcon from "@/components/ui/ServiceIcon";
-import { LocalBusinessSchema, FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
+import { FAQSchema, BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
 export async function generateStaticParams() {
   return cities.map((c) => ({ city: c.slug }));
@@ -32,12 +31,15 @@ export async function generateMetadata({
 
   const title = cityPageTitle(city);
   const description = cityPageDescription(city);
-  const canonical = `${SITE_URL}/locations/${citySlug}`;
   const image = getCityImage(citySlug).src;
 
   return {
-    title,
-    description,
+    ...pageMetadata({
+      title,
+      description,
+      path: `/locations/${citySlug}`,
+      image,
+    }),
     keywords: [
       `roofing contractor ${city.name} AZ`,
       `roof repair ${city.name}`,
@@ -46,19 +48,6 @@ export async function generateMetadata({
       `tile roofing ${city.name}`,
       `licensed roofer ${city.name} AZ`,
     ],
-    alternates: { canonical },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      images: [{ url: image }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
   };
 }
 
@@ -85,7 +74,6 @@ export default async function CityPage({
 
   return (
     <>
-      <LocalBusinessSchema cityName={city.name} citySlug={citySlug} />
       <FAQSchema faqs={content.faqs} />
       <BreadcrumbSchema items={breadcrumbItems} />
 

@@ -43,7 +43,7 @@ type PackageOption = {
 
 const oldDefaultTerms = "Payment terms, change orders, warranty coverage, permitting, and project scheduling are subject to final written approval. Customer approval authorizes XRP Roofing to begin project coordination.";
 
-const defaultTerms = `AZPRO Contractor LLC DBA XRP Roofing
+const defaultTerms = `AZ Pro Contractors LLC DBA XRP Roofing
 2843 W McDowell Rd, Phoenix, AZ 85009
 Phone: ${PHONE} | Email: ${EMAIL}
 ROC # 350898

@@ -1,33 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { OG_IMAGE, PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { PHONE, PHONE_HREF, EMAIL, ADDRESS, SITE_NAME } from "@/lib/constants";
+import { CONTACT_DESCRIPTION, CONTACT_TITLE, pageMetadata } from "@/lib/seo";
 import LeadForm from "@/components/ui/LeadForm";
-import { LocalBusinessSchema } from "@/components/ui/SeoSchema";
+import { BreadcrumbSchema } from "@/components/ui/SeoSchema";
 
-export const metadata: Metadata = {
-  title: "Contact XRP Roofing | Free Roof Inspection in Phoenix, AZ",
-  description:
-    "Contact XRP Roofing for a free roof inspection in Phoenix. Call or use the form. We reply within one business hour.",
-  alternates: { canonical: `${SITE_URL}/contact` },
-  openGraph: {
-    title: `Contact XRP Roofing | Free Roof Inspection`,
-    description: "Contact XRP Roofing for a free roof inspection in Phoenix. Call or use the form. We reply within one business hour.",
-    url: `${SITE_URL}/contact`,
-    images: [{ url: OG_IMAGE }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `Contact XRP Roofing | Free Roof Inspection`,
-    description: "Contact XRP Roofing for a free roof inspection in Phoenix. Call or use the form. We reply within one business hour.",
-    images: [OG_IMAGE],
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: CONTACT_TITLE,
+  description: CONTACT_DESCRIPTION,
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
-      <LocalBusinessSchema />
+      <BreadcrumbSchema items={[{ label: "Contact" }]} />
 
       {/* Hero */}
       <section className="py-16 bg-gray-900">

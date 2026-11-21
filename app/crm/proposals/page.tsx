@@ -95,7 +95,7 @@ const defaultInspectionPhotos: InspectionPhoto[] = [
   { label: "Detail area", image: "", note: "" },
   { label: "Project notes", image: "", note: "" },
 ];
-const defaultTerms = `AZPRO Contractor LLC DBA XRP Roofing
+const defaultTerms = `AZ Pro Contractors LLC DBA XRP Roofing
 2843 W McDowell Rd, Phoenix, AZ 85009
 Phone: ${PHONE} | Email: ${EMAIL}
 ROC # 350898
