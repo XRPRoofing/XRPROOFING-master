@@ -5,7 +5,6 @@ import {
   GEO_LATITUDE,
   GEO_LONGITUDE,
   GOOGLE_MAPS_URL,
-  LEGAL_NAME,
   LOGO_IMAGE,
   LOGO_IMAGE_HEIGHT,
   LOGO_IMAGE_WIDTH,
@@ -38,7 +37,6 @@ export function buildRoofingContractorSchema() {
     "@type": "RoofingContractor",
     "@id": `${SITE_URL}/#localbusiness`,
     name: SITE_NAME,
-    legalName: LEGAL_NAME,
     url: SITE_URL,
     image: `${SITE_URL}${OG_IMAGE}`,
     logo: {
@@ -92,7 +90,7 @@ export function buildRoofingContractorSchema() {
       },
     ],
     sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok, GOOGLE_MAPS_URL],
-    description: `${SITE_NAME} is a DBA of ${LEGAL_NAME}, a roofing contractor serving the Phoenix metro. Arizona ROC #${ROC_LICENSE_NUMBER}. Roof repair, replacement, tile, shingle, foam, flat, and storm-damage work. Free inspections and written estimates.`,
+    description: `${SITE_NAME} is a roofing contractor serving the Phoenix metro. Arizona ROC #${ROC_LICENSE_NUMBER}. Roof repair, replacement, tile, shingle, foam, flat, and storm-damage work. Free inspections and written estimates.`,
   };
 }
 

@@ -1,9 +1,7 @@
 export const SITE_NAME = "XRP Roofing";
 export const SITE_URL = "https://www.xrproofing.com";
-/** Confirmed legal name. */
-export const LEGAL_NAME = "AZ Pro Contractors LLC";
 export const ROC_LICENSE_NUMBER = "350898";
-export const LICENSE_LINE = "XRP Roofing is a DBA of AZ Pro Contractors LLC · Arizona ROC #350898";
+export const LICENSE_LINE = "XRP Roofing · Arizona ROC #350898";
 /** Single public phone number. Display copy, tel: links, and JSON-LD all read this. */
 export const PHONE = "(623) 300-8097";
 export const PHONE_HREF = "tel:+16233008097";
