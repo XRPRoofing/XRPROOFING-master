@@ -125,7 +125,7 @@ const parsed = JSON.parse(json) as Record<string, unknown>;
 if (parsed["@type"] !== "RoofingContractor") failures.push("Schema type is not RoofingContractor");
 if ("aggregateRating" in parsed) failures.push("Schema includes aggregateRating");
 if (parsed.name !== "XRP Roofing") failures.push(`Schema name ${parsed.name}`);
-if (parsed.legalName !== "AZ Pro Contractors") failures.push(`Schema legalName ${parsed.legalName}`);
+if (parsed.legalName !== "AZ Pro Contractors LLC") failures.push(`Schema legalName ${parsed.legalName}`);
 if (parsed.telephone !== "(623) 300-8097") failures.push(`Schema telephone ${parsed.telephone}`);
 if (parsed.url !== "https://www.xrproofing.com") failures.push(`Schema url ${parsed.url}`);
 const address = parsed.address as Record<string, string>;

@@ -1,9 +1,9 @@
 export const SITE_NAME = "XRP Roofing";
 export const SITE_URL = "https://www.xrproofing.com";
-/** Public DBA line. Legal name spelling should be confirmed by the owner; proposal templates use a different form. */
-export const LEGAL_NAME = "AZ Pro Contractors";
+/** Confirmed legal name. */
+export const LEGAL_NAME = "AZ Pro Contractors LLC";
 export const ROC_LICENSE_NUMBER = "350898";
-export const LICENSE_LINE = "XRP Roofing is a DBA of AZ Pro Contractors · Arizona ROC #350898";
+export const LICENSE_LINE = "XRP Roofing is a DBA of AZ Pro Contractors LLC · Arizona ROC #350898";
 /** Single public phone number. Display copy, tel: links, and JSON-LD all read this. */
 export const PHONE = "(623) 300-8097";
 export const PHONE_HREF = "tel:+16233008097";
