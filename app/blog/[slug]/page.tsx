@@ -1527,7 +1527,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "How Much Does Foam Roofing Cost in Phoenix?",
-        body: "Foam roofing is priced per project rather than off a rate card, because two roofs of the same square footage can differ substantially in what the work actually involves. The factors that move the number are:",
+        body: "Foam roofing is priced per project rather than off a rate card, because two roofs of the same square footage can differ substantially in what the work actually involves. For how those numbers compare with shingle and tile replacement, see [roof replacement cost in Phoenix](/blog/roof-replacement-cost-phoenix-az). The factors that move the number are:",
         listItems: [
           "Roof size and layout — total square footage, plus how much of it is cut up by equipment and small sections versus open field.",
           "The existing roofing system — what is there now, and whether foam can be applied over it or not.",
@@ -1744,7 +1744,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Repair vs. Replacement Cost Decision",
-        body: "A small isolated leak on a roof with years of remaining life is usually a repair candidate. Multiple leaks, widespread underlayment failure, brittle shingles, or storm damage across large sections may make replacement the better financial decision. XRP Roofing provides written estimates that separate immediate repair options from long-term replacement recommendations when both are relevant.",
+        body: "A small isolated leak on a roof with years of remaining life is usually a repair candidate. Multiple leaks, widespread underlayment failure, brittle shingles, or storm damage across large sections may make replacement the better financial decision. If you are weighing a repair bid against a new roof, see [what a roof replacement costs in Phoenix](/blog/roof-replacement-cost-phoenix-az). XRP Roofing provides written estimates that separate immediate repair options from long-term replacement recommendations when both are relevant.",
       },
       {
         heading: "How to Avoid Paying Twice",
@@ -2002,7 +2002,7 @@ const allPosts: Record<string, BlogPost> = {
       },
       {
         heading: "Architectural Shingles: The Cost-Effective Alternative",
-        body: "High-quality architectural shingles (GAF Timberline HDZ, Owens Corning Duration, CertainTeed Landmark Pro) rated for high-temperature climates perform well in Arizona with proper installation and adequate attic ventilation — a 20–25 year realistic lifespan in Phoenix conditions. Shingles cost 30–50% less than a comparable tile installation, making them the right choice for many budget-conscious homeowners or where HOA rules permit both materials. The non-negotiables: only install Class A fire-rated, high-temperature architectural product — no 3-tab, no builder-grade. And get the ventilation right.",
+        body: "High-quality architectural shingles (GAF Timberline HDZ, Owens Corning Duration, CertainTeed Landmark Pro) rated for high-temperature climates perform well in Arizona with proper installation and adequate attic ventilation — a 20–25 year realistic lifespan in Phoenix conditions. Shingles cost 30–50% less than a comparable tile installation, making them the right choice for many budget-conscious homeowners or where HOA rules permit both materials. The non-negotiables: only install Class A fire-rated, high-temperature architectural product — no 3-tab, no builder-grade. And get the ventilation right. For current planning ranges by material, see [how much a roof replacement costs in Phoenix](/blog/roof-replacement-cost-phoenix-az).",
       },
       {
         heading: "Key Comparison: Arizona-Specific Factors",
@@ -2039,7 +2039,7 @@ const allPosts: Record<string, BlogPost> = {
     sections: [
       {
         heading: "Repair or Replace? The Right Framework",
-        body: "The repair-vs-replace decision is where many Phoenix homeowners get poor advice. Some contractors push replacement when repair is sufficient; others patch failing systems that should be replaced. The right answer depends on age, extent of damage, underlayment condition, and total cost-of-ownership — not just what's easiest to sell.",
+        body: "The repair-vs-replace decision is where many Phoenix homeowners get poor advice. Some contractors push replacement when repair is sufficient; others patch failing systems that should be replaced. The right answer depends on age, extent of damage, underlayment condition, and total cost-of-ownership — not just what's easiest to sell. If replacement is the likely path, see [how much a roof replacement costs in Phoenix](/blog/roof-replacement-cost-phoenix-az) before you compare bids.",
       },
       {
         heading: "7 Signs Full Replacement Is the Right Call",
@@ -2199,6 +2199,127 @@ const allPosts: Record<string, BlogPost> = {
       { label: "Metal Roofing", href: "/services/metal-roofing" },
       { label: "Roof Replacement", href: "/services/roof-replacement" },
       { label: "New Roof Installation", href: "/services/new-roof-installation" },
+    ],
+  },
+  "roof-replacement-cost-phoenix-az": {
+    slug: "roof-replacement-cost-phoenix-az",
+    title: "How Much Does a Roof Replacement Cost in Phoenix, AZ?",
+    excerpt: "Homeowners searching for a roof replacement cost in Phoenix usually want one number. The honest answer is a range. Architectural shingles, concrete or clay tile, and spray foam on a flat roof are different jobs, and the price that matters is a written estimate after a free inspection.",
+    date: "2026-11-23",
+    readTime: "7 min read",
+    category: "Repair & Replacement",
+    metaDescription: "Typical Phoenix roof replacement costs for shingle, tile, and foam, plus size, underlayment, decking, permits, and desert heat. Free estimate.",
+    sections: [
+      {
+        heading: "There Is No Single Phoenix Roof Price",
+        body: "If you are comparing bids for a [roof replacement](/services/roof-replacement) in [Phoenix](/locations/phoenix-az), ask what each bid includes. A low total that leaves out tear-off, new underlayment, flashing, a permit, or decking is not the same project as a bid that lists those items. Roofers price by the square — 100 square feet of roof surface — not by the living area on a listing. An 1,800-square-foot house with a garage and a covered patio often has well over 2,000 square feet of roof. The ranges below are planning figures from published Phoenix-area cost guides, not a price from XRP Roofing. Your roof can land outside them.",
+      },
+      {
+        heading: "Asphalt Shingle Replacement",
+        image: {
+          src: "/images/blog/shingles-vs-tile/architectural-shingle-roof-phoenix.jpg",
+          alt: "Architectural asphalt shingle roof on a Phoenix-area home, with roof vents, a chimney, and flashing",
+          caption: "Architectural shingles are usually the lowest upfront replacement cost in the Valley. The bid still depends on roof area, tear-off, and the underlayment underneath.",
+        },
+        body: "[Architectural asphalt shingles](/services/shingle-roofing) are usually the lowest upfront cost of the three common residential systems here. Published Phoenix-area planning ranges often put them around $4.50 to $7 per square foot of roof surface. On a straightforward single-story home with about 2,000 square feet of roof, that commonly works out to roughly $9,000 to $15,000. A second story, a steep pitch, or a larger roof often moves the same material toward $18,000 or above, so many single-family shingle replacements are planned around $8,000 to $18,000. How that compares with tile over time is in [tile vs. shingle roofing](/blog/tile-vs-shingle-roofing-arizona).",
+      },
+      {
+        heading: "What Changes a Shingle Price",
+        listItems: [
+          "Product tier. A high-temperature architectural shingle made for desert sun costs more than builder-grade, and it is the product that belongs on a Phoenix roof. Three-tab shingles are a poor fit here.",
+          "Tear-off. Most replacements remove the old roof down to the deck. A second layer adds labor and disposal.",
+          "Underlayment. Synthetic underlayment rated for high deck temperatures costs more than basic felt and holds up better when the surface runs 150°F or hotter.",
+          "Flashings. Pipe boots, valley metal, wall flashing, and skylight curbs leak first if dried-out pieces are reused.",
+        ],
+      },
+      {
+        heading: "Concrete and Clay Tile",
+        image: {
+          src: "/images/blog/shingles-vs-tile/clay-tile-roof-arizona-home-aerial.jpg",
+          alt: "Aerial view of a large Arizona home with clay tile roofs and separate flat roof sections",
+          caption: "Tile roofs in the Valley are often priced two ways: all-new tile, or a lift-and-relay that keeps sound tile and replaces the underlayment.",
+        },
+        body: "[Tile](/services/tile-roofing) is the roof many [Phoenix](/locations/phoenix-az), [Scottsdale](/locations/scottsdale-az), and [Chandler](/locations/chandler-az) neighborhoods were built with, and it is priced two ways. A full replacement — new underlayment and new tile — is the expensive path. Published planning ranges for new concrete tile often run about $7 to $14 per square foot. On a typical Valley home, many projects land around $15,000 to $30,000. Larger homes, clay tile, steep access, or a complicated layout can reach $35,000 or more.",
+      },
+      {
+        heading: "Lift-and-Relay Costs Less When the Tile Is Sound",
+        image: {
+          src: "/images/blog/tile-repair-relay-replace/tile-lift-and-relay-new-underlayment-phoenix.jpg",
+          alt: "Crew members removing clay tile and installing new underlayment on an Arizona home during a lift-and-relay",
+          caption: "A lift-and-relay replaces the waterproofing and puts usable tile back. Broken tile and soft decking are the items that push this scope toward a full replacement.",
+        },
+        body: "The tile often outlasts the waterproofing under it. If the tiles are still sound, a lift-and-relay takes them off, installs new underlayment, and puts the usable tile back. Published Valley guides often place this work around $4 to $8 per square foot, commonly about $8,000 to $17,000 on a roof near 2,000 square feet, before extra tile and deck repairs. When most of the tile can be saved, that is often on the order of 40–60% less than a full tile replacement. See [repair, lift-and-relay, or replace](/blog/tile-roof-repair-lift-relay-or-replace-arizona) and [why Phoenix tile roofs fail from the inside out](/blog/phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat).",
+      },
+      {
+        heading: "Spray Foam and Flat Roofs",
+        image: {
+          src: "/images/xrp-roofing/foam-roofing-After-2.jpeg",
+          alt: "Arizona home with white coated flat roof sections next to clay tile roofs",
+          caption: "Flat sections are priced on their own. A new foam system, a recoat, and a tear-off are three different budgets.",
+        },
+        body: "Many Phoenix homes are not one roof. A tile or shingle field often sits beside a flat patio cover or a low-slope addition. Those sections are a [flat roofing](/services/flat-roofing) or [spray foam](/phoenix-foam-roofing) project. Published planning ranges for a new spray-foam system, including the coating, often fall around $5 to $9 per square foot when the roof underneath is dry enough to foam over. A flat roof of about 1,500 to 2,000 square feet is often planned around $8,000 to $18,000 before a full tear-off. Removing a built-up roof, wet foam, or bad decking adds cost. Recoating foam that is still dry is a smaller job, commonly about $1.50 to $4 per square foot depending on the coating and the repairs that come first. Coating a wet roof usually means paying twice. Lifespan is covered in the [foam roofing guide](/blog/foam-roofing-arizona), and the limit of a coating is in [coatings versus replacement](/blog/roof-coatings-vs-roof-replacement-phoenix).",
+      },
+      {
+        heading: "The Other Factors That Move a Bid",
+        listItems: [
+          "Roof size, hips, valleys, and the number of penetrations.",
+          "Pitch and stories. A steep two-story roof takes more setup than a low single-story ranch.",
+          "Tear-off and disposal of shingles, tile, or built-up roofing.",
+          "New tile versus reusing sound tile.",
+          "Decking repairs found after the old roof comes off.",
+          "A city permit. Most Valley cities, including Phoenix, require one for a replacement. The fee is small next to labor and materials. Skipping it can show up at resale.",
+          "Access. A tight lot or nowhere to place a container for the tear-off slows the crew.",
+          "HOA color and profile approval before materials are ordered. Summer heat also shortens the workday.",
+        ],
+      },
+      {
+        heading: "Decking and Permits",
+        body: "From the driveway, the plywood can look fine. After tear-off, soft spots often show up around old leaks. A clear estimate says whether some deck repair is included or extra sheets are billed at a stated price after you approve them. The contractor should also pull the required permit and meet the city's inspections. XRP Roofing pulls required roofing permits on replacement work.",
+      },
+      {
+        heading: "Heat, Monsoon Season, Access, and HOA Rules",
+        body: "Roof surfaces in [Phoenix](/locations/phoenix-az) regularly reach 150°F or hotter in summer, so shingles and underlayment need a heat rating. Crews often start early, and a dry stretch is the practical window for a tear-off because an open deck during monsoon storms is a risk. The same rules apply in [Mesa](/locations/mesa-az), [Glendale](/locations/glendale-az), and [Peoria](/locations/peoria-az). Tile is heavy, and a second-story roof with poor staging costs more than a single-story house with a clear driveway. If an association must approve color or profile, start that review before you order. The paperwork is in the [HOA roofing guide](/blog/hoa-roofing-requirements-arizona).",
+      },
+      {
+        heading: "Repair, Recoat, or Replace",
+        body: "Replacement is not always the right spend. A few broken tiles, a cracked pipe boot, or one flashing leak on a roof with years left is usually a [repair](/services/roof-repair). Failed underlayment, brittle shingles across whole slopes, or foam that is bare and sitting on a soft deck is a replacement conversation. Price the two scopes separately and decide from the condition of the roof. A useful inspection will also say when the roof does not need work yet. If a leak is what started the question, read [roof leak repair cost in Arizona](/blog/roof-leak-repair-cost-arizona) next to [the signs a roof needs replacement](/blog/signs-your-arizona-roof-needs-replacement).",
+      },
+      {
+        heading: "How to Compare Two Estimates",
+        body: "The lowest total is not the lowest cost if it skips the deck, reuses dried-out flashing, or specifies a shingle that is not rated for desert heat. Ask how many squares were measured, whether the old roof comes off, and which underlayment product goes down. Flashing and pipe boots should be marked new or reused. Decking should be an allowance or a per-sheet rate, and the permit and haul-off should be included. A price from a satellite photo is a guess. If you are still early, start with [how often a Phoenix roof should be inspected](/blog/how-often-roof-inspection-phoenix).",
+      },
+      {
+        heading: "Get a Written Estimate for Your Roof",
+        body: "To find out what a new roof costs on your home, someone has to look at that roof. XRP Roofing will inspect it, explain whether a repair, a lift-and-relay, a recoat, or a full replacement fits, and give you a written estimate at no charge. We work across [Phoenix](/locations/phoenix-az) and the surrounding metro. Licensed, bonded, and insured — Arizona ROC #350898. Call {{PHONE}} or [request a free estimate](/contact).",
+      },
+    ],
+    faqs: [
+      {
+        q: "How much does a new roof cost in Phoenix, AZ?",
+        a: "Many single-family homes fall around $8,000 to $18,000 for architectural shingles and $15,000 to $35,000 or more for a full tile replacement. A new foam roof on a residential flat section is often planned around $8,000 to $18,000 before a major tear-off. These are planning ranges, not a quote. A free inspection is what turns the range into a price.",
+      },
+      {
+        q: "Why do roof replacement bids for the same Phoenix house vary so much?",
+        a: "Bids diverge when they measure different roof areas, specify different underlayment, leave out decking, skip the permit, or assume every old tile can be reused. Compare the scope line by line, not only the total.",
+      },
+      {
+        q: "Is it cheaper to replace tile underlayment than to buy new tile?",
+        a: "Often yes, when the tile is still sound. A lift-and-relay installs new waterproofing and puts the existing tile back. It costs more if many tiles break or the deck needs widespread repair. An inspection should tell you which path fits.",
+      },
+      {
+        q: "How much does spray foam roofing cost in Phoenix?",
+        a: "A new foam system is commonly planned around $5 to $9 per square foot, including the coating, when the roof underneath is dry. Recoating sound foam is usually less, often about $1.50 to $4 per square foot. Tear-off, wet foam, and deck repairs raise the price.",
+      },
+      {
+        q: "Will insurance pay for a roof replacement in Phoenix?",
+        a: "Only if your policy covers the cause. Age and ordinary wear are often excluded. A contractor can document the roof and provide an estimate. The coverage decision belongs to your insurer.",
+      },
+    ],
+    relatedServices: [
+      { label: "Roof Replacement", href: "/services/roof-replacement" },
+      { label: "Shingle Roofing", href: "/services/shingle-roofing" },
+      { label: "Tile Roofing", href: "/services/tile-roofing" },
+      { label: "Foam Roofing", href: "/phoenix-foam-roofing" },
     ],
   },
 };

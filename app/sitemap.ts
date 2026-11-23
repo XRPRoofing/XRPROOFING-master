@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogSlugs = [
+    "roof-replacement-cost-phoenix-az",
     "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat",
     "hidden-water-damage-mold-after-roof-leak-phoenix",
     "post-monsoon-roof-checklist-phoenix",

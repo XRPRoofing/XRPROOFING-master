@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "roof-replacement-cost-phoenix-az",
+    title: "How Much Does a Roof Replacement Cost in Phoenix, AZ?",
+    excerpt: "Homeowners searching for a roof replacement cost in Phoenix usually want one number. The honest answer is a range. Architectural shingles, concrete or clay tile, and spray foam on a flat roof are different jobs, and the price that matters is a written estimate after a free inspection.",
+    date: "2026-11-23",
+    readTime: "7 min read",
+    category: "Repair & Replacement",
+  },
+  {
     slug: "phoenix-tile-roofs-fail-inside-out-underlayment-flashing-heat",
     title: "Why Phoenix Tile Roofs Fail From the Inside Out: Understanding Underlayment, Flashing & Heat",
     excerpt: "Many Phoenix homeowners believe their concrete or clay tile roof is the primary defense against water. While tile is extremely durable, it is only one part of the system. In Arizona's extreme climate, most tile roofs fail from the inside out — long before the tiles themselves wear out.",
