@@ -1,7 +1,12 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 import { cities } from "@/lib/cities";
+import { landingPages } from "@/lib/landing";
+import { serviceAreaCities } from "@/lib/seo-routes";
 import { services } from "@/lib/services";
+
+const redirectedServiceSlugs = new Set(["shingle-roofing", "tile-roofing"]);
+const redirectedCitySlugs = new Set<string>(serviceAreaCities.map((city) => city.legacySlug));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,24 +19,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/services`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/locations`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/phoenix-roofing`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
-    { url: `${SITE_URL}/phoenix-foam-roofing`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
-    url: `${SITE_URL}/services/${service.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  const servicePages: MetadataRoute.Sitemap = services
+    .filter((service) => !redirectedServiceSlugs.has(service.slug))
+    .map((service) => ({
+      url: `${SITE_URL}/services/${service.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }));
 
-  const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
-    url: `${SITE_URL}/locations/${city.slug}`,
+  const cityPages: MetadataRoute.Sitemap = cities
+    .filter((city) => !redirectedCitySlugs.has(city.slug))
+    .map((city) => ({
+      url: `${SITE_URL}/locations/${city.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    }));
+
+  const landingEntries: MetadataRoute.Sitemap = landingPages.map((page) => ({
+    url: `${SITE_URL}${page.path}`,
     lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.85,
+    changeFrequency: page.path.split("/").length > 2 ? "monthly" : "weekly",
+    priority: page.path.split("/").length > 2 ? 0.8 : 0.9,
   }));
 
   const cityServicePages: MetadataRoute.Sitemap = cities.flatMap((city) =>
@@ -81,5 +96,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...corePages, ...servicePages, ...cityPages, ...cityServicePages, ...blogPostPages];
+  return [...corePages, ...landingEntries, ...servicePages, ...cityPages, ...cityServicePages, ...blogPostPages];
 }

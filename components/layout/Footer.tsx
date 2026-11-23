@@ -14,6 +14,7 @@ import {
 } from "@/lib/constants";
 import { services } from "@/lib/services";
 import { cities } from "@/lib/cities";
+import { FOAM_HUB, cityPath, servicePath } from "@/lib/seo-routes";
 
 export default function Footer() {
   const topCities = cities.slice(0, 10);
@@ -100,7 +101,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/phoenix-foam-roofing"
+                  href={FOAM_HUB}
                   className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
                 >
                   Foam Roofing
@@ -108,7 +109,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/phoenix-foam-roofing"
+                  href={`${FOAM_HUB}/installation`}
                   className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
                 >
                   SPF Roofing
@@ -116,7 +117,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/phoenix-foam-roofing"
+                  href={`${FOAM_HUB}/recoating`}
                   className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
                 >
                   Elastomeric Coatings
@@ -125,7 +126,7 @@ export default function Footer() {
               {topServices.map((s) => (
                 <li key={s.slug}>
                   <Link
-                    href={`/services/${s.slug}`}
+                    href={servicePath(s.slug)}
                     className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
                   >
                     {s.name}
@@ -147,7 +148,7 @@ export default function Footer() {
               {topCities.map((c) => (
                 <li key={c.slug}>
                   <Link
-                    href={`/locations/${c.slug}`}
+                    href={cityPath(c.slug)}
                     className="text-sm text-gray-300 hover:text-orange-400 transition-colors"
                   >
                     {c.name}, {c.state}
@@ -185,6 +186,7 @@ export default function Footer() {
             <div className="bg-gray-800 rounded-xl p-4 space-y-2">
               <div className="text-xs font-semibold text-orange-400 uppercase tracking-wider">Trust & Credentials</div>
               <ul className="space-y-1">
+                <li className="text-xs text-white font-semibold">XRP Roofing · Arizona ROC #350898</li>
                 <li className="text-xs text-gray-300">✓ {LICENSE_NOTE}</li>
                 <li className="text-xs text-gray-300">✓ {SERVICE_AREA}</li>
                 <li className="text-xs text-gray-300">✓ Free Inspections & Estimates</li>

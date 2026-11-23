@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/services";
+import { servicePath } from "@/lib/seo-routes";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 
 interface ServiceGridProps {
@@ -21,7 +22,7 @@ export default function ServiceGrid({ citySlug, title = "Our Roofing Services", 
           {services.map((service) => {
             const href = citySlug
               ? `/locations/${citySlug}/${service.slug}`
-              : `/services/${service.slug}`;
+              : servicePath(service.slug);
             return (
               <Link
                 key={service.slug}

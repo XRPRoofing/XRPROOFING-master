@@ -1,16 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, X, ChevronDown, Facebook, Instagram } from "lucide-react";
+import { Phone, Menu, X, Facebook, Instagram } from "lucide-react";
 import { PHONE, PHONE_HREF, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
-import { services } from "@/lib/services";
 import { Button } from "@/components/ui/button";
+import SiteNav from "@/components/layout/SiteNav";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
@@ -53,7 +61,7 @@ export default function Header() {
         </div>
       </div>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex flex-wrap items-center justify-between h-16 lg:h-auto lg:py-2">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0" aria-label={SITE_NAME}>
             <Image
@@ -66,53 +74,7 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
-            <div className="relative group">
-              <button
-                className="flex items-center gap-1 px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors"
-                onMouseEnter={() => setServicesOpen(true)}
-                onMouseLeave={() => setServicesOpen(false)}
-              >
-                Services <ChevronDown className="w-4 h-4" />
-              </button>
-              {servicesOpen && (
-                <div
-                  className="absolute top-full left-0 w-64 bg-white shadow-xl rounded-xl border border-gray-100 py-2 z-50"
-                  onMouseEnter={() => setServicesOpen(true)}
-                  onMouseLeave={() => setServicesOpen(false)}
-                >
-                  {services.map((s) => (
-                    <Link
-                      key={s.slug}
-                      href={`/services/${s.slug}`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#eef2fb] hover:text-[#1a3a8f] transition-colors"
-                    >
-                      {s.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-            <Link href="/locations" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
-              Locations
-            </Link>
-            <Link href="/phoenix-foam-roofing" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
-              Foam Roofing
-            </Link>
-            <Link href="/about" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
-              About
-            </Link>
-            <Link href="/blog" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
-              Blog
-            </Link>
-            <Link href="/contact" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
-              Contact
-            </Link>
-            <Link href="/book" className="px-3 py-2 text-gray-700 hover:text-[#1a3a8f] font-medium text-sm rounded-md hover:bg-[#eef2fb] transition-colors">
-              Book Online
-            </Link>
-          </nav>
+          <SiteNav variant="desktop" />
 
           {/* CTA */}
           <div className="flex items-center gap-3">
@@ -128,7 +90,9 @@ export default function Header() {
               size="icon"
               className="lg:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle mobile menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -138,8 +102,8 @@ export default function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
-          <nav className="container mx-auto px-4 py-4 flex flex-col gap-1">
+        <div id="mobile-nav" className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
+          <div className="container mx-auto px-4 py-4 flex flex-col gap-1">
             <a
               href={PHONE_HREF}
               className="flex items-center gap-2 bg-orange-700 text-white px-4 py-3 rounded-lg font-semibold text-sm mb-2"
@@ -147,45 +111,7 @@ export default function Header() {
               <Phone className="w-4 h-4" />
               Call Now: {PHONE}
             </a>
-            <div>
-              <button
-                className="w-full flex items-center justify-between px-3 py-2 text-gray-700 font-medium text-sm"
-                onClick={() => setServicesOpen(!servicesOpen)}
-              >
-                Services <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
-              </button>
-              {servicesOpen && (
-                <div className="pl-4 flex flex-col gap-1">
-                  {services.map((s) => (
-                    <Link
-                      key={s.slug}
-                      href={`/services/${s.slug}`}
-                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-500"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {s.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-            {[
-              { href: "/locations", label: "Locations" },
-              { href: "/phoenix-foam-roofing", label: "Foam Roofing" },
-              { href: "/about", label: "About" },
-              { href: "/blog", label: "Blog" },
-              { href: "/contact", label: "Contact" },
-              { href: "/book", label: "Book Online" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="px-3 py-2 text-gray-700 font-medium text-sm hover:text-orange-500"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <SiteNav variant="mobile" onNavigate={() => setMobileOpen(false)} />
             {/* Mobile social badges */}
             <div className="flex items-center gap-2 pt-3 mt-2 border-t border-gray-100">
               <span className="text-xs text-gray-400 font-medium">Follow:</span>
@@ -222,7 +148,7 @@ export default function Header() {
                 <span className="text-xs font-semibold group-hover:text-white">TikTok</span>
               </a>
             </div>
-          </nav>
+          </div>
         </div>
       )}
     </header>

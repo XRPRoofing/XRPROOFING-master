@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
 import { cities } from "@/lib/cities";
+import { cityPath } from "@/lib/seo-routes";
 
 interface LocationGridProps {
   title?: string;
@@ -26,7 +27,7 @@ export default function LocationGrid({
           {displayCities.map((city) => (
             <Link
               key={city.slug}
-              href={`/locations/${city.slug}`}
+              href={cityPath(city.slug)}
               className="group bg-white hover:bg-[#eef2fb] border border-gray-200 hover:border-[#1a3a8f]/30 rounded-xl p-3 transition-all duration-200 flex items-center gap-2"
             >
               <MapPin className="w-3.5 h-3.5 text-[#1a3a8f] flex-shrink-0" />
