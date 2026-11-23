@@ -50,7 +50,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+              <div id="estimate" className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 scroll-mt-28">
                 <h2 className="text-2xl font-black text-gray-900 mb-2">Request a Free Inspection</h2>
                 <p className="text-gray-600 mb-8 text-sm">
                   Describe your roofing needs and we&apos;ll contact you within one business hour to schedule your free, no-obligation inspection.

@@ -127,6 +127,38 @@ export default function HomePage() {
         subtitle="From emergency repairs to full commercial installations, our licensed team handles every roofing need across the Phoenix metro."
       />
 
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-black text-gray-900 mb-3">Shingle, Tile, and Foam Roofing</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Start with the roof you have. Jonathan inspects every project and does the work himself. We also document storm damage and travel across the Phoenix metro.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { href: "/shingle-roofing", label: "Shingle Roofing", text: "Repair, replacement, and inspections for asphalt shingle roofs." },
+              { href: "/tile-roofing", label: "Tile Roofing", text: "Tile repair, replacement, and underlayment re-lays." },
+              { href: "/spray-foam-roofing", label: "Spray Foam Roofing", text: "Foam installation, repair, and elastomeric or silicone recoating." },
+              { href: "/roof-insurance-claim", label: "Insurance Claims", text: "Photos and an adjuster meeting. We do not waive a deductible." },
+              { href: "/service-areas", label: "Service Areas", text: "Phoenix, Mesa, Gilbert, Chandler, Scottsdale, Tempe, and more." },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block rounded-2xl border border-gray-200 hover:border-orange-300 bg-gray-50 p-5 transition-colors"
+              >
+                <span className="block font-bold text-[#0f2156]">{item.label}</span>
+                <span className="block mt-2 text-sm text-gray-600 leading-relaxed">{item.text}</span>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-orange-700">
+                  Learn more <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About / Why Us */}
       <section className="py-16 bg-[#eef2fb]">
         <div className="container mx-auto px-4">
@@ -242,7 +274,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link
-              href="/phoenix-foam-roofing"
+              href="/spray-foam-roofing"
               className="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200"
             >
               <div className="relative h-48">
@@ -269,7 +301,13 @@ export default function HomePage() {
             {topServices.map((service) => (
               <Link
                 key={service.slug}
-                href={`/services/${service.slug}`}
+                href={
+                  service.slug === "shingle-roofing"
+                    ? "/shingle-roofing"
+                    : service.slug === "tile-roofing"
+                      ? "/tile-roofing"
+                      : `/services/${service.slug}`
+                }
                 className="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200"
               >
                 <div className="relative h-48">

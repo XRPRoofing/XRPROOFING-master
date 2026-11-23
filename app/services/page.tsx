@@ -54,7 +54,13 @@ export default function ServicesPage() {
             {services.map((service) => (
               <Link
                 key={service.slug}
-                href={`/services/${service.slug}`}
+                href={
+                  service.slug === "shingle-roofing"
+                    ? "/shingle-roofing"
+                    : service.slug === "tile-roofing"
+                      ? "/tile-roofing"
+                      : `/services/${service.slug}`
+                }
                 className="group bg-white border border-gray-200 hover:border-orange-300 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200"
               >
                 <div className="relative h-48">
@@ -95,9 +101,9 @@ export default function ServicesPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { label: "Foam Roofing", href: "/phoenix-foam-roofing" },
-              { label: "SPF Roofing", href: "/phoenix-foam-roofing" },
-              { label: "Elastomeric Coatings", href: "/phoenix-foam-roofing" },
+              { label: "Foam Roofing", href: "/spray-foam-roofing" },
+              { label: "SPF Roofing", href: "/spray-foam-roofing/installation" },
+              { label: "Elastomeric Coatings", href: "/spray-foam-roofing/recoating" },
               { label: "Emergency Roof Repair", href: "/services/emergency-roof-repair" },
               { label: "Roof Leak Repair", href: "/services/roof-repair" },
               { label: "Storm Damage Inspection", href: "/services/storm-damage-roofing" },

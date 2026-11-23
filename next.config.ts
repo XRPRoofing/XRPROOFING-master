@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { landingRedirects } from "./lib/seo-routes";
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -50,6 +51,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...landingRedirects.map((redirect) => ({
+        source: redirect.source,
+        destination: redirect.destination,
+        permanent: true as const,
+      })),
       // ─── Old WordPress service pages → new /services/[slug] ───────────────
       {
         source: "/new-roof-installation",
@@ -79,26 +85,6 @@ const nextConfig: NextConfig = {
       {
         source: "/repairs-and-maintenance/",
         destination: "/services/roof-repair",
-        permanent: true,
-      },
-      {
-        source: "/shingle-roofing",
-        destination: "/services/shingle-roofing",
-        permanent: true,
-      },
-      {
-        source: "/shingle-roofing/",
-        destination: "/services/shingle-roofing",
-        permanent: true,
-      },
-      {
-        source: "/tile-roofing",
-        destination: "/services/tile-roofing",
-        permanent: true,
-      },
-      {
-        source: "/tile-roofing/",
-        destination: "/services/tile-roofing",
         permanent: true,
       },
       {
