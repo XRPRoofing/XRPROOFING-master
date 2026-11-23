@@ -118,6 +118,21 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className="py-12 bg-white border-y border-gray-200">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <h2 className="text-2xl font-black text-gray-900 mb-3">What Does a New Roof Cost in Phoenix?</h2>
+          <p className="text-gray-600 leading-relaxed mb-5">
+            Shingle, tile, and foam replacements are priced from the roof in front of you. This guide covers typical Phoenix planning ranges and the factors that move a bid, including size, underlayment, decking, permits, heat, and HOA rules.
+          </p>
+          <Link
+            href="/blog/roof-replacement-cost-phoenix-az"
+            className="inline-flex items-center gap-2 text-orange-700 font-bold hover:text-orange-800"
+          >
+            Roof replacement cost in Phoenix <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* Why Choose Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
